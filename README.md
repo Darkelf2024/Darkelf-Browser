@@ -1,4 +1,4 @@
-# Darkelf Browser
+# Darkelf Browser Release - Coming Soon!
 
 Darkelf, as a custom PyQt5-based browser, incorporates several security features designed to enhance user privacy and protect against various online threats. Here are some of its notable security features and Highlights.
 
