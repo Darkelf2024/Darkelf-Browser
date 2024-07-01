@@ -22,13 +22,27 @@ AES Encryption: Darkelf securely manages an AES encryption key, ensuring sensiti
 
 RSA Encryption: It generates or loads RSA key pairs, enabling secure communication and potentially securing stored data through asymmetric encryption techniques.
 
+## TOR and Quantum Encryption
+
+Tor Network: Darkelf Browser includes the option to route traffic through the Tor network, providing enhanced anonymity and privacy by using a series of encrypted relays.
+
+Quantum Encryption: While mentioned as a feature in the settings, the provided code does not detail the implementation of quantum encryption. Quantum encryption would provide theoretically unbreakable security by using principles of quantum mechanics to secure key exchanges.
+
+Both features aim to enhance user privacy and security, with Tor focusing on anonymity and quantum encryption aiming for unbreakable security.
+
+Benefits of Quantum Encryption
+
+Unconditional Security: The security of quantum encryption is based on the laws of quantum mechanics, making it theoretically immune to any future advancements in computational power, including quantum computers.
+
+Detection of Eavesdropping: Any attempt to intercept the quantum key alters its state, which can be detected by the communicating parties, ensuring the integrity of the key exchange.
+
 ## Privacy Controls
 
 JavaScript Management: Users have the ability to enable or disable JavaScript globally or on a per-tab basis. This control helps mitigate JavaScript-related attacks and enhances privacy by preventing scripts from executing without user consent.
 
-Anti-Fingerprinting Measures: Darkelf implements measures to spoof or alter the browser's fingerprint, reducing the effectiveness of fingerprinting techniques used for tracking users across websites.
+Anti-Fingerprinting Measures: Darkelf implements measures to spoof or alter the browser's fingerprint, reducing the effectiveness of fingerprinting techniques used for tracking users across websites. Darkelf includes a script to spoof the user-agent string, which is a common fingerprinting metric. By changing the user-agent string to a generic value, Darkelf makes it more difficult for websites to uniquely identify the browser based on this information. The configure_web_engine_profile method sets various privacy-related attributes, which can help with anti-fingerprinting by limiting what information the browser exposes.
 
-HTTPS Enforcement: The browser can enforce HTTPS connections for all websites, ensuring data transmitted between the browser and websites is encrypted and protected against interception or tampering.
+HTTPS Enforcement: The browser can enforce HTTPS connections for all websites, ensuring data transmitted between the browser and websites is encrypted and protected against interception or tampering. enforcing HTTPS ensures that the data exchanged between the browser and websites is encrypted, which prevents third parties from eavesdropping and potentially using fingerprinting techniques.
 
 ## Network Security
 
