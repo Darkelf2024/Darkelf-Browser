@@ -2,6 +2,10 @@
 
 Darkelf, as a custom PyQt5-based browser, incorporates several security features designed to enhance user privacy and protect against various online threats. Here are some of its notable security features and Highlights.
 
+MAC OS - Ready
+Linux - Ready
+Windows - In Progress
+
 # Darkelf (Custom PyQt5 Browser)
 
 ## Positives and Advantages
@@ -26,7 +30,7 @@ RSA Encryption: It generates or loads RSA key pairs, enabling secure communicati
 
 Tor Network: Darkelf Browser includes the option to route traffic through the Tor network, providing enhanced anonymity and privacy by using a series of encrypted relays.
 
-Quantum Encryption: While mentioned as a feature in the settings, the provided code does not detail the implementation of quantum encryption. Quantum encryption would provide theoretically unbreakable security by using principles of quantum mechanics to secure key exchanges.
+Quantum Encryption: While mentioned as a feature in the settings, the provided code does not detail the implementation of quantum encryption. Quantum encryption would provide theoretically unbreakable security by using principles of quantum mechanics to secure key exchanges. - This is in Progress
 
 Both features aim to enhance user privacy and security, with Tor focusing on anonymity and quantum encryption aiming for unbreakable security.
 
