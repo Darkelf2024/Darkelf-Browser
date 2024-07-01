@@ -32,6 +32,6 @@ The browser utilizes event filtering to intercept and modify navigation requests
 
 # Community and Development
 
-Darkelf benefits from being an open-source project (assuming it is), potentially allowing community-driven improvements, security audits, and contributions, which can enhance its security over time.
+Darkelf benefits from being an open-source project, potentially allowing community-driven improvements, security audits, and contributions, which can enhance its security over time.
 
 Overall, Darkelf's emphasis on encryption, privacy controls, network security enhancements, and customization options makes it a strong choice for users looking to prioritize security and privacy in their browsing experience. As with any software, staying updated with security patches and best practices is essential to maintaining its security effectiveness.
