@@ -30,7 +30,7 @@ Quantum Encryption: While mentioned as a feature in the settings, the provided c
 
 Both features aim to enhance user privacy and security, with Tor focusing on anonymity and quantum encryption aiming for unbreakable security.
 
-Benefits of Quantum Encryption
+## Benefits of Quantum Encryption
 
 Unconditional Security: The security of quantum encryption is based on the laws of quantum mechanics, making it theoretically immune to any future advancements in computational power, including quantum computers.
 
