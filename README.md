@@ -40,13 +40,29 @@ Unconditional Security: The security of quantum encryption is based on the laws 
 
 Detection of Eavesdropping: Any attempt to intercept the quantum key alters its state, which can be detected by the communicating parties, ensuring the integrity of the key exchange.
 
-## Privacy Controls
+## Anti-Fingerprinting
 
-JavaScript Management: Users have the ability to enable or disable JavaScript globally or on a per-tab basis. This control helps mitigate JavaScript-related attacks and enhances privacy by preventing scripts from executing without user consent.
+1. Canvas Fingerprinting Blocking: Disables canvas elements to prevent tracking via canvas fingerprinting.
+2. WebRTC IP Leaks Protection: Protects against IP leaks through WebRTC by modifying the user agent.
+3. Font Fingerprinting Protection: Disables running insecure content, helping to prevent font-based fingerprinting.
+4. Blocking Device Sensors: Disables the use of certain sensors to reduce fingerprinting.
+5. Limiting Browser Features: Disables full-screen support to limit fingerprinting opportunities.
 
-Anti-Fingerprinting Measures: Darkelf implements measures to spoof or alter the browser's fingerprint, reducing the effectiveness of fingerprinting techniques used for tracking users across websites. Darkelf includes a script to spoof the user-agent string, which is a common fingerprinting metric. By changing the user-agent string to a generic value, Darkelf makes it more difficult for websites to uniquely identify the browser based on this information. The configure_web_engine_profile method sets various privacy-related attributes, which can help with anti-fingerprinting by limiting what information the browser exposes.
+JavaScript Control: Users can enable or disable JavaScript, providing control over scripts that run on web pages.
 
-HTTPS Enforcement: The browser can enforce HTTPS connections for all websites, ensuring data transmitted between the browser and websites is encrypted and protected against interception or tampering. enforcing HTTPS ensures that the data exchanged between the browser and websites is encrypted, which prevents third parties from eavesdropping and potentially using fingerprinting techniques.
+Persistent Settings: Uses QSettings for persistent storage of user preferences, including security and privacy settings, ensuring user preferences are maintained across sessions.
+
+Proxy Configuration: Supports configuration for network proxies, allowing users to route their traffic through various proxy servers for added privacy.
+
+## Theming and Customization:
+
+Theme Management: Users can switch between different themes (white, dark, dark gray) to match their preferences, and CSS is injected to apply these themes.
+
+## User Interface Features:
+
+Toolbar and Menu Bar: A toolbar and menu bar provide easy access to navigation controls (back, forward, reload, home) and security settings.
+
+Homepage Setup: A customizable homepage with a search function that defaults to DuckDuckGo, a privacy-focused search engine. The homepage can also handle .onion sites for access through the Tor network.
 
 ## Network Security
 
@@ -67,3 +83,18 @@ The browser utilizes event filtering to intercept and modify navigation requests
 Darkelf benefits from being an open-source project, potentially allowing community-driven improvements, security audits, and contributions, which can enhance its security over time.
 
 Overall, Darkelf's emphasis on encryption, privacy controls, network security enhancements, and customization options makes it a strong choice for users looking to prioritize security and privacy in their browsing experience. As with any software, staying updated with security patches and best practices is essential to maintaining its security effectiveness.
+
+## Additional Notes:
+
+Event Handling: Custom event filters and handlers allow for tailored interactions and additional security measures.
+
+Persistent Settings Restoration: The browser restores settings on launch to ensure that security and privacy configurations are always active based on user preferences.
+
+This combination of features makes Darkelf a privacy-focused web browser with several layers of security to protect users' data and enhance their online privacy.
+
+JavaScript Management: Users have the ability to enable or disable JavaScript globally or on a per-tab basis. This control helps mitigate JavaScript-related attacks and enhances privacy by preventing scripts from executing without user consent.
+
+Anti-Fingerprinting Measures: Darkelf implements measures to spoof or alter the browser's fingerprint, reducing the effectiveness of fingerprinting techniques used for tracking users across websites. Darkelf includes a script to spoof the user-agent string, which is a common fingerprinting metric. By changing the user-agent string to a generic value, Darkelf makes it more difficult for websites to uniquely identify the browser based on this information. The configure_web_engine_profile method sets various privacy-related attributes, which can help with anti-fingerprinting by limiting what information the browser exposes.
+
+HTTPS Enforcement: The browser can enforce HTTPS connections for all websites, ensuring data transmitted between the browser and websites is encrypted and protected against interception or tampering. enforcing HTTPS ensures that the data exchanged between the browser and websites is encrypted, which prevents third parties from eavesdropping and potentially using fingerprinting techniques.
+
