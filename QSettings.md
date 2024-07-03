@@ -1,6 +1,6 @@
 # QSettings
 
-## 1. Purpose: Persistent storage for application settings.
+## 1. Persistent storage for application settings.
 
 Location: Stored in platform-specific locations determined by the Qt framework. Typically:
         
