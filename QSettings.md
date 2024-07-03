@@ -1,6 +1,6 @@
 # QSettings
 
-Purpose: Persistent storage for application settings.
+## 1. Purpose: Persistent storage for application settings.
 
 Location: Stored in platform-specific locations determined by the Qt framework. Typically:
         
@@ -16,7 +16,7 @@ python
 
 self.settings = QSettings("DarkelfBrowser", "Darkelf")
 
-2. Environment Variables
+## 2. Environment Variables
 
 Purpose: Storing cryptographic keys securely.
 
@@ -32,7 +32,7 @@ os.environ['AES_KEY'] = b64encode(aes_key).decode()
 os.environ['RSA_PRIVATE_KEY'] = b64encode(private_key).decode()
 os.environ['RSA_PUBLIC_KEY'] = b64encode(public_key).decode()
 
-4. Cookies
+## 3. Cookies
 
 Purpose: Storing session data and user preferences for websites.
 
@@ -45,7 +45,7 @@ python
 
 profile = QWebEngineProfile.defaultProfile()
 
-5. Local Storage (Web Storage)
+## 4. Local Storage (Web Storage)
 
 Purpose: Storing web application data.
 
@@ -58,12 +58,12 @@ python
 
 settings.setAttribute(QWebEngineSettings.LocalStorageEnabled, True)
 
-6. HTML5 Storage (IndexedDB, WebSQL, etc.)
+## 5. HTML5 Storage (IndexedDB, WebSQL, etc.)
 
 Purpose: Storing more complex web application data.
 Location: Stored by the QWebEngineProfile in a directory determined by the Qt framework.
 
-Clearing and Viewing Stored Data
+## 6. Clearing and Viewing Stored Data
 
 Clear Cookies: Deletes all cookies stored by the browser.
 
