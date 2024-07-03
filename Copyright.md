@@ -1,4 +1,4 @@
-# Copyright Notice
+## Copyright Notice
 
 Copyright (c) 2023-2024 Dr. Kevin Moore. All rights reserved.
 
