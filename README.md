@@ -72,7 +72,9 @@ Mixed Content Blocking: Darkelf can block insecure content (HTTP) on HTTPS pages
 
 ## Customizable Themes and UI
 
-While not a security feature directly, Darkelf allows users to choose between different themes (like dark, light, or custom colors), potentially improving user experience and readability, which indirectly impacts security by enhancing usability.
+While not a security feature directly, Darkelf allows users to choose between different themes (like dark, or custom colors based on modification in the code), potentially improving user experience and readability, which indirectly impacts security by enhancing usability.
+
+Users have the option implement a background image embedded into the code
 
 ## Event Handling and Filtering
 
