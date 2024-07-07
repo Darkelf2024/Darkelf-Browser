@@ -52,7 +52,6 @@ Implementation: Sets up a SOCKS5 proxy to connect to the local Tor service (127.
 
 Cookie Management
 Clear Cookies: Provides a function to clear all cookies.
-View Cookies: Provides a function to view all stored cookies.
 
 Security Settings Management
 Persistent Storage: Uses QSettings to store and retrieve security settings persistently.
