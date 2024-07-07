@@ -4,7 +4,7 @@ Darkelf, as a custom PyQt5-based browser, incorporates several security features
 
 MAC OS - Ready,
 Linux - Ready,
-Windows - In Progress
+Windows - Ready
 
 # Darkelf (Custom PyQt5 Browser)
 
