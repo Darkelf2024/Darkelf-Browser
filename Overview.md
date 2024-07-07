@@ -1,8 +1,9 @@
-Overview
+# Overview
 Darkelf Browser is a privacy-focused web browser designed to provide enhanced security and
 user privacy features. Developed using PyQt5, it incorporates various encryption methods,
 security settings, and privacy enhancements to protect user data and browsing activities.
-Functionality
+
+## Functionality
 1. Tabbed Browsing: Darkelf supports tabbed browsing with features for tab management,
 including closing tabs and navigating backward and forward.
 2. Toolbar and Menu: It includes a customizable toolbar with buttons for navigation (back,
@@ -32,7 +33,8 @@ clear cookies. It also includes a history log viewer for users to review their b
 history.
 7. Customization: Users can set a background image for the browser homepage, enhancing
 personalization.
-Encryption and Security Features
+
+## Encryption and Security Features
 • AES Encryption: Utilizes AES-256 encryption for local data storage and protection.
 • RSA Encryption: Implements RSA encryption for secure communication channels and
 key management.
@@ -47,12 +49,13 @@ enhanced anonymity.
 possible.
 • Geolocation Control: Allows users to manage browser access to geolocation data,
 enhancing privacy.
-Compliance and Legal Considerations
+## Compliance and Legal Considerations
 • BIS.gov: Darkelf Browser complies with export control regulations and is designed to
 ensure lawful use and compliance with export control laws.
 • SNAP-R: The browser includes security measures to protect sensitive data and ensures
 compliance with encryption export regulations where applicable.
 Conclusion
+
 Darkelf Browser provides robust privacy and security features through its encryption methods,
 security settings, and user protection mechanisms. It is designed to offer a secure browsing
 experience while prioritizing user privacy and compliance with relevant regulations.
