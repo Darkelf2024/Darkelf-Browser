@@ -56,7 +56,7 @@ Proxy Configuration: Supports configuration for network proxies, allowing users 
 
 ## Theming and Customization:
 
-Theme Management: Users can switch between different themes (white, dark, dark gray) to match their preferences, and CSS is injected to apply these themes.
+Theme Management: Users can switch between different themes (Dark Theme) to match their preferences, and CSS is injected to apply these themes.
 
 ## User Interface Features:
 
