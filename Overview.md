@@ -54,7 +54,8 @@ BIS.gov: Darkelf Browser complies with export control regulations and is designe
 ensure lawful use and compliance with export control laws.
 SNAP-R: The browser includes security measures to protect sensitive data and ensures
 compliance with encryption export regulations where applicable.
-Conclusion
+
+## Conclusion
 
 Darkelf Browser provides robust privacy and security features through its encryption methods,
 security settings, and user protection mechanisms. It is designed to offer a secure browsing
