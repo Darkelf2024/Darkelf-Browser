@@ -18,7 +18,7 @@ anonymized browsing.
 o HTTPS Enforcement: Automatically redirect HTTP to HTTPS for secure
 connections.
 o Cookie Control: Enable or disable browser cookies.
-o Geolocation Control: Manage browser access to geolocation data.
+Geolocation Control: Manage browser access to geolocation data.
 4. Encryption: Darkelf Browser utilizes both symmetric and asymmetric encryption
 methods:
 o AES Encryption: Used for encrypting local data, such as AES-256 encryption for
