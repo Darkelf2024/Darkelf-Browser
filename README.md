@@ -5,7 +5,7 @@
 <div style="display: flex;">
 
 <div>
-    <img src="https://www.freepnglogos.com/uploads/html5-logo-png/html5-logo-devextreme-multi-purpose-controls-html-javascript-3.png" width="67" height="48" alt="HTML5 Logo">
+    <img src="https://www.freepnglogos.com/uploads/html5-logo-png/html5-logo-devextreme-multi-purpose-controls-html-javascript-3.png" width="85" height="48" alt="HTML5 Logo">
     <img src="https://s3.dualstack.us-east-2.amazonaws.com/pythondotorg-assets/media/community/logos/python-logo-only.png" alt="Python Logo" style="width:67; height:48px; margin-right:10px;">
     <img src="https://pypi.org/static/images/white-cube.2351a86c.svg" width="67" height="48;“>
 <div>
