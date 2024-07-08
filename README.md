@@ -1,5 +1,7 @@
 # Darkelf Browser - Release Soon
 
+
+## Web Tech
 <div style="display: flex;">
 
 <div>
@@ -8,6 +10,7 @@
     <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg" alt="CSS Logo" style="width: 48px;">
 </div>
 
+## Intro
 
 Darkelf, as a custom PyQt5-based browser, incorporates several security features designed to enhance user privacy and protect against various online threats. Here are some of its notable security features and Highlights.
 
