@@ -1,4 +1,4 @@
-This project utilizes the following third-party libraries:
+This project(Darkelf Browser) utilizes the following third-party libraries:
 
 1. **Python (PSFL)**:
    - License: [Python Software Foundation License (PSFL)](https://docs.python.org/3/license.html)
