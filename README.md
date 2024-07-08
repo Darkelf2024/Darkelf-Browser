@@ -100,3 +100,9 @@ Anti-Fingerprinting Measures: Darkelf implements measures to spoof or alter the 
 
 HTTPS Enforcement: The browser can enforce HTTPS connections for all websites, ensuring data transmitted between the browser and websites is encrypted and protected against interception or tampering. enforcing HTTPS ensures that the data exchanged between the browser and websites is encrypted, which prevents third parties from eavesdropping and potentially using fingerprinting techniques.
 
+
+## Contributors
+
+Dr. Kevin Moore (Darkelf2024)](https://github.com/Darkelf2024) (Kjm489) Initial work, design, and implementation, additional contributions.
+ChatGPT by OpenAI for code optimization and error checking.
+
