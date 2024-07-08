@@ -3,8 +3,6 @@
 
    ![HTML5 Logo](images/html5_logo.png)
    ![Python Logo](images/python_logo.png)
-   ![PyQt5 Logo](images/pyqt5_logo.png)
-   ![Cryptography Logo](images/cryptography_logo.png)
    
 
 Darkelf, as a custom PyQt5-based browser, incorporates several security features designed to enhance user privacy and protect against various online threats. Here are some of its notable security features and Highlights.
