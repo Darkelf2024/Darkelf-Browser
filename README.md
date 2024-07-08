@@ -10,7 +10,7 @@
     <img src="https://pypi.org/static/images/white-cube.2351a86c.svg" width="67" height="48" alt="Cube Logo">
 </div>
 
-<p>## Intro</p>
+## Intro
 
 Darkelf, as a custom PyQt5-based browser, incorporates several security features designed to enhance user privacy and protect against various online threats. Here are some of its notable security features and Highlights.
 
