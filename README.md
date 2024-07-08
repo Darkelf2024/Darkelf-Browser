@@ -4,15 +4,13 @@
 ## Web Tech
 <div style="display: flex;">
 
-<div>
+<div style="display:flex; align-items:center;">
     <img src="https://www.freepnglogos.com/uploads/html5-logo-png/html5-logo-devextreme-multi-purpose-controls-html-javascript-3.png" width="120" height="60" alt="HTML5 Logo">
-    <img src="https://s3.dualstack.us-east-2.amazonaws.com/pythondotorg-assets/media/community/logos/python-logo-only.png" alt="Python Logo" style="width:67; height:48px; margin-right:10px;">
-    <img src="https://pypi.org/static/images/white-cube.2351a86c.svg" width="67" height="48;“>
-<div>
-
+    <img src="https://s3.dualstack.us-east-2.amazonaws.com/pythondotorg-assets/media/community/logos/python-logo-only.png" alt="Python Logo" style="width:67px; height:48px; margin-right:10px;">
+    <img src="https://pypi.org/static/images/white-cube.2351a86c.svg" width="67" height="48" alt="Cube Logo">
 </div>
 
-<p>## Intro<p>
+<p>## Intro</p>
 
 Darkelf, as a custom PyQt5-based browser, incorporates several security features designed to enhance user privacy and protect against various online threats. Here are some of its notable security features and Highlights.
 
