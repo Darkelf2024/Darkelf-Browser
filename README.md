@@ -9,8 +9,7 @@
     <img src="https://s3.dualstack.us-east-2.amazonaws.com/pythondotorg-assets/media/community/logos/python-logo-only.png" alt="Python Logo" style="width:67; height:48px; margin-right:10px;">
     <img src="https://pypi.org/static/images/white-cube.2351a86c.svg" width="67" height="48;“>
 <div>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg" alt="CSS Logo" style="width: 48px;">
-</div>
+
 
 ## Intro
 
