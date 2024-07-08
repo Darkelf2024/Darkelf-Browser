@@ -6,6 +6,7 @@
 
 <div>
     <img src="https://s3.dualstack.us-east-2.amazonaws.com/pythondotorg-assets/media/community/logos/python-logo-only.png" alt="Python Logo" style="width:67; height:48px; margin-right:10px;">
+    <img src="https://pypi.org/static/images/white-cube.2351a86c.svg" width="67" height="67">
     <img src="https://www.w3.org/html/logo/downloads/HTML5_Logo_512.png" alt="HTML5 Logo" style="width: 67px;">
     <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg" alt="CSS Logo" style="width: 48px;">
 </div>
