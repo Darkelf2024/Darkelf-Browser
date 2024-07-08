@@ -2,6 +2,9 @@
 
 
 <div style="display: flex;">
+    
+![Python Logo](https://s3.dualstack.us-east-2.amazonaws.com/pythondotorg-assets/media/community/logos/python-logo-only.png)
+
     <img src="https://www.w3.org/html/logo/downloads/HTML5_Logo_512.png" alt="HTML5 Logo" style="width: 67px;">
     <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg" alt="CSS Logo" style="width: 48px;">
 </div>
