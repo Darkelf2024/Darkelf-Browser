@@ -22,7 +22,7 @@ Educational and Development Benefits: Building a custom browser like Darkelf pro
 
 ## Encryption Support
 
-AES Encryption: Darkelf securely manages an AES encryption key, ensuring sensitive data such as user credentials or stored information is encrypted, protecting it from unauthorized access.
+AES-GCM Encryption: Darkelf securely manages an AES encryption key, ensuring sensitive data such as user credentials or stored information is encrypted, protecting it from unauthorized access.
 
 RSA Encryption: It generates or loads RSA key pairs, enabling secure communication and potentially securing stored data through asymmetric encryption techniques.
 
