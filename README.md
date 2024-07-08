@@ -2,7 +2,6 @@
 
 
 <div style="display: flex;">
-    <img src="https://https://www.iconfinder.com/icons/4375050/logo_python_icon/static/community_logos/python-logo.png" alt="Python Logo" style="width: 48px; margin-right: 10px;">
     <img src="https://www.w3.org/html/logo/downloads/HTML5_Logo_512.png" alt="HTML5 Logo" style="width: 48px;">
 </div>
 
