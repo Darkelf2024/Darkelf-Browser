@@ -1,6 +1,6 @@
 # Darkelf Browser - Release Soon
 
-div style="display: flex;">
+<div style="display: flex;">
 
 <div>
     <img src="https://s3.dualstack.us-east-2.amazonaws.com/pythondotorg-assets/media/community/logos/python-logo-only.png" alt="Python Logo" style="width:67; height:48px; margin-right:10px;">
