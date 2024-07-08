@@ -54,11 +54,11 @@ Persistent Settings: Uses QSettings for persistent storage of user preferences, 
 
 Proxy Configuration: Supports configuration for network proxies, allowing users to route their traffic through various proxy servers for added privacy.
 
-## Theming and Customization:
+## Theming and Customization
 
 Theme Management: Users can switch between different themes (Dark Theme) to match their preferences, and CSS is injected to apply these themes.
 
-## User Interface Features:
+## User Interface Features
 
 Toolbar and Menu Bar: A toolbar and menu bar provide easy access to navigation controls (back, forward, reload, home) and security settings.
 
@@ -86,7 +86,7 @@ Darkelf benefits from being an open-source project, potentially allowing communi
 
 Overall, Darkelf's emphasis on encryption, privacy controls, network security enhancements, and customization options makes it a strong choice for users looking to prioritize security and privacy in their browsing experience. As with any software, staying updated with security patches and best practices is essential to maintaining its security effectiveness.
 
-## Additional Notes:
+## Additional Notes
 
 Event Handling: Custom event filters and handlers allow for tailored interactions and additional security measures.
 
