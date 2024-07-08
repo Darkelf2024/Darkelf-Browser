@@ -1,4 +1,4 @@
-#Darkelf Browaer
+# Darkelf Browaer
 
 This project (Darkelf Browser) utilizes the following third-party libraries:
 
