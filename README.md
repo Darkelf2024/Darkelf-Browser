@@ -126,3 +126,12 @@ HTTPS Enforcement: The browser can enforce HTTPS connections for all websites, e
 Dr. Kevin Moore [Darkelf2024](https://github.com/Darkelf2024) ([Kjm489](https://github.com/Kjm489)) Initial work, design, and implementation, additional contributions. 
 Heapy for memory leak testing.
 ChatGPT by OpenAI for code optimization and error analysis.
+
+
+## Feedback and Contributions
+
+Your feedback is valuable for the improvement of Darkelf Browser. If you have any suggestions, ideas, bug reports, or feature requests, please don't hesitate to open an issue or reach out to me.
+
+I welcome constructive criticism and diverse perspectives as they can help make Darkelf Browser better for everyone. Let's work together to create a vibrant and supportive community around this project.
+
+Thank you for your support and for helping make Darkelf Browser the best it can be!
