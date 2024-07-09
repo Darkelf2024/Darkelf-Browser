@@ -39,7 +39,7 @@ This project utilizes third-party libraries and resources, which are acknowledge
 - **DuckDuckGo Search**: 
 This browser uses DuckDuckGo search for private and anonymous searches. DuckDuckGo is a privacy-focused search engine that does not track your searches or store your personal information. Learn more about DuckDuckGo at [DuckDuckGo](https://duckduckgo.com/).
 
-- **TOR Network Integration**: 
+- **Tor Network Integration**: 
 For enhanced privacy and anonymity, this browser offers integration with the Tor network. The Tor network helps protect your online privacy by routing your internet traffic through a series of encrypted relays. Learn more about the Tor Project at [Tor Project](https://www.torproject.org/).
 
 
