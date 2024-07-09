@@ -22,9 +22,9 @@ Darkelf, as a custom PyQt5-based browser, incorporates several security features
 • [Copyright](Copyright.md)
 • [QSettings](QSettings.md)
 
-MAC OS - Ready,
-Linux - Ready,
-Windows - Ready
+- MAC OS - Ready,
+- Linux - Ready,
+- Windows - Ready
 
 # Darkelf (Custom PyQt5 Browser)
 
