@@ -49,6 +49,7 @@ AES-GCM Encryption: Darkelf securely manages an AES encryption key, ensuring sen
 RSA Encryption: It generates or loads RSA key pairs, enabling secure communication and potentially securing stored data through asymmetric encryption techniques.
 
 ## TOR and Quantum Encryption
+- Tor is emphasized in “CAPS” to emphasize importance.
 
 Tor Network: Darkelf Browser includes the option to route traffic through the Tor network, providing enhanced anonymity and privacy by using a series of encrypted relays.
 
