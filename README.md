@@ -27,7 +27,7 @@ Darkelf, as a custom PyQt5-based browser, incorporates several security features
 - Linux - Ready
 - Windows - Ready
 
-# Darkelf 
+# Darkelf Browser
 - (Custom PyQt5 Browser)
 
 ## Positives and Advantages
