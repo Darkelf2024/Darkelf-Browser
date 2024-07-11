@@ -5,22 +5,22 @@ This project (Darkelf Browser) utilizes the following third-party libraries:
 ## Resources
 
 1. **Python (PSFL)**:
-- **License: [Python Software Foundation License (PSFL)](https://docs.python.org/3/license.html)
-- **Copyright © 2001-2024 Python Software Foundation.
+- License: [Python Software Foundation License (PSFL)](https://docs.python.org/3/license.html)
+- Copyright © 2001-2024 Python Software Foundation.
 
 2. **PyQt5 (GPL and Commercial License)**:
-- **PyQt5 is available under the GNU General Public License (GPL) or a commercial license from Riverbank Computing.
-- **GPL License: [GNU General Public License](https://www.gnu.org/licenses/gpl.html)
-- **Commercial License: [Riverbank Computing License](https://www.riverbankcomputing.com/software/pyqt/license)
+- PyQt5 is available under the GNU General Public License (GPL) or a commercial license from Riverbank Computing.
+- GPL License: [GNU General Public License](https://www.gnu.org/licenses/gpl.html)
+- Commercial License: [Riverbank Computing License](https://www.riverbankcomputing.com/software/pyqt/license)
 
 3. **Crypto (Public Domain)**:
-- **Crypto is considered public domain.
-- **Source: [Crypto repository](https://github.com/dlitz/pycrypto)
+- Crypto is considered public domain.
+- Source: [Crypto repository](https://github.com/dlitz/pycrypto)
 
 4. **base64, urllib, sys, os, gc (PSFL)**:
-- **These modules are part of Python's standard library and are covered under the Python Software Foundation License (PSFL).
-- **License: [Python Software Foundation License (PSFL)](https://docs.python.org/3/license.html)
-- **Copyright © 2001-2024 Python Software Foundation.
+- These modules are part of Python's standard library and are covered under the Python Software Foundation License (PSFL).
+- License: [Python Software Foundation License (PSFL)](https://docs.python.org/3/license.html)
+- Copyright © 2001-2024 Python Software Foundation.
 
 Copyright © 2024 Dr. Kevin Moore.
 
