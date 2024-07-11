@@ -1,7 +1,5 @@
 # Darkelf Browser
 
-This project (Darkelf Browser) utilizes the following third-party libraries:
-
 ## Attribution
 
 This project utilizes third-party libraries and resources, which are acknowledged below:
