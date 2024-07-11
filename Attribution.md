@@ -36,6 +36,11 @@ This project utilizes third-party libraries and resources, which are acknowledge
 - **urllib**: [Python Standard Library](https://docs.python.org/3/library/urllib.html) (License: [PSF License](https://docs.python.org/3/license.html))
 - **Other standard libraries**: Refer to their respective documentation for licenses.
 
+
+This application uses Qt WebEngine, a part of the Qt framework.
+Qt WebEngine is based on the open-source Chromium project and is developed and maintained by the Qt Company.
+For more information about Qt WebEngine, visit https://www.qt.io.
+
 - **DuckDuckGo Search**: 
 This browser uses DuckDuckGo search for private and anonymous searches. DuckDuckGo is a privacy-focused search engine that does not track your searches or store your personal information. Learn more about DuckDuckGo at [DuckDuckGo](https://duckduckgo.com/).
 
