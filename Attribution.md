@@ -41,13 +41,13 @@ This project utilizes third-party libraries and resources, which are acknowledge
 
 - This project utilizes third-party libraries and resources, which are acknowledged below:
 
-- Python: Python Software Foundation (License: PSF License)
+- Python: Python Software Foundation [PSF License](https://docs.python.org/3/license.html))
           Modules: sys, os, gc, base64, urllib.parse
 
-- PyQt5: Riverbank Computing Limited (License: GPL)
+- PyQt5: Riverbank Computing Limited 
          Modules: PyQt5.QtCore, PyQt5.QtWidgets, PyQt5.QtNetwork
 
-- PyQt-WebEngine: Riverbank Computing Limited (License: GPL)
+- PyQt-WebEngine: Riverbank Computing Limited 
   Components: QWebEngineView, QWebEnginePage, QWebEngineProfile, QWebEngineSettings, QWebEngineDownloadItem,     QWebEngineHttpRequest, QWebEngineUrlRequestInterceptor
 
 - Qt WebEngine: The Qt Company (License: LGPL)
@@ -56,7 +56,7 @@ This project utilizes third-party libraries and resources, which are acknowledge
 - PyCryptodome: Python Cryptography Toolkit (License: Public Domain)
   Modules: Crypto.Random, Crypto.Cipher, Crypto.PublicKey
 
-- Guppy: The Python heap analysis toolset (License: MIT License)
+- Guppy: The Python heap analysis toolset [MIT License](https://github.com/zhuyifei1999/guppy3/blob/master/LICENSE)
   Module: guppy.heapy
 
 ## Explanation:
