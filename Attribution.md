@@ -37,7 +37,7 @@ This project utilizes third-party libraries and resources, which are acknowledge
 - **Other standard libraries**: Refer to their respective documentation
 
 
--**Breakdown**:
+## Breakdown:
 
 - This project utilizes third-party libraries and resources, which are acknowledged below:
 
@@ -59,7 +59,7 @@ This project utilizes third-party libraries and resources, which are acknowledge
 - Guppy: The Python heap analysis toolset (License: MIT License)
   Module: guppy.heapy
 
--**Explanation**:
+## Explanation:
 
 - Python Standard Library: Covers the standard modules provided by Python, including sys, os, gc, base64, and urllib.parse.
 - PyQt5: A set of Python bindings for the Qt application framework, covering core and widget components.
