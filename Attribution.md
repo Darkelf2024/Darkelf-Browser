@@ -2,28 +2,6 @@
 
 This project (Darkelf Browser) utilizes the following third-party libraries:
 
-## Resources
-
-1. **Python (PSFL)**:
-- License: [Python Software Foundation License (PSFL)](https://docs.python.org/3/license.html)
-- Copyright © 2001-2024 Python Software Foundation.
-
-2. **PyQt5 (GPL and Commercial License)**:
-- PyQt5 is available under the GNU General Public License (GPL) or a commercial license from Riverbank Computing.
-- GPL License: [GNU General Public License](https://www.gnu.org/licenses/gpl.html)
-- Commercial License: [Riverbank Computing License](https://www.riverbankcomputing.com/software/pyqt/license)
-
-3. **Crypto (Public Domain)**:
-- Crypto is considered public domain.
-- Source: [Crypto repository](https://github.com/dlitz/pycrypto)
-
-4. **base64, urllib, sys, os, gc (PSFL)**:
-- These modules are part of Python's standard library and are covered under the Python Software Foundation License (PSFL).
-- License: [Python Software Foundation License (PSFL)](https://docs.python.org/3/license.html)
-- Copyright © 2001-2024 Python Software Foundation.
-
-Copyright © 2024 Dr. Kevin Moore.
-
 ## Attribution
 
 This project utilizes third-party libraries and resources, which are acknowledged below:
@@ -34,7 +12,15 @@ This project utilizes third-party libraries and resources, which are acknowledge
 - **Crypto**: [PyCryptodome](https://www.pycryptodome.org/) (License: [Public Domain](https://github.com/Legrandin/pycryptodome/blob/main/LICENSE))
 - **base64**: [Python Standard Library](https://docs.python.org/3/library/base64.html) (License: [PSF License](https://docs.python.org/3/license.html))
 - **urllib**: [Python Standard Library](https://docs.python.org/3/library/urllib.html) (License: [PSF License](https://docs.python.org/3/license.html))
-- **Other standard libraries**: Refer to their respective documentation
+- **Other standard libraries**: Refer to their respective documentation.
+
+## Additional Attributions:
+
+- **DuckDuckGo Search**: 
+This browser uses DuckDuckGo search for private and anonymous searches. DuckDuckGo is a privacy-focused search engine that does not track your searches or store your personal information. Learn more about DuckDuckGo at [DuckDuckGo](https://duckduckgo.com/).
+
+- **Tor Network Integration**: 
+For enhanced privacy and anonymity, this browser offers integration with the Tor network. The Tor network helps protect your online privacy by routing your internet traffic through a series of encrypted relays. Learn more about the Tor Project at [Tor Project](https://www.torproject.org/).
 
 ## Explanation:
 This application uses PyQt-WebEngine, which provides Python bindings for Qt WebEngine, and Qt WebEngine, which is provided by The Qt Company under the LGPL license.
@@ -55,15 +41,5 @@ This project is licensed under the terms of the GNU General Public License v3.0.
 ### Third-Party Libraries
 - **PyQt5**: Licensed under the GNU General Public License v3.0. For more details, visit the [PyQt5 project page](https://riverbankcomputing.com/software/pyqt/intro).
 - **Qt WebEngine**: Licensed under the GNU Lesser General Public License v3.0. For more details, visit the [Qt project page](https://www.qt.io/).
-
-
-## Additional Attributions:
-
-- **DuckDuckGo Search**: 
-This browser uses DuckDuckGo search for private and anonymous searches. DuckDuckGo is a privacy-focused search engine that does not track your searches or store your personal information. Learn more about DuckDuckGo at [DuckDuckGo](https://duckduckgo.com/).
-
-- **Tor Network Integration**: 
-For enhanced privacy and anonymity, this browser offers integration with the Tor network. The Tor network helps protect your online privacy by routing your internet traffic through a series of encrypted relays. Learn more about the Tor Project at [Tor Project](https://www.torproject.org/).
-
 
 Copyright © 2024 Dr. Kevin Moore. All rights reserved.
