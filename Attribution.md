@@ -39,7 +39,13 @@ This project utilizes third-party libraries and resources, which are acknowledge
 ## Explanation:
 This application uses PyQt-WebEngine, which provides Python bindings for Qt WebEngine, and Qt WebEngine, which is provided by The Qt Company under the LGPL license.
 PyQt-WebEngine enables the integration of web functionality into this application using the Qt framework.
-For more information about PyQt-WebEngine, please refer to the PyQt documentation.
+For more information about PyQt-WebEngine, please refer to the PyQt documentation. 
+## License
+This project is licensed under the terms of the GNU General Public License v3.0. See the [LICENSE](LICENSE) file for more details.
+
+### Third-Party Libraries
+- **PyQt5**: Licensed under the GNU General Public License v3.0. For more details, visit the [PyQt5 project page](https://riverbankcomputing.com/software/pyqt/intro).
+- **Qt WebEngine**: Licensed under the GNU Lesser General Public License v3.0. For more details, visit the [Qt project page](https://www.qt.io/).
 
 - Python Standard Library: Covers the standard modules provided by Python, including sys, os, gc, base64, and urllib.parse.
 - PyQt5: A set of Python bindings for the Qt application framework, covering core and widget components.
