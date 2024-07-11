@@ -49,7 +49,7 @@ For more information about PyQt-WebEngine, please refer to the PyQt documentatio
 - PyCryptodome: A self-contained Python package of low-level cryptographic primitives.
 - Guppy: A Python programming environment & heap analysis toolset, with heapy for heap analysis.
 
-  ## License
+## License
 This project is licensed under the terms of the GNU General Public License v3.0. See the [LICENSE](LICENSE) file for more details.
 
 ### Third-Party Libraries
