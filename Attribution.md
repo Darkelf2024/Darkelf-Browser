@@ -41,13 +41,6 @@ This application uses PyQt-WebEngine, which provides Python bindings for Qt WebE
 PyQt-WebEngine enables the integration of web functionality into this application using the Qt framework.
 For more information about PyQt-WebEngine, please refer to the PyQt documentation. 
 
-### License
-This project is licensed under the terms of the GNU General Public License v3.0. See the [LICENSE](LICENSE) file for more details.
-
-### Third-Party Libraries
-- **PyQt5**: Licensed under the GNU General Public License v3.0. For more details, visit the [PyQt5 project page](https://riverbankcomputing.com/software/pyqt/intro).
-- **Qt WebEngine**: Licensed under the GNU Lesser General Public License v3.0. For more details, visit the [Qt project page](https://www.qt.io/).
-
 - Python Standard Library: Covers the standard modules provided by Python, including sys, os, gc, base64, and urllib.parse.
 - PyQt5: A set of Python bindings for the Qt application framework, covering core and widget components.
 - PyQt-WebEngine: Python bindings specifically for the Qt WebEngine module, facilitating web content embedding in Python    applications.
@@ -55,6 +48,13 @@ This project is licensed under the terms of the GNU General Public License v3.0.
 - Qt WebEngine: The C++ module providing the actual web rendering engine, which PyQt-WebEngine wraps for use in Python.
 - PyCryptodome: A self-contained Python package of low-level cryptographic primitives.
 - Guppy: A Python programming environment & heap analysis toolset, with heapy for heap analysis.
+
+  ## License
+This project is licensed under the terms of the GNU General Public License v3.0. See the [LICENSE](LICENSE) file for more details.
+
+### Third-Party Libraries
+- **PyQt5**: Licensed under the GNU General Public License v3.0. For more details, visit the [PyQt5 project page](https://riverbankcomputing.com/software/pyqt/intro).
+- **Qt WebEngine**: Licensed under the GNU Lesser General Public License v3.0. For more details, visit the [Qt project page](https://www.qt.io/).
 
 
 ## Additional Attributions:
