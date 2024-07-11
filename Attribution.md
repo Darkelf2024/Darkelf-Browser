@@ -37,7 +37,7 @@ This project utilizes third-party libraries and resources, which are acknowledge
 - **Other standard libraries**: Refer to their respective documentation for licenses.
 
 
-This application uses Qt WebEngine, a part of the Qt framework.
+- **This application uses Qt WebEngine, a part of the Qt framework.
 Qt WebEngine is based on the open-source Chromium project and is developed and maintained by the Qt Company.
 For more information about Qt WebEngine, visit https://www.qt.io.
 
