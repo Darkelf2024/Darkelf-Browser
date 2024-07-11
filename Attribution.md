@@ -37,6 +37,9 @@ This project utilizes third-party libraries and resources, which are acknowledge
 - **Other standard libraries**: Refer to their respective documentation
 
 ## Explanation:
+This application uses PyQt-WebEngine, which provides Python bindings for Qt WebEngine, and Qt WebEngine, which is provided by The Qt Company under the LGPL license.
+PyQt-WebEngine enables the integration of web functionality into this application using the Qt framework.
+For more information about PyQt-WebEngine, please refer to the PyQt documentation.
 
 - Python Standard Library: Covers the standard modules provided by Python, including sys, os, gc, base64, and urllib.parse.
 - PyQt5: A set of Python bindings for the Qt application framework, covering core and widget components.
@@ -46,6 +49,8 @@ This project utilizes third-party libraries and resources, which are acknowledge
 - PyCryptodome: A self-contained Python package of low-level cryptographic primitives.
 - Guppy: A Python programming environment & heap analysis toolset, with heapy for heap analysis.
 
+
+## Additional Attributions:
 - **DuckDuckGo Search**: 
 This browser uses DuckDuckGo search for private and anonymous searches. DuckDuckGo is a privacy-focused search engine that does not track your searches or store your personal information. Learn more about DuckDuckGo at [DuckDuckGo](https://duckduckgo.com/).
 
