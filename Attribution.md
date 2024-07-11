@@ -30,7 +30,7 @@ This project utilizes third-party libraries and resources, which are acknowledge
 
 - **Python**: [Python Software Foundation](https://www.python.org/) (License: [PSF License](https://docs.python.org/3/license.html))
 - **PyQt5**: [Riverbank Computing Limited](https://www.riverbankcomputing.com/software/pyqt/) (License: [GPL](https://www.riverbankcomputing.com/software/pyqt/intro))
-- **PyQtWebEngine**: [Riverbank Computing Limited](https://www.riverbankcomputing.com/software/pyqtwebengine/) (License: [GPL](https://www.riverbankcomputing.com/software/pyqtwebengine/intro))
+- **PyQt-WebEngine**: [Riverbank Computing Limited](https://www.riverbankcomputing.com/software/pyqtwebengine/) (License: [GPL](https://www.riverbankcomputing.com/software/pyqtwebengine/intro))
 - **Crypto**: [PyCryptodome](https://www.pycryptodome.org/) (License: [Public Domain](https://github.com/Legrandin/pycryptodome/blob/main/LICENSE))
 - **base64**: [Python Standard Library](https://docs.python.org/3/library/base64.html) (License: [PSF License](https://docs.python.org/3/license.html))
 - **urllib**: [Python Standard Library](https://docs.python.org/3/library/urllib.html) (License: [PSF License](https://docs.python.org/3/license.html))
