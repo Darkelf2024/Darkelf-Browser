@@ -20,7 +20,7 @@ This browser uses DuckDuckGo search for private and anonymous searches. DuckDuck
 - **Tor Network Integration**: 
 For enhanced privacy and anonymity, this browser offers integration with the Tor network. The Tor network helps protect your online privacy by routing your internet traffic through a series of encrypted relays. Learn more about the Tor Project at [Tor Project](https://www.torproject.org/).
 
-## Explanation:
+## Explanation
 This application uses PyQt-WebEngine, which provides Python bindings for Qt WebEngine, and Qt WebEngine, which is provided by The Qt Company under the LGPL license.
 PyQt-WebEngine enables the integration of web functionality into this application using the Qt framework.
 For more information about PyQt-WebEngine, please refer to the PyQt documentation. 
