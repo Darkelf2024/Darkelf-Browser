@@ -40,7 +40,8 @@ This project utilizes third-party libraries and resources, which are acknowledge
 This application uses PyQt-WebEngine, which provides Python bindings for Qt WebEngine, and Qt WebEngine, which is provided by The Qt Company under the LGPL license.
 PyQt-WebEngine enables the integration of web functionality into this application using the Qt framework.
 For more information about PyQt-WebEngine, please refer to the PyQt documentation. 
-## License
+
+### License
 This project is licensed under the terms of the GNU General Public License v3.0. See the [LICENSE](LICENSE) file for more details.
 
 ### Third-Party Libraries
@@ -57,6 +58,7 @@ This project is licensed under the terms of the GNU General Public License v3.0.
 
 
 ## Additional Attributions:
+
 - **DuckDuckGo Search**: 
 This browser uses DuckDuckGo search for private and anonymous searches. DuckDuckGo is a privacy-focused search engine that does not track your searches or store your personal information. Learn more about DuckDuckGo at [DuckDuckGo](https://duckduckgo.com/).
 
