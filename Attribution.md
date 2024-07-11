@@ -34,7 +34,40 @@ This project utilizes third-party libraries and resources, which are acknowledge
 - **Crypto**: [PyCryptodome](https://www.pycryptodome.org/) (License: [Public Domain](https://github.com/Legrandin/pycryptodome/blob/main/LICENSE))
 - **base64**: [Python Standard Library](https://docs.python.org/3/library/base64.html) (License: [PSF License](https://docs.python.org/3/license.html))
 - **urllib**: [Python Standard Library](https://docs.python.org/3/library/urllib.html) (License: [PSF License](https://docs.python.org/3/license.html))
-- **Other standard libraries**: Refer to their respective documentation 
+- **Other standard libraries**: Refer to their respective documentation
+
+
+-**Breakdown**:
+
+- This project utilizes third-party libraries and resources, which are acknowledged below:
+
+- Python: Python Software Foundation (License: PSF License)
+          Modules: sys, os, gc, base64, urllib.parse
+
+- PyQt5: Riverbank Computing Limited (License: GPL)
+         Modules: PyQt5.QtCore, PyQt5.QtWidgets, PyQt5.QtNetwork
+
+- PyQt-WebEngine: Riverbank Computing Limited (License: GPL)
+  Components: QWebEngineView, QWebEnginePage, QWebEngineProfile, QWebEngineSettings, QWebEngineDownloadItem,     QWebEngineHttpRequest, QWebEngineUrlRequestInterceptor
+
+- Qt WebEngine: The Qt Company (License: LGPL)
+  Provides the underlying web rendering engine used by PyQt-WebEngine.
+
+- PyCryptodome: Python Cryptography Toolkit (License: Public Domain)
+  Modules: Crypto.Random, Crypto.Cipher, Crypto.PublicKey
+
+- Guppy: The Python heap analysis toolset (License: MIT License)
+  Module: guppy.heapy
+
+-**Explanation**:
+
+- Python Standard Library: Covers the standard modules provided by Python, including sys, os, gc, base64, and urllib.parse.
+- PyQt5: A set of Python bindings for the Qt application framework, covering core and widget components.
+- PyQt-WebEngine: Python bindings specifically for the Qt WebEngine module, facilitating web content embedding in Python    applications.
+    
+- Qt WebEngine: The C++ module providing the actual web rendering engine, which PyQt-WebEngine wraps for use in Python.
+- PyCryptodome: A self-contained Python package of low-level cryptographic primitives.
+- Guppy: A Python programming environment & heap analysis toolset, with heapy for heap analysis.
 
 - **DuckDuckGo Search**: 
 This browser uses DuckDuckGo search for private and anonymous searches. DuckDuckGo is a privacy-focused search engine that does not track your searches or store your personal information. Learn more about DuckDuckGo at [DuckDuckGo](https://duckduckgo.com/).
