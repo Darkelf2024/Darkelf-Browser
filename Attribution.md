@@ -36,29 +36,6 @@ This project utilizes third-party libraries and resources, which are acknowledge
 - **urllib**: [Python Standard Library](https://docs.python.org/3/library/urllib.html) (License: [PSF License](https://docs.python.org/3/license.html))
 - **Other standard libraries**: Refer to their respective documentation
 
-
-## Breakdown:
-
-- This project utilizes third-party libraries and resources, which are acknowledged below:
-
-- Python: Python Software Foundation [PSF License](https://docs.python.org/3/license.html))
-          Modules: sys, os, gc, base64, urllib.parse
-
-- PyQt5: Riverbank Computing Limited (License: [GPL](https://www.riverbankcomputing.com/software/pyqt/intro))
-         Modules: PyQt5.QtCore, PyQt5.QtWidgets, PyQt5.QtNetwork
-
-- PyQt-WebEngine: Riverbank Computing Limited 
-  Components: QWebEngineView, QWebEnginePage, QWebEngineProfile, QWebEngineSettings, QWebEngineDownloadItem,     QWebEngineHttpRequest, QWebEngineUrlRequestInterceptor (License: [GPL](https://www.riverbankcomputing.com/software/pyqtwebengine/intro))
-
-- Qt WebEngine: The Qt Company (License: LGPL)
-  Provides the underlying web rendering engine used by PyQt-WebEngine.
-
-- PyCryptodome: Python Cryptography Toolkit [License](https://github.com/Legrandin/pycryptodome/blob/master/LICENSE.rst)
-  Modules: Crypto.Random, Crypto.Cipher, Crypto.PublicKey
-
-- Guppy: The Python heap analysis toolset [MIT License](https://github.com/zhuyifei1999/guppy3/blob/master/LICENSE)
-  Module: guppy.heapy
-
 ## Explanation:
 
 - Python Standard Library: Covers the standard modules provided by Python, including sys, os, gc, base64, and urllib.parse.
