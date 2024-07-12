@@ -1,4 +1,4 @@
-## Advantages of Darkelf over Tor Browser
+## Advantages of Darkelf vs Tor Browser
 
 - Enhanced Encryption Options
 AES-GCM and RSA: Darkelf implements AES-GCM for secure data encryption and integrity checking, along with RSA encryption for key exchange. This provides robust encryption capabilities, potentially enhancing data security compared to Tor's standard encryption through the Tor network.
