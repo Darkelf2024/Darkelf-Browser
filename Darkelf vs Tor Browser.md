@@ -24,35 +24,35 @@ Darkelf offers several advantages over Tor Browser, including enhanced encryptio
 
 ## Darkelf
 
-- AES-GCM Encryption
+- AES-GCM Encryption:
 Darkelf utilizes AES-GCM (Advanced Encryption Standard-Galois/Counter Mode) for encrypting data. AES-GCM is widely recognized for its efficiency and security in symmetric key encryption, providing both confidentiality and integrity of data.
 
-- RSA Encryption
+- RSA Encryption:
 Darkelf employs RSA (Rivest-Shamir-Adleman) encryption for key exchange purposes. RSA is a public-key cryptographic algorithm used for secure communication and digital signatures.
 
-- Future Quantum Encryption
+- Future Quantum Encryption:
 Darkelf has plans to incorporate quantum encryption in the future. Quantum encryption uses principles from quantum mechanics to secure communication channels, offering potentially stronger protection against quantum computing-based attacks.
 
 ## Tor Browser
 
-- Tor Circuit Encryption
+- Tor Circuit Encryption:
 Tor Browser encrypts data using multiple layers of encryption, known as onion routing. Each relay in the Tor network adds a layer of encryption, ensuring that no single relay can determine both the origin and destination of the data.
 
-- Diffie-Hellman Key Exchange
+- Diffie-Hellman Key Exchange:
 Tor Browser uses the Diffie-Hellman key exchange protocol for establishing secure communication channels between the client (user's browser) and the Tor network relays.
 
-- End-to-End Encryption
+- End-to-End Encryption:
 Tor Browser ensures end-to-end encryption through its layered encryption approach, where each relay decrypts only enough data to know which relay to send it to next, preventing anyone monitoring the traffic from knowing the entire route.
 
 ## Differences in Encryption
 
-- Symmetric vs Asymmetric Encryption
+- Symmetric vs Asymmetric Encryption:
 Darkelf primarily uses symmetric AES-GCM encryption for data and RSA for key exchange, focusing on efficient and secure communication.
 
-- Onion Routing vs Direct Encryption
+- Onion Routing vs Direct Encryption:
 Tor Browser relies on onion routing for anonymity and privacy, while Darkelf employs direct encryption methods suitable for browsing with enhanced privacy settings.
 
-- Quantum Encryption
+- Quantum Encryption:
 Darkelf's planned integration of quantum encryption may offer future-proofing against advanced cryptographic attacks that leverage quantum computing, which Tor Browser does not currently include.
 
 In summary, Darkelf and Tor Browser employ different encryption methodologies tailored to their respective design goals—Darkelf focusing on robust symmetric and asymmetric encryption for browsing security and potential quantum encryption, while Tor Browser emphasizes onion routing for anonymous and private internet access. Each approach has its strengths depending on specific security and privacy needs.
