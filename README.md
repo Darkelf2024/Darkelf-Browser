@@ -150,8 +150,8 @@ Alters or hides TLS fingerprinting information (such as supported cipher suites 
 ## JavaScript Hooks
 The browser employs JavaScript hooks to intercept and modify calls to functions and APIs that can be used for fingerprinting, such as navigator, screen, document, and window properties.
 
-## Browser Extensions
-Utilizes extensions or built-in features to spoof or block fingerprintable attributes dynamically, providing an extra layer of protection.
+## Built-In
+Built-in features to spoof or block fingerprintable attributes dynamically, providing an extra layer of protection.
 
 ## Configuration Options
 Provides user-configurable options to enable or disable specific anti-fingerprinting techniques, allowing users to balance privacy and functionality according to their needs.
