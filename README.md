@@ -30,7 +30,7 @@ Darkelf, as a custom PyQt5-based browser, incorporates several security features
 
 The Darkelf browser includes a wide range of security, encryption, and privacy features to ensure safe and private browsing. 
 
-# Security Features
+## Security Features
 
 ## Content Security Policy (CSP)
 Sets strict content security policies to prevent cross-site scripting (XSS), clickjacking, and other code injection attacks.
@@ -41,13 +41,13 @@ Automatically upgrades HTTP requests to HTTPS to ensure encrypted communication 
 ## Anti-Fingerprinting
 Reduces the amount of information available for browser fingerprinting, making it harder to track users across the web.
 
-## Tor Network Integration:
+## Tor Network Integration
 Optional integration with the Tor network for anonymous browsing by routing traffic through multiple nodes to conceal users' IP addresses.
 
-## Clear Cookies and Cache on Exit:
+## Clear Cookies and Cache on Exit
 Clears HTTP cache and cookies when the browser or a tab is closed to prevent tracking and maintain privacy.
 
-# Encryption Features
+## Encryption Features
 
 ## AES Key Encryption
 Uses AES (Advanced Encryption Standard) for encrypting sensitive data. The AES key is either loaded from an environment variable or generated if not available.
@@ -61,7 +61,7 @@ Uses RSA for encrypting and decrypting data. The RSA key pair is generated or lo
 ## Quantum Encryption
 Option to enable quantum encryption for advanced security against future quantum computing threats.
 
-# Privacy Features
+## Privacy Features
 
 ## JavaScript Control
 Allows users to enable or disable JavaScript, reducing the risk of malicious scripts.
@@ -81,7 +81,7 @@ A visually unobtrusive theme to reduce eye strain and potentially avoid drawing 
 ## Home Page with Integrated Search:
 A customizable home page with integrated DuckDuckGo search, offering a privacy-focused search engine.
 
-# Additional Features
+## Additional Features
 
 ## Debounce Resize Function
 Efficiently handles resize events to optimize performance.
@@ -101,7 +101,7 @@ Supports restoring the previous session, including tabs and their state, enhanci
 
 The Darkelf browser employs several anti-fingerprinting techniques to reduce the amount of information that can be used to track users across the web. Here are the primary techniques used:
 
-# Anti-Fingerprinting Techniques
+## Anti-Fingerprinting Techniques
 
 ## Canvas Fingerprinting Protection
 Modifies or blocks the ability of websites to read canvas data. This prevents websites from creating a unique fingerprint based on the rendering of graphics on the user's device.
@@ -145,7 +145,7 @@ Modifies or disables ETag headers and cache-control mechanisms to prevent tracki
 ## TLS Fingerprinting Protection
 Alters or hides TLS fingerprinting information (such as supported cipher suites and TLS extensions) to prevent fingerprinting based on SSL/TLS handshakes.
 
-# Implementation Details
+## Implementation Details
 
 ## JavaScript Hooks
 The browser employs JavaScript hooks to intercept and modify calls to functions and APIs that can be used for fingerprinting, such as navigator, screen, document, and window properties.
