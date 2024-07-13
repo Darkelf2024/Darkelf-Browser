@@ -12,7 +12,7 @@
 
 ## Intro
 
-Darkelf, as a custom PyQt5-based browser, incorporates several security features designed to enhance user privacy and protect against various online threats. Here are some of its notable security features and Highlights.
+Darkelf, as a custom PyQt5-based browser, incorporates several security features designed to enhance user privacy and protect against various online threats. It allows for "User Control" not a third party.Here are some of its notable security features and Highlights.
 
 ## Table of Contents
 - [Attribution](Attribution.md)
