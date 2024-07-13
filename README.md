@@ -28,111 +28,145 @@ Darkelf, as a custom PyQt5-based browser, incorporates several security features
 - Linux - Ready
 - Windows - Ready
 
-## Customization
-- (Custom PyQt5 Browser)
+The Darkelf browser includes a wide range of security, encryption, and privacy features to ensure safe and private browsing. 
 
-## Positives and Advantages
+# Security Features
 
-Customizability: Darkelf is highly customizable due to its PyQt5 framework, allowing developers to tailor features and user interface elements precisely to their needs.
+## Content Security Policy (CSP)
+Sets strict content security policies to prevent cross-site scripting (XSS), clickjacking, and other code injection attacks.
 
-Security Integration: It directly integrates cryptographic libraries like Crypto and offers options for AES and RSA encryption, enhancing data security and potentially enabling secure communications.
-
-Granular Control: Users have granular control over JavaScript execution, anti-fingerprinting measures, Tor network integration, and HTTPS enforcement. This level of control can be beneficial for privacy enthusiasts or users needing specific security configurations.
-
-Lightweight: Being a custom-built browser, it can be more lightweight compared to larger browsers like Firefox derivatives, potentially offering better performance on resource-constrained systems.
-
-Educational and Development Benefits: Building a custom browser like Darkelf provides educational insights into browser internals, web security practices, and PyQt5 development, fostering learning opportunities.
-
-## Encryption Support
-
-AES-GCM Encryption: Darkelf securely manages an AES encryption key, ensuring sensitive data such as user credentials or stored information is encrypted, protecting it from unauthorized access.
-
-RSA Encryption: It generates or loads RSA key pairs, enabling secure communication and potentially securing stored data through asymmetric encryption techniques.
-
-## TOR and Quantum Encryption
-- Tor is emphasized in “CAPS” to emphasize importance.
-
-Tor Network: Darkelf Browser includes the option to route traffic through the Tor network, providing enhanced anonymity and privacy by using a series of encrypted relays.
-
-Quantum Encryption: While mentioned as a feature in the settings, the provided code does not detail the implementation of quantum encryption. Quantum encryption would provide theoretically unbreakable security by using principles of quantum mechanics to secure key exchanges. - This is a work in Progress
-
-Both features aim to enhance user privacy and security, with Tor focusing on anonymity and quantum encryption aiming for unbreakable security.
-
-## Benefits of Quantum Encryption
-
-Unconditional Security: The security of quantum encryption is based on the laws of quantum mechanics, making it theoretically immune to any future advancements in computational power, including quantum computers.
-
-Detection of Eavesdropping: Any attempt to intercept the quantum key alters its state, which can be detected by the communicating parties, ensuring the integrity of the key exchange.
+## HTTPS Enforcement
+Automatically upgrades HTTP requests to HTTPS to ensure encrypted communication whenever possible.
 
 ## Anti-Fingerprinting
+Reduces the amount of information available for browser fingerprinting, making it harder to track users across the web.
 
-1. Canvas Fingerprinting Blocking: Disables canvas elements to prevent tracking via canvas fingerprinting.
-2. WebRTC IP Leaks Protection: Protects against IP leaks through WebRTC by modifying the user agent.
-3. Font Fingerprinting Protection: Disables running insecure content, helping to prevent font-based fingerprinting.
-4. Blocking Device Sensors: Disables the use of certain sensors to reduce fingerprinting.
-5. Limiting Browser Features: Disables full-screen support to limit fingerprinting opportunities.
+## Tor Network Integration:
+Optional integration with the Tor network for anonymous browsing by routing traffic through multiple nodes to conceal users' IP addresses.
 
-JavaScript Control: Users can enable or disable JavaScript, providing control over scripts that run on web pages.
+## Clear Cookies and Cache on Exit:
+Clears HTTP cache and cookies when the browser or a tab is closed to prevent tracking and maintain privacy.
 
-Persistent Settings: Uses QSettings for persistent storage of user preferences, including security and privacy settings, ensuring user preferences are maintained across sessions.
+# Encryption Features
 
-Proxy Configuration: Supports configuration for network proxies, allowing users to route their traffic through various proxy servers for added privacy.
+## AES Key Encryption
+Uses AES (Advanced Encryption Standard) for encrypting sensitive data. The AES key is either loaded from an environment variable or generated if not available.
 
-## Theming and Customization
+## ECDH Key Pair
+Uses Elliptic Curve Diffie-Hellman (ECDH) for secure key exchange. The key pair is loaded or generated and stored securely.
 
-Theme Management: Users can switch between different themes (Dark Theme) to match their preferences, and CSS is injected to apply these themes.
+## RSA Key Pair
+Uses RSA for encrypting and decrypting data. The RSA key pair is generated or loaded and stored securely.
 
-## User Interface Features
+## Quantum Encryption
+Option to enable quantum encryption for advanced security against future quantum computing threats.
 
-Toolbar and Menu Bar: A toolbar and menu bar provide easy access to navigation controls (back, forward, reload, home) and security settings.
+# Privacy Features
 
-Homepage Setup: A customizable homepage with a search function that defaults to DuckDuckGo, a privacy-focused search engine. The homepage can also handle .onion sites for access through the Tor network.
+## JavaScript Control
+Allows users to enable or disable JavaScript, reducing the risk of malicious scripts.
 
-## Network Security
+## Cookie Management
+Provides the option to enable or disable cookies, offering control over data stored by websites.
 
-Tor Network Integration: It supports routing traffic through the Tor network via SOCKS5 proxy settings. This feature enhances user anonymity by masking the user's IP address and encrypting traffic through multiple layers.
+## Geolocation Control
+Option to enable or disable geolocation, preventing websites from accessing the user's physical location.
 
-Mixed Content Blocking: Darkelf can block insecure content (HTTP) on HTTPS pages, reducing the risk of man-in-the-middle attacks and ensuring secure connections to websites.
+## Device Orientation and Media Device Blocking
+Options to block device orientation sensors and media devices (camera, microphone), preventing websites from accessing this data.
 
-## Customizable Themes and UI
+## Black Theme
+A visually unobtrusive theme to reduce eye strain and potentially avoid drawing attention in low-light environments.
 
-While not a security feature directly, Darkelf allows users to choose between different themes (like dark, or custom colors based on modification in the code), potentially improving user experience and readability, which indirectly impacts security by enhancing usability.
+## Home Page with Integrated Search:
+A customizable home page with integrated DuckDuckGo search, offering a privacy-focused search engine.
 
-Users have the option implement a background image embedded into the code
+# Additional Features
 
-## Event Handling and Filtering
+## Debounce Resize Function
+Efficiently handles resize events to optimize performance.
 
-The browser utilizes event filtering to intercept and modify navigation requests, such as enforcing HTTPS for HTTP requests. This feature helps protect against insecure connections and ensures data integrity during web browsing.
+## Download Manager
+Manages and tracks downloads, providing a secure way to handle file downloads.
 
-## Community and Development
+## Security Settings Dialog
+A user interface to configure various security settings, such as enabling/disabling JavaScript, Tor network, and encryption options.
 
-Darkelf benefits from being an open-source project, potentially allowing community-driven improvements, security audits, and contributions, which can enhance its security over time.
+## Toolbar and Menu Bar
+Provides quick access to navigation controls, search bar, and security settings.
 
-Overall, Darkelf's emphasis on encryption, privacy controls, network security enhancements, and customization options makes it a strong choice for users looking to prioritize security and privacy in their browsing experience. As with any software, staying updated with security patches and best practices is essential to maintaining its security effectiveness.
-
-## Additional Notes
-
-Event Handling: Custom event filters and handlers allow for tailored interactions and additional security measures.
-
-Persistent Settings Restoration: The browser restores settings on launch to ensure that security and privacy configurations are always active based on user preferences.
-
-This combination of features makes Darkelf a privacy-focused web browser with several layers of security to protect users' data and enhance their online privacy.
-
-JavaScript Management: Users have the ability to enable or disable JavaScript globally or on a per-tab basis. This control helps mitigate JavaScript-related attacks and enhances privacy by preventing scripts from executing without user consent.
-
-Anti-Fingerprinting Measures: Darkelf implements measures to spoof or alter the browser's fingerprint, reducing the effectiveness of fingerprinting techniques used for tracking users across websites. Darkelf includes a script to spoof the user-agent string, which is a common fingerprinting metric. By changing the user-agent string to a generic value, Darkelf makes it more difficult for websites to uniquely identify the browser based on this information. The configure_web_engine_profile method sets various privacy-related attributes, which can help with anti-fingerprinting by limiting what information the browser exposes.
-
-HTTPS Enforcement: The browser can enforce HTTPS connections for all websites, ensuring data transmitted between the browser and websites is encrypted and protected against interception or tampering. enforcing HTTPS ensures that the data exchanged between the browser and websites is encrypted, which prevents third parties from eavesdropping and potentially using fingerprinting techniques.
+## Session Management
+Supports restoring the previous session, including tabs and their state, enhancing usability without compromising security.
 
 
-## Contributors
+The Darkelf browser employs several anti-fingerprinting techniques to reduce the amount of information that can be used to track users across the web. Here are the primary techniques used:
+
+# Anti-Fingerprinting Techniques
+
+## Canvas Fingerprinting Protection
+Modifies or blocks the ability of websites to read canvas data. This prevents websites from creating a unique fingerprint based on the rendering of graphics on the user's device.
+
+## User-Agent Spoofing
+Randomizes or standardizes the user-agent string sent to websites, making it difficult to identify the browser and operating system version.
+
+## WebGL Fingerprinting Protection
+Alters or blocks WebGL information to prevent fingerprinting based on the graphics hardware and driver details.
+
+## Font Fingerprinting Protection:
+Limits the list of available system fonts exposed to websites, preventing fingerprinting based on the unique set of installed fonts.
+
+## Media Device Enumeration Blocking
+Prevents websites from accessing detailed information about the user's media devices (e.g., cameras, microphones), which can be used for fingerprinting.
+
+## Timezone Spoofing
+Changes or hides the timezone information to prevent websites from determining the user's geographical location based on their timezone.
+
+## Language and Locale Spoofing
+Randomizes or standardizes language and locale settings to prevent fingerprinting based on these attributes.
+
+## Screen Resolution and Color Depth Spoofing
+Modifies or hides screen resolution and color depth information to prevent websites from creating a unique fingerprint based on the display properties of the device.
+
+## Hardware Concurrency Spoofing
+Changes the reported number of logical processors (CPU cores) to prevent fingerprinting based on the hardware concurrency.
+
+## Audio Fingerprinting Protection
+Alters or blocks audio context information to prevent fingerprinting based on the audio hardware and capabilities.
+
+## Battery Status API Blocking
+Blocks access to the Battery Status API, preventing websites from tracking battery levels and charging status, which can be used for fingerprinting.
+
+## Network Information API Blocking
+Blocks access to the Network Information API, preventing websites from accessing network type and speed information, which can be used for fingerprinting.
+
+## ETag and Cache-Control Manipulation
+Modifies or disables ETag headers and cache-control mechanisms to prevent tracking via caching techniques.
+
+## TLS Fingerprinting Protection
+Alters or hides TLS fingerprinting information (such as supported cipher suites and TLS extensions) to prevent fingerprinting based on SSL/TLS handshakes.
+
+# Implementation Details
+
+## JavaScript Hooks
+The browser employs JavaScript hooks to intercept and modify calls to functions and APIs that can be used for fingerprinting, such as navigator, screen, document, and window properties.
+
+## Browser Extensions
+Utilizes extensions or built-in features to spoof or block fingerprintable attributes dynamically, providing an extra layer of protection.
+
+## Configuration Options
+Provides user-configurable options to enable or disable specific anti-fingerprinting techniques, allowing users to balance privacy and functionality according to their needs.
+
+These techniques collectively reduce the uniqueness of the user's browser environment, making it harder for websites to track users based on their browser and device characteristics.
+
+
+# Contributors
 
 Dr. Kevin Moore [Darkelf2024](https://github.com/Darkelf2024) ([Kjm489](https://github.com/Kjm489)) Initial work, design, and implementation, additional contributions. 
 Heapy for memory leak testing.
 ChatGPT by OpenAI for code optimization and error analysis.
 
 
-## Feedback and Contributions
+# Feedback and Contributions
 
 Your feedback is valuable for the improvement of Darkelf Browser. If you have any suggestions, ideas, bug reports, or feature requests, please don't hesitate to open an issue or reach out to me.
 
