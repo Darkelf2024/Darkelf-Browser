@@ -161,7 +161,7 @@ These techniques collectively reduce the uniqueness of the user's browser enviro
 
 Dr. Kevin Moore [Darkelf2024](https://github.com/Darkelf2024) ([Kjm489](https://github.com/Kjm489)) Initial work, design, and implementation, additional contributions. 
 Heapy for memory leak testing.
-ChatGPT by OpenAI for code optimization and error analysis.
+ChatGPT by OpenAI for code optimization, and error analysis.
 
 
 ## Feedback and Contributions
