@@ -1,8 +1,8 @@
-## Darkelf vs. Tor Browser: A Comparative Analysis
+# Darkelf vs. Tor Browser: A Comparative Analysis
 
 Darkelf and Tor Browser are both designed to enhance user privacy and security while browsing the internet. However, they implement different methodologies and offer distinct features. This comparison highlights the advantages of Darkelf over Tor Browser, emphasizing its unique features and potential benefits.
 
-# Advantages of Darkelf over Tor Browser
+## Advantages of Darkelf over Tor Browser
 
 ## 1. Enhanced Encryption Options
 
