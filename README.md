@@ -32,70 +32,70 @@ The Darkelf browser includes a wide range of security, encryption, and privacy f
 
 ## Security Features
 
-## Content Security Policy (CSP)
+- Content Security Policy (CSP):
 Sets strict content security policies to prevent cross-site scripting (XSS), clickjacking, and other code injection attacks.
 
-## HTTPS Enforcement
+- HTTPS Enforcement:
 Automatically upgrades HTTP requests to HTTPS to ensure encrypted communication whenever possible.
 
-## Anti-Fingerprinting
+- Anti-Fingerprinting:
 Reduces the amount of information available for browser fingerprinting, making it harder to track users across the web.
 
-## Tor Network Integration
+- Tor Network Integration:
 Optional integration with the Tor network for anonymous browsing by routing traffic through multiple nodes to conceal users' IP addresses.
 
-## Clear Cookies and Cache on Exit
+- Clear Cookies and Cache on Exit:
 Clears HTTP cache and cookies when the browser or a tab is closed to prevent tracking and maintain privacy.
 
-## Encryption Features
+- Encryption Features
 
-## AES Key Encryption
+- AES Key Encryption:
 Uses AES (Advanced Encryption Standard) for encrypting sensitive data. The AES key is either loaded from an environment variable or generated if not available.
 
-## ECDH Key Pair
+- ECDH Key Pair:
 Uses Elliptic Curve Diffie-Hellman (ECDH) for secure key exchange. The key pair is loaded or generated and stored securely.
 
-## RSA Key Pair
+- RSA Key Pair:
 Uses RSA for encrypting and decrypting data. The RSA key pair is generated or loaded and stored securely.
 
-## Quantum Encryption
+- Quantum Encryption:
 Option to enable quantum encryption for advanced security against future quantum computing threats.
 
-## Privacy Features
+- Privacy Features
 
-## JavaScript Control
+- JavaScript Control:
 Allows users to enable or disable JavaScript, reducing the risk of malicious scripts.
 
-## Cookie Management
+- Cookie Management:
 Provides the option to enable or disable cookies, offering control over data stored by websites.
 
-## Geolocation Control
+- Geolocation Control:
 Option to enable or disable geolocation, preventing websites from accessing the user's physical location.
 
-## Device Orientation and Media Device Blocking
+- Device Orientation and Media Device Blocking:
 Options to block device orientation sensors and media devices (camera, microphone), preventing websites from accessing this data.
 
-## Black Theme
+- Black Theme:
 A visually unobtrusive theme to reduce eye strain and potentially avoid drawing attention in low-light environments.
 
-## Home Page with Integrated Search:
+- Home Page with Integrated Search:
 A customizable home page with integrated DuckDuckGo search, offering a privacy-focused search engine.
 
 ## Additional Features
 
-## Debounce Resize Function
+## Debounce Resize Function:
 Efficiently handles resize events to optimize performance.
 
-## Download Manager
+- Download Manager:
 Manages and tracks downloads, providing a secure way to handle file downloads.
 
-## Security Settings Dialog
+- Security Settings Dialog:
 A user interface to configure various security settings, such as enabling/disabling JavaScript, Tor network, and encryption options.
 
-## Toolbar and Menu Bar
+- Toolbar and Menu Bar:
 Provides quick access to navigation controls, search bar, and security settings.
 
-## Session Management
+- Session Management:
 Supports restoring the previous session, including tabs and their state, enhancing usability without compromising security.
 
 
@@ -103,57 +103,57 @@ The Darkelf browser employs several anti-fingerprinting techniques to reduce the
 
 ## Anti-Fingerprinting Techniques
 
-## Canvas Fingerprinting Protection
+- Canvas Fingerprinting Protection:
 Modifies or blocks the ability of websites to read canvas data. This prevents websites from creating a unique fingerprint based on the rendering of graphics on the user's device.
 
-## User-Agent Spoofing
+- User-Agent Spoofing:
 Randomizes or standardizes the user-agent string sent to websites, making it difficult to identify the browser and operating system version.
 
-## WebGL Fingerprinting Protection
+- WebGL Fingerprinting Protection:
 Alters or blocks WebGL information to prevent fingerprinting based on the graphics hardware and driver details.
 
-## Font Fingerprinting Protection:
+- Font Fingerprinting Protection:
 Limits the list of available system fonts exposed to websites, preventing fingerprinting based on the unique set of installed fonts.
 
-## Media Device Enumeration Blocking
+- Media Device Enumeration Blocking:
 Prevents websites from accessing detailed information about the user's media devices (e.g., cameras, microphones), which can be used for fingerprinting.
 
-## Timezone Spoofing
+- Timezone Spoofing:
 Changes or hides the timezone information to prevent websites from determining the user's geographical location based on their timezone.
 
-## Language and Locale Spoofing
+- Language and Locale Spoofing:
 Randomizes or standardizes language and locale settings to prevent fingerprinting based on these attributes.
 
-## Screen Resolution and Color Depth Spoofing
+- Screen Resolution and Color Depth Spoofing:
 Modifies or hides screen resolution and color depth information to prevent websites from creating a unique fingerprint based on the display properties of the device.
 
-## Hardware Concurrency Spoofing
+- Hardware Concurrency Spoofing:
 Changes the reported number of logical processors (CPU cores) to prevent fingerprinting based on the hardware concurrency.
 
-## Audio Fingerprinting Protection
+- Audio Fingerprinting Protection:
 Alters or blocks audio context information to prevent fingerprinting based on the audio hardware and capabilities.
 
-## Battery Status API Blocking
+- Battery Status API Blocking:
 Blocks access to the Battery Status API, preventing websites from tracking battery levels and charging status, which can be used for fingerprinting.
 
-## Network Information API Blocking
+- Network Information API Blocking:
 Blocks access to the Network Information API, preventing websites from accessing network type and speed information, which can be used for fingerprinting.
 
-## ETag and Cache-Control Manipulation
+- ETag and Cache-Control Manipulation:
 Modifies or disables ETag headers and cache-control mechanisms to prevent tracking via caching techniques.
 
-## TLS Fingerprinting Protection
+- TLS Fingerprinting Protection:
 Alters or hides TLS fingerprinting information (such as supported cipher suites and TLS extensions) to prevent fingerprinting based on SSL/TLS handshakes.
 
-## Implementation Details
+- Implementation Details
 
-## JavaScript Hooks
+- JavaScript Hooks:
 The browser employs JavaScript hooks to intercept and modify calls to functions and APIs that can be used for fingerprinting, such as navigator, screen, document, and window properties.
 
-## Built-In
+- Built-In:
 Built-in features to spoof or block fingerprintable attributes dynamically, providing an extra layer of protection.
 
-## Configuration Options
+- Configuration Options:
 Provides user-configurable options to enable or disable specific anti-fingerprinting techniques, allowing users to balance privacy and functionality according to their needs.
 
 These techniques collectively reduce the uniqueness of the user's browser environment, making it harder for websites to track users based on their browser and device characteristics.
