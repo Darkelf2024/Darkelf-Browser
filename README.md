@@ -157,14 +157,14 @@ Provides user-configurable options to enable or disable specific anti-fingerprin
 These techniques collectively reduce the uniqueness of the user's browser environment, making it harder for websites to track users based on their browser and device characteristics.
 
 
-# Contributors
+## Contributors
 
 Dr. Kevin Moore [Darkelf2024](https://github.com/Darkelf2024) ([Kjm489](https://github.com/Kjm489)) Initial work, design, and implementation, additional contributions. 
 Heapy for memory leak testing.
 ChatGPT by OpenAI for code optimization and error analysis.
 
 
-# Feedback and Contributions
+## Feedback and Contributions
 
 Your feedback is valuable for the improvement of Darkelf Browser. If you have any suggestions, ideas, bug reports, or feature requests, please don't hesitate to open an issue or reach out to me.
 
