@@ -18,6 +18,11 @@ encrypt_rsa(plaintext): Encrypts the provided plaintext using the RSA public key
 decrypt_rsa(ciphertext): Decrypts the provided ciphertext using the RSA private key.
 Use Case: This encryption is typically used for securing data during transmission, such as encrypting search queries or communication data.
 
+## ECDH Encryption
+Functionality: ECDH (Elliptic Curve Diffie-Hellman) key exchange, the "bit encryption" typically refers to the length of the cryptographic keys used. In ECDH, the key length is determined by the elliptic curve parameters and is usually measured in bits. 
+
+Methods: Common key lengths for ECDH may include 256 bits, 384 bits, or 521 bits, depending on the specific elliptic curve parameters chosen for the key exchange. The longer the key length, the higher the level of security provided, as longer keys are generally more resistant to cryptographic attacks.
+
 ## Anti-Fingerprinting Features
 
 Canvas Fingerprinting Blocking
