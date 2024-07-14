@@ -81,7 +81,7 @@ A customizable home page with integrated DuckDuckGo search, offering a privacy-f
 
 ## Additional Features
 
-## Debounce Resize Function:
+- Debounce Resize Function:
 Efficiently handles resize events to optimize performance.
 
 - Download Manager:
