@@ -155,8 +155,8 @@ These techniques collectively reduce the uniqueness of the user's browser enviro
 
 ## Not Working(Currently)
 
-Tuta/Proton - Can't access login due to CSP issue 
-Everything else is working though 
+Tuta/Proton - Can't access login due to CSP issue.
+Everything else is working though.
 
 
 ## Contributors
