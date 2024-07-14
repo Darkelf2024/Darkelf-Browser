@@ -96,9 +96,6 @@ Provides quick access to navigation controls, search bar, and security settings.
 - Session Management:
 Supports restoring the previous session, including tabs and their state, enhancing usability without compromising security.
 
-
-The Darkelf browser employs several anti-fingerprinting techniques to reduce the amount of information that can be used to track users across the web. Here are the primary techniques used:
-
 ## Anti-Fingerprinting Techniques
 
 - Canvas Fingerprinting Protection:
