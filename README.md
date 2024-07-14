@@ -143,7 +143,7 @@ Modifies or disables ETag headers and cache-control mechanisms to prevent tracki
 - TLS Fingerprinting Protection:
 Alters or hides TLS fingerprinting information (such as supported cipher suites and TLS extensions) to prevent fingerprinting based on SSL/TLS handshakes.
 
-- Implementation Details
+## Implementation Details
 
 - JavaScript Hooks:
 The browser employs JavaScript hooks to intercept and modify calls to functions and APIs that can be used for fingerprinting, such as navigator, screen, document, and window properties.
