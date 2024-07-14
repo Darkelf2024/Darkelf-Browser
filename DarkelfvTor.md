@@ -3,7 +3,7 @@
 - Enhanced Encryption Options
 AES-GCM and RSA: Darkelf implements AES-GCM for secure data encryption and integrity checking, along with RSA encryption for key exchange. This provides robust encryption capabilities, potentially enhancing data security compared to Tor's standard encryption through the Tor network.
 
-- ECDH Encryption
+- ECDH Encryption:
 ECDH (Elliptic Curve Diffie-Hellman) encryption is a key exchange protocol that allows two parties to securely generate a shared secret key over an insecure channel using elliptic curve cryptography, enabling them to communicate securely through encryption and decryption without the need to share the secret key beforehand.
 
 - Future-Proofing with Quantum Encryption
