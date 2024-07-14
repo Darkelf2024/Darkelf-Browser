@@ -28,8 +28,6 @@ Darkelf, as a custom PyQt5-based browser, incorporates several security features
 - Linux - Ready
 - Windows - Ready
 
-The Darkelf browser includes a wide range of security, encryption, and privacy features to ensure safe and private browsing. 
-
 ## Security Features
 
 - Content Security Policy (CSP):
