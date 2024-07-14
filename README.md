@@ -18,9 +18,9 @@ Darkelf, as a custom PyQt5-based browser, incorporates several security features
 - [Attribution](Attribution.md)
 - [Encryption](Encryption.md)
 - [Overview](Overview.md)
+- [QSettings](QSettings.md)
 - [LICENSE](LICENSE)
 - [Copyright](Copyright.md)
-- [QSettings](QSettings.md)
 - [Darkelf vs Tor](DarkelfvTor.md)
 
 ## Systems
