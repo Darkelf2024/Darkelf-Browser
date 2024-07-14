@@ -32,7 +32,8 @@ Darkelf and Tor Browser are both designed to enhance user privacy and security w
 ## Summary
 
 Darkelf offers several advantages over Tor Browser, including enhanced encryption options with AES-GCM, RSA, ECDH, and future plans for quantum encryption. It also provides customizable privacy settings and JavaScript control, potentially appealing to users looking for a balance between strong security, privacy, and usability. However, the choice between Darkelf and Tor Browser ultimately depends on individual preferences for specific features, security requirements, and privacy concerns.
-Darkelf
+
+## Darkelf
 
 - AES-GCM Encryption: Darkelf utilizes AES-GCM (Advanced Encryption Standard-Galois/Counter Mode) for encrypting data. AES-GCM is widely recognized for its efficiency and security in symmetric key encryption, providing both confidentiality and integrity of data.
 - RSA Encryption: Darkelf employs RSA (Rivest-Shamir-Adleman) encryption for key exchange purposes. RSA is a public-key cryptographic algorithm used for secure communication and digital signatures.
