@@ -20,7 +20,7 @@ Performance Considerations: Darkelf may offer improved performance compared to T
 
 ## Summary
 
-Darkelf offers several advantages over Tor Browser, including enhanced encryption options with AES-GCM, RSA, and future plans for quantum encryption. It also provides customizable privacy settings and JavaScript control, potentially appealing to users looking for a balance between strong security, privacy, and usability. However, the choice between Darkelf and Tor Browser ultimately depends on individual preferences for specific features, security requirements, and privacy concerns.
+Darkelf offers several advantages over Tor Browser, including enhanced encryption options with AES-GCM, RSA, ECDH and future plans for quantum encryption. It also provides customizable privacy settings and JavaScript control, potentially appealing to users looking for a balance between strong security, privacy, and usability. However, the choice between Darkelf and Tor Browser ultimately depends on individual preferences for specific features, security requirements, and privacy concerns.
 
 ## Darkelf
 
