@@ -33,6 +33,8 @@ Darkelf utilizes AES-GCM (Advanced Encryption Standard-Galois/Counter Mode) for 
 - RSA Encryption:
 Darkelf employs RSA (Rivest-Shamir-Adleman) encryption for key exchange purposes. RSA is a public-key cryptographic algorithm used for secure communication and digital signatures.
 
+- ECDH Encryption:
+ECDH (Elliptic Curve Diffie-Hellman) encryption is a key exchange protocol that allows two parties to securely generate a shared secret key over an insecure channel using elliptic curve cryptography, enabling them to communicate securely through encryption and decryption without the need to share the secret key beforehand.
 - Future Quantum Encryption:
 Darkelf has plans to incorporate quantum encryption in the future. Quantum encryption uses principles from quantum mechanics to secure communication channels, offering potentially stronger protection against quantum computing-based attacks.
 
