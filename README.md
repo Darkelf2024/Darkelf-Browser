@@ -38,6 +38,7 @@ environment.
 - Protection Against Exploits: By confining processes to a sandbox, Darkelf Browser reduces the risk of
 exploits and unauthorized access to sensitive system resources.
 
+- Custom Ad Blocker - Enabled by default 
 - Content Security Policy (CSP):
 Sets strict content security policies to prevent cross-site scripting (XSS), clickjacking, and other code injection attacks.
 
