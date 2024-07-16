@@ -47,14 +47,13 @@ Clears HTTP cache and cookies when the browser or a tab is closed to prevent tra
 
 ## Encryption Features
 
-- AES Key Encryption:
-Uses AES (Advanced Encryption Standard) for encrypting sensitive data. The AES key is either loaded from an environment variable or generated if not available.
+- ChaCha20 Cipher: 
+A robust symmetric encryption algorithm that ensures data integrity and confidentiality.
 
-- ECDH Key Pair:
-Uses Elliptic Curve Diffie-Hellman (ECDH) for secure key exchange. The key pair is loaded or generated and stored securely.
+- RSA and X25519: 
+Asymmetric encryption algorithms used for key exchange and digital signatures, providing an additional layer of
 
-- RSA Key Pair:
-Uses RSA for encrypting and decrypting data. The RSA key pair is generated or loaded and stored securely.
+security.
 
 - Quantum Encryption:
 Option to enable quantum encryption for advanced security against future quantum computing threats.
