@@ -51,9 +51,7 @@ Clears HTTP cache and cookies when the browser or a tab is closed to prevent tra
 A robust symmetric encryption algorithm that ensures data integrity and confidentiality.
 
 - RSA and X25519: 
-Asymmetric encryption algorithms used for key exchange and digital signatures, providing an additional layer of
-
-security.
+Asymmetric encryption algorithms used for key exchange and digital signatures, providing an additional layer of security.
 
 - Quantum Encryption:
 Option to enable quantum encryption for advanced security against future quantum computing threats.
