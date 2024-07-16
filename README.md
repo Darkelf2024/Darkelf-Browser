@@ -30,6 +30,14 @@ Darkelf, as a custom PyQt5-based browser, incorporates several security features
 
 ## Security Features
 
+- Sandboxing:
+Darkelf Browser implements sandboxing technology to provide an additional layer of security:
+- Isolated Environment: Each browsing session is isolated from the system, preventing malicious code from affecting other parts of the browser or the device.
+- Enhanced Security: Sandboxing helps mitigate the impact of potential security vulnerabilities by containing threats within the browser's sandboxed
+environment. 
+- Protection Against Exploits: By confining processes to a sandbox, Darkelf Browser reduces the risk of
+exploits and unauthorized access to sensitive system resources.
+
 - Content Security Policy (CSP):
 Sets strict content security policies to prevent cross-site scripting (XSS), clickjacking, and other code injection attacks.
 
