@@ -1,5 +1,3 @@
-When comparing Darkelf Browser with Tor Browser, several advantages of Darkelf emerge, particularly in terms of its architecture, features, and user experience.
-
 # Architecture and Features
 
 ## Sandboxing and Security
