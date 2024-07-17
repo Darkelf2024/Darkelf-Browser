@@ -24,8 +24,6 @@ Tor: Due to its network routing and encryption overhead, Tor Browser may experie
 
 ## Differences in Encryption between Darkelf and Tor
 
-When comparing Darkelf Browser and Tor Browser, the differences in encryption methodologies highlight their respective approaches to security and privacy:
-
 ## Darkelf Browser:
 Encryption Standards: Darkelf Browser utilizes modern cryptographic standards such as ChaCha20 for symmetric encryption and X25519 for key exchange.
 
