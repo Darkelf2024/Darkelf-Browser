@@ -5,7 +5,7 @@ Darkelf: Darkelf Browser implements strong sandboxing mechanisms, restricting Ja
         
 Tor: Tor Browser focuses on anonymity and privacy by routing traffic through the Tor network, which uses layers of encryption to anonymize the user's IP address. However, it may not provide the same level of sandboxing and local security controls as Darkelf.
 
-## Cryptographic Standards:
+## Cryptographic Standards
 
 Darkelf: Utilizes modern cryptographic algorithms such as ChaCha20 for encryption and X25519 for key exchange. These algorithms are designed for efficiency and security, enhancing the confidentiality and integrity of data transmissions.
 
@@ -13,26 +13,26 @@ Tor: Relies on its onion routing protocol to anonymize traffic, which involves m
 
 ## User Experience and Customization
 
-## Customization and Extensibility:
+## Customization and Extensibility
 Darkelf: Offers a customizable user interface with options to enable/disable features like JavaScript, cookies, and geolocation. Users can tailor their browsing experience while maintaining a high level of security.
         
 Tor: Designed with a standardized interface focused on anonymity. While configurable, Tor Browser may not offer the same level of granular customization as Darkelf for security and privacy settings.
 
-## Performance and Compatibility:
+## Performance and Compatibility
 Darkelf: Optimized for performance with streamlined browsing capabilities and support for modern web technologies. It integrates security features without compromising on user experience or compatibility with web applications.
 
 Tor: Due to its network routing and encryption overhead, Tor Browser may experience slower browsing speeds compared to traditional browsers. It may also face compatibility challenges with certain websites and services.
 
 ## Differences in Encryption between Darkelf and Tor
 
-## Darkelf Browser:
+## Darkelf Browser
 Encryption Standards: Darkelf Browser utilizes modern cryptographic standards such as ChaCha20 for symmetric encryption and X25519 for key exchange.
 
 Focus: The emphasis is on strong, efficient encryption to protect data confidentiality and integrity within the browser environment itself.
         
 Implementation: These algorithms are chosen for their speed and security benefits, ensuring that communications within the browser are robustly protected against interception and tampering.
 
-## Tor Browser:
+## Tor Browser
 Onion Routing: Tor Browser employs a layered encryption approach known as onion routing.
         
 Encryption Layers: Each layer encrypts the data, encapsulating it in multiple layers of encryption (hence the term "onion"), which is decrypted step-by-step as it passes through relays in the Tor network.
