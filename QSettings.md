@@ -4,9 +4,9 @@
 
 Location: Stored in platform-specific locations determined by the Qt framework. Typically:
         
-On Windows: Registry or AppData.
-On macOS: ~/Library/Preferences.
-On Linux: ~/.config or ~/.local/share.
+- On Windows: Registry or AppData.
+- On macOS: ~/Library/Preferences.
+- On Linux: ~/.config or ~/.local/share.
 
 Stored Data:
 Security settings (e.g., JavaScript enabled, anti-fingerprinting enabled, Tor network enabled, quantum encryption enabled, HTTPS enforced).
