@@ -1,5 +1,47 @@
 # Encryption Features
 
+The current implementation of Darkelf includes several layers of encryption and security features. Here's a detailed breakdown.
+
+## ECDH (Elliptic Curve Diffie-Hellman) Key Exchange
+- Purpose: Used for secure key exchange.
+- Details: An ECDH key pair is generated for secure key exchange, which ensures that a shared secret can be established securely over an untrusted channel.
+
+## AES-GCM (Advanced Encryption Standard in Galois/Counter Mode)
+- Purpose: Used for encrypting data.
+- Details: After deriving a shared secret using ECDH, AES-GCM is used for encrypting and decrypting data. This provides both confidentiality and integrity of the data.
+
+## RSA-OAEP (Rivest-Shamir-Adleman with Optimal Asymmetric Encryption Padding)
+- Purpose: Used for encrypting data.
+- Details: RSA-OAEP is used for public-key encryption and decryption, offering secure encryption of data with added padding for enhanced security.
+
+## Encryption Layers in Darkelf
+
+ECDH Key Exchange
+- Layer 1: ECDH key pair generation and public key exchange.
+- Layer 2: Derivation of a shared secret using the exchanged public keys.
+
+AES-GCM Encryption
+- Layer 3: Using the derived shared secret for symmetric encryption and decryption with AES-GCM.
+
+RSA-OAEP Encryption
+- Layer 4: Generation of an RSA key pair for asymmetric encryption.
+- Layer 5: Encrypting data using the RSA public key.
+- Layer 6: Decrypting data using the RSA private key.
+
+WebCrypto API for Random Number Generation
+- Layer 7: Utilizing WebCrypto PRNG for generating secure random bytes.
+
+## Summary of Encryption Layers
+
+Darkelf effectively uses up to seven layers of encryption and security mechanisms to ensure data confidentiality and integrity.
+
+- ECDH Key Exchange (2 layers)
+- AES-GCM Encryption (1 layer)
+- RSA-OAEP Encryption (3 layers)
+- WebCrypto PRNG (1 layer)
+
+This layered approach provides robust security for sensitive data and communication within the Darkelf browser.
+
 ## AES Encryption
 Functionality: AES (Advanced Encryption Standard) is used for encrypting and decrypting data.
 Key Management: A 256-bit AES key is securely generated and managed. If the key isn't already available in the environment, a new key is generated, encoded in Base64, and stored in an environment variable.
