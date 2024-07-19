@@ -14,27 +14,23 @@
    - Website: [DumpItBlue+](https:https://github.com/arioux/DumpItBluePlus)
    - Description: Helps to download and analyze Facebook profile data, including posts and interactions, for in-depth reporting and investigation.
 
-4. **Facebook Recover**
-   - Website: [Facebook Recover](https://facebookrecovery.com)
-   - Description: Helps to find Facebook accounts using an email address with Facebook’s account recovery feature. Useful for locating lost or forgotten accounts.
-
-5. **Graph.tips**
+4. **Graph.tips**
    - Website: [Graph.tips](https://graph.tips)
    - Description: Offers advanced search capabilities for social media and other online platforms, similar to Intelx.io.
 
-6. **Intelx.io**
+5. **Intelx.io**
    - Website: [Intelx.io](https://intelx.io)
    - Description: Search engine for open-source intelligence, including social media and various public databases. Useful for extensive and diverse searches.
 
-7. **Lookup-id.com**
+6. **Lookup-id.com**
    - Website: [Lookup-id.com](https://lookup-id.com)
    - Description: Find the Facebook ID of a user by entering their username or URL. Useful for linking social media profiles and conducting deeper searches.
 
-8. **Sowsearch.info**
+7. **Sowsearch.info**
    - Website: [Sowsearch.info](https://sowsearch.info)
    - Description: Alternative to Facebook Graph Search. Allows for detailed searches on Facebook to find posts, users, and more.
 
-9. **Whopostedwhat.com**
+8. **Whopostedwhat.com**
    - Website: [Whopostedwhat.com](https://whopostedwhat.com)
    - Description: Search for Facebook posts with the ability to filter by date range and location. Handy for locating specific posts or events within a given timeframe.
 
