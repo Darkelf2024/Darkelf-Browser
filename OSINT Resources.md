@@ -118,7 +118,7 @@
 
 2. **ManchesterCF**:
    - Website: [ManchesterCF](https://manchestercf.com/)
-   - Description: Provides a range of OSINT and cybersecurity training courses, focusing on both theoretical and practical aspects.
+   - Description: Provides a range of OSINT and financial training courses, focusing on both theoretical and practical aspects.
 
 3. **TCM-SEC**:
    - Website: [TCM-SEC](https://academy.tcm-sec.com/)
@@ -134,7 +134,7 @@ Command-Line Interface Tools like the Friend List Scraper facilitate efficient d
 
 OSINT Tools and Resources including Maltego, SpiderFoot, and FOCA offer powerful capabilities for data visualization, network footprinting, and intelligence gathering. These tools help researchers and security professionals analyze and visualize complex data relationships and network structures.
 
-Educational Resources such as ManchesterCF and TCM-SEC offer structured training and certifications in OSINT and cybersecurity. These platforms provide valuable knowledge and practical skills for individuals looking to deepen their understanding of these fields.
+Educational Resources such as ManchesterCF offering extensive training in OSINT and financial sectors. TCM-SEC offers structured training and certifications in OSINT and cybersecurity. These platforms provide valuable knowledge and practical skills for individuals looking to deepen their understanding of these fields.
 
 TraceLabs is dedicated to using OSINT for missing person investigations and collaborative intelligence efforts, further demonstrating the practical applications of these tools in critical scenarios.
 
