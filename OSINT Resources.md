@@ -7,7 +7,7 @@
    - Description: Scrapes Facebook posts and comments from one or multiple page URLs. Retrieves post details, comment texts, timestamps, and more for comprehensive data collection.
 
 2. **DumpItBlue+**
-   - Website: [DumpItBlue+](https:https://github.com/arioux/DumpItBluePlus)
+   - Website: [DumpItBluePlus](https:https://github.com/arioux/DumpItBluePlus)
    - Description: Helps to download and analyze Facebook profile data, including posts and interactions, for in-depth reporting and investigation.
 
 3. **Graph.tips**
