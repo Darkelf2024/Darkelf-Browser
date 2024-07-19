@@ -39,7 +39,7 @@
 ### Tools and Resources
 
 1. **Tsurugi Linux**
-   - Website:[Tsurugi Linux](https://tsurugi-linux.org/)
+   - Website: [Tsurugi Linux](https://tsurugi-linux.org/)
    - Description: Linux Distro for DFIR
    
 
