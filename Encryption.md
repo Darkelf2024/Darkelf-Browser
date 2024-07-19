@@ -104,7 +104,7 @@ Functionality: Routes traffic through the Tor network for anonymous browsing.
 Implementation: Sets up a SOCKS5 proxy to connect to the local Tor service (127.0.0.1:9050).
 
 Cookie Management
-Clear Cookies: Provides a function to clear all cookies.
+Clear Cookies: Cookies, Cache and history clear after closing tabs.
 
 Security Settings Management
 Persistent Storage: Uses QSettings to store and retrieve security settings persistently.
