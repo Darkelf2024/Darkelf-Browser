@@ -34,7 +34,7 @@ As we prepare for the imminent release of Darkelf Browser, our team is dedicated
 - [LICENSE](LICENSE)
 - [Copyright](Copyright.md)
 - [Darkelf vs Tor](DarkelfvTor.md)
-- [OSINT Resources](
+- [OSINT Resources](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/OSINT%20Resources.md)
 
 ## Systems
 - MAC OS - Ready
