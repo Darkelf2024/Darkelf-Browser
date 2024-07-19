@@ -11,7 +11,7 @@
    - Description: Analyzes the fan count of Facebook pages and compares them to thousands of other pages with similar fan ranges. Useful for competitive analysis and social media insights.
 
 3. **DumpItBlue+**
-   - Website: [DumpItBlue+](https://dumpitblue.com)
+   - Website: [DumpItBlue+](https:https://github.com/arioux/DumpItBluePlus)
    - Description: Helps to download and analyze Facebook profile data, including posts and interactions, for in-depth reporting and investigation.
 
 4. **Facebook Recover**
