@@ -6,31 +6,27 @@
    - Website: [Apify.com](https://apify.com)
    - Description: Scrapes Facebook posts and comments from one or multiple page URLs. Retrieves post details, comment texts, timestamps, and more for comprehensive data collection.
 
-2. **Barometer.agorapulse.com**
-   - Website: [Barometer.agorapulse.com](https://barometer.agorapulse.com)
-   - Description: Analyzes the fan count of Facebook pages and compares them to thousands of other pages with similar fan ranges. Useful for competitive analysis and social media insights.
-
-3. **DumpItBlue+**
+2. **DumpItBlue+**
    - Website: [DumpItBlue+](https:https://github.com/arioux/DumpItBluePlus)
    - Description: Helps to download and analyze Facebook profile data, including posts and interactions, for in-depth reporting and investigation.
 
-4. **Graph.tips**
+3. **Graph.tips**
    - Website: [Graph.tips](https://graph.tips)
    - Description: Offers advanced search capabilities for social media and other online platforms, similar to Intelx.io.
 
-5. **Intelx.io**
+4. **Intelx.io**
    - Website: [Intelx.io](https://intelx.io)
    - Description: Search engine for open-source intelligence, including social media and various public databases. Useful for extensive and diverse searches.
 
-6. **Lookup-id.com**
+5. **Lookup-id.com**
    - Website: [Lookup-id.com](https://lookup-id.com)
    - Description: Find the Facebook ID of a user by entering their username or URL. Useful for linking social media profiles and conducting deeper searches.
 
-7. **Sowsearch.info**
+6. **Sowsearch.info**
    - Website: [Sowsearch.info](https://sowsearch.info)
    - Description: Alternative to Facebook Graph Search. Allows for detailed searches on Facebook to find posts, users, and more.
 
-8. **Whopostedwhat.com**
+7. **Whopostedwhat.com**
    - Website: [Whopostedwhat.com](https://whopostedwhat.com)
    - Description: Search for Facebook posts with the ability to filter by date range and location. Handy for locating specific posts or events within a given timeframe.
 
