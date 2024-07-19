@@ -38,9 +38,10 @@
 
 ### Tools and Resources
 
-1. **Buscador OSINT VM**
-   - Website: [Buscador OSINT VM](https://inteltechniques.com/buscador/)
-   - Description: Virtual Machine with OSINT tools pre-installed.
+1. **Tsurugi Linux**
+   - Website:[Tsurugi Linux](https://tsurugi-linux.org/)
+   - Description: Linux Distro for DFIR
+   
 
 2. **Creepy**
    - Github Repository: [Creepy](https://github.com/ilektrojohn/creepy)
