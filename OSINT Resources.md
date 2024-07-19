@@ -1,7 +1,7 @@
 ## OSINT Tools and Resources
 
 ### Dorks Collection List
-- Website: https://github.com/cipher387/Dorks-collections-list
+- Website: [Dorks-Collection](https://github.com/cipher387/Dorks-collections-list)
 - Description: Utilize Dorking Skillset - List of Dorks.
 
 ### Online Tools
