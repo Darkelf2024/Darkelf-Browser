@@ -1,5 +1,3 @@
----
-
 ## OSINT Tools and Resources
 
 1. **Maltego**:
@@ -69,8 +67,6 @@
 17. **Wayback Machine**:
     - Website: [Wayback Machine](https://archive.org/web/)
     - Description: Archive of web pages for historical data retrieval.
-
----
 
 ## Educational Resources
 
