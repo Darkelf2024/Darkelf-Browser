@@ -115,6 +115,18 @@ Provides quick access to navigation controls, search bar, and security settings.
 - Session Management:
 Supports restoring the previous session, including tabs and their state, enhancing usability without compromising security.
 
+## Adblock Features 
+
+Darkelf Browser incorporates robust adblocking functionality to enhance privacy and browsing experience:
+
+1. **Domain Blocking**: The `AdblockUrlRequestInterceptor` class blocks requests to specific domains listed in the `blocked_domains` parameter, preventing unwanted content from loading.
+
+2. **Rule-Based Filtering**: Custom rules in the `AdblockUrlRequestInterceptor` class enable filtering based on content type. This includes blocking CSP reports, large media files, and other specified types of requests.
+
+3. **Adblock Pattern Management**: The `load_adblock_list` function aggregates adblock patterns from multiple sources, including popular ad-blocking lists and custom rules for sites like YouTube. Patterns are processed using the `BeautifulSoup` library to handle HTML content effectively.
+
+4. **Tracking Protection**: The `TrackerInterceptor` class prevents requests to known tracking domains. Tracking domains are sourced from JSON files and processed with the `json` module, ensuring comprehensive tracking protection.
+
 ## Anti-Fingerprinting Techniques
 
 - Canvas Fingerprinting Protection:
