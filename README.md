@@ -46,7 +46,7 @@ As we prepare for the imminent release of Darkelf Browser, our team is dedicated
 - Darkelf Private - Privacy Extreme 
 - Darkelf Public - Balanced 
 
-Each Type of Browser can be modified - Pick a style 
+Each Type of Browser can be modified (Pick a style)
 
 ## Security Features
 
