@@ -45,8 +45,8 @@ As we prepare for the imminent release of Darkelf Browser, our team is dedicated
 - Darkelf OSINT - Browser for OSINT 
 - Darkelf Private - Extreme Privacy
 - Darkelf Public - Balanced/Mixed
-
-Each Type of Browser can be modified (Pick a style)
+- Each Type of Browser can be modified
+- Pick a style
 
 ## Security Features
 
