@@ -41,6 +41,13 @@ As we prepare for the imminent release of Darkelf Browser, our team is dedicated
 - Linux - Ready
 - Windows - Ready
 
+## Variations of Browser Types
+- Darkelf OSINT - Browser for OSINT 
+- Darkelf Private - Privacy Extreme 
+- Darkelf Public - Balanced 
+
+Each Type of Browser can be modified - Pick a style 
+
 ## Security Features
 
 - Sandboxing:
