@@ -192,6 +192,12 @@ Provides user-configurable options to enable or disable specific anti-fingerprin
 
 These techniques collectively reduce the uniqueness of the user's browser environment, making it harder for websites to track users based on their browser and device characteristics.
 
+## Themes
+- Dark Theme
+- White Theme
+
+Themes are based on your personal system preferences.
+
 ## Not Working(Currently)
 
 Tuta/Proton - Can't access login due to CSP issue.
