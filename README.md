@@ -196,6 +196,15 @@ These techniques collectively reduce the uniqueness of the user's browser enviro
 Themes are based on auto-detection system preferences.
 The browser can adapt its theme to match the system-wide preferences set by the user on their operating system.
 
+## Hot Key Functions 
+
+- Back
+- Forward
+- Reload
+- Zoom in/out
+- Open/Close Tabs
+- History Log: Open/Close
+- Toggle Fullscreen Mode
 
 ## Not Working(Currently)
 
