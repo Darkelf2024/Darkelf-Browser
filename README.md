@@ -196,7 +196,9 @@ These techniques collectively reduce the uniqueness of the user's browser enviro
 - Dark Theme
 - White Theme
 
-Themes are based on your personal system preferences.
+Themes are based on auto-detection system preferences.
+The browser can adapt its theme to match the system-wide preferences set by the user on their operating system.
+
 
 ## Not Working(Currently)
 
