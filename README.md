@@ -176,9 +176,6 @@ Blocks access to the Network Information API, preventing websites from accessing
 - ETag and Cache-Control Manipulation:
 Modifies or disables ETag headers and cache-control mechanisms to prevent tracking via caching techniques.
 
-- TLS Fingerprinting Protection:
-Alters or hides TLS fingerprinting information (such as supported cipher suites and TLS extensions) to prevent fingerprinting based on SSL/TLS handshakes. - Not Enabled: Needs Configuration on Serverside.
-
 ## Implementation Details
 
 - JavaScript Hooks:
