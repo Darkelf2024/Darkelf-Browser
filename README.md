@@ -202,6 +202,7 @@ The browser can adapt its theme to match the system-wide preferences set by the 
 - Forward
 - Reload
 - Zoom in/out
+- Add Multiple Tabs
 - Open/Close Tabs
 - History Log: Open/Close
 - Toggle Fullscreen Mode
