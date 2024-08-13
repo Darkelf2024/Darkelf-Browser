@@ -100,7 +100,7 @@ Option to enable or disable geolocation, preventing websites from accessing the 
 - Device Orientation and Media Device Blocking:
 Options to block device orientation sensors and media devices (camera, microphone), preventing websites from accessing this data.
 
-- Black Theme:
+- Theme:
 A visually unobtrusive theme to reduce eye strain and potentially avoid drawing attention in low-light environments.
 
 - Home Page with Integrated Search:
