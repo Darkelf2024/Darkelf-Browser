@@ -103,6 +103,10 @@
 - Website: [Wayback Machine](https://archive.org/web/)
 - Description: Archive of web pages for historical data retrieval.
 
+17. **KeePassXC:
+- Website: KeePassXC
+- Description: Open-source password manager that can be used to securely store and organize credentials gathered during OSINT investigations, enabling efficient management of sensitive information.
+
 ### Educational Resources
 
 1. **ManchesterCF**:
@@ -125,7 +129,7 @@ Online Tools such as Apify.com, Graph.tips, and Whopostedwhat.com provide specia
 
 Command-Line Interface Tools like the Friend List Scraper facilitate efficient data gathering from large social networks, enabling researchers to collect names and usernames from extensive friend lists.
 
-OSINT Tools and Resources including Maltego, SpiderFoot, and FOCA offer powerful capabilities for data visualization, network footprinting, and intelligence gathering. These tools help researchers and security professionals analyze and visualize complex data relationships and network structures.
+OSINT Tools and Resources including Maltego, SpiderFoot, KeePassXC, and FOCA offer powerful capabilities for data visualization, network footprinting, intelligence gathering, and secure management of credentials. KeePassXC, in particular, adds a crucial layer of security for managing sensitive information acquired during investigations.
 
 Educational Resources such as ManchesterCF offering extensive training in OSINT and financial sectors. TCM-SEC offers structured training and certifications in OSINT and cybersecurity. These platforms provide valuable knowledge and practical skills for individuals looking to deepen their understanding of these fields.
 
