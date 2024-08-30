@@ -103,7 +103,7 @@
 - Website: [Wayback Machine](https://archive.org/web/)
 - Description: Archive of web pages for historical data retrieval.
 
-17. **KeePassXC:
+17. **KeePassXC**:
 - Website: [KeePassXC](https://keepassxc.org/)
 - Description: Open-source password manager that can be used to securely store and organize credentials gathered during OSINT investigations, enabling efficient management of sensitive information.
 
