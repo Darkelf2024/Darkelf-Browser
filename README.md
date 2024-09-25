@@ -1,5 +1,5 @@
 ## Darkelf Browser
-- Release Soon (Waiting for ECCN #)
+- Release Soon (Waiting for ECCN #) Ready By November Hopefully
 
 
 ## Web Tech
