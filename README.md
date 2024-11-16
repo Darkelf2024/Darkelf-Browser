@@ -1,5 +1,5 @@
 ## Darkelf Browser
-- Release Soon (Waiting for ECCN #) Ready By November 1st, 2024 - It is on Hold by BIS 
+- Release Soon (Waiting for ECCN #) Ready By 2024 - It is Pending RFI by BIS 
 
 
 ## Web Tech
