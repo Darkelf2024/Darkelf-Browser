@@ -1,7 +1,6 @@
 ## Darkelf Browser
 - Release Soon (Waiting for ECCN #) Ready By 2024 - It is Pending RFI by BIS 
 
-
 ## Web Tech
 <div style="display: flex;">
 
@@ -10,6 +9,10 @@
     <img src="https://s3.dualstack.us-east-2.amazonaws.com/pythondotorg-assets/media/community/logos/python-logo-only.png" alt="Python Logo" style="width:67px; height:48px; margin-right:10px;">
     <img src="https://pypi.org/static/images/white-cube.2351a86c.svg" width="67" height="48" alt="Cube Logo">
 </div>
+
+## Originality Statement
+This project consists of over 1,000 lines of original code. A CopyLeaks report has been generated to verify its uniqueness, indicating a 4.8% similarity. The flagged similarity is attributed to standard coding patterns and false positives.
+If you would like to review the CopyLeaks report, please feel free to reach out.
 
 ## Intro
 
