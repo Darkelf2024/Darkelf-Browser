@@ -12,7 +12,7 @@ Date of Test: 01-10-2025
 
  ## Detailed Analysis
 
-1. -**Passed Tests**:
+1. **Passed Tests**:
 - **Description**: The browser successfully passed 389 tests, demonstrating strong compliance with security and functionality requirements.
 - **Coverage**: These tests evaluated the browser’s implementation of key security features, including:
 - **HTTPS enforcement**.
