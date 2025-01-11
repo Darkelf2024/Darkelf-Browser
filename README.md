@@ -34,13 +34,13 @@ As we prepare for the imminent release of Darkelf Browser, our team is dedicated
 ## Table of Contents
 - [Attribution](Attribution.md)
 - [BrowserAudit](BrowserAudit.md)
-- [Darkelf Installation Guide](DarkelfInstallationGuide.md)
 - [Encryption](Encryption.md)
 - [Overview](Overview.md)
 - [QSettings](QSettings.md)
 - [LICENSE](LICENSE)
 - [Copyright](Copyright.md)
 - [Darkelf vs Tor](DarkelfvTor.md)
+- [Darkelf Installation Guide](DarkelfInstallationGuide.md)
 - [OSINT Resources](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/OSINT%20Resources.md)
 
 ## Systems
