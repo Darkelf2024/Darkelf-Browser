@@ -1,5 +1,5 @@
 ## Darkelf Browser
-- Release Soon (Waiting for ECCN #) Ready By 2024 - 2025. It is Pending by BIS - Inter-Agency Review.
+- Release Soon (Waiting for ECCN #) Ready By 2024 - 2025. It is Pending by BIS - CCATS/Management Review.
 
 ## Web Tech
 <div style="display: flex;">
