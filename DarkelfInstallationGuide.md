@@ -44,6 +44,6 @@ This guide explains the step-by-step process to set up and run the Darkelf Brows
    	4. Since Latest Update with Pip3 24.xx and adblock parser is running slower - Just wait 
 
     Python Program will autodetect what packages are needed at boot if you miss a package during 
-    installation if it can't find the package to boot up etc.
+    installation if it can't find the package to boot up etc. Just install the package with - Remember - You will receive an error if a package is not installed 
  
  
