@@ -31,7 +31,7 @@ Date of Test: 01-10-2025
 
 3. **Skipped Tests**:
 - **Count: 9 skipped tests**.
-- **Potential Reasons**:Certain tests may not be applicable to the browser or require unavailable dependencies.
+- **Potential Reasons**: Certain tests may not be applicable to the browser or require unavailable dependencies.
 - **Impact**: Negligible, as skipped tests are not included in the overall compliance evaluation.
 
 ## Conclusion
