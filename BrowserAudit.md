@@ -25,9 +25,9 @@ Date of Test: 01-10-2025
 - **Count**: 33 warnings.
 - **Reason for Warnings**:
 - **All warnings are classified as non-critical**.
-- **Resource requests were not received by the server within a 300ms timeout**.
-- **BrowserAudit notes these results may be unreliable due to environmental factors such as network latency or device performance**.
-- **Impact: Minimal, as the warnings do not indicate actual security vulnerabilities or significant compliance issues**.
+- Resource requests were not received by the server within a 300ms timeout.
+- BrowserAudit notes these results may be unreliable due to environmental factors such as network latency or device performance.
+- Impact: Minimal, as the warnings do not indicate actual security vulnerabilities or significant compliance issues.
 
 3. **Skipped Tests**:
 - **Count: 9 skipped tests**.
