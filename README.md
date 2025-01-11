@@ -1,5 +1,6 @@
 ## Darkelf Browser
 - Release Soon (Waiting for ECCN #) Ready By Early 2025. It is Pending by BIS - CCATS/Management Review.
+- Reviewing Office: Office of National Security Agency on 11/27/2024 - Closed on 12/17/2024
 
 ## Web Tech
 <div style="display: flex;">
