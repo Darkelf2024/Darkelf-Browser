@@ -14,7 +14,7 @@ Before you begin, ensure you have the following installed:
 	3. Create a virtual environment for dependency isolation: python -m venv darkelf_env
 
 ## Activate the virtual environment:
-        1. Windows: darkelf_env\Scripts\activate
+	1. Windows: darkelf_env\Scripts\activate
 	2. MacOS/Linux: source darkelf_env/bin/activate
 
 ## Create a requirements.txt file with the following content:
