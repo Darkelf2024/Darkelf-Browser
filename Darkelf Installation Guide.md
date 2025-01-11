@@ -18,12 +18,12 @@ Before you begin, ensure you have the following installed:
 	2. MacOS/Linux: source darkelf_env/bin/activate
 
 ## Create a requirements.txt file with the following content:
-        1. PyQt5==5.15.9, beautifulsoup4==4.12.2, requests==2.31.0, adblockparser==0.7, cryptography==41.0.3
+	1. PyQt5==5.15.9, beautifulsoup4==4.12.2, requests==2.31.0, adblockparser==0.7, cryptography==41.0.3
 	2. Install the dependencies: pip install -r requirements.txt
  
 ## Verify System Compatibility for PyQt5:
 	1. Linux: sudo apt-get install python3-pyqt5 python3-pyqt5.qtwebengine
-        2. MacOS: brew install qt
+ 	2. MacOS: brew install qt
 	3. Windows: python -m pip install --upgrade pip
 
 ## Install OpenSSL for Secure Communication:
