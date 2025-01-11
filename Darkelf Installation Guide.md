@@ -42,7 +42,7 @@ Before you begin, ensure you have the following installed:
   	3. Wait for it to boot! Enjoy!
    	4. Since Latest Update with Pip3 24.xx and adblock parser is running slower - Just wait 
 
-    Python Program will autodetect what packages are needed at boot if you miss a package during installation
-    if it can't find the package to boot up etc.
+    Python Program will autodetect what packages are needed at boot if you miss a package during 
+    installation if it can't find the package to boot up etc.
  
  
