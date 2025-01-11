@@ -9,9 +9,9 @@ Before you begin, ensure you have the following installed:
 	2. Pip (Python Package Installer)
  
  ## Commands: Access Terminal
-        1. Verify installation: pip --version
+	1. Verify installation: pip --version
 	2. (Optional) Virtual Environment: Install if needed: pip install virtualenv
-        3. Create a virtual environment for dependency isolation: python -m venv darkelf_env
+	3. Create a virtual environment for dependency isolation: python -m venv darkelf_env
 
 ## Activate the virtual environment:
         1. Windows: darkelf_env\Scripts\activate
