@@ -34,7 +34,7 @@ As we prepare for the imminent release of Darkelf Browser, our team is dedicated
 ## Table of Contents
 - [Attribution](Attribution.md)
 - [BrowserAudit](BrowserAudit.md)
-- [Darkelf Installation Guide](Darkelf Installation Guide.md)
+- [Darkelf Installation Guide](DarkelfInstallationGuide.md)
 - [Encryption](Encryption.md)
 - [Overview](Overview.md)
 - [QSettings](QSettings.md)
