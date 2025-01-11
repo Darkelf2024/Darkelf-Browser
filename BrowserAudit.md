@@ -4,11 +4,11 @@ Browser Under Test: Darkelf Browser (Public, Extreme, and OSINT Versions)
 
 Date of Test: 01-10-2025
 
-Summary of Results
-	•	Total Tests Conducted: 431
-	•	Passed Tests: 389
-	•	Warnings: 33
-	•	Skipped Tests: 9
+## Summary of Results
+- **Total Tests Conducted**: 431
+- **Passed Tests**: 389
+- **Warnings: 33**
+- **Skipped Tests**: 9
 
  ## Detailed Analysis
 
@@ -16,10 +16,10 @@ Summary of Results
 - **Description**: The browser successfully passed 389 tests, demonstrating strong compliance with security and functionality requirements.
 - **Coverage**: These tests evaluated the browser’s implementation of key security features, including:
 - **HTTPS enforcement**.
--Secure cookie handling.
--Cross-origin resource protection.
--Content Security Policies (CSP).
--Result: Excellent performance.
+- **Secure cookie handling**.
+- **Cross-origin resource protection**.
+- **Content Security Policies (CSP)**.
+- **Result: Excellent performance**.
 
 2. Warnings:
 	•	Count: 33 warnings.
