@@ -7,7 +7,7 @@ Date of Test: 01-10-2025
 ## Summary of Results
 - **Total Tests Conducted**: 431
 - **Passed Tests**: 389
-- **Warnings: 33**
+- **Warnings**: 33
 - **Skipped Tests**: 9
 
  ## Detailed Analysis
