@@ -32,7 +32,7 @@ As we prepare for the imminent release of Darkelf Browser, our team is dedicated
 
 ## Table of Contents
 - [Attribution](Attribution.md)
-- [Browseraudit](BrowserAudit.md)
+- [BrowserAudit](BrowserAudit.md)
 - [Encryption](Encryption.md)
 - [Overview](Overview.md)
 - [QSettings](QSettings.md)
