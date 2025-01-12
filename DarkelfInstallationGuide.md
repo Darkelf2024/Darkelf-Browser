@@ -26,7 +26,7 @@ This guide explains the step-by-step process to set up and run the Darkelf Brows
  4. adblockparser==0.7
  5. cryptography==41.0.3
 
- - Install the dependencies: pip install -r requirements.txt(Creating a "requirement" txt file will batch dependencies together - It is optional)
+ - Install the dependencies: pip install -r requirements.txt (Creating a "requirement" txt file will batch dependencies together - It is optional)
  - You can pip install all packages manually in terminal etc. - Your choice.
 
 ## Verify System Compatibility for PyQt5:
