@@ -82,7 +82,7 @@ Functionality: Protects against IP leaks through WebRTC by modifying the HTTP Us
 Configuration: Set through QWebEngineProfile.setHttpUserAgent.
 
 Font Fingerprinting Protection
-Functionality: Protects against fingerprinting through installed fonts by allowing insecure content.
+Functionality: Protects against fingerprinting through installed fonts by not allowing insecure content.
 Configuration: Set through QWebEngineSettings.AllowRunningInsecureContent.
 
 Blocking Device Sensors
