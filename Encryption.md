@@ -28,6 +28,11 @@ RSA-OAEP Encryption
 - Layer 5: Encrypting data using the RSA public key.
 - Layer 6: Decrypting data using the RSA private key.
 
+Post Quantum Encryption (Placeholder):
+- Key Generation: Generates key pairs for ECDH and RSA within the browser using the Web Cryptography API.
+- Encryption and Decryption: Placeholder functions for encrypting and decrypting messages using post-quantum keys.
+- Need to install - If you need to implement post-quantum cryptographic algorithms, you should look into libraries and standards that specifically address post-quantum security, such as those provided by the Open Quantum Safe project (liboqs).
+
 WebCrypto API for Random Number Generation
 - Layer 7: Utilizing WebCrypto PRNG for generating secure random bytes.
 
