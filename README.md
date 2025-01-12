@@ -90,7 +90,7 @@ A robust symmetric encryption algorithm that ensures data integrity and confiden
 Asymmetric encryption algorithms used for key exchange and digital signatures, providing an additional layer of security.
 
 - Quantum Encryption:
-Option to enable quantum encryption for advanced security against future quantum computing threats.
+Option to enable quantum encryption for advanced security against future quantum computing threats. (Research/Testing Phase)
 
 ## Privacy Features
 
