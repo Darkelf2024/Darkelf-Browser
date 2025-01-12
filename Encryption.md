@@ -44,6 +44,7 @@ Darkelf effectively uses up to seven layers of encryption and security mechanism
 - AES-GCM Encryption (1 layer)
 - RSA-OAEP Encryption (3 layers)
 - WebCrypto PRNG (1 layer)
+- Post Quantum Encryption Currently (Optional - Implementation of Liboqs and Generate Keys/Pairs)
 
 This layered approach provides robust security for sensitive data and communication within the Darkelf browser.
 
