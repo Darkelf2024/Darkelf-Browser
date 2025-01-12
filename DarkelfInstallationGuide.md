@@ -19,9 +19,14 @@ This guide explains the step-by-step process to set up and run the Darkelf Brows
 	2. MacOS/Linux: source darkelf_env/bin/activate
 
 ## Create a requirements.txt file with the following content:
-	1. PyQt5==5.15.9, beautifulsoup4==4.12.2, requests==2.31.0, adblockparser==0.7, cryptography==41.0.3
-	2. Install the dependencies: pip install -r requirements.txt
- 
+	1. PyQt5==5.15.9
+ 2. beautifulsoup4==4.12.2
+ 3. requests==2.31.0
+ 4. adblockparser==0.7
+ 5. cryptography==41.0.3
+	- Install the dependencies: pip install -r requirements.txt(Creating a "requirement" txt file will batch dependencies together - It is optional)
+ - You can pip install all packages manually in terminal etc. - Your choice.
+
 ## Verify System Compatibility for PyQt5:
 	1. Linux: sudo apt-get install python3-pyqt5 python3-pyqt5.qtwebengine
  	2. MacOS: brew install qt
