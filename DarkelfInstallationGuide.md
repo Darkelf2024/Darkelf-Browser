@@ -19,6 +19,7 @@ This guide explains the step-by-step process to set up and run the Darkelf Brows
 	2. MacOS/Linux: source darkelf_env/bin/activate
 
 ## Create a requirements.txt file with the following content:
+
 	1. PyQt5==5.15.9
  2. beautifulsoup4==4.12.2
  3. requests==2.31.0
