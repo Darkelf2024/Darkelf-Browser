@@ -71,8 +71,8 @@ Functionality: ECDH (Elliptic Curve Diffie-Hellman) key exchange, the "bit encry
 
 ## Quantum Threats:
 
-Grover's Algorithm: Can theoretically reduce the security of symmetric encryption by half. For example, a 256-bit key would have the equivalent security of a 128-bit key against quantum attacks.
-Shor's Algorithm: Specifically affects asymmetric encryption, breaking widely used algorithms like RSA and ECC.
+- Grover's Algorithm: Can theoretically reduce the security of symmetric encryption by half. For example, a 256-bit key would have the equivalent security of a 128-bit key against quantum attacks.
+- Shor's Algorithm: Specifically affects asymmetric encryption, breaking widely used algorithms like RSA and ECC.
 
 ## ChaCha20 and Quantum Resistance:
 
