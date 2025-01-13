@@ -69,8 +69,15 @@ Use Case: This encryption is typically used for securing data during transmissio
 ## ECDH Encryption
 Functionality: ECDH (Elliptic Curve Diffie-Hellman) key exchange, the "bit encryption" typically refers to the length of the cryptographic keys used. In ECDH, the key length is determined by the elliptic curve parameters and is usually measured in bits. 
 
-## ChaCha20 Cipher: 
-A robust symmetric encryption algorithm that ensures data integrity and confidentiality.
+## Quantum Threats:
+
+Grover's Algorithm: Can theoretically reduce the security of symmetric encryption by half. For example, a 256-bit key would have the equivalent security of a 128-bit key against quantum attacks.
+Shor's Algorithm: Specifically affects asymmetric encryption, breaking widely used algorithms like RSA and ECC.
+
+## ChaCha20 and Quantum Resistance:
+
+ChaCha20, with a 256-bit key, would effectively offer 128-bit security against quantum attacks due to Grover's algorithm.
+This level of security (128-bit) is generally considered sufficient for many applications even in the face of quantum computing.
 
 ## RSA and X25519: 
 Asymmetric encryption algorithms used for key exchange and digital signatures, providing an additional layer of security.
