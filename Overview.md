@@ -35,20 +35,12 @@ history.
 personalization.
 
 ## Encryption and Security Features
-AES Encryption: Utilizes AES-256 encryption for local data storage and protection.
-RSA Encryption: Implements RSA encryption for secure communication channels and
-key management.
-Content Security Policies (CSP): Enforces strict CSP to mitigate risks from cross-site
-scripting (XSS) and other web vulnerabilities.
-User Protection and Privacy Features
-Anti-Fingerprinting: Reduces browser fingerprinting by limiting screen capture and
-unique identifier exposure.
-Tor Network Integration: Offers optional routing of traffic through the Tor network for
-enhanced anonymity.
-HTTPS Enforcement: Ensures secure connections by enforcing HTTPS protocol where
-possible.
-Geolocation Control: Allows users to manage browser access to geolocation data,
-enhancing privacy.
+The Darkelf Browser incorporates multiple layers of encryption and advanced security features to ensure robust protection and privacy for its users. It utilizes AES-256 encryption for protecting local data storage, ensuring that any sensitive information stored on the user's device is securely encrypted. RSA encryption is implemented for secure communication channels and key management, providing a reliable method for encrypting data and managing encryption keys. Additionally, the browser uses ChaCha20 encryption, which is known for its speed and security, to further enhance the encryption mechanisms.
+
+To further protect user privacy, the Darkelf Browser employs anti-fingerprinting techniques that reduce the browser's ability to be uniquely identified. This includes methods such as canvas fingerprinting protection, user-agent spoofing, WebGL fingerprinting protection, font fingerprinting protection, and media device enumeration blocking. These techniques help to obscure identifying information and reduce the risk of tracking.
+
+The browser also includes optional routing of traffic through the Tor network for enhanced anonymity and ensures secure connections by enforcing the HTTPS protocol wherever possible. Users have control over browser access to geolocation data to prevent unauthorized tracking, and strict Content Security Policies (CSP) are enforced to mitigate risks from cross-site scripting (XSS) and other web vulnerabilities. This comprehensive suite of features positions the Darkelf Browser as a secure and privacy-focused option for users.
+
 ## Compliance and Legal Considerations
 BIS.gov: Darkelf Browser complies with export control regulations and is designed to
 ensure lawful use and compliance with export control laws.
