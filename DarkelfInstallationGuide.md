@@ -25,6 +25,10 @@ This guide explains the step-by-step process to set up and run the Darkelf Brows
  3. requests==2.31.0
  4. adblockparser==0.7
  5. cryptography==41.0.3
+ 6. pycryptodome - Latest
+ 7. pqcrypto - Latest
+ 8. PyQtWebEngine - Latest
+ *  Upgrade Python3/Pip3 - Latest
 
  - Install the dependencies: pip install -r requirements.txt (Creating a "requirement" txt file will batch dependencies together - It is optional)
  - You can pip install all packages manually in terminal etc. - Your choice.
