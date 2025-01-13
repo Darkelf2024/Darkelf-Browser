@@ -90,9 +90,9 @@ A robust symmetric encryption algorithm that ensures data integrity and confiden
 Asymmetric encryption algorithms used for key exchange and digital signatures, providing an additional layer of security.
 
 - Quantum Encryption:
-Option to enable quantum encryption for advanced security against future quantum computing threats. (Research/Testing Phase)
+Option to enable quantum encryption for advanced security against future quantum computing threats. (Research/Testing Phase - Kyber1024/XMSS) - Error w/Python 3.12 Can't find KeyPairs)Module hidden! Currently working on it!
 
-## Privacy Features
+- Privacy Features
 
 - JavaScript Control:
 Allows users to enable or disable JavaScript, reducing the risk of malicious scripts.
