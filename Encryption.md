@@ -97,24 +97,24 @@ Methods: Common key lengths for ECDH may include 256 bits, 384 bits, or 521 bits
 ## Anti-Fingerprinting Features
 
 1. Canvas Fingerprinting Blocking
-	•	Functionality: Blocks attempts to use the canvas element for fingerprinting by enabling screen capture protection.
-	•	Configuration: Set through QWebEngineSettings.ScreenCaptureEnabled.
+- Functionality: Blocks attempts to use the canvas element for fingerprinting by enabling screen capture protection.
+- Configuration: Set through QWebEngineSettings.ScreenCaptureEnabled.
 
 2. WebRTC IP Leak Protection
-	•	Functionality: Prevents IP leaks via WebRTC by modifying the HTTP User Agent.
-	•	Configuration: Set through QWebEngineProfile.setHttpUserAgent.
+- Functionality: Prevents IP leaks via WebRTC by modifying the HTTP User Agent.
+- Configuration: Set through QWebEngineProfile.setHttpUserAgent.
 
 3. Font Fingerprinting Protection
-	•	Functionality: Protects against fingerprinting by restricting access to installed fonts and disallowing insecure content.
-	•	Configuration: Set through QWebEngineSettings.AllowRunningInsecureContent.
+- Functionality: Protects against fingerprinting by restricting access to installed fonts and disallowing insecure content.
+- Configuration: Set through QWebEngineSettings.AllowRunningInsecureContent.
 
 4. Blocking Device Sensors
-	•	Functionality: Limits access to device sensors that could be exploited for fingerprinting.
-	•	Configuration: Set through QWebEngineSettings.Accelerated2dCanvasEnabled.
+- Functionality: Limits access to device sensors that could be exploited for fingerprinting.
+- Configuration: Set through QWebEngineSettings.Accelerated2dCanvasEnabled.
 
 5. Limiting Browser Features
-	•	Functionality: Restricts various browser features that could facilitate fingerprinting.
-	•	Configuration: Set through QWebEngineSettings.FullScreenSupportEnabled.
+- Functionality: Restricts various browser features that could facilitate fingerprinting.
+- Configuration: Set through QWebEngineSettings.FullScreenSupportEnabled.
 
 ## Other Privacy Features
 
