@@ -14,27 +14,39 @@ The current implementation of Darkelf includes several layers of encryption and 
 - Purpose: Used for encrypting data.
 - Details: RSA-OAEP is used for public-key encryption and decryption, offering secure encryption of data with added padding for enhanced security.
 
-## Encryption Layers in Darkelf
+# Encryption Layers in Darkelf
 
-ECDH Key Exchange
-- Layer 1: ECDH key pair generation and public key exchange.
-- Layer 2: Derivation of a shared secret using the exchanged public keys.
+## **ECDH Key Exchange**
+- **Layer 1:** Generate an ECDH key pair and exchange public keys between parties.
+- **Layer 2:** Derive a shared secret from the exchanged public keys using the ECDH algorithm, ensuring secure shared key agreement.
 
-AES-GCM Encryption
-- Layer 3: Using the derived shared secret for symmetric encryption and decryption with AES-GCM.
+## **AES-GCM Encryption**
+- **Layer 3:** Use the derived shared secret as the symmetric encryption key for AES-GCM, enabling secure encryption and decryption of data with authenticated encryption.
 
-RSA-OAEP Encryption
-- Layer 4: Generation of an RSA key pair for asymmetric encryption.
-- Layer 5: Encrypting data using the RSA public key.
-- Layer 6: Decrypting data using the RSA private key.
+## **RSA-OAEP Encryption**
+- **Layer 4:** Generate an RSA key pair (public and private keys) for asymmetric encryption.
+- **Layer 5:** Encrypt data using the RSA public key, ensuring confidentiality when sharing sensitive information.
+- **Layer 6:** Decrypt data using the RSA private key, restoring the original message securely.
 
-Post Quantum Encryption (Placeholder): Available in Extreme Private Edition Currently 
-- Key Generation: Generates key pairs for ECDH and RSA within the browser using the Web Cryptography API.
-- Encryption and Decryption: Placeholder functions for encrypting and decrypting messages using post-quantum keys.
-- Need to install - If you need to implement post-quantum cryptographic algorithms, you should look into libraries and standards that specifically address post-quantum security, such as those provided by the Open Quantum Safe project (liboqs).
+## **Post-Quantum Encryption (Placeholder)**  
+(*Exclusive to Extreme Private Edition*)
+- **Key Generation:** Generate ECDH and RSA key pairs within the browser using the Web Cryptography API.
+- **Encryption and Decryption:** Placeholder functions for encrypting and decrypting messages using post-quantum cryptographic keys.  
+  - *Future Implementation:* To achieve true post-quantum security, consider adopting algorithms standardized by NIST or using libraries such as the Open Quantum Safe project (liboqs).
 
-WebCrypto API for Random Number Generation
-- Layer 7: Utilizing WebCrypto PRNG for generating secure random bytes.
+## **WebCrypto API for Random Number Generation**
+- **Layer 7:** Utilize the WebCrypto API's secure pseudo-random number generator (PRNG) for generating cryptographically secure random bytes, essential for key generation and encryption processes.
+
+---
+
+## **Key Notes**
+1. **Post-Quantum Placeholder:** Post-quantum encryption is not currently implemented but is planned for future versions. Libraries such as liboqs provide a foundation for integrating post-quantum algorithms.  
+2. **Standards Compliance:** Encryption methods used align with industry best practices, including AES-GCM for authenticated encryption and RSA-OAEP for asymmetric encryption. Future updates aim to adopt NIST-recommended post-quantum cryptography standards.  
+3. **Layer Dependencies:** Layers build on each other logically:
+   - Layers 1–2 establish the shared secret (ECDH).
+   - Layer 3 uses the shared secret for symmetric encryption (AES-GCM).
+   - Layers 4–6 introduce an optional additional layer of security using RSA for asymmetric encryption.
+   - Layer 7 supports all layers by ensuring secure random number generation.
 
 ## Summary of Encryption Layers
 
