@@ -20,14 +20,15 @@ If you would like to review the CopyLeaks report, please feel free to reach out.
 Darkelf, a custom PyQt5-based browser, is equipped with a range of advanced security features aimed at safeguarding user privacy and fortifying defenses against online threats. The upcoming release of the Darkelf Browser promises an enriching browsing experience, with a strong emphasis on security and privacy.
 
 Key Highlights and Security Features:
+1. **AdGuard DNS Integration:** Darkelf Browser incorporates AdGuard DNS, a powerful DNS resolution service designed to block trackers, ads, and phishing domains at the network level. By intercepting DNS requests, AdGuard DNS strengthens your browsing privacy while providing a smoother and clutter-free experience.
 
-1. **Content Security Policy (CSP) Enhancements:** Darkelf Browser emphasizes the importance of Content Security Policy (CSP) to mitigate various forms of attacks such as cross-site scripting (XSS) and data injection. We are committed to working closely with the community to fine-tune and adapt the CSP policies for optimal protection.
+2. **Content Security Policy (CSP) Enhancements:** Darkelf Browser emphasizes the importance of Content Security Policy (CSP) to mitigate various forms of attacks such as cross-site scripting (XSS) and data injection. We are committed to working closely with the community to fine-tune and adapt the CSP policies for optimal protection.
 
-2. **Sandboxing for Enhanced Security:** Darkelf Browser leverages sandboxing techniques to isolate potential security vulnerabilities and prevent unauthorized access to critical system resources. By containing processes within secure boundaries, sandboxing enhances the overall security posture of the browser.
+3. **Sandboxing for Enhanced Security:** Darkelf Browser leverages sandboxing techniques to isolate potential security vulnerabilities and prevent unauthorized access to critical system resources. By containing processes within secure boundaries, sandboxing enhances the overall security posture of the browser.
 
-3. **CHACHA20 Encryption with x25519 Key Exchange:** Darkelf Browser employs the robust CHACHA20 encryption algorithm in conjunction with the x25519 key exchange protocol to ensure secure communication and data integrity. This cutting-edge encryption scheme offers a high level of confidentiality and protection against eavesdropping and tampering.
+4. **CHACHA20 Encryption with x25519 Key Exchange:** Darkelf Browser employs the robust CHACHA20 encryption algorithm in conjunction with the x25519 key exchange protocol to ensure secure communication and data integrity. This cutting-edge encryption scheme offers a high level of confidentiality and protection against eavesdropping and tampering.
 
-4. **Community Collaboration:** We value community feedback and contributions in shaping the security features and policies of Darkelf Browser. Your active participation will be instrumental in refining our security strategies and addressing emerging threats effectively.
+5. **Community Collaboration:** We value community feedback and contributions in shaping the security features and policies of Darkelf Browser. Your active participation will be instrumental in refining our security strategies and addressing emerging threats effectively.
 
 As we prepare for the imminent release of Darkelf Browser, our team is dedicated to delivering a secure and privacy-focused browsing environment that empowers users to explore the web with confidence. Stay tuned for updates and join us in our mission to create a safer online ecosystem for all users.
 
