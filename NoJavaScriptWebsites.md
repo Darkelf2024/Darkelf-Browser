@@ -1,5 +1,9 @@
 # No JavaScript Websites
 
+A curated list of websites and services that work effectively without JavaScript.
+
+---
+
 ## News
 - [BBC News](https://www.bbc.co.uk/news)
 - [CNN News](https://edition.cnn.com)
@@ -7,6 +11,8 @@
 - [ProPublica](https://www.propublica.org)
 - [Ars Technica](https://arstechnica.com)
 - [NASA](https://www.nasa.gov)
+
+---
 
 ## Encyclopedias
 - [Wikipedia](https://www.wikipedia.org)
@@ -19,67 +25,89 @@
 - [Simple English Wikipedia](https://simple.wikipedia.org)
 - [JSTOR](https://www.jstor.org)
 
+---
+
 ## Dictionary
 - [The Free Dictionary](https://www.thefreedictionary.com)
+
+---
 
 ## Shopping
 - [eBay](https://www.ebay.com)
 - [Amazon](https://www.amazon.com)
 
+---
+
 ## Search Engines
 
-1. **[DuckDuckGo](https://duckduckgo.com)**
-   - **About**: DuckDuckGo is a privacy-focused search engine that doesn’t track users. It provides a simple and straightforward interface, with minimal JavaScript used for search results. You can access and view search results with little to no JavaScript.
+1. **[DuckDuckGo](https://duckduckgo.com)**  
+   A privacy-focused search engine that doesn’t track users. Provides a simple interface with minimal JavaScript for search results.
 
-2. **[Startpage](https://www.startpage.com)**
-   - **About**: Startpage is another privacy-oriented search engine. It pulls results from Google but doesn’t track users or show ads. It’s lightweight and can be used effectively without JavaScript for basic searches.
+2. **[Startpage](https://www.startpage.com)**  
+   Privacy-oriented search engine pulling results from Google. No tracking or ads, and usable without JavaScript.
 
-3. **[Qwant](https://www.qwant.com)**
-   - **About**: Qwant is a European search engine that values privacy. It provides a simple layout and minimal JavaScript usage, making it usable in text-only or no-JavaScript browsers.
+3. **[Qwant](https://www.qwant.com)**  
+   European privacy-first search engine with minimal JavaScript usage.
 
-4. **[Ecosia](https://www.ecosia.org)**
-   - **About**: Ecosia is an eco-friendly search engine that plants trees with its revenue. It provides search results with minimal JavaScript, though the site can become slightly more dynamic depending on the results page.
+4. **[Ecosia](https://www.ecosia.org)**  
+   An eco-friendly search engine that plants trees with its revenue. Usable with minimal JavaScript.
 
-5. **[MetaGer](https://metager.de/en)**
-   - **About**: MetaGer is a privacy-focused metasearch engine that aggregates results from multiple sources. It has a simple design and uses minimal JavaScript.
+5. **[MetaGer](https://metager.de/en)**  
+   A privacy-focused metasearch engine that aggregates results from multiple sources with minimal JavaScript.
 
-6. **[Mojeek](https://www.mojeek.com)**
-   - **About**: Mojeek is an independent search engine that crawls the web and indexes its own data. Its interface is simple and can be used without JavaScript for basic searches.
+6. **[Mojeek](https://www.mojeek.com)**  
+   An independent search engine with its own index, offering a no-JavaScript interface.
 
-7. **[Searx](https://searx.me)**
-   - **About**: Searx is an open-source metasearch engine that combines results from multiple search engines. It is designed for privacy and can be used without JavaScript for text-based searches.
+7. **[Searx](https://searx.me)**  
+   Open-source metasearch engine combining results from multiple engines. Privacy-focused and no-JavaScript friendly.
 
 ---
 
 ## Banking Websites
 
-While most modern banking websites rely on JavaScript for dynamic features (like login forms, transaction history, or account management), some websites have simpler layouts or offer limited services without requiring JavaScript.
+While most modern banking websites use JavaScript for dynamic features, the following offer limited functionality or simpler interfaces without requiring JavaScript:
 
-1. **[Simple Bank (Text-based version)](https://www.simple.com)**
-   - **About**: Simple Bank is a mobile banking service that focuses on easy-to-use features. While the mobile and full websites may use JavaScript for dynamic content, basic features like checking balance or viewing transactions are accessible with minimal JavaScript.
+1. **[Simple Bank](https://www.simple.com)**  
+   Basic balance and transaction viewing with minimal JavaScript.
 
-2. **[Revolut (Limited JavaScript)](https://www.revolut.com)**
-   - **About**: Revolut is a global banking service, providing services like currency exchange, payments, and savings. While the mobile app and full website are dynamic, simple features such as checking balance and transaction history can be accessed with limited JavaScript.
+2. **[Revolut](https://www.revolut.com)**  
+   Access simple features like balance checks with limited JavaScript.
 
-3. **[Bank of America (Basic Account Access)](https://www.bankofamerica.com)**
-   - **About**: Bank of America provides a website for accessing accounts, paying bills, and other basic services. Basic banking features can be accessed with minimal or no JavaScript, although the full range of account management features requires it.
+3. **[Bank of America](https://www.bankofamerica.com)**  
+   Basic services like balance checks available with minimal JavaScript.
 
-4. **[Chase (Basic Features)](https://www.chase.com)**
-   - **About**: Chase provides a variety of banking services. While advanced features (such as transfers and detailed account management) rely on JavaScript, checking balances and viewing recent transactions can be done with limited JavaScript.
+4. **[Chase](https://www.chase.com)**  
+   View balances and transactions with limited JavaScript.
 
-5. **[USAA (Basic Account Access)](https://www.usaa.com)**
-   - **About**: USAA provides banking and insurance services for military members and their families. While the main website uses JavaScript for full functionality, basic account viewing, such as balance checking, can be done with minimal JavaScript.
+5. **[USAA](https://www.usaa.com)**  
+   Basic account viewing, such as balance checks, works with minimal JavaScript.
 
-6. **[Capital One (Text-Only Login)](https://www.capitalone.com)**
-   - **About**: Capital One is a popular bank offering credit cards, loans, and banking services. While their website uses JavaScript for a more dynamic experience, basic account access (like balance and transactions) can be viewed without JavaScript.
+6. **[Capital One](https://www.capitalone.com)**  
+   Offers text-only login and basic account access.
 
-7. **[Monzo (Minimal JavaScript)](https://monzo.com)**
-   - **About**: Monzo is a digital bank based in the UK that offers simple and easy banking through its mobile app and website. While most interactive features require JavaScript, some account details and balance information can be accessed with minimal JavaScript.
+7. **[Monzo](https://monzo.com)**  
+   Digital bank with simple account information accessible without JavaScript.
 
-8. **[N26 (Basic Features)](https://n26.com)**
-   - **About**: N26 is a German-based digital bank that offers basic banking features through its app and website. Some basic features, such as checking your balance and transaction history, are accessible with minimal JavaScript.
+8. **[N26](https://n26.com)**  
+   Access basic features like balance and transaction history with limited JavaScript.
 
-9. **[Ally Bank (Simplified Web Pages)](https://www.ally.com)**
-   - **About**: Ally Bank is an online bank that offers savings and checking accounts. While the site is dynamic, some basic account functionalities (like checking balances and viewing transactions) can be accessed without JavaScript.
+9. **[Ally Bank](https://www.ally.com)**  
+   Simplified web pages allow for balance checks without JavaScript.
+
+---
+
+## Email Alternatives
+For accessing email without relying on JavaScript, consider using dedicated email clients like:
+
+1. **[Thunderbird](https://www.mozilla.org/en-US/thunderbird/)**  
+2. **[K-9 Mail](https://k9mail.app/)**
+
+---
+
+## YouTube Clients
+These apps allow you to access YouTube content without relying on JavaScript-heavy interfaces:
+
+1. **[FreeTube](https://freetubeapp.io)**  
+2. **[NewPipe](https://newpipe.net)**
 
 ---
