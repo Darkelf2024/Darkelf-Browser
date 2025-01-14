@@ -48,17 +48,15 @@ The current implementation of Darkelf includes several layers of encryption and 
    - Layers 4–6 introduce an optional additional layer of security using RSA for asymmetric encryption.
    - Layer 7 supports all layers by ensuring secure random number generation.
 
-## Summary of Encryption Layers
+## **Summary of Encryption Layers**
+Darkelf employs a layered encryption model with up to seven layers of security mechanisms to ensure data confidentiality and integrity:
+- **ECDH Key Exchange:** 2 layers.
+- **AES-GCM Encryption:** 1 layer.
+- **RSA-OAEP Encryption:** 3 layers.
+- **WebCrypto PRNG:** 1 layer.
+- **Post-Quantum Encryption (Optional):** Placeholder for future implementation using Liboqs.
 
-Darkelf effectively uses up to seven layers of encryption and security mechanisms to ensure data confidentiality and integrity.
-
-- ECDH Key Exchange (2 layers)
-- AES-GCM Encryption (1 layer)
-- RSA-OAEP Encryption (3 layers)
-- WebCrypto PRNG (1 layer)
-- Post Quantum Encryption Currently (Optional - Implementation of Liboqs and Generate Keys/Pairs)
-
-This layered approach provides robust security for sensitive data and communication within the Darkelf browser.
+This approach provides robust protection for sensitive data and secure communication within the Darkelf browser.
 
 ## AES Encryption
 Functionality: AES (Advanced Encryption Standard) is used for encrypting and decrypting data.
