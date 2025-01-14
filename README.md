@@ -19,8 +19,8 @@ If you would like to review the CopyLeaks report, please feel free to reach out.
 
 Darkelf, a custom PyQt5-based browser, is equipped with a range of advanced security features aimed at safeguarding user privacy and fortifying defenses against online threats. The upcoming release of the Darkelf Browser promises an enriching browsing experience, with a strong emphasis on security and privacy.
 
-Key Highlights and Security Features:
-1. **AdGuard DNS Integration:** Darkelf Browser incorporates AdGuard DNS, a powerful DNS resolution service designed to block trackers, ads, and phishing domains at the network level. By intercepting DNS requests, AdGuard DNS strengthens your browsing privacy while providing a smoother and clutter-free experience.
+Key Highlights and Security Features
+1. **AdGuard DNS Integration:** Darkelf Browser incorporates AdGuard DNS, a powerful DNS resolution service designed to block trackers, ads, and phishing domains at the network level. By intercepting DNS requests, AdGuard DNS strengthens your browsing privacy while providing a smoother and clutter-free experience. (This is in the codebase)
 
 2. **Content Security Policy (CSP) Enhancements:** Darkelf Browser emphasizes the importance of Content Security Policy (CSP) to mitigate various forms of attacks such as cross-site scripting (XSS) and data injection. We are committed to working closely with the community to fine-tune and adapt the CSP policies for optimal protection.
 
