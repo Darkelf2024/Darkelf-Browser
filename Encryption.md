@@ -124,8 +124,16 @@ Persistent Storage: Uses QSettings to store and retrieve security settings persi
 Security Settings Dialog: Provides a user interface to enable or disable various security settings, such as JavaScript, anti-fingerprinting, Tor network, quantum encryption, and HTTPS enforcement.
 Dynamic Application: Applies the changes made in the security settings dialog dynamically to the browser's configuration.
 
-Default Dark Theme
+## Summary
 
-CSS Injection: Applies a dark theme by injecting CSS into the web pages.
+Summary
 
-These features collectively enhance the privacy and security of the browser, providing protections against common tracking techniques and ensuring secure data transmission and storage.
+These features collectively enhance the privacy and security of the browser by:
+
+    - Ensuring secure communication through HTTPS.
+    - Providing anonymous browsing via the Tor network.
+    - Managing cookies and cache to protect user privacy.
+    - Allowing users to enable or disable security settings through a persistent storage mechanism.
+    - Applying a dark theme for better visual comfort.
+
+Each feature requires specific implementation steps, and the provided code snippets give a starting point for integrating these features into a web browser application using Qt.
