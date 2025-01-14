@@ -129,11 +129,10 @@ Dynamic Application: Applies the changes made in the security settings dialog dy
 Summary
 
 These features collectively enhance the privacy and security of the browser by:
-
-    - Ensuring secure communication through HTTPS.
-    - Providing anonymous browsing via the Tor network.
-    - Managing cookies and cache to protect user privacy.
-    - Allowing users to enable or disable security settings through a persistent storage mechanism.
-    - Applying a dark theme for better visual comfort.
+- Ensuring secure communication through HTTPS.
+- Providing anonymous browsing via the Tor network.
+- Managing cookies and cache to protect user privacy.
+- Allowing users to enable or disable security settings through a persistent storage mechanism.
+- Applying a dark theme for better visual comfort.
 
 Each feature requires specific implementation steps, and the provided code snippets give a starting point for integrating these features into a web browser application using Qt.
