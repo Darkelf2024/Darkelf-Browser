@@ -121,7 +121,7 @@ Clear Cookies: Cookies, Cache and history clear after closing tabs.
 
 Security Settings Management
 Persistent Storage: Uses QSettings to store and retrieve security settings persistently.
-Security Settings Dialog: Provides a user interface to enable or disable various security settings, such as JavaScript, anti-fingerprinting, Tor network, quantum encryption, and HTTPS enforcement.
+Security Settings Dialog: Provides a user interface to enable or disable various security settings, such as JavaScript, anti-fingerprinting, Tor network, Post-quantum encryption capabilities, and HTTPS enforcement.
 Dynamic Application: Applies the changes made in the security settings dialog dynamically to the browser's configuration.
 
 ## Summary
