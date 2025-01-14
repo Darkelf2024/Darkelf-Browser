@@ -143,4 +143,4 @@ These features collectively enhance the privacy and security of the browser by:
 - Allowing users to enable or disable security settings through a persistent storage mechanism.
 - Applying a dark theme for better visual comfort.
 
-Each feature requires specific implementation steps, and the provided code snippets give a starting point for integrating these features into a web browser application using Qt.
+Each feature requires careful implementation and can be integrated into a web browser application using Qt.
