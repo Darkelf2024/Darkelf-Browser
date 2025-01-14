@@ -61,77 +61,91 @@ As we prepare for the imminent release of Darkelf Browser, our team is dedicated
 
 ## Security Features
 
-- Sandboxing:
+### Sandboxing
 Darkelf Browser implements sandboxing technology to provide an additional layer of security:
-- Isolated Environment: Each browsing session is isolated from the system, preventing malicious code from affecting other parts of the browser or the device.
-- Enhanced Security: Sandboxing helps mitigate the impact of potential security vulnerabilities by containing threats within the browser's sandboxed
-environment. 
-- Protection Against Exploits: By confining processes to a sandbox, Darkelf Browser reduces the risk of
-exploits and unauthorized access to sensitive system resources.
 
-- Custom Ad Blocker - Enabled by default 
-- Content Security Policy (CSP):
-Sets strict content security policies to prevent cross-site scripting (XSS), clickjacking, and other code injection attacks.
+- **Isolated Environment**: Each browsing session is isolated from the system, preventing malicious code from affecting other parts of the browser or the device.
+- **Enhanced Security**: Sandboxing helps mitigate the impact of potential security vulnerabilities by containing threats within the browser's sandboxed environment.
+- **Protection Against Exploits**: By confining processes to a sandbox, Darkelf Browser reduces the risk of exploits and unauthorized access to sensitive system resources.
 
-- HTTPS Enforcement:
-Automatically upgrades HTTP requests to HTTPS to ensure encrypted communication whenever possible.
+### Custom Ad Blocker
+- **Enabled by Default**: Darkelf Browser comes with a custom ad blocker enabled by default, ensuring an ad-free browsing experience.
+- **Updated Adblock Rules**: Regularly fetches and updates adblock rules from multiple trusted sources to effectively block ads and trackers.
 
-- Anti-Fingerprinting:
-Reduces the amount of information available for browser fingerprinting, making it harder to track users across the web.
+### Content Security Policy (CSP)
+- **Strict Security Policies**: Sets strict content security policies to prevent cross-site scripting (XSS), clickjacking, and other code injection attacks.
 
-- Tor Network Integration:
-Optional integration with the Tor network for anonymous browsing by routing traffic through multiple nodes to conceal users' IP addresses.
+### HTTPS Enforcement
+- **Automatic Upgrades**: Automatically upgrades HTTP requests to HTTPS to ensure encrypted communication whenever possible.
+- **Secure Browsing**: Ensures that your data is encrypted and protected from eavesdropping.
 
-- Clear Cookies and Cache on Exit:
-Clears HTTP cache and cookies when the browser or a tab is closed to prevent tracking and maintain privacy.
+### Anti-Fingerprinting
+- **Reduced Tracking**: Reduces the amount of information available for browser fingerprinting, making it harder to track users across the web.
+- **Spoofing Techniques**: Implements various techniques to spoof browser characteristics and protect against fingerprinting.
+
+### Tor Network Integration
+- **Anonymous Browsing**: Optional integration with the Tor network for anonymous browsing by routing traffic through multiple nodes to conceal users' IP addresses.
+- **Privacy Protection**: Enhances privacy by preventing websites from tracking your real IP address.
+
+### Clear Cookies and Cache on Exit
+- **Automatic Clearing**: Clears HTTP cache and cookies when the browser or a tab is closed to prevent tracking and maintain privacy.
+- **Enhanced Privacy**: Ensures that no browsing data is left behind after your session ends.
+
+### Additional Features
+- **AdGuard DNS Resolver**: Uses AdGuard DNS servers to enhance security and block ads and trackers at the DNS level.
+- **Quantum Encryption**: Optional quantum encryption for enhanced security.
+- **Custom Web Engine Page**: Implements various security measures such as disabling local storage, blocking JavaScript, and enforcing CSP.
+- **Download Manager**: Secure download manager that provides progress updates and ensures safe file downloads.
+
+Darkelf Browser is designed with privacy and security at its core, ensuring a safer and more private browsing experience for all users.
 
 ## Encryption Features
 
-- ChaCha20 Cipher: 
-A robust symmetric encryption algorithm that ensures data integrity and confidentiality.
+- **ChaCha20 Cipher**: 
+  A robust symmetric encryption algorithm that ensures data integrity and confidentiality.
 
-- RSA and X25519: 
-Asymmetric encryption algorithms used for key exchange and digital signatures, providing an additional layer of security.
+- **RSA and X25519**: 
+  Asymmetric encryption algorithms used for key exchange and digital signatures, providing an additional layer of security.
 
-- Quantum Encryption:
-Option to enable quantum encryption for advanced security against future quantum computing threats. (Research/Testing Phase - Kyber1024/XMSS) - Error w/Python 3.12 Can't find KeyPairs)Module hidden! Currently working on it!
+- **Quantum Encryption**:
+  Option to enable quantum encryption for advanced security against future quantum computing threats. (Research/Testing Phase - Kyber1024/XMSS) - Currently, there is an error with Python 3.12 where key pairs cannot be found. The module is hidden and work is ongoing to resolve this issue.
 
 ## Privacy Features
 
-- JavaScript Control:
-Allows users to enable or disable JavaScript, reducing the risk of malicious scripts.
+- **JavaScript Control**:
+  Allows users to enable or disable JavaScript, reducing the risk of malicious scripts.
 
-- Cookie Management:
-Provides the option to enable or disable cookies, offering control over data stored by websites.
+- **Cookie Management**:
+  Provides the option to enable or disable cookies, offering control over data stored by websites.
 
-- Geolocation Control:
-Option to enable or disable geolocation, preventing websites from accessing the user's physical location.
+- **Geolocation Control**:
+  Option to enable or disable geolocation, preventing websites from accessing the user's physical location.
 
-- Device Orientation and Media Device Blocking:
-Options to block device orientation sensors and media devices (camera, microphone), preventing websites from accessing this data.
+- **Device Orientation and Media Device Blocking**:
+  Options to block device orientation sensors and media devices (camera, microphone), preventing websites from accessing this data.
 
-- Theme:
-A visually unobtrusive theme to reduce eye strain and potentially avoid drawing attention in low-light environments.
+- **Theme**:
+  A visually unobtrusive theme to reduce eye strain and potentially avoid drawing attention in low-light environments.
 
-- Home Page with Integrated Search:
-A customizable home page with integrated DuckDuckGo search, offering a privacy-focused search engine.
+- **Home Page with Integrated Search**:
+  A customizable home page with integrated DuckDuckGo search, offering a privacy-focused search engine.
 
 ## Additional Features
 
-- Debounce Resize Function:
-Efficiently handles resize events to optimize performance.
+- **Debounce Resize Function**:
+  Efficiently handles resize events to optimize performance.
 
-- Download Manager:
-Manages and tracks downloads, providing a secure way to handle file downloads.
+- **Download Manager**:
+  Manages and tracks downloads, providing a secure way to handle file downloads.
 
-- Security Settings Dialog:
-A user interface to configure various security settings, such as enabling/disabling JavaScript, Tor network, and encryption options.
+- **Security Settings Dialog**:
+  A user interface to configure various security settings, such as enabling/disabling JavaScript, Tor network, and encryption options.
 
-- Toolbar and Menu Bar:
-Provides quick access to navigation controls, search bar, and security settings.
+- **Toolbar and Menu Bar**:
+  Provides quick access to navigation controls, search bar, and security settings.
 
-- Session Management:
-Supports restoring the previous session, including tabs and their state, enhancing usability without compromising security.
+- **Session Management**:
+  Supports restoring the previous session, including tabs and their state, enhancing usability without compromising security.
 
 ## Adblock Features 
 
@@ -147,81 +161,81 @@ Darkelf Browser incorporates robust adblocking functionality to enhance privacy 
 
 ## Anti-Fingerprinting Techniques
 
-- Canvas Fingerprinting Protection:
-Modifies or blocks the ability of websites to read canvas data. This prevents websites from creating a unique fingerprint based on the rendering of graphics on the user's device.
+- **Canvas Fingerprinting Protection**:
+  Modifies or blocks the ability of websites to read canvas data. This prevents websites from creating a unique fingerprint based on the rendering of graphics on the user's device.
 
-- User-Agent Spoofing:
-Randomizes or standardizes the user-agent string sent to websites, making it difficult to identify the browser and operating system version.
+- **User-Agent Spoofing**:
+  Randomizes or standardizes the user-agent string sent to websites, making it difficult to identify the browser and operating system version.
 
-- WebGL Fingerprinting Protection:
-Alters or blocks WebGL information to prevent fingerprinting based on the graphics hardware and driver details.
+- **WebGL Fingerprinting Protection**:
+  Alters or blocks WebGL information to prevent fingerprinting based on the graphics hardware and driver details.
 
-- Font Fingerprinting Protection:
-Limits the list of available system fonts exposed to websites, preventing fingerprinting based on the unique set of installed fonts.
+- **Font Fingerprinting Protection**:
+  Limits the list of available system fonts exposed to websites, preventing fingerprinting based on the unique set of installed fonts.
 
-- Media Device Enumeration Blocking:
-Prevents websites from accessing detailed information about the user's media devices (e.g., cameras, microphones), which can be used for fingerprinting.
+- **Media Device Enumeration Blocking**:
+  Prevents websites from accessing detailed information about the user's media devices (e.g., cameras, microphones), which can be used for fingerprinting.
 
-- Timezone Spoofing:
-Changes or hides the timezone information to prevent websites from determining the user's geographical location based on their timezone.
+- **Timezone Spoofing**:
+  Changes or hides the timezone information to prevent websites from determining the user's geographical location based on their timezone.
 
-- Language and Locale Spoofing:
-Randomizes or standardizes language and locale settings to prevent fingerprinting based on these attributes.
+- **Language and Locale Spoofing**:
+  Randomizes or standardizes language and locale settings to prevent fingerprinting based on these attributes.
 
-- Screen Resolution and Color Depth Spoofing:
-Modifies or hides screen resolution and color depth information to prevent websites from creating a unique fingerprint based on the display properties of the device.
+- **Screen Resolution and Color Depth Spoofing**:
+  Modifies or hides screen resolution and color depth information to prevent websites from creating a unique fingerprint based on the display properties of the device.
 
-- Hardware Concurrency Spoofing:
-Changes the reported number of logical processors (CPU cores) to prevent fingerprinting based on the hardware concurrency.
+- **Hardware Concurrency Spoofing**:
+  Changes the reported number of logical processors (CPU cores) to prevent fingerprinting based on the hardware concurrency.
 
-- Audio Fingerprinting Protection:
-Alters or blocks audio context information to prevent fingerprinting based on the audio hardware and capabilities.
+- **Audio Fingerprinting Protection**:
+  Alters or blocks audio context information to prevent fingerprinting based on the audio hardware and capabilities.
 
-- Battery Status API Blocking:
-Blocks access to the Battery Status API, preventing websites from tracking battery levels and charging status, which can be used for fingerprinting.
+- **Battery Status API Blocking**:
+  Blocks access to the Battery Status API, preventing websites from tracking battery levels and charging status, which can be used for fingerprinting.
 
-- Network Information API Blocking:
-Blocks access to the Network Information API, preventing websites from accessing network type and speed information, which can be used for fingerprinting.
+- **Network Information API Blocking**:
+  Blocks access to the Network Information API, preventing websites from accessing network type and speed information, which can be used for fingerprinting.
 
-- ETag and Cache-Control Manipulation:
-Modifies or disables ETag headers and cache-control mechanisms to prevent tracking via caching techniques.
+- **ETag and Cache-Control Manipulation**:
+  Modifies or disables ETag headers and cache-control mechanisms to prevent tracking via caching techniques.
 
 ## Implementation Details
 
-- JavaScript Hooks:
-The browser employs JavaScript hooks to intercept and modify calls to functions and APIs that can be used for fingerprinting, such as navigator, screen, document, and window properties.
+- **JavaScript Hooks**:
+  The browser employs JavaScript hooks to intercept and modify calls to functions and APIs that can be used for fingerprinting, such as `navigator`, `screen`, `document`, and `window` properties.
 
-- Built-In:
-Built-in features to spoof or block fingerprintable attributes dynamically, providing an extra layer of protection.
+- **Built-In Features**:
+  Built-in features spoof or block fingerprintable attributes dynamically, providing an extra layer of protection.
 
-- Configuration Options:
-Provides user-configurable options to enable or disable specific anti-fingerprinting techniques, allowing users to balance privacy and functionality according to their needs.
+- **Configuration Options**:
+  Provides user-configurable options to enable or disable specific anti-fingerprinting techniques, allowing users to balance privacy and functionality according to their needs.
 
 These techniques collectively reduce the uniqueness of the user's browser environment, making it harder for websites to track users based on their browser and device characteristics.
 
 ## Themes
-- Dark Theme
-- White Theme
 
-Themes are based on auto-detection system preferences.
-The browser can adapt its theme to match the system-wide preferences set by the user on their operating system.
+- **Dark Theme**
+- **White Theme**
+
+Themes are based on an auto-detection system of user preferences. The browser adapts its theme to match the system-wide preferences set by the user on their operating system.
 
 ## Hot Key Functions 
 
-- Back
-- Forward
-- Reload
-- Zoom in/out
-- Add Multiple Tabs
-- Open/Close Tabs
-- History Log: Open/Close
-- Toggle Fullscreen Mode
+- **Back**
+- **Forward**
+- **Reload**
+- **Zoom In/Out**
+- **Add Multiple Tabs**
+- **Open/Close Tabs**
+- **History Log: Open/Close**
+- **Toggle Fullscreen Mode**
 
-## Not Working(Currently)
+## Not Working (Currently)
 
-Tuta/Proton - Can't access login due to CSP issue.
-Everything else is working though.
+- **Tuta/Proton**: Cannot access login due to CSP issue.
 
+Everything else is working correctly.
 
 ## Contributors
 
