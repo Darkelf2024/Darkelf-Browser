@@ -126,8 +126,6 @@ Dynamic Application: Applies the changes made in the security settings dialog dy
 
 ## Summary
 
-Summary
-
 These features collectively enhance the privacy and security of the browser by:
 - Ensuring secure communication through HTTPS.
 - Providing anonymous browsing via the Tor network.
