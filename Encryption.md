@@ -96,25 +96,25 @@ Methods: Common key lengths for ECDH may include 256 bits, 384 bits, or 521 bits
 
 ## Anti-Fingerprinting Features
 
-Canvas Fingerprinting Blocking
-Functionality: Blocks attempts to use the canvas element for fingerprinting by enabling screen capture protection.
-Configuration: Set through QWebEngineSettings.ScreenCaptureEnabled.
+1. Canvas Fingerprinting Blocking
+	•	Functionality: Blocks attempts to use the canvas element for fingerprinting by enabling screen capture protection.
+	•	Configuration: Set through QWebEngineSettings.ScreenCaptureEnabled.
 
-WebRTC IP Leaks Protection
-Functionality: Protects against IP leaks through WebRTC by modifying the HTTP User Agent.
-Configuration: Set through QWebEngineProfile.setHttpUserAgent.
+2. WebRTC IP Leak Protection
+	•	Functionality: Prevents IP leaks via WebRTC by modifying the HTTP User Agent.
+	•	Configuration: Set through QWebEngineProfile.setHttpUserAgent.
 
-Font Fingerprinting Protection
-Functionality: Protects against fingerprinting through installed fonts by not allowing insecure content.
-Configuration: Set through QWebEngineSettings.AllowRunningInsecureContent.
+3. Font Fingerprinting Protection
+	•	Functionality: Protects against fingerprinting by restricting access to installed fonts and disallowing insecure content.
+	•	Configuration: Set through QWebEngineSettings.AllowRunningInsecureContent.
 
-Blocking Device Sensors
-Functionality: Limits access to device sensors that could be used for fingerprinting.
-Configuration: Set through QWebEngineSettings.Accelerated2dCanvasEnabled.
+4. Blocking Device Sensors
+	•	Functionality: Limits access to device sensors that could be exploited for fingerprinting.
+	•	Configuration: Set through QWebEngineSettings.Accelerated2dCanvasEnabled.
 
-Limiting Browser Features
-Functionality: Limits various browser features that can be used for fingerprinting.
-Configuration: Set through QWebEngineSettings.FullScreenSupportEnabled.
+5. Limiting Browser Features
+	•	Functionality: Restricts various browser features that could facilitate fingerprinting.
+	•	Configuration: Set through QWebEngineSettings.FullScreenSupportEnabled.
 
 ## Other Privacy Features
 
