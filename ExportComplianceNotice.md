@@ -1,6 +1,6 @@
 ## **Export Compliance Notice**
 
-Darkelf Browser v3.0 is an open-source project classified under **ECCN 5D002 c.1** and is eligible for **License Exception ENC** under section 740.17(a) of the U.S. Export Administration Regulations (EAR). This classification was issued by the U.S. Department of Commerce, Bureau of Industry and Security (BIS) under case number **Z1835048** on January 13, 2025.
+Darkelf Browser v3.0 is an open-source project classified under **ECCN 5D002 c.1** and is eligible for **License Exception ENC** under section 740.17(a) of the U.S. Export Administration Regulations (EAR). This classification was issued by the U.S. Department of Commerce, Bureau of Industry and Security (BIS) under case number **Z1835048** on January 13, 2025. For further inquiries, reference correspondence identifier G197019.
 
 ### **Restrictions**
 This software and its source code are subject to U.S. export laws and regulations. As such, the following restrictions apply:
