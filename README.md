@@ -236,9 +236,6 @@ Themes are based on an auto-detection system of user preferences. The browser ad
 ### 1. Tuta/Proton Login Access Issue
 - **Problem**: Login access fails due to a **Content Security Policy (CSP)** issue.
 - **Details**: This occurs when website CSP rules block specific scripts or resources, causing login failures.
-- **Potential Solutions**:
-  - Adjust browser extensions (e.g., ad blockers).
-  - Contact support for assistance.
 
 ### 2. Adblockparser Accuracy
 - **Problem**: The **adblockparser** tool is not 100% accurate in identifying and blocking all ads and trackers.
