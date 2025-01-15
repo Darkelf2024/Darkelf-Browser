@@ -46,6 +46,7 @@ As we prepare for the imminent release of Darkelf Browser, our team is dedicated
 - [Darkelf Installation Guide](DarkelfInstallationGuide.md)
 - [OSINT Resources](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/OSINT%20Resources.md)
 - [No JavaScript Websites](NoJavaScriptWebsites.md)
+- [FAQ](FAQ.md)
 
 ## Systems
 - MAC OS - Ready
