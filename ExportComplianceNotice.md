@@ -5,7 +5,7 @@ This software, **Darkelf Browser v3.0**, is classified under Export Control Clas
 
 ## 1. Prohibited Destinations
 - This software may not be exported, re-exported, or transferred, either directly or indirectly, to:
-- Countries embargoed by the United States, including but not limited to **Cuba, Iran, North Korea, Syria, the Crimea region of Ukraine, Russia, China, and Venezuela - Countries listed under E1/E2.
+- Countries embargoed by the United States, including but not limited to **Cuba, Iran, North Korea, Syria, the Crimea region of Ukraine, Russia, China, and Venezuela** - Countries listed under E1/E2.
 - Any individual or entity listed on the U.S. Department of Commerce's **Denied Persons List**, **Entity List**, or any other restricted parties list.
 
 ## 2. End-Use Restrictions
