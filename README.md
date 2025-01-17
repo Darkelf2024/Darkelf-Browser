@@ -57,7 +57,7 @@ As we prepare for the imminent release of Darkelf Browser, our team is dedicated
 - Darkelf OSINT - Browser for OSINT 
 - Darkelf Private - Extreme Privacy
 - Darkelf Public - Balanced/Mixed
-- Each Browser/Type - Can be modified in within the python code
+- Each Browser/Type - Can be modified within the python code
 - Pick a style
 
 ## Security Features
