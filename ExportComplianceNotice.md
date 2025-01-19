@@ -17,7 +17,7 @@ This software may not be used for the development, production, or deployment of 
 By downloading, using, or distributing this software, you agree to comply with all applicable U.S. export laws and regulations. Users are responsible for ensuring that their actions comply with these restrictions.
 
 ## 4. Notification
-In accordance with U.S. export regulations, this software has been reviewed and classified by the U.S. Department of Commerce and NSA under **Case Number Z1835048**. It leverages advanced encryption technologies, including:
+In accordance with U.S. export regulations, this software has been reviewed and classified by the U.S. Department of Commerce and NSA. It leverages advanced encryption technologies, including:
 - **AES and RSA encryption** for data storage and transmission.  
 - **ChaCha20 stream cipher** with **X25519 elliptic curve Diffie-Hellman (ECDH)** key exchange for secure communication, as implemented in **TLS 1.3**.
 
