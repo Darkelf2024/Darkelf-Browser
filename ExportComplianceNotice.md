@@ -27,4 +27,5 @@ This software is released under the **GNU General Public License (GPL) v3.0** an
 ---
 
 ### Notes to Developers and Users
+Disclaimer: The case number is provided for transparency regarding the export compliance status of Darkelf Browser.
 For additional information on export regulations or compliance requirements, consult the [U.S. Bureau of Industry and Security (BIS)](https://www.bis.doc.gov) or contact a legal expert in export control.
