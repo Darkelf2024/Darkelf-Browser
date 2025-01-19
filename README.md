@@ -1,5 +1,5 @@
 ## Darkelf Browser
-- Release of Darkelf Browser Extreme Edition - Monday Earliest: 01/20/2025 Latest 01/30/2025 - GitHub Verification from BIS
+- Release of Darkelf Browser Extreme Edition - Monday Earliest: 01/30/2025 - GitHub Verification from BIS
 - Please Read - Updated 1/17/25: [Export Compliance Notice](ExportComplianceNotice.md)
 - Reviewing Office: Office of National Security Agency on 11/27/2024 - Closed on 12/17/2024
 
