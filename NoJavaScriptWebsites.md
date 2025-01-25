@@ -29,6 +29,19 @@ A curated list of websites and services that work effectively without JavaScript
 
 ## Dictionary
 - [The Free Dictionary](https://www.thefreedictionary.com)
+- [Merriam-Webster](https://www.merriam-webster.com)
+- [Cambridge Fictionary](https://dictionary.cambridge.org)
+
+---
+
+## Free E-Books
+- [Project Gutenberg](https://www.gutenberg.org)
+
+---
+
+## Media Resources 
+- [Internet Archive](https://archive.org)
+- [Daring Fireball](https://daringfireball.net)
 
 ---
 
