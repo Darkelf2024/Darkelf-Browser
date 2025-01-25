@@ -1,5 +1,14 @@
 # No JavaScript Websites
 
+## Disclaimer
+
+This repository may include links to third-party open-source projects. These links are provided for informational purposes and to promote the use of open-source software.
+
+- The repository owner is not responsible for the content or functionality of the external links.
+- These third-party tools are independent of this repository and may have their own terms of use or licenses.
+
+Please ensure you review the license and terms of use of any third-party software you access via links in this repository.
+
 A curated list of websites and services that work effectively without JavaScript.
 
 ---
