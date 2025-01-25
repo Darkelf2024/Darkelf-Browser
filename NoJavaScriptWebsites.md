@@ -43,7 +43,7 @@ A curated list of websites and services that work effectively without JavaScript
 - [Internet Archive](https://archive.org)
 - [Daring Fireball](https://daringfireball.net)
 
-# Nuclear Music App
+## Music App
 
 - [Nuclear Music App](https://nuclearjs.github.io/)
 
