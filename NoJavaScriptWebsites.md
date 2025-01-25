@@ -9,7 +9,6 @@ This repository may include links to third-party open-source projects. These lin
 
 Please ensure you review the license and terms of use of any third-party software you access via links in this repository.
 
-## Curated list of websites and services that work effectively without JavaScript.
 
 ---
 
