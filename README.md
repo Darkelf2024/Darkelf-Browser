@@ -1,5 +1,5 @@
 ## Darkelf Browser
-- Release of Darkelf Browser Extreme Edition - [Release](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Darkelf%20Extreme.py)
+- Release of Darkelf Browser Extreme Edition v3.0 - [DEv3.0 Release](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Darkelf%20Extreme.py)
 - Please Read - Updated 1/17/25: [Export Compliance Notice](ExportComplianceNotice.md)
 - Reviewing Office: Office of National Security Agency on 11/27/2024 - Closed on 12/17/2024
 
