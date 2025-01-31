@@ -3,7 +3,7 @@
 - **Please Note**: There is an OSINT and Public Version - If there is a high interest.
 - Please Read - Updated 1/17/25: [Export Compliance Notice](ExportComplianceNotice.md)
 - Reviewing Office: Office of National Security Agency on 11/27/2024 - Closed on 12/17/2024
-- Please Open issues link - Found under Feedback Section (Bottom)
+- [Open an issue](https://github.com/Darkelf2024/Darkelf-Browser/issues)
 
 
 ## Web Tech
