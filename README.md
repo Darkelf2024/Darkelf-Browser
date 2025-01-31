@@ -258,7 +258,7 @@ Themes are based on an auto-detection system of user preferences. The browser ad
 Contributions and suggestions are always welcome! Feel free to open an issue or submit a pull request to help improve the project.  
 
 ### Contributors  
-- **Dr. Kevin Moore l**: [Darkelf2024](https://github.com/Darkelf2024) Initial work, design, implementation, and additional contributions.  
+- **Dr. Kevin Moore**: [Darkelf2024](https://github.com/Darkelf2024) Initial work, design, implementation, and additional contributions.  
 - **Heapy**: Memory leak testing.  
 - **ChatGPT by OpenAI**: Code optimization and error analysis.  
 
