@@ -266,7 +266,7 @@ Contributions and suggestions are always welcome! Feel free to open an issue or 
 ## Feedback and Contributions
 
 Your feedback is invaluable to the growth and improvement of **Darkelf Browser**. If you have suggestions, ideas, bug reports, or feature requests, please don’t hesitate to:  
-- [Open an issue](#)  
+- [Open an issue](https://github.com/Darkelf2024/Darkelf-Browser/issues)
 - Reach out directly via the project’s contact channels.  
 
 I actively welcome constructive criticism and diverse perspectives, as they help make **Darkelf Browser** better for everyone. Let’s collaborate to foster a vibrant and supportive community around this project.  
