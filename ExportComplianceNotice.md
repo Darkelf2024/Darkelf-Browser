@@ -1,4 +1,4 @@
-# Export Compliance Statement
+## Export Compliance Statement
 
 This software, **Darkelf Browser v3.0**, is classified under **ECCN 5D002 c.1** and is authorized for export under **License Exception ENC**, as described in Sections 740.17(a) and 740.17(b)(1) of the U.S. **Export Administration Regulations (EAR)**. The software includes encryption technologies (such as AES, RSA, ChaCha20, and X25519) used for secure data storage and transmission, which may subject it to U.S. export control laws.
 
