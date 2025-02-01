@@ -1,0 +1,10 @@
+PyQt5==5.15.9
+beautifulsoup4==4.12.2
+requests==2.31.0
+adblockparser==0.7
+cryptography==41.0.3
+pycryptodome
+pqcrypto
+PyQtWebEngine
+dnspython
+stem  # Optional, only if you plan to use Tor network
