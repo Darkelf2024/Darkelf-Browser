@@ -33,7 +33,7 @@ This guide explains the step-by-step process to set up and run the Darkelf Brows
 10. stem(Tor Network - Optional)
  *  Upgrade Python3/Pip3 - Latest
 
- * [Requirements]( 
+ * [Requirements](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/requirements.txt) File 
 
  - Install the dependencies: pip install -r requirements.txt (Creating a "requirement" txt file will batch dependencies together - It is optional)
  - You can pip install all packages manually in terminal etc. - Your choice.
