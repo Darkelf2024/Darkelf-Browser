@@ -30,7 +30,7 @@ This guide explains the step-by-step process to set up and run the Darkelf Brows
  7. pqcrypto - Latest
  8. PyQtWebEngine - Latest
  9. dns.resolver/dnspython
-10. stem(Tor Network - Optional)
+ 10. stem(Tor Network - Optional)
  *  Upgrade Python3/Pip3 - Latest
 
  * [Requirements File](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/requirements.txt)
