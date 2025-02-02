@@ -6,14 +6,12 @@
 - [Open an issue](https://github.com/Darkelf2024/Darkelf-Browser/issues)
 
 
-## Web Tech
-<div style="display: flex;">
+## Tech Stack
 
-<div style="display:flex; align-items:center;">
-    <img src="https://www.freepnglogos.com/uploads/html5-logo-png/html5-logo-devextreme-multi-purpose-controls-html-javascript-3.png" width="120" height="60" alt="HTML5 Logo">
-    <img src="https://s3.dualstack.us-east-2.amazonaws.com/pythondotorg-assets/media/community/logos/python-logo-only.png" alt="Python Logo" style="width:67px; height:48px; margin-right:10px;">
-    <img src="https://pypi.org/static/images/white-cube.2351a86c.svg" width="67" height="48" alt="Cube Logo">
-</div>
+![HTML5](https://img.shields.io/badge/HTML5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)  
+![CSS3](https://img.shields.io/badge/CSS3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)  
+![Python](https://img.shields.io/badge/Python-%233776AB.svg?style=for-the-badge&logo=python&logoColor=white)  
+![Encryption](https://img.shields.io/badge/Encryption-%23008C45.svg?style=for-the-badge&logo=lock&logoColor=white)
 
 ## Originality Statement
 This project consists of over 1,200 lines of original code. A CopyLeaks report has been generated to verify its uniqueness, indicating a 1.5-6% similarity based on type of DE Browser: OSINT, Extreme/Private, or Public Version. The flagged similarity is attributed to standard coding patterns and false positives. Upon review, the content is verified as 0% plagiarized and fully original.
