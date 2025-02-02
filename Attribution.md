@@ -23,6 +23,7 @@ For enhanced privacy and anonymity, this browser offers integration with the Tor
 - **AdGuard DNS**:
 This project uses AdGuard DNS for enhanced privacy and security. AdGuard DNS is a free DNS service that helps block ads, trackers, and phishing websites. For more information, please visit AdGuard DNS at [AdGuard DNS](https://adguard-dns.io/en/welcome.html)
 
+- **Adblock & Tracking Lists**:
 - **EasyList & Fanboy Lists**: This project incorporates ad-blocking lists from [EasyList](https://easylist.to/) and [Fanboy Annoyance List](https://easylist.to/pages/other-supplementary-filter-lists-and-easylist-variants.html). These lists are maintained by the EasyList community and are licensed under **CC BY-SA 4.0**. More details can be found at [EasyList](https://easylist.to/).  
 
 - **Disconnect Tracking Protection Lists**: This project includes tracking protection lists from [Disconnect](https://github.com/disconnectme/disconnect-tracking-protection), licensed under the **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0)**. More details on the license can be found [here](https://creativecommons.org/licenses/by-nc-sa/4.0/).  
