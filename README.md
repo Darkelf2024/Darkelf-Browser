@@ -61,6 +61,16 @@ As we prepare for the imminent release of Darkelf Browser, our team is dedicated
 - Each Browser/Type - Can be modified within the python code
 - Pick a style
 
+## Modify Settings 
+Users can modify and tweak these settings in the codebase 
+
+True = Enabled 
+False = Disabled 
+
+- [Sandbox Settings]
+- [Initialize Settings]
+- [QWebEngine Profile Settings]
+
 ## Security Features
 
 ### Sandboxing
