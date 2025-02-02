@@ -25,7 +25,14 @@ This project uses AdGuard DNS for enhanced privacy and security. AdGuard DNS is 
 
 - **EasyList & Fanboy Lists**: This project incorporates ad-blocking lists from [EasyList](https://easylist.to/) and [Fanboy Annoyance List](https://easylist.to/pages/other-supplementary-filter-lists-and-easylist-variants.html). These lists are maintained by the EasyList community and are licensed under **CC BY-SA 4.0**. More details can be found at [EasyList](https://easylist.to/).  
 
-- **Disconnect Tracking Protection Lists**: This project includes tracking protection lists from [Disconnect](https://github.com/disconnectme/disconnect-tracking-protection), used under the **Mozilla Public License 2.0 (MPL-2.0)**. The lists are available at [Disconnect Tracking Protection](https://github.com/disconnectme/disconnect-tracking-protection).  
+- **Disconnect Tracking Protection Lists**: This project includes tracking protection lists from [Disconnect](https://github.com/disconnectme/disconnect-tracking-protection), licensed under the **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0)**. More details on the license can be found [here](https://creativecommons.org/licenses/by-nc-sa/4.0/).  
+
+  - These lists **may only be used for non-commercial purposes**. If you would like to use them in a commercial project, please contact **support@disconnect.me** to request a commercial license.  
+  - If you believe a tracker has been missed or a domain has been incorrectly categorized, you can submit a report using [this form](https://github.com/disconnectme/disconnect-tracking-protection).  
+  - **Note:** Pull requests are not reviewed and will be closed.  
+
+  **Copyright (c) 2024 Disconnect, Inc.**  
+  
 
 ## Explanation
 This application uses PyQt-WebEngine, which provides Python bindings for Qt WebEngine, and Qt WebEngine, which is provided by The Qt Company under the LGPL license.
