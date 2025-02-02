@@ -23,6 +23,10 @@ For enhanced privacy and anonymity, this browser offers integration with the Tor
 - **AdGuard DNS**:
 This project uses AdGuard DNS for enhanced privacy and security. AdGuard DNS is a free DNS service that helps block ads, trackers, and phishing websites. For more information, please visit AdGuard DNS at [AdGuard DNS](https://adguard-dns.io/en/welcome.html)
 
+- **EasyList & Fanboy Lists**: This project incorporates ad-blocking lists from [EasyList](https://easylist.to/) and [Fanboy Annoyance List](https://easylist.to/pages/other-supplementary-filter-lists-and-easylist-variants.html). These lists are maintained by the EasyList community and are licensed under **CC BY-SA 4.0**. More details can be found at [EasyList](https://easylist.to/).  
+
+- **Disconnect Tracking Protection Lists**: This project includes tracking protection lists from [Disconnect](https://github.com/disconnectme/disconnect-tracking-protection), used under the **Mozilla Public License 2.0 (MPL-2.0)**. The lists are available at [Disconnect Tracking Protection](https://github.com/disconnectme/disconnect-tracking-protection).  
+
 ## Explanation
 This application uses PyQt-WebEngine, which provides Python bindings for Qt WebEngine, and Qt WebEngine, which is provided by The Qt Company under the LGPL license.
 PyQt-WebEngine enables the integration of web functionality into this application using the Qt framework.
