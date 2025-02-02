@@ -5,13 +5,16 @@
 - Reviewing Office: Office of National Security Agency on 11/27/2024 - Closed on 12/17/2024
 - [Open an issue](https://github.com/Darkelf2024/Darkelf-Browser/issues)
 
-
 ## Tech Stack
 
 ![HTML5](https://img.shields.io/badge/HTML5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)  
 ![CSS3](https://img.shields.io/badge/CSS3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)  
 ![Python](https://img.shields.io/badge/Python-%233776AB.svg?style=for-the-badge&logo=python&logoColor=white)  
-![Encryption](https://img.shields.io/badge/Encryption-%23008C45.svg?style=for-the-badge&logo=lock&logoColor=white)
+![Encryption](https://img.shields.io/badge/Encryption-%23008C45.svg?style=for-the-badge&logo=lock&logoColor=white)  
+![Crypto](https://img.shields.io/badge/Crypto-%230A0A0A.svg?style=for-the-badge&logo=bitcoin&logoColor=white)  
+![PyCryptodome](https://img.shields.io/badge/PyCryptodome-%23007ACC.svg?style=for-the-badge&logo=python&logoColor=white)  
+![Cryptography](https://img.shields.io/badge/Cryptography-%234B8BBE.svg?style=for-the-badge&logo=lock&logoColor=white)  
+
 
 ## Originality Statement
 This project consists of over 1,200 lines of original code. A CopyLeaks report has been generated to verify its uniqueness, indicating a 1.5-6% similarity based on type of DE Browser: OSINT, Extreme/Private, or Public Version. The flagged similarity is attributed to standard coding patterns and false positives. Upon review, the content is verified as 0% plagiarized and fully original.
