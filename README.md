@@ -1,5 +1,5 @@
 ## Darkelf Browser - Extreme Edition 
-- Release of Darkelf Browser Extreme Edition v3.0.2 [DEv3.0.1 Release](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Darkelf%20Extreme.py) This is the Extreme/Private Version - It is released in a Monolithic Style.
+- Release of Darkelf Browser Extreme Edition v3.0.2 [DEv3.0.2 Release](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Darkelf%20Extreme.py) This is the Extreme/Private Version - It is released in a Monolithic Style.
 - **Please Note**: There is an OSINT and Public Version - Will release if there is a high interest.
 - Please Read - Updated 1/31/25: [Export Compliance Notice](ExportComplianceNotice.md)
 - Reviewing Office: Office of National Security Agency on 11/27/2024 - Closed on 12/17/2024
