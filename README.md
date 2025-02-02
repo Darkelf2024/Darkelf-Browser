@@ -69,7 +69,7 @@ Users can modify and tweak these settings in the codebase
 
 1. [Sandbox Settings](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Sandbox%20Settings.py)
 2. [Initialize Settings](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Initialize%20Settings.py)
-3. [QWebEngine Profile Settings]
+3. [QWebEngine Profile Settings](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/QWebEngine%20Profile%20Settings.py)
 
 ## Security Features
 
