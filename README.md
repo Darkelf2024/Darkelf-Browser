@@ -64,10 +64,10 @@ As we prepare for the imminent release of Darkelf Browser, our team is dedicated
 ## Modify Settings 
 Users can modify and tweak these settings in the codebase 
 
-True = Enabled 
-False = Disabled 
+- True = Enabled 
+- False = Disabled 
 
-- [Sandbox Settings]
+- [Sandbox Settings](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Sandbox%20Settings.py)
 - [Initialize Settings]
 - [QWebEngine Profile Settings]
 
