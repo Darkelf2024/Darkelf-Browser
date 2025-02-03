@@ -2,7 +2,7 @@
 
 This page provides attribution for the external web resources referenced in the OSINT toolkits within the OSINT Edition. These links lead to publicly available tools and databases that assist in open-source intelligence (OSINT) investigations.  
 
-> **Note:** Some OSINT tools require **JavaScript** to be enabled and may need additional browser settings to function properly. Please refer to the **Modify Settings** section in the [ReadMe](#) for further instructions.  
+> **Note:** Some OSINT tools require **JavaScript** to be enabled and may need additional browser settings to function properly. Please refer to the **Modify Settings** section in the [ReadMe](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/README.md) for further instructions.  
 
 ## **1. OSINT Investigation Tools**  
 
