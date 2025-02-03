@@ -73,6 +73,17 @@ Users can modify and tweak these settings in the codebase
 2. [Initialize Settings](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Initialize%20Settings.py)
 3. [QWebEngine Profile Settings](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/QWebEngine%20Profile%20Settings.py)
 
+## ⚠️ Important Note  
+
+JavaScript behavior can be manipulated in the browser by enabling or disabling it in settings.  
+To test this:  
+
+1. Go to **Browser Settings** and navigate to **JavaScript** options.  
+2. Enable or disable JavaScript as needed.  
+3. Refresh the page by clicking the **Reload** button in your browser.  
+
+This can affect how scripts run on the page, so keep this in mind while testing or debugging JavaScript-based features.  
+
 ## Security Features
 
 ### Sandboxing
