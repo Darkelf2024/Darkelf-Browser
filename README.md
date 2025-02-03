@@ -47,6 +47,7 @@ As we prepare for the imminent release of Darkelf Browser, our team is dedicated
 - [Copyright](Copyright.md)
 - [Darkelf vs Tor](DarkelfvTor.md)
 - [Darkelf Installation Guide](DarkelfInstallationGuide.md)
+- [OSINT Attribution](
 - [OSINT Resources](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/OSINT%20Resources.md)
 - [No JavaScript Websites](NoJavaScriptWebsites.md)
 - [FAQ](FAQ.md)
