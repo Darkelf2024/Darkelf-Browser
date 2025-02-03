@@ -2,6 +2,8 @@
 
 This page provides attribution for the external web resources referenced in the OSINT toolkit. These links lead to publicly available tools and databases that assist in open-source intelligence (OSINT) investigations.  
 
+> **Note:** Some OSINT tools require **JavaScript** to be enabled and may need additional browser settings to function properly. Please refer to the **Modify Settings** section in the [ReadMe](#) for further instructions.  
+
 ## **1. OSINT Investigation Tools**  
 
 These tools help in gathering, analyzing, and correlating public data for intelligence and cybersecurity research.  
