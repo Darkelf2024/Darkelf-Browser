@@ -58,8 +58,9 @@ As we prepare for the imminent release of Darkelf Browser, our team is dedicated
 - Windows - Ready
 
 ## Variations/Types
-- Darkelf Private - Extreme Privacy
-- Darkelf Browser: OSINT & Public Version on stanby - Released if interested 
+- Darkelf Private - Extreme Privacy - Released
+- Darkelf OSINT Version - Released (Alpha)
+- Darkelf Public Version - In Progress
 - Each Browser/Type - Can be modified within the python code
 - Pick a style
 
