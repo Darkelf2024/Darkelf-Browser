@@ -276,10 +276,6 @@ Themes are based on an auto-detection system of user preferences. The browser ad
 
 ---
 
-## Contributions
-
-Contributions and suggestions are always welcome! Feel free to open an issue or submit a pull request to help improve the project.  
-
 ## Contributors  
 - **Dr. Kevin Moore** (Darkelf2024) – Creator, lead developer, initial design, implementation, and ongoing maintenance.  
 - **Kevin Nguyen** ([KevinVinhN](https://github.com/KevinVinhN)) – Assisted in testing boot-up, analyzing errors, and identifying possible fixes.  
