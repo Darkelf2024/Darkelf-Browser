@@ -112,8 +112,16 @@ class AdGuardDNSResolver:
             print(f"An unexpected error occurred: {e}")
             return []
 
-# Load Adblock Rules
+
+# Global cache for adblock rules and tracking domains
+adblock_rules_cache = None
+tracking_domains_cache = None
+
 def fetch_adblock_rules():
+    global adblock_rules_cache
+    if adblock_rules_cache is not None:
+        return adblock_rules_cache
+
     urls = [
         "https://easylist.to/easylist/easylist.txt",
         "https://easylist.to/easylist/fanboy-annoyance.txt",
