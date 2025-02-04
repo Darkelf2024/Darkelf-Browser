@@ -1,10 +1,12 @@
 PyQt5==5.15.9
-beautifulsoup4==4.12.2
-requests==2.32.0
-adblockparser==0.7
-cryptography==41.0.4
+beautifulsoup4
+requests
+adblockparser
+cryptography
 pycryptodome
 pqcrypto
 PyQtWebEngine
 dnspython
 stem  # Optional, only if you plan to use Tor network
+# Packages need to be maintained and upgraded to the latest
+# PyQt5 can't be upgraded to PyQt6 due to lack of infrastructure - System will break
