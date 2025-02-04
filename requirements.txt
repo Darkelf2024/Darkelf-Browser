@@ -8,6 +8,7 @@ pqcrypto
 PyQtWebEngine
 dnspython
 stem  # Optional, only if you plan to use Tor network
+
 # Packages need to be maintained and upgraded to the latest
 # PyQt5 can't be upgraded to PyQt6 due to lack of infrastructure - System will break
 # pqcrypto - Post Quantum - This is in testing phases currently with Kyber1024 - Planned for future releases
