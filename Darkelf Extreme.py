@@ -52,6 +52,7 @@ import os
 import re
 import requests
 import socket
+import subprocess
 import dns.resolver
 import json
 import logging
