@@ -55,7 +55,6 @@ import socket
 import dns.resolver
 import json
 import logging
-import subprocess
 import time
 from urllib.parse import urlparse
 from bs4 import BeautifulSoup
