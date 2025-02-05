@@ -27,5 +27,5 @@ We take security vulnerabilities seriously and appreciate your efforts to respon
 Thank you for helping us keep Darkelf Browser secure!
 
 ## Footer
-For general inquiries, please visit our [GitHub repository](https://github.com/YOUR-REPO) or contact **kjm489@km-consultant.pro**.
+For general inquiries, please visit our [GitHub repository]([https://github.com/YOUR-REPO](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/README.md)) or contact **kjm489@km-consultant.pro**.
 
