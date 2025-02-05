@@ -2,20 +2,31 @@
 
 ## Supported Versions
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
+The following versions of Darkelf Browser receive security updates:
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+| Version  | Supported |
+|----------|------------|
+| 5.1.x    | ✅         |
+| 5.0.x    | ❌         |
+| 4.0.x    | ✅         |
+| < 4.0    | ❌         |
 
 ## Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
+We take security vulnerabilities seriously and appreciate your efforts to responsibly disclose them.
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+### How to Report
+- Please report vulnerabilities via [GitHub Security Advisories](https://github.com/YOUR-REPO/security/advisories) or email us at **security@darkelfbrowser.com**.
+- Do not disclose the vulnerability publicly until we have assessed and addressed it.
+
+### What to Expect
+- We will acknowledge receipt of your report within **48 hours**.
+- We will investigate and provide updates at least every **5 business days**.
+- If the vulnerability is confirmed, we will work on a fix and release a security update as soon as possible.
+- If the vulnerability is declined, we will provide a clear explanation of our decision.
+
+Thank you for helping us keep Darkelf Browser secure!
+
+## Footer
+For general inquiries, please visit our [GitHub repository](https://github.com/YOUR-REPO) or contact **kjm489@km-consultant.pro**.
+
