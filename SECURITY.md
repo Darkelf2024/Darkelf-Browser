@@ -5,18 +5,17 @@
 The following versions of Darkelf Browser receive security updates:
 
 | Version  | Supported |
-|----------|------------|
-| 5.1.x    | ✅         |
-| 5.0.x    | ❌         |
-| 4.0.x    | ✅         |
-| < 4.0    | ❌         |
+|-----------------|------------|
+| DE Public         ✅
+| DE Ext 3.0      | ✅         |
+| DE OSINT 3.0    | ✅         |
 
 ## Reporting a Vulnerability
 
 We take security vulnerabilities seriously and appreciate your efforts to responsibly disclose them.
 
 ### How to Report
-- Please report vulnerabilities via [GitHub Security Advisories](https://github.com/YOUR-REPO/security/advisories) or email us at **security@darkelfbrowser.com**.
+- Please report vulnerabilities via [GitHub Security Advisories](https://github.com/YOUR-REPO/security/advisories) or email us at **kjm489@km-consultant.pro**.
 - Do not disclose the vulnerability publicly until we have assessed and addressed it.
 
 ### What to Expect
