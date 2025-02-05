@@ -15,7 +15,7 @@ The following versions of Darkelf Browser receive security updates:
 We take security vulnerabilities seriously and appreciate your efforts to responsibly disclose them.
 
 ### How to Report
-- Please report vulnerabilities via [GitHub Security Advisories](https://github.com/YOUR-REPO/security/advisories) or email us at **kjm489@km-consultant.pro**.
+- Please report vulnerabilities via [GitHub Security Advisories]([https://github.com/YOUR-REPO/security/advisories](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/README.md)) or email us at **kjm489@km-consultant.pro**.
 - Do not disclose the vulnerability publicly until we have assessed and addressed it.
 
 ### What to Expect
