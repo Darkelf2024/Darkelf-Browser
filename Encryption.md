@@ -2,40 +2,123 @@
 
 The current implementation of Darkelf includes several layers of encryption and security features. Here's a detailed breakdown.
 
-## ECDH (Elliptic Curve Diffie-Hellman) Key Exchange
-- Purpose: Used for secure key exchange.
-- Details: An ECDH key pair is generated for secure key exchange, which ensures that a shared secret can be established securely over an untrusted channel.
+# **Encryption Layers in Darkelf Browser**
 
-## AES-GCM (Advanced Encryption Standard in Galois/Counter Mode)
-- Purpose: Used for encrypting data.
-- Details: After deriving a shared secret using ECDH, AES-GCM is used for encrypting and decrypting data. This provides both confidentiality and integrity of the data.
+Darkelf Browser implements multiple layers of encryption to ensure **secure communication, data protection, and user privacy**. The encryption mechanisms include **ECDH for key exchange, AES-CBC for symmetric encryption, RSA-OAEP for asymmetric encryption, and a secure PRNG** for cryptographic operations.
 
-## RSA-OAEP (Rivest-Shamir-Adleman with Optimal Asymmetric Encryption Padding)
-- Purpose: Used for encrypting data.
-- Details: RSA-OAEP is used for public-key encryption and decryption, offering secure encryption of data with added padding for enhanced security.
+---
 
-# Encryption Layers in Darkelf
+## **1. ECDH (Elliptic Curve Diffie-Hellman) - Secure Key Exchange**
+### **Purpose:**  
+ECDH is used to establish a **shared secret** between parties over an untrusted channel.
 
-## **ECDH Key Exchange**
-- **Layer 1:** Generate an ECDH key pair and exchange public keys between parties.
-- **Layer 2:** Derive a shared secret from the exchanged public keys using the ECDH algorithm, ensuring secure shared key agreement.
+### **Implementation:**  
+- The browser's **Web Cryptography API** generates an **ECDH key pair**.
+- Public keys are securely exchanged.
+- A **shared secret** is derived from the exchanged public keys.
+- This shared secret is used as an encryption key for **AES-GCM encryption**.
 
-## **AES-GCM Encryption**
-- **Layer 3:** Use the derived shared secret as the symmetric encryption key for AES-GCM, enabling secure encryption and decryption of data with authenticated encryption.
+### **Security Benefits:**  
+✅ Ensures **perfect forward secrecy (PFS)**.  
+✅ Prevents third parties from decrypting exchanged data even if they intercept public keys.  
 
-## **RSA-OAEP Encryption**
-- **Layer 4:** Generate an RSA key pair (public and private keys) for asymmetric encryption.
-- **Layer 5:** Encrypt data using the RSA public key, ensuring confidentiality when sharing sensitive information.
-- **Layer 6:** Decrypt data using the RSA private key, restoring the original message securely.
+---
 
-## **Post-Quantum Encryption (Placeholder)**  
-(*Exclusive to Extreme Private Edition*)
-- **Key Generation:** Generate ECDH and RSA key pairs within the browser using the Web Cryptography API.
-- **Encryption and Decryption:** Placeholder functions for encrypting and decrypting messages using post-quantum cryptographic keys.  
-  - *Future Implementation:* To achieve true post-quantum security, consider adopting algorithms standardized by NIST or using libraries such as the Open Quantum Safe project (liboqs).
+## **2. AES-CBC (Advanced Encryption Standard - Cipher Block Chaining) - Symmetric Encryption**
+### **Purpose:**  
+AES-CBC is used to encrypt and decrypt data securely with a **symmetric key**.
 
-## **WebCrypto API for Random Number Generation**
-- **Layer 7:** Utilize the WebCrypto API's secure pseudo-random number generator (PRNG) for generating cryptographically secure random bytes, essential for key generation and encryption processes.
+### **Implementation:**  
+- A **256-bit AES key** is randomly generated.
+- A **random 16-byte IV** (Initialization Vector) is generated for each encryption.
+- The **plaintext is padded** to a multiple of 16 bytes before encryption.
+- The **AES-CBC cipher** encrypts the padded plaintext.
+- The **IV is prepended to the ciphertext** for decryption integrity.
+
+### **Security Benefits:**  
+✅ AES is **fast and efficient** for large data.  
+✅ CBC mode ensures **data confidentiality**, but integrity must be verified separately.  
+
+---
+
+## **3. RSA-OAEP (Rivest-Shamir-Adleman with Optimal Asymmetric Encryption Padding) - Public Key Encryption**
+### **Purpose:**  
+RSA-OAEP is used for **securely encrypting and decrypting data** using public and private keys.
+
+### **Implementation:**  
+- A **2048-bit RSA key pair** is generated.
+- The **RSA public key** encrypts data.
+- The **RSA private key** decrypts encrypted data.
+- OAEP padding is used for **increased security**.
+
+### **Security Benefits:**  
+✅ RSA ensures **confidentiality** for sensitive data.  
+✅ OAEP padding **prevents common attacks** like chosen plaintext attacks.  
+
+---
+
+## **4. AES-GCM (Advanced Encryption Standard - Galois/Counter Mode) - Authenticated Encryption**
+### **Purpose:**  
+AES-GCM is used as an **authenticated encryption** method after the **ECDH key exchange**.
+
+### **Implementation:**  
+- The **shared secret** from ECDH is used as the AES-GCM encryption key.
+- A **random 12-byte IV** is generated.
+- AES-GCM encrypts the plaintext **and produces an authentication tag**.
+- This tag ensures **data integrity and authenticity**.
+
+### **Security Benefits:**  
+✅ AES-GCM provides **both encryption and authentication**.  
+✅ Protects against **man-in-the-middle (MITM) attacks**.  
+
+---
+
+## **5. Secure Pseudo-Random Number Generator (PRNG) - WebCrypto API**
+### **Purpose:**  
+Darkelf uses **cryptographically secure random number generation** to enhance security.
+
+### **Implementation:**  
+- The **WebCrypto API's getRandomValues()** function generates **random bytes**.
+- The random bytes are used for **key generation, IVs, and cryptographic operations**.
+
+### **Security Benefits:**  
+✅ Ensures **high entropy** and **unpredictability** for encryption keys.  
+✅ Prevents predictable values that could compromise security.  
+
+---
+
+## **Post-Quantum Encryption (Future Implementation - Placeholder)**
+### **Purpose:**  
+To protect against future quantum computing threats, Darkelf plans to integrate **post-quantum cryptography**.
+
+### **Planned Implementation:**  
+- Replace RSA with **NIST-standardized post-quantum cryptographic algorithms**.
+- Use libraries like **Open Quantum Safe (liboqs)** for secure key exchange.
+- Implement **quantum-resistant encryption schemes**.
+
+---
+
+## **Encryption Layers in Darkelf Browser (Step-by-Step Flow)**  
+
+### **1. Secure Key Exchange (ECDH)**
+✅ **Layer 1:** Generate an **ECDH key pair**.  
+✅ **Layer 2:** Exchange **public keys** and derive a **shared secret** securely.  
+
+### **2. Secure Data Encryption (AES-GCM & AES-CBC)**
+✅ **Layer 3:** Use the **shared secret** as the **AES-GCM encryption key** for securing data.  
+✅ **Layer 4:** AES-CBC is used for **local file encryption** to protect stored data.  
+
+### **3. Public Key Encryption (RSA-OAEP)**
+✅ **Layer 5:** Encrypt **sensitive data** (e.g., user credentials) using **RSA public key**.  
+✅ **Layer 6:** Decrypt data securely with the **RSA private key**.  
+
+### **4. Secure Randomness (WebCrypto PRNG)**
+✅ **Layer 7:** Use **WebCrypto's secure PRNG** for cryptographic operations.  
+
+---
+
+## **Final Thoughts**
+Darkelf Browser implements a **multi-layered encryption model** to ensure **data confidentiality, integrity, and secure communications**. With **future post-quantum enhancements**, it aims to remain secure against evolving cryptographic threats.
 
 ---
 
@@ -47,14 +130,6 @@ The current implementation of Darkelf includes several layers of encryption and 
    - Layer 3 uses the shared secret for symmetric encryption (AES-GCM).
    - Layers 4–6 introduce an optional additional layer of security using RSA for asymmetric encryption.
    - Layer 7 supports all layers by ensuring secure random number generation.
-
-## **Summary of Encryption Layers**
-Darkelf employs a layered encryption model with up to seven layers of security mechanisms to ensure data confidentiality and integrity:
-- **ECDH Key Exchange:** 2 layers.
-- **AES-GCM Encryption:** 1 layer.
-- **RSA-OAEP Encryption:** 3 layers.
-- **WebCrypto PRNG:** 1 layer.
-- **Post-Quantum Encryption (Optional):** Placeholder for future implementation using Liboqs.
 
 This approach provides robust protection for sensitive data and secure communication within the Darkelf browser.
 
