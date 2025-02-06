@@ -1,6 +1,6 @@
 ## Darkelf Browser - Extreme Edition 
 - Release of Darkelf Browser Extreme Edition v3.0 [DE Release](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Darkelf%20Extreme.py) This is the Extreme/Private Version - It is released in a Monolithic Style.
-- Release of Darkelf OSINT Edition Alpha v3.0 [DE OSINT](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Darkelf%20OSINT.py)
+- Release of Darkelf OSINT Edition v3.0 [DE OSINT](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Darkelf%20OSINT.py)
 - Please Read - Updated 1/31/25: [Export Compliance Notice](ExportComplianceNotice.md)
 - Reviewing Office: Office of National Security Agency on 11/27/2024 - Closed on 12/17/2024
 - [Open an issue](https://github.com/Darkelf2024/Darkelf-Browser/issues)
@@ -34,7 +34,7 @@ Key Highlights and Security Features
 
 5. **Community Collaboration:** We value community feedback and contributions in shaping the security features and policies of Darkelf Browser. Your active participation will be instrumental in refining our security strategies and addressing emerging threats effectively.
 
-As we prepare for the imminent release of Darkelf Browser, our team is dedicated to delivering a secure and privacy-focused browsing environment that empowers users to explore the web with confidence. Stay tuned for updates and join us in our mission to create a safer online ecosystem for all users.
+Our team is dedicated to delivering a secure and privacy-focused browsing environment that empowers users to explore the web with confidence. Stay tuned for updates and join us in our mission to create a safer online ecosystem for all users.
 
 ## Table of Contents
 - [Attribution](Attribution.md)
@@ -283,7 +283,7 @@ Themes are based on an auto-detection system of user preferences. The browser ad
 - **Please See** [Contributors List](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Contributors.md)
 
 ## Acknowledgments & Tools Used  
-- **Heapy** – Used for memory leak testing.  
+- **Heapy** – Used for memory leak testing.
 - **ChatGPT by OpenAI** – Assisted with code optimization and error analysis.  
 ---
 
