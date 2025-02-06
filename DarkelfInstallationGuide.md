@@ -22,16 +22,19 @@ This guide explains the step-by-step process to set up and run the Darkelf Brows
 ## Create a requirements.txt file with the following content:
 
  1. PyQt5==5.15.9
- 2. beautifulsoup4
- 3. requests
- 4. adblockparser
- 5. cryptography
+ 2. beautifulsoup4 - Latest
+ 3. requests - Latest
+ 4. adblockparser - Latest
+ 5. cryptography - Latest
  6. pycryptodome - Latest
  7. pqcrypto - Latest
  8. PyQtWebEngine - Latest
  9. dns.resolver/dnspython
  10. stem(Tor Network - Optional)
+
  *  Upgrade Python3/Pip3 - Latest
+ *  Upgrade all required packages to the Latest Versions - Do this before running Darkelf = Preventative Safety Measures
+ * If a package needs to updated - When you bootup Darkelf Browser - 
 
  * [Requirements File](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/requirements.txt)
 
