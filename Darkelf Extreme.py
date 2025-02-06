@@ -149,7 +149,7 @@ def decrypt_aes_cbc(key, encrypted_data):
 def generate_rsa_key_pair():
     private_key = rsa.generate_private_key(
         public_exponent=65537,
-        key_size=2048,
+        key_size=4096,
         backend=default_backend()
     )
     return private_key, private_key.public_key()
@@ -407,7 +407,7 @@ class CustomWebEnginePage(QWebEnginePage):
             async function generateRSAKeyPair() {
                 const keyPair = await window.crypto.subtle.generateKey({
                     name: "RSA-OAEP",
-                    modulusLength: 2048,
+                    modulusLength: 4096,
                     publicExponent: new Uint8Array([1, 0, 1]),
                     hash: { name: "SHA-256" }
                 }, true, ["encrypt", "decrypt"]);
