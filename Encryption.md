@@ -46,7 +46,7 @@ AES-CBC is used to encrypt and decrypt data securely with a **symmetric key**.
 RSA-OAEP is used for **securely encrypting and decrypting data** using public and private keys.
 
 ### **Implementation:**  
-- A **2048-bit RSA key pair** is generated.
+- A **4096-bit RSA key pair** is generated.
 - The **RSA public key** encrypts data.
 - The **RSA private key** decrypts encrypted data.
 - OAEP padding is used for **increased security**.
