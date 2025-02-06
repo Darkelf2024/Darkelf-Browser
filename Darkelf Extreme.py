@@ -47,38 +47,133 @@
 #
 # This software is made available under the GPL 3.0 license.
 
+# Copyright (C) [2025 Dr. Kevin Moore]
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+# EXPORT COMPLIANCE NOTICE:
+# This software, Darkelf Browser v3.0, is classified under ECCN 5D002 c.1
+# and is authorized for export under License Exception ENC, as described in
+# Sections 740.17(a) and 740.17(b)(1) of the U.S. Export Administration
+# Regulations (EAR). The software includes encryption technologies (such
+# as AES, RSA, ChaCha20, and X25519) used for secure data storage and
+# transmission, which may subject it to U.S. export control laws.
+#
+# Prohibited Destinations:
+# This software may not be exported, re-exported, or transferred, either
+# directly or indirectly, to:
+# - Countries or territories subject to U.S. embargoes or comprehensive
+#   sanctions, as identified by the U.S. Department of Treasury’s Office of
+#   Foreign Assets Control (OFAC) or the BIS E1/E2 List.
+# - Entities or individuals listed on the U.S. Denied Persons List, Entity
+#   List, Specially Designated Nationals (SDN) List, or any other restricted
+#   parties list.
+#
+# End-Use Restrictions:
+# This software may not be used for the development, production, or
+# deployment of weapons of mass destruction, including nuclear, chemical,
+# or biological weapons, or missile technology, as defined under Part 744
+# of the EAR.
+#
+# User Obligations:
+# By downloading, using, or distributing this software, you agree to comply
+# with all applicable U.S. export laws and regulations. Users and redistributors
+# are solely responsible for ensuring their actions adhere to these regulations.
+#
+# For more information, consult the Bureau of Industry and Security (BIS)
+# at https://www.bis.doc.gov.
+#
+# This software is made available under the GPL 3.0 license.
+
 import sys
 import os
 import re
 import requests
 import socket
-import subprocess
 import dns.resolver
 import json
 import logging
 import time
+import subprocess
 from urllib.parse import urlparse
-from bs4 import BeautifulSoup
+from base64 import urlsafe_b64encode, urlsafe_b64decode
 from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QTabWidget, QPushButton, QLineEdit, QVBoxLayout, QMenuBar, QAction, QShortcut, QToolBar, QDialog, QMessageBox, QFileDialog, QProgressDialog, QListWidget, QWidget
 )
 from PyQt5.QtGui import QPalette, QColor, QKeySequence
 from PyQt5.QtWebEngineWidgets import QWebEngineView, QWebEngineSettings, QWebEnginePage, QWebEngineProfile, QWebEngineDownloadItem
 from PyQt5.QtWebEngineCore import QWebEngineUrlRequestInterceptor
-from PyQt5.QtCore import QUrl, QSettings, Qt, QObject, pyqtSlot, QEventLoop, QTimer
-from PyQt5.QtNetwork import QSslConfiguration, QSsl
-from adblockparser import AdblockRules
+from PyQt5.QtCore import QUrl, QSettings, Qt, QObject, pyqtSlot
 from cryptography.hazmat.primitives import serialization, hashes
-from cryptography.hazmat.primitives.asymmetric import x25519, rsa
+from cryptography.hazmat.primitives.asymmetric import x25519, rsa, padding
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
-from cryptography.hazmat.primitives.ciphers import Cipher, algorithms
+from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
-from Crypto.PublicKey import RSA
-from Crypto.Cipher import PKCS1_OAEP
-from Crypto.Random import get_random_bytes
-from Crypto.Hash import SHA256
-from Crypto.Signature import pkcs1_15
-from base64 import urlsafe_b64encode, urlsafe_b64decode
+from adblockparser import AdblockRules
+from stem.control import Controller
+from PyQt5.QtNetwork import QSslConfiguration, QSsl
+
+
+# AES and RSA Encryption Functions
+def generate_aes_cbc_key():
+    return os.urandom(32)
+
+def encrypt_aes_cbc(key, plaintext):
+    iv = os.urandom(16)
+    cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=default_backend())
+    encryptor = cipher.encryptor()
+    pad_length = 16 - (len(plaintext) % 16)
+    padded_plaintext = plaintext + chr(pad_length) * pad_length
+    ciphertext = encryptor.update(padded_plaintext.encode()) + encryptor.finalize()
+    return iv + ciphertext
+
+def decrypt_aes_cbc(key, encrypted_data):
+    iv, ciphertext = encrypted_data[:16], encrypted_data[16:]
+    cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=default_backend())
+    decryptor = cipher.decryptor()
+    padded_plaintext = decryptor.update(ciphertext) + decryptor.finalize()
+    pad_length = padded_plaintext[-1]
+    return padded_plaintext[:-pad_length].decode()
+
+def generate_rsa_key_pair():
+    private_key = rsa.generate_private_key(
+        public_exponent=65537,
+        key_size=2048,
+        backend=default_backend()
+    )
+    return private_key, private_key.public_key()
+
+def encrypt_rsa(public_key, plaintext):
+    return public_key.encrypt(
+        plaintext.encode(),
+        padding.OAEP(
+            mgf=padding.MGF1(hashes.SHA256()),
+            algorithm=hashes.SHA256(),
+            label=None
+        )
+    )
+
+def decrypt_rsa(private_key, ciphertext):
+    return private_key.decrypt(
+        ciphertext,
+        padding.OAEP(
+            mgf=padding.MGF1(hashes.SHA256()),
+            algorithm=hashes.SHA256(),
+            label=None
+        )
+    ).decode()
+
 
 # AdGuard DNS Resolver
 class AdGuardDNSResolver:
@@ -196,7 +291,7 @@ class AdblockAndTrackerInterceptor(QWebEngineUrlRequestInterceptor):
         elif any(domain in url for domain in self.tracking_domains):
             print(f"Blocked by Tracker Rules: {url}")
             info.block(True)
-
+            
 # Download Manager
 class DownloadManager(QObject):
     def __init__(self, parent=None):
@@ -514,7 +609,7 @@ class CustomWebEnginePage(QWebEnginePage):
         """
         self.runJavaScript(script)
         
-# Custom Web Engine View
+        # Custom Web Engine View
 class CustomWebEngineView(QWebEngineView):
     def __init__(self, browser, parent=None):
         super().__init__(parent)
@@ -698,10 +793,10 @@ class Darkelf(QMainWindow):
         profile.setHttpCacheType(QWebEngineProfile.NoCache)
         profile.setPersistentCookiesPolicy(QWebEngineProfile.NoPersistentCookies)
         settings = profile.settings()
-        settings.setAttribute(QWebEngineSettings.LocalStorageEnabled, False)
+        settings.setAttribute(QWebEngineSettings.LocalStorageEnabled, True)
         settings.setAttribute(QWebEngineSettings.JavascriptEnabled, self.javascript_enabled)
-        settings.setAttribute(QWebEngineSettings.JavascriptCanOpenWindows, False)
-        settings.setAttribute(QWebEngineSettings.JavascriptCanAccessClipboard, False)
+        settings.setAttribute(QWebEngineSettings.JavascriptCanOpenWindows, True)
+        settings.setAttribute(QWebEngineSettings.JavascriptCanAccessClipboard, True)
         settings.setAttribute(QWebEngineSettings.LocalContentCanAccessRemoteUrls, False)
         settings.setAttribute(QWebEngineSettings.XSSAuditingEnabled, True)
         settings.setAttribute(QWebEngineSettings.ErrorPageEnabled, False)
@@ -739,10 +834,6 @@ class Darkelf(QMainWindow):
             )
             self.controller = Controller.from_port(port=9051)
             self.controller.authenticate()
-            
-            # Set the proxy settings for the browser
-            profile = QWebEngineProfile.defaultProfile()
-            profile.setHttpProxy(QNetworkProxy(QNetworkProxy.Socks5Proxy, '127.0.0.1', 9050))
         except OSError as e:
             QMessageBox.critical(self, "Tor Error", f"Failed to start Tor: {e}")
 
