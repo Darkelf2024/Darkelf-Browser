@@ -274,7 +274,7 @@ Themes are based on an auto-detection system of user preferences. The browser ad
 - Enhance parsing algorithms to address modern, complex web structures (e.g., JavaScript-heavy frameworks).
 - Conduct additional testing across a wider range of websites to identify and resolve gaps.
   
-- **Future**:
+## Future Implementation:
 - Implementation of Rust Hybrid Encryption with Kyber1024
 - ios/Android App Creation
 - Desktop App dmg,exe for Mac/Windows
