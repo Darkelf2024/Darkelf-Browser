@@ -144,7 +144,7 @@ Use Case: This encryption is typically used for securing data at rest or in tran
 
 ## RSA Encryption
 Functionality: RSA (Rivest-Shamir-Adleman) is used for public-key encryption.
-Key Management: RSA key pair (2048-bit) is generated and managed. If the keys aren't already available in the environment, new keys are generated, encoded in Base64, and stored in environment variables.
+Key Management: RSA key pair (4096-bit) is generated and managed. If the keys aren't already available in the environment, new keys are generated, encoded in Base64, and stored in environment variables.
         
 Methods:
 encrypt_rsa(plaintext): Encrypts the provided plaintext using the RSA public key.
