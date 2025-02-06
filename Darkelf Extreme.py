@@ -15,55 +15,6 @@
 #
 # EXPORT COMPLIANCE NOTICE:
 # This software, Darkelf Browser v3.0, is classified under ECCN 5D002 c.1
-# and is authorized for export under License Exception ENC, as described in 
-# Sections 740.17(a) and 740.17(b)(1) of the U.S. Export Administration 
-# Regulations (EAR). The software includes encryption technologies (such 
-# as AES, RSA, ChaCha20, and X25519) used for secure data storage and 
-# transmission, which may subject it to U.S. export control laws.
-#
-# Prohibited Destinations:
-# This software may not be exported, re-exported, or transferred, either 
-# directly or indirectly, to:
-# - Countries or territories subject to U.S. embargoes or comprehensive 
-#   sanctions, as identified by the U.S. Department of Treasury’s Office of 
-#   Foreign Assets Control (OFAC) or the BIS E1/E2 List.
-# - Entities or individuals listed on the U.S. Denied Persons List, Entity 
-#   List, Specially Designated Nationals (SDN) List, or any other restricted 
-#   parties list.
-#
-# End-Use Restrictions:
-# This software may not be used for the development, production, or 
-# deployment of weapons of mass destruction, including nuclear, chemical, 
-# or biological weapons, or missile technology, as defined under Part 744 
-# of the EAR.
-#
-# User Obligations:
-# By downloading, using, or distributing this software, you agree to comply 
-# with all applicable U.S. export laws and regulations. Users and redistributors 
-# are solely responsible for ensuring their actions adhere to these regulations.
-#
-# For more information, consult the Bureau of Industry and Security (BIS) 
-# at https://www.bis.doc.gov.
-#
-# This software is made available under the GPL 3.0 license.
-
-# Copyright (C) [2025 Dr. Kevin Moore]
-#
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
-#
-# EXPORT COMPLIANCE NOTICE:
-# This software, Darkelf Browser v3.0, is classified under ECCN 5D002 c.1
 # and is authorized for export under License Exception ENC, as described in
 # Sections 740.17(a) and 740.17(b)(1) of the U.S. Export Administration
 # Regulations (EAR). The software includes encryption technologies (such
@@ -601,9 +552,7 @@ class CustomWebEnginePage(QWebEnginePage):
         script = """
         (function() {
             const meta = document.createElement('meta');
-            meta.httpEquiv = "Content-Security-Policy";
-            meta.content = "default-src 'self'; script-src 'self' 'nonce-12345' 'strict-dynamic' https:; style-src 'self' 'unsafe-inline'; img-src 'self' http: https: data: blob: cid:; frame-src 'self' blob: data: https://account-api.proton.me; object-src 'self' blob:; child-src 'self' data: blob:; report-uri https://reports.proton.me/reports/csp; frame-ancestors 'self'; base-uri 'self';";
-            document.head.appendChild(meta);
+            <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'nonce-12345' 'strict-dynamic' https:; style-src 'self' 'unsafe-inline'; img-src 'self' http: https: data: blob: cid:; frame-src 'self' blob: data: https://account-api.proton.me; object-src 'self' blob:; child-src 'self' data: blob:; report-uri https://reports.proton.me/reports/csp; frame-ancestors 'self'; base-uri 'self'">
         })();
         """
         self.runJavaScript(script)
