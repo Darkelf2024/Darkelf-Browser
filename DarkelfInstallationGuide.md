@@ -34,7 +34,7 @@ This guide explains the step-by-step process to set up and run the Darkelf Brows
 
  *  Upgrade Python3/Pip3 - Latest
  *  Upgrade all required packages to the Latest Versions - Do this before running Darkelf = Preventative Safety Measures
- * If a package needs to updated - When you bootup Darkelf Browser - 
+ 
 
  * [Requirements File](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/requirements.txt)
 
