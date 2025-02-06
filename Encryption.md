@@ -2,7 +2,7 @@
 
 The current implementation of Darkelf includes several layers of encryption and security features. Here's a detailed breakdown.
 
-# **Encryption Layers in Darkelf Browser**
+# Encryption Layers in Darkelf Browser
 
 Darkelf Browser implements multiple layers of encryption to ensure **secure communication, data protection, and user privacy**. The encryption mechanisms include **ECDH for key exchange, AES-CBC for symmetric encryption, RSA-OAEP for asymmetric encryption, and a secure PRNG** for cryptographic operations.
 
