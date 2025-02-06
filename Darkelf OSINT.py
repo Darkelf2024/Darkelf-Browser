@@ -55,73 +55,30 @@ import socket
 import dns.resolver
 import json
 import logging
+import subprocess
 import time
 from urllib.parse import urlparse
-from base64 import urlsafe_b64encode, urlsafe_b64decode
+from bs4 import BeautifulSoup
 from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QTabWidget, QPushButton, QLineEdit, QVBoxLayout, QMenuBar, QAction, QShortcut, QToolBar, QDialog, QMessageBox, QFileDialog, QProgressDialog, QListWidget, QWidget
 )
 from PyQt5.QtGui import QPalette, QColor, QKeySequence
 from PyQt5.QtWebEngineWidgets import QWebEngineView, QWebEngineSettings, QWebEnginePage, QWebEngineProfile, QWebEngineDownloadItem
 from PyQt5.QtWebEngineCore import QWebEngineUrlRequestInterceptor
-from PyQt5.QtCore import QUrl, QSettings, Qt, QObject, pyqtSlot
-from cryptography.hazmat.primitives import serialization, hashes
-from cryptography.hazmat.primitives.asymmetric import x25519, rsa, padding
-from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
-from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
-from cryptography.hazmat.backends import default_backend
-from adblockparser import AdblockRules
-from stem.control import Controller
+from PyQt5.QtCore import QUrl, QSettings, Qt, QObject, pyqtSlot, QEventLoop, QTimer
 from PyQt5.QtNetwork import QSslConfiguration, QSsl
-
-# AES and RSA Encryption Functions
-def generate_aes_cbc_key():
-    return os.urandom(32)
-
-def encrypt_aes_cbc(key, plaintext):
-    iv = os.urandom(16)
-    cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=default_backend())
-    encryptor = cipher.encryptor()
-    pad_length = 16 - (len(plaintext) % 16)
-    padded_plaintext = plaintext + chr(pad_length) * pad_length
-    ciphertext = encryptor.update(padded_plaintext.encode()) + encryptor.finalize()
-    return iv + ciphertext
-
-def decrypt_aes_cbc(key, encrypted_data):
-    iv, ciphertext = encrypted_data[:16], encrypted_data[16:]
-    cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=default_backend())
-    decryptor = cipher.decryptor()
-    padded_plaintext = decryptor.update(ciphertext) + decryptor.finalize()
-    pad_length = padded_plaintext[-1]
-    return padded_plaintext[:-pad_length].decode()
-
-def generate_rsa_key_pair():
-    private_key = rsa.generate_private_key(
-        public_exponent=65537,
-        key_size=4096,
-        backend=default_backend()
-    )
-    return private_key, private_key.public_key()
-
-def encrypt_rsa(public_key, plaintext):
-    return public_key.encrypt(
-        plaintext.encode(),
-        padding.OAEP(
-            mgf=padding.MGF1(hashes.SHA256()),
-            algorithm=hashes.SHA256(),
-            label=None
-        )
-    )
-
-def decrypt_rsa(private_key, ciphertext):
-    return private_key.decrypt(
-        ciphertext,
-        padding.OAEP(
-            mgf=padding.MGF1(hashes.SHA256()),
-            algorithm=hashes.SHA256(),
-            label=None
-        )
-    ).decode()
+from adblockparser import AdblockRules
+from cryptography.hazmat.primitives import serialization, hashes
+from cryptography.hazmat.primitives.asymmetric import x25519, rsa
+from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+from cryptography.hazmat.primitives.ciphers import Cipher, algorithms
+from cryptography.hazmat.backends import default_backend
+from Crypto.PublicKey import RSA
+from Crypto.Cipher import PKCS1_OAEP
+from Crypto.Random import get_random_bytes
+from Crypto.Hash import SHA256
+from Crypto.Signature import pkcs1_15
+from base64 import urlsafe_b64encode, urlsafe_b64decode
 
 # AdGuard DNS Resolver
 class AdGuardDNSResolver:
@@ -357,7 +314,7 @@ class CustomWebEnginePage(QWebEnginePage):
             async function generateRSAKeyPair() {
                 const keyPair = await window.crypto.subtle.generateKey({
                     name: "RSA-OAEP",
-                    modulusLength: 4096,
+                    modulusLength: 2048,
                     publicExponent: new Uint8Array([1, 0, 1]),
                     hash: { name: "SHA-256" }
                 }, true, ["encrypt", "decrypt"]);
@@ -540,9 +497,7 @@ class CustomWebEnginePage(QWebEnginePage):
         script = """
         (function() {
             const meta = document.createElement('meta');
-            meta.httpEquiv = "Content-Security-Policy";
-            meta.content = "default-src 'self'; script-src 'self' 'nonce-12345' 'strict-dynamic' https:; style-src 'self' 'unsafe-inline'; img-src 'self' http: https: data: blob: cid:; frame-src 'self' blob: data: https://account-api.proton.me; object-src 'self' blob:; child-src 'self' data: blob:; report-uri https://reports.proton.me/reports/csp; frame-ancestors 'self'; base-uri 'self';";
-            document.head.appendChild(meta);
+            <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'nonce-12345' 'strict-dynamic' https:; style-src 'self' 'unsafe-inline'; img-src 'self' http: https: data: blob: cid:; frame-src 'self' blob: data: https://account-api.proton.me; object-src 'self' blob:; child-src 'self' data: blob:; report-uri https://reports.proton.me/reports/csp; frame-ancestors 'self'; base-uri 'self'">
         })();
         """
         self.runJavaScript(script)
