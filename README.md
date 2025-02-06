@@ -59,8 +59,8 @@ Our team is dedicated to delivering a secure and privacy-focused browsing enviro
 
 ## Variations/Types
 - Darkelf Private - Extreme Privacy - Released
-- Darkelf OSINT Version - Released (Alpha)
-- Darkelf Public Version - In Progress
+- Darkelf OSINT Version - Released 
+- Darkelf Public Version - Released
 - Each Browser/Type - Can be modified within the python code
 - Pick a style
 
