@@ -71,7 +71,9 @@ from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
 from adblockparser import AdblockRules
+import stem.process
 from stem.control import Controller
+from tor_integration import TorIntegration
 from PyQt5.QtNetwork import QSslConfiguration, QSsl
 
 
@@ -770,25 +772,43 @@ class Darkelf(QMainWindow):
     def start_tor(self):
         try:
             if self.tor_process:
+                print("Tor is already running.")
                 return
-            import stem.process
-            from stem.control import Controller
+
+            tor_path = "/opt/homebrew/bin/tor"  # Update this with the correct path
+
+            if not os.path.exists(tor_path):
+                QMessageBox.critical(self, "Tor Error", "Tor executable not found! Install it using 'brew install tor'.")
+                return
+
             self.tor_process = stem.process.launch_tor_with_config(
+                tor_cmd=tor_path,
                 config={
                     'SocksPort': '9050',
                     'ControlPort': '9051',
                 },
                 init_msg_handler=lambda line: print(line) if 'Bootstrapped ' in line else None,
             )
+
             self.controller = Controller.from_port(port=9051)
             self.controller.authenticate()
+            print("Tor started successfully.")
+
         except OSError as e:
             QMessageBox.critical(self, "Tor Error", f"Failed to start Tor: {e}")
-
+        
     def stop_tor(self):
         if self.tor_process:
             self.tor_process.terminate()
             self.tor_process = None
+            print("Tor stopped.")
+
+    def close(self):
+        self.stop_tor()
+
+    def init_theme(self):
+        self.black_theme_enabled = True
+        self.apply_theme()
 
     def init_theme(self):
         self.black_theme_enabled = True
