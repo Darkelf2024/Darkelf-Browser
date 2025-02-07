@@ -59,7 +59,7 @@ import time
 from urllib.parse import urlparse
 from base64 import urlsafe_b64encode, urlsafe_b64decode
 from PyQt5.QtWidgets import (
-    QApplication, QMainWindow, QTabWidget, QPushButton, QLineEdit, QVBoxLayout, QMenuBar, QAction, QShortcut, QToolBar, QDialog, QMessageBox, QFileDialog, QProgressDialog, QListWidget, QWidget
+    QApplication, QMainWindow, QTabWidget, QPushButton, QLineEdit, QVBoxLayout, QMenuBar, QAction, QShortcut, QToolBar, QDialog, QMessageBox, QFileDialog, QProgressDialog, QListWidget, QWidget, QLabel
 )
 from PyQt5.QtGui import QPalette, QColor, QKeySequence
 from PyQt5.QtWebEngineWidgets import QWebEngineView, QWebEngineSettings, QWebEnginePage, QWebEngineProfile, QWebEngineDownloadItem
@@ -71,7 +71,9 @@ from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
 from adblockparser import AdblockRules
+import stem.process
 from stem.control import Controller
+from tor_integration import TorIntegration
 from PyQt5.QtNetwork import QSslConfiguration, QSsl
 
 
@@ -741,7 +743,7 @@ class Darkelf(QMainWindow):
         profile.setHttpCacheType(QWebEngineProfile.NoCache)
         profile.setPersistentCookiesPolicy(QWebEngineProfile.NoPersistentCookies)
         settings = profile.settings()
-        settings.setAttribute(QWebEngineSettings.LocalStorageEnabled, True)
+        settings.setAttribute(QWebEngineSettings.LocalStorageEnabled, False)
         settings.setAttribute(QWebEngineSettings.JavascriptEnabled, self.javascript_enabled)
         settings.setAttribute(QWebEngineSettings.JavascriptCanOpenWindows, False)
         settings.setAttribute(QWebEngineSettings.JavascriptCanAccessClipboard, False)
@@ -770,25 +772,39 @@ class Darkelf(QMainWindow):
     def start_tor(self):
         try:
             if self.tor_process:
+                print("Tor is already running.")
                 return
-            import stem.process
-            from stem.control import Controller
+
+            tor_path = "/opt/homebrew/bin/tor"  # Update this with the correct path
+
+            if not os.path.exists(tor_path):
+                QMessageBox.critical(self, "Tor Error", "Tor executable not found! Install it using 'brew install tor'.")
+                return
+
             self.tor_process = stem.process.launch_tor_with_config(
+                tor_cmd=tor_path,
                 config={
                     'SocksPort': '9050',
                     'ControlPort': '9051',
                 },
                 init_msg_handler=lambda line: print(line) if 'Bootstrapped ' in line else None,
             )
+
             self.controller = Controller.from_port(port=9051)
             self.controller.authenticate()
+            print("Tor started successfully.")
+
         except OSError as e:
             QMessageBox.critical(self, "Tor Error", f"Failed to start Tor: {e}")
-
+        
     def stop_tor(self):
         if self.tor_process:
             self.tor_process.terminate()
             self.tor_process = None
+            print("Tor stopped.")
+
+    def close(self):
+        self.stop_tor()
 
     def init_theme(self):
         self.black_theme_enabled = True
@@ -1310,7 +1326,23 @@ class HistoryDialog(QDialog):
         layout.addWidget(close_button)
         
         self.setLayout(layout)
-
+        
+    def style_button(self, button):
+        button.setStyleSheet("""
+            QPushButton {
+                border: 1px solid #ccc;
+                border-radius: 10px;
+                padding: 5px;
+                margin: 3px;
+                font-size: 12px;
+                background-color: #333;
+                color: #fff;
+            }
+            QPushButton:hover {
+                color: #34C759;
+            }
+        """)
+        
 def main():
     app = QApplication(sys.argv)
     darkelf_browser = Darkelf()
@@ -1319,3 +1351,6 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+    
+
