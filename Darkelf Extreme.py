@@ -51,6 +51,7 @@ import sys
 import os
 import re
 import requests
+import shutil
 import socket
 import dns.resolver
 import json
@@ -63,6 +64,7 @@ from PyQt5.QtWidgets import (
 )
 from PyQt5.QtGui import QPalette, QColor, QKeySequence
 from PyQt5.QtWebEngineWidgets import QWebEngineView, QWebEngineSettings, QWebEnginePage, QWebEngineProfile, QWebEngineDownloadItem
+from PyQt5.QtNetwork import QNetworkProxy, QSslConfiguration, QSsl
 from PyQt5.QtWebEngineCore import QWebEngineUrlRequestInterceptor
 from PyQt5.QtCore import QUrl, QSettings, Qt, QObject, pyqtSlot
 from cryptography.hazmat.primitives import serialization, hashes
@@ -73,8 +75,6 @@ from cryptography.hazmat.backends import default_backend
 from adblockparser import AdblockRules
 import stem.process
 from stem.control import Controller
-from tor_integration import TorIntegration
-from PyQt5.QtNetwork import QSslConfiguration, QSsl
 
 
 # AES and RSA Encryption Functions
@@ -554,7 +554,9 @@ class CustomWebEnginePage(QWebEnginePage):
         script = """
         (function() {
             const meta = document.createElement('meta');
-            <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'nonce-12345' 'strict-dynamic' https:; style-src 'self' 'unsafe-inline'; img-src 'self' http: https: data: blob: cid:; frame-src 'self' blob: data: https://account-api.proton.me; object-src 'self' blob:; child-src 'self' data: blob:; report-uri https://reports.proton.me/reports/csp; frame-ancestors 'self'; base-uri 'self'">
+            meta.httpEquiv = "Content-Security-Policy";
+            meta.content = "default-src 'self', script-src 'self' 'nonce-12345' 'strict-dynamic' https:, style-src 'self' 'unsafe-inline', img-src 'self' http: https: data: blob:, frame-src 'self' blob: data: https://account-api.proton.me, object-src 'self' blob:, child-src 'self' data: blob:, report-uri https://reports.proton.me/reports/csp, frame-ancestors 'self', base-uri 'self'";
+            document.head.appendChild(meta);
         })();
         """
         self.runJavaScript(script)
@@ -599,6 +601,7 @@ class CustomWebEngineView(QWebEngineView):
         url = self.page().contextMenuData().linkUrl()
         if url.isValid():
             self.browser.create_new_window(url.toString())
+
 
 class Darkelf(QMainWindow):
     def __init__(self):
@@ -768,6 +771,8 @@ class Darkelf(QMainWindow):
         self.tor_process = None
         if self.tor_network_enabled:
             self.start_tor()
+            if self.is_tor_running():
+                self.configure_tor_proxy()
 
     def start_tor(self):
         try:
@@ -784,19 +789,35 @@ class Darkelf(QMainWindow):
             self.tor_process = stem.process.launch_tor_with_config(
                 tor_cmd=tor_path,
                 config={
-                    'SocksPort': '9050',
-                    'ControlPort': '9051',
+                    'SocksPort': '9052',
+                    'ControlPort': '9053',
                 },
                 init_msg_handler=lambda line: print(line) if 'Bootstrapped ' in line else None,
             )
 
-            self.controller = Controller.from_port(port=9051)
+            self.controller = Controller.from_port(port=9053)
             self.controller.authenticate()
             print("Tor started successfully.")
 
         except OSError as e:
             QMessageBox.critical(self, "Tor Error", f"Failed to start Tor: {e}")
-        
+
+    def is_tor_running(self):
+        try:
+            with Controller.from_port(port=9053) as controller:
+                controller.authenticate()
+                print("Tor is running.")
+                return True
+        except Exception as e:
+            print(f"Tor is not running: {e}")
+            return False
+
+    def configure_tor_proxy(self):
+        # Note: QWebEngineProfile does not support proxy configuration directly, use QNetworkProxy
+        proxy = QNetworkProxy(QNetworkProxy.Socks5Proxy, '127.0.0.1', 9052)
+        QNetworkProxy.setApplicationProxy(proxy)
+        print("Configured QWebEngineView to use Tor SOCKS proxy.")
+
     def stop_tor(self):
         if self.tor_process:
             self.tor_process.terminate()
@@ -805,7 +826,8 @@ class Darkelf(QMainWindow):
 
     def close(self):
         self.stop_tor()
-
+        super().close()
+        
     def init_theme(self):
         self.black_theme_enabled = True
         self.apply_theme()
@@ -1004,7 +1026,7 @@ class Darkelf(QMainWindow):
         </html>
         """
         return html_content
-
+        
     def current_web_view(self):
         return self.tab_widget.currentWidget().findChild(QWebEngineView)
 
@@ -1353,4 +1375,3 @@ if __name__ == '__main__':
     main()
 
     
-
