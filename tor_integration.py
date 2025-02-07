@@ -48,10 +48,10 @@ class TorIntegration:
 
 # Copy and Paste the following below in the torrc file: 
 
-# SocksPort 9050
-# ControlPort 9051
+# SocksPort 9050 or 9052
+# ControlPort 9051 or 9053
 # AutomapHostsOnResolve 1
-# DNSPort 53
+# DNSPort 53 - Remove as needed
 
 # brew services start tor - then start Darrkelf Browser
 # brew services stop tor
