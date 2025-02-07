@@ -589,7 +589,6 @@ class CustomWebEngineView(QWebEngineView):
         if url.isValid():
             self.browser.create_new_window(url.toString())
 
-# Darkelf Browser
 class Darkelf(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -611,9 +610,6 @@ class Darkelf(QMainWindow):
 
         # Initialize history log
         self.history_log = []
-        
-        # Create the initial tab with only the Darkelf homepage
-        self.create_new_tab("home")
 
     def init_settings(self):
         self.settings = QSettings("DarkelfBrowser", "Darkelf")
@@ -761,6 +757,8 @@ class Darkelf(QMainWindow):
         self.tor_process = None
         if self.tor_network_enabled:
             self.start_tor()
+            if self.is_tor_running():
+                self.configure_tor_proxy()
 
     def start_tor(self):
         try:
@@ -777,19 +775,35 @@ class Darkelf(QMainWindow):
             self.tor_process = stem.process.launch_tor_with_config(
                 tor_cmd=tor_path,
                 config={
-                    'SocksPort': '9050',
-                    'ControlPort': '9051',
+                    'SocksPort': '9052',
+                    'ControlPort': '9053',
                 },
                 init_msg_handler=lambda line: print(line) if 'Bootstrapped ' in line else None,
             )
 
-            self.controller = Controller.from_port(port=9051)
+            self.controller = Controller.from_port(port=9053)
             self.controller.authenticate()
             print("Tor started successfully.")
 
         except OSError as e:
             QMessageBox.critical(self, "Tor Error", f"Failed to start Tor: {e}")
-        
+
+    def is_tor_running(self):
+        try:
+            with Controller.from_port(port=9053) as controller:
+                controller.authenticate()
+                print("Tor is running.")
+                return True
+        except Exception as e:
+            print(f"Tor is not running: {e}")
+            return False
+
+    def configure_tor_proxy(self):
+        # Note: QWebEngineProfile does not support proxy configuration directly, use QNetworkProxy
+        proxy = QNetworkProxy(QNetworkProxy.Socks5Proxy, '127.0.0.1', 9052)
+        QNetworkProxy.setApplicationProxy(proxy)
+        print("Configured QWebEngineView to use Tor SOCKS proxy.")
+
     def stop_tor(self):
         if self.tor_process:
             self.tor_process.terminate()
@@ -798,6 +812,7 @@ class Darkelf(QMainWindow):
 
     def close(self):
         self.stop_tor()
+        super().close()
     
     def init_theme(self):
         self.black_theme_enabled = True
