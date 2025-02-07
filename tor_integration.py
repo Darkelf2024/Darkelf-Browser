@@ -53,5 +53,5 @@ class TorIntegration:
 # AutomapHostsOnResolve 1
 # DNSPort 53
 
-# brew services start tor
+# brew services start tor - then start Darrkelf Browser
 # brew services stop tor
