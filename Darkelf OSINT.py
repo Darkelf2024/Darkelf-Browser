@@ -71,7 +71,9 @@ from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
 from adblockparser import AdblockRules
+import stem.process
 from stem.control import Controller
+from tor_integration import TorIntegration
 from PyQt5.QtNetwork import QSslConfiguration, QSsl
 
 # AES and RSA Encryption Functions
