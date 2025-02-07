@@ -638,12 +638,12 @@ class Darkelf(QMainWindow):
         self.chacha20_key = self.generate_chacha20_key(os.urandom(16))
 
         # Initialize settings
-        self.javascript_enabled = self.settings.value("javascript_enabled", True, type=bool)
+        self.javascript_enabled = self.settings.value("javascript_enabled", False, type=bool)
         self.anti_fingerprinting_enabled = self.settings.value("anti_fingerprinting_enabled", True, type=bool)
         self.tor_network_enabled = self.settings.value("tor_network_enabled", False, type=bool)
         self.quantum_encryption_enabled = self.settings.value("quantum_encryption_enabled", False, type=bool)
         self.https_enforced = self.settings.value("https_enforced", True, type=bool)
-        self.cookies_enabled = self.settings.value("cookies_enabled", True, type=bool)
+        self.cookies_enabled = self.settings.value("cookies_enabled", False, type=bool)
         self.geolocation_enabled = self.settings.value("geolocation_enabled", False, type=bool)
         self.block_device_orientation = self.settings.value("block_device_orientation", True, type=bool)
         self.block_media_devices = self.settings.value("block_media_devices", True, type=bool)
@@ -742,15 +742,15 @@ class Darkelf(QMainWindow):
         profile.setHttpCacheType(QWebEngineProfile.NoCache)
         profile.setPersistentCookiesPolicy(QWebEngineProfile.NoPersistentCookies)
         settings = profile.settings()
-        settings.setAttribute(QWebEngineSettings.LocalStorageEnabled, True)
+        settings.setAttribute(QWebEngineSettings.LocalStorageEnabled, False)
         settings.setAttribute(QWebEngineSettings.JavascriptEnabled, self.javascript_enabled)
         settings.setAttribute(QWebEngineSettings.JavascriptCanOpenWindows, False)
         settings.setAttribute(QWebEngineSettings.JavascriptCanAccessClipboard, False)
         settings.setAttribute(QWebEngineSettings.LocalContentCanAccessRemoteUrls, False)
         settings.setAttribute(QWebEngineSettings.XSSAuditingEnabled, True)
-        settings.setAttribute(QWebEngineSettings.ErrorPageEnabled, True)
-        settings.setAttribute(QWebEngineSettings.WebGLEnabled, True)
-        settings.setAttribute(QWebEngineSettings.WebRTCPublicInterfacesOnly, True)
+        settings.setAttribute(QWebEngineSettings.ErrorPageEnabled, False)
+        settings.setAttribute(QWebEngineSettings.WebGLEnabled, False)
+        settings.setAttribute(QWebEngineSettings.WebRTCPublicInterfacesOnly, False)
         settings.setAttribute(QWebEngineSettings.AutoLoadImages, True)
         settings.setAttribute(QWebEngineSettings.PluginsEnabled, False)
         settings.setAttribute(QWebEngineSettings.HyperlinkAuditingEnabled, False)
@@ -767,6 +767,8 @@ class Darkelf(QMainWindow):
         self.tor_process = None
         if self.tor_network_enabled:
             self.start_tor()
+            if self.is_tor_running():
+                self.configure_tor_proxy()
 
     def start_tor(self):
         try:
@@ -783,19 +785,35 @@ class Darkelf(QMainWindow):
             self.tor_process = stem.process.launch_tor_with_config(
                 tor_cmd=tor_path,
                 config={
-                    'SocksPort': '9050',
-                    'ControlPort': '9051',
+                    'SocksPort': '9052',
+                    'ControlPort': '9053',
                 },
                 init_msg_handler=lambda line: print(line) if 'Bootstrapped ' in line else None,
             )
 
-            self.controller = Controller.from_port(port=9051)
+            self.controller = Controller.from_port(port=9053)
             self.controller.authenticate()
             print("Tor started successfully.")
 
         except OSError as e:
             QMessageBox.critical(self, "Tor Error", f"Failed to start Tor: {e}")
-        
+
+    def is_tor_running(self):
+        try:
+            with Controller.from_port(port=9053) as controller:
+                controller.authenticate()
+                print("Tor is running.")
+                return True
+        except Exception as e:
+            print(f"Tor is not running: {e}")
+            return False
+
+    def configure_tor_proxy(self):
+        # Note: QWebEngineProfile does not support proxy configuration directly, use QNetworkProxy
+        proxy = QNetworkProxy(QNetworkProxy.Socks5Proxy, '127.0.0.1', 9052)
+        QNetworkProxy.setApplicationProxy(proxy)
+        print("Configured QWebEngineView to use Tor SOCKS proxy.")
+
     def stop_tor(self):
         if self.tor_process:
             self.tor_process.terminate()
@@ -804,11 +822,8 @@ class Darkelf(QMainWindow):
 
     def close(self):
         self.stop_tor()
-
-    def init_theme(self):
-        self.black_theme_enabled = True
-        self.apply_theme()
-
+        super().close()
+        
     def init_theme(self):
         self.black_theme_enabled = True
         self.apply_theme()
