@@ -38,5 +38,20 @@ class TorIntegration:
 
     def close(self):
         self.stop_tor()
+        
 
-# You have two options for starting Tor, Boot from Darkelf Browser or used this Tor py file for modularizing and maintaining. 
+# You have one option for starting Tor, Boot from Darkelf Browser and use this Tor py file for modularizing and maintaining. 
+# Create a Folder 'Darkelf Browser' 
+# Next Place the Darkelf Browser.py and tor_integration.py in the folder
+# Boot from the directory where both files are located in the folder
+# Edit torrc file - 
+
+# Copy and Paste the following below in the torrc file: 
+
+# SocksPort 9050
+# ControlPort 9051
+# AutomapHostsOnResolve 1
+# DNSPort 53
+
+# brew services start tor
+# brew services stop tor
