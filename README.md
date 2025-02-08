@@ -44,9 +44,7 @@ Darkelf Browser employs the robust CHACHA20 encryption algorithm in conjunction 
 Darkelf Browser integrates seamlessly with the Tor network, allowing users to anonymize their browsing activity and further safeguard their privacy. By routing internet traffic through the Tor network, Darkelf users are able to hide their IP addresses and obscure their browsing behavior from prying eyes, including websites and ISPs. This integration enables access to .onion websites, offering a truly anonymous browsing experience. Whether you're accessing standard web pages or specialized Tor sites, Darkelf ensures that your identity remains concealed, mitigating tracking risks and enhancing overall security. The Tor protocol also prevents traffic analysis, providing an additional layer of protection against potential adversaries who attempt to monitor or intercept your online activity.
 
 ### **Community Collaboration**  
-We value community feedback and contributions in shaping the security features and policies of Darkelf Browser. Your active participation will be instrumental in refining our security strategies and addressing emerging threats effectively.
-
-Our team is dedicated to delivering a secure and privacy-focused browsing environment that empowers users to explore the web with confidence. Stay tuned for updates and join us in our mission to create a safer online ecosystem for all users.
+We welcome community feedback and contributions to enhance the security of Darkelf Browser. Your input helps us refine our strategies and tackle emerging threats effectively. Our team is committed to providing a secure, privacy-focused browsing experience, empowering users to explore the web with confidence. Stay tuned for updates and join us in building a safer online ecosystem.
 
 ## Table of Contents
 - [Attribution](Attribution.md)
