@@ -24,24 +24,7 @@ ECDH is used to establish a **shared secret** between parties over an untrusted 
 
 ---
 
-## **2. AES-CBC (Advanced Encryption Standard - Cipher Block Chaining) - Symmetric Encryption**
-### **Purpose:**  
-AES-CBC is used to encrypt and decrypt data securely with a **symmetric key**.
-
-### **Implementation:**  
-- A **256-bit AES key** is randomly generated.
-- A **random 16-byte IV** (Initialization Vector) is generated for each encryption.
-- The **plaintext is padded** to a multiple of 16 bytes before encryption.
-- The **AES-CBC cipher** encrypts the padded plaintext.
-- The **IV is prepended to the ciphertext** for decryption integrity.
-
-### **Security Benefits:**  
-✅ AES is **fast and efficient** for large data.  
-✅ CBC mode ensures **data confidentiality**, but integrity must be verified separately.  
-
----
-
-## **3. RSA-OAEP (Rivest-Shamir-Adleman with Optimal Asymmetric Encryption Padding) - Public Key Encryption**
+## **2. RSA-OAEP (Rivest-Shamir-Adleman with Optimal Asymmetric Encryption Padding) - Public Key Encryption**
 ### **Purpose:**  
 RSA-OAEP is used for **securely encrypting and decrypting data** using public and private keys.
 
@@ -57,7 +40,7 @@ RSA-OAEP is used for **securely encrypting and decrypting data** using public an
 
 ---
 
-## **4. AES-GCM (Advanced Encryption Standard - Galois/Counter Mode) - Authenticated Encryption**
+## **3. AES-GCM (Advanced Encryption Standard - Galois/Counter Mode) - Authenticated Encryption**
 ### **Purpose:**  
 AES-GCM is used as an **authenticated encryption** method after the **ECDH key exchange**.
 
@@ -73,7 +56,7 @@ AES-GCM is used as an **authenticated encryption** method after the **ECDH key e
 
 ---
 
-## **5. Secure Pseudo-Random Number Generator (PRNG) - WebCrypto API**
+## **4. Secure Pseudo-Random Number Generator (PRNG) - WebCrypto API**
 ### **Purpose:**  
 Darkelf uses **cryptographically secure random number generation** to enhance security.
 
