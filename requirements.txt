@@ -7,7 +7,7 @@ pycryptodome
 pqcrypto
 PyQtWebEngine
 dnspython
-stem  # Optional, only if you plan to use Tor network
+stem
 
 # Packages need to be maintained and upgraded to the latest
 # PyQt5 can't be upgraded to PyQt6 due to lack of infrastructure - System will break
