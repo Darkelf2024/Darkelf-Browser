@@ -47,6 +47,7 @@ Our team is dedicated to delivering a secure and privacy-focused browsing enviro
 - [Copyright](Copyright.md)
 - [Darkelf vs Tor](DarkelfvTor.md)
 - [Darkelf Installation Guide](DarkelfInstallationGuide.md)
+- [Tor Installation Guide](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Tor%20Installation%20Guide.md)
 - [OSINT Attribution](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/OSINT%20Attribution.md)
 - [OSINT Resources](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/OSINT%20Resources.md)
 - [No JavaScript Websites](NoJavaScriptWebsites.md)
