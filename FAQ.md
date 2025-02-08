@@ -53,8 +53,8 @@ Yes, Darkelf Browser aligns with privacy-focused principles and complies with ma
 
 ## 9. Who is Darkelf Browser for?
 Darkelf Browser is designed for individuals and professionals who prioritize privacy and security, including:
-	•	Journalists – Protect sources and research securely.
-	•	Law Enforcement – Conduct investigations without leaving digital traces.
-	•	OSINT Investigators – Gather intelligence anonymously.
-	•	Privacy Enthusiasts – Maintain online anonymity and security.
+- Journalists – Protect sources and research securely.
+- Law Enforcement – Conduct investigations without leaving digital traces.
+- OSINT Investigators – Gather intelligence anonymously.
+- Privacy Enthusiasts – Maintain online anonymity and security.
 For further details, visit the [official GitHub repository](https://github.com/Darkelf2024/Darkelf-Browser) or review the code for full transparency.
