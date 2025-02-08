@@ -177,7 +177,7 @@ def fetch_adblock_rules():
     rules = []
     for url in urls:
         try:
-            response = requests.get(url)
+            response = requests.get(url, timeout=10)  # Set timeout to 10 seconds
             response.raise_for_status()
             raw_rules = response.text.splitlines()
             for rule in raw_rules:
