@@ -76,27 +76,27 @@ from adblockparser import AdblockRules
 import stem.process
 from stem.control import Controller
 
-# AES and RSA Encryption Functions
-def generate_aes_cbc_key():
+
+# AES-GCM Implementation
+def generate_aes_gcm_key():
     return os.urandom(32)
 
-def encrypt_aes_cbc(key, plaintext):
-    iv = os.urandom(16)
-    cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=default_backend())
+def encrypt_aes_gcm(key, plaintext):
+    iv = os.urandom(12)
+    cipher = Cipher(algorithms.AES(key), modes.GCM(iv), backend=default_backend())
     encryptor = cipher.encryptor()
-    pad_length = 16 - (len(plaintext) % 16)
-    padded_plaintext = plaintext + chr(pad_length) * pad_length
-    ciphertext = encryptor.update(padded_plaintext.encode()) + encryptor.finalize()
-    return iv + ciphertext
+    ciphertext = encryptor.update(plaintext.encode()) + encryptor.finalize()
+    return urlsafe_b64encode(iv + encryptor.tag + ciphertext).decode()
 
-def decrypt_aes_cbc(key, encrypted_data):
-    iv, ciphertext = encrypted_data[:16], encrypted_data[16:]
-    cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=default_backend())
+def decrypt_aes_gcm(key, encrypted_data):
+    encrypted_data = urlsafe_b64decode(encrypted_data.encode())
+    iv, tag, ciphertext = encrypted_data[:12], encrypted_data[12:28], encrypted_data[28:]
+    cipher = Cipher(algorithms.AES(key), modes.GCM(iv, tag), backend=default_backend())
     decryptor = cipher.decryptor()
-    padded_plaintext = decryptor.update(ciphertext) + decryptor.finalize()
-    pad_length = padded_plaintext[-1]
-    return padded_plaintext[:-pad_length].decode()
+    plaintext = decryptor.update(ciphertext) + decryptor.finalize()
+    return plaintext.decode()
 
+# RSA Implementation
 def generate_rsa_key_pair():
     private_key = rsa.generate_private_key(
         public_exponent=65537,
@@ -124,6 +124,61 @@ def decrypt_rsa(private_key, ciphertext):
             label=None
         )
     ).decode()
+
+# ChaCha20 Implementation
+def generate_chacha20_key(salt):
+    password = os.urandom(32)
+    kdf = PBKDF2HMAC(
+        algorithm=hashes.SHA256(),
+        length=32,
+        salt=salt,
+        iterations=100000,
+        backend=default_backend()
+    )
+    key = kdf.derive(password)
+    return key
+
+def encrypt_chacha20(key, plaintext):
+    nonce = os.urandom(12)
+    cipher = Cipher(algorithms.ChaCha20(key, nonce), mode=None, backend=default_backend())
+    encryptor = cipher.encryptor()
+    ciphertext = encryptor.update(plaintext.encode()) + encryptor.finalize()
+    return urlsafe_b64encode(nonce + ciphertext).decode()
+
+def decrypt_chacha20(key, encrypted_data):
+    encrypted_data = urlsafe_b64decode(encrypted_data.encode())
+    nonce = encrypted_data[:12]
+    ciphertext = encrypted_data[12:]
+    cipher = Cipher(algorithms.ChaCha20(key, nonce), mode=None, backend=default_backend())
+    decryptor = cipher.decryptor()
+    plaintext = decryptor.update(ciphertext) + decryptor.finalize()
+    return plaintext.decode()
+
+# X25519 Implementation
+def generate_ecdh_key_pair():
+    private_key = x25519.X25519PrivateKey.generate()
+    public_key = private_key.public_key()
+    with open('ecdh_private_key.pem', 'wb') as f:
+        f.write(private_key.private_bytes(
+            encoding=serialization.Encoding.PEM,
+            format=serialization.PrivateFormat.PKCS8,
+            encryption_algorithm=serialization.NoEncryption()
+        ))
+    return private_key, public_key
+
+def load_or_generate_ecdh_key_pair():
+    try:
+        with open('ecdh_private_key.pem', 'rb') as f:
+            private_key_data = f.read()
+            private_key = serialization.load_pem_private_key(
+                private_key_data,
+                password=None,
+                backend=default_backend()
+            )
+        return private_key
+    except Exception as e:
+        print(f"Error: {e}")
+        return None
 
 
 # AdGuard DNS Resolver
