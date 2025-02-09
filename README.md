@@ -30,7 +30,7 @@ Darkelf, a custom PyQt5-based browser, is equipped with a range of advanced secu
 
 ### **Tor DNS Integration**
 
-The Darkelf Browser includes Tor DNS, an advanced DNS resolution service that enhances privacy by blocking trackers, ads, and phishing domains at the network level. Through the interception of DNS requests, AdGuard DNS further strengthens browsing privacy, ensuring a cleaner, more seamless, and ad-free online experience.
+The Darkelf Browser includes Tor DNS, an advanced DNS resolution service that enhances privacy by blocking trackers, ads, and phishing domains at the network level. Through the interception of DNS requests, Tor DNS further strengthens browsing privacy, ensuring a cleaner, more seamless, and ad-free online experience.
 
 ### **Content Security Policy (CSP) Enhancements**  
 Darkelf Browser emphasizes the importance of Content Security Policy (CSP) to mitigate various forms of attacks such as cross-site scripting (XSS) and data injection. We are committed to working closely with the community to fine-tune and adapt the CSP policies for optimal protection.
