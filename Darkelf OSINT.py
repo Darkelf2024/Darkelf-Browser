@@ -611,7 +611,7 @@ class CustomWebEngineView(QWebEngineView):
         if url.isValid():
             self.browser.create_new_window(url.toString())
 
-    class Darkelf(QMainWindow):
+class Darkelf(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Darkelf Browser")
