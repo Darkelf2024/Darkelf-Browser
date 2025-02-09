@@ -73,9 +73,9 @@ We welcome community feedback and contributions to enhance the security of Darke
 - Windows - Ready
 
 ## Variations/Types
-- Darkelf Private - Extreme Privacy - Released
+- Darkelf Extreme Privacy - Released
 - Darkelf OSINT Version - Released 
-- Darkelf Public Version - Released
+- Darkelf Privacy Version - Released
 - Each Browser/Type - Can be modified within the python code
 - Pick a style
 
