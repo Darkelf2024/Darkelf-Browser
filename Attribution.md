@@ -21,8 +21,7 @@ This browser uses DuckDuckGo Lite for private and anonymous searches. DuckDuckGo
 For enhanced privacy and anonymity, this browser offers integration with the Tor network. The Tor network helps protect your online privacy by routing your internet traffic through a series of encrypted relays. Learn more about the Tor Project at [Tor Project](https://www.torproject.org/).
 
 - **Tor DNS Integration**:
-
-The Darkelf Browser incorporates Tor DNS, an advanced DNS resolution service that enhances privacy by blocking trackers, ads, and phishing domains at the network level. By intercepting DNS requests, it strengthens browsing privacy, ensuring a cleaner, more seamless, and ad-free online experience. Powered by the Tor Project, this integration helps safeguard user anonymity and protect against unwanted online tracking.
+The Darkelf Browser incorporates Tor DNS, an advanced DNS resolution service that enhances privacy by blocking trackers, ads, and phishing domains at the network level. By intercepting DNS requests, it strengthens browsing privacy, ensuring a cleaner, more seamless, and ad-free online experience. Powered by the Tor Project, this integration helps safeguard user anonymity and protect against unwanted online tracking. Learn more about the Tor Project at [Tor Project](https://www.torproject.org/).
 
 ## Adblock & Tracking Lists
 - **EasyList & Fanboy Lists**: This project incorporates ad-blocking lists from [EasyList](https://easylist.to/) and [Fanboy Annoyance List](https://easylist.to/pages/other-supplementary-filter-lists-and-easylist-variants.html). These lists are maintained by the EasyList community and are licensed under **CC BY-SA 4.0**. More details can be found at [EasyList](https://easylist.to/).  
