@@ -1,4 +1,4 @@
-Introduction
+# Introduction
 
 Darkelf Browser is a privacy-focused web browser that prioritizes user security and privacy. It includes advanced features such as anti-fingerprinting, ad-blocking, and encryption technologies. This guide will help you install and configure Tor to work with Darkelf Browser.
 Prerequisites
@@ -90,7 +90,7 @@ Step 6: Verify Tor Connection
 
     Verify that you see the confirmation message indicating that your browser is configured to use Tor.
 
-Troubleshooting
+# Troubleshooting
 
     If you encounter issues starting Tor, ensure that there are no conflicting applications using ports 9052 and 9053.
     If Darkelf Browser fails to connect through Tor, double-check the Tor configuration and ensure that the Tor process is running.
@@ -108,12 +108,12 @@ Troubleshooting
 
 If you forget to close Tor after closing Darkelf, you may encounter a listener error from the previous session at bootup.
 
-References
+# References
 
     Tor Project
     Homebrew
 
-Contact
+# Contact
 
 For additional support, please contact kjm489@km-consultant.pro.
 
