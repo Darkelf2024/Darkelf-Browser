@@ -180,7 +180,6 @@ def load_or_generate_ecdh_key_pair():
         print(f"Error: {e}")
         return None
 
-
 # Load Adblock Rules
 def fetch_adblock_rules():
     urls = [
@@ -576,7 +575,9 @@ class CustomWebEnginePage(QWebEnginePage):
         script = """
         (function() {
             const meta = document.createElement('meta');
-            <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'nonce-12345' 'strict-dynamic' https:; style-src 'self' 'unsafe-inline'; img-src 'self' http: https: data: blob: cid:; frame-src 'self' blob: data: https://account-api.proton.me; object-src 'self' blob:; child-src 'self' data: blob:; report-uri https://reports.proton.me/reports/csp; frame-ancestors 'self'; base-uri 'self'">
+            meta.httpEquiv = "Content-Security-Policy";
+            meta.content = "default-src 'self', script-src 'self' 'nonce-12345' 'strict-dynamic' https:, style-src 'self' 'unsafe-inline', img-src 'self' http: https: data: blob:, frame-src 'self' blob: data: https://account-api.proton.me, object-src 'self' blob:, child-src 'self' data: blob:, report-uri https://reports.proton.me/reports/csp, frame-ancestors 'self', base-uri 'self'";
+            document.head.appendChild(meta);
         })();
         """
         self.runJavaScript(script)
@@ -597,7 +598,7 @@ class CustomWebEngineView(QWebEngineView):
         settings.setAttribute(QWebEngineSettings.JavascriptCanAccessClipboard, False)
         settings.setAttribute(QWebEngineSettings.LocalContentCanAccessRemoteUrls, False)
         settings.setAttribute(QWebEngineSettings.XSSAuditingEnabled, True)
-        settings.setAttribute(QWebEngineSettings.ErrorPageEnabled, True)
+        settings.setAttribute(QWebEngineSettings.ErrorPageEnabled, False)
         settings.setAttribute(QWebEngineSettings.WebGLEnabled, False)
         settings.setAttribute(QWebEngineSettings.WebRTCPublicInterfacesOnly, False)
         settings.setAttribute(QWebEngineSettings.AllowRunningInsecureContent, False)
@@ -792,6 +793,7 @@ class Darkelf(QMainWindow):
             self.start_tor()
             if self.is_tor_running():
                 self.configure_tor_proxy()
+                self.configure_tor_dns()
 
     def start_tor(self):
         try:
@@ -810,6 +812,9 @@ class Darkelf(QMainWindow):
                 config={
                     'SocksPort': '9052',
                     'ControlPort': '9053',
+                    'DNSPort': '9054',
+                    'AutomapHostsOnResolve': '1',
+                    'VirtualAddrNetworkIPv4': '10.192.0.0/10',
                 },
                 init_msg_handler=lambda line: print(line) if 'Bootstrapped ' in line else None,
             )
@@ -836,6 +841,10 @@ class Darkelf(QMainWindow):
         proxy = QNetworkProxy(QNetworkProxy.Socks5Proxy, '127.0.0.1', 9052)
         QNetworkProxy.setApplicationProxy(proxy)
         print("Configured QWebEngineView to use Tor SOCKS proxy.")
+
+    def configure_tor_dns(self):
+        os.environ['DNSPORT'] = '127.0.0.1:9054'
+        print("Configured Tor DNS.")
 
     def stop_tor(self):
         if self.tor_process:
@@ -995,7 +1004,7 @@ class Darkelf(QMainWindow):
                     justify-content: center;
                 }
                 h1 {
-                    font-size: 36px;  /* Increased font size */
+                    font-size: 24px;
                     margin-bottom: 20px;
                     color: #34C759; /* Same green as the tab */
                 }
@@ -1034,7 +1043,7 @@ class Darkelf(QMainWindow):
         </head>
         <body>
             <div class="content">
-                <h1>Darkelf Browser</h1>
+                <h1>Welcome to Darkelf Browser</h1>
                 <p>Your privacy is our priority.</p>
                 <form id="searchForm" action="https://lite.duckduckgo.com/lite/" method="get">
                     <input type="text" id="searchInput" name="q" placeholder="Search DuckDuckGo">
