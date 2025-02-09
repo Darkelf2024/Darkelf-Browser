@@ -180,7 +180,6 @@ def load_or_generate_ecdh_key_pair():
         print(f"Error: {e}")
         return None
 
-
 # Load Adblock Rules
 def fetch_adblock_rules():
     urls = [
@@ -624,7 +623,6 @@ class CustomWebEngineView(QWebEngineView):
         if url.isValid():
             self.browser.create_new_window(url.toString())
 
-
 class Darkelf(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -795,6 +793,7 @@ class Darkelf(QMainWindow):
             self.start_tor()
             if self.is_tor_running():
                 self.configure_tor_proxy()
+                self.configure_tor_dns()
 
     def start_tor(self):
         try:
