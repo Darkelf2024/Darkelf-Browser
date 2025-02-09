@@ -180,40 +180,6 @@ def load_or_generate_ecdh_key_pair():
         print(f"Error: {e}")
         return None
 
-
-# AdGuard DNS Resolver
-class AdGuardDNSResolver:
-    """
-    A DNS resolver that uses AdGuard's DNS servers for privacy-focused lookups.
-    """
-    def __init__(self):
-        self.resolver = dns.resolver.Resolver()
-        self.resolver.nameservers = [
-            "94.140.14.14",  # AdGuard DNS primary server
-            "94.140.15.15",  # AdGuard DNS secondary server
-        ]
-
-    def resolve(self, hostname):
-        """
-        Resolves a hostname to its IP address using AdGuard DNS servers.
-
-        Args:
-            hostname (str): The hostname to resolve.
-        
-        Returns:
-            list: A list of resolved IP addresses or an empty list on failure.
-        """
-        try:
-            answers = self.resolver.resolve(hostname, "A")
-            return [ip.address for ip in answers]
-        except (dns.resolver.NoAnswer, dns.resolver.NXDOMAIN, dns.resolver.Timeout) as e:
-            print(f"DNS resolution failed for {hostname}: {e}")
-            return []
-        except Exception as e:
-            print(f"An unexpected error occurred: {e}")
-            return []
-
-
 # Global cache for adblock rules and tracking domains
 adblock_rules_cache = None
 tracking_domains_cache = None
