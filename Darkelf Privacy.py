@@ -181,38 +181,6 @@ def load_or_generate_ecdh_key_pair():
         return None
 
 
-# AdGuard DNS Resolver
-class AdGuardDNSResolver:
-    """
-    A DNS resolver that uses AdGuard's DNS servers for privacy-focused lookups.
-    """
-    def __init__(self):
-        self.resolver = dns.resolver.Resolver()
-        self.resolver.nameservers = [
-            "94.140.14.14",  # AdGuard DNS primary server
-            "94.140.15.15",  # AdGuard DNS secondary server
-        ]
-
-    def resolve(self, hostname):
-        """
-        Resolves a hostname to its IP address using AdGuard DNS servers.
-
-        Args:
-            hostname (str): The hostname to resolve.
-        
-        Returns:
-            list: A list of resolved IP addresses or an empty list on failure.
-        """
-        try:
-            answers = self.resolver.resolve(hostname, "A")
-            return [ip.address for ip in answers]
-        except (dns.resolver.NoAnswer, dns.resolver.NXDOMAIN, dns.resolver.Timeout) as e:
-            print(f"DNS resolution failed for {hostname}: {e}")
-            return []
-        except Exception as e:
-            print(f"An unexpected error occurred: {e}")
-            return []
-
 # Load Adblock Rules
 def fetch_adblock_rules():
     urls = [
@@ -624,14 +592,14 @@ class CustomWebEngineView(QWebEngineView):
     def configure_sandbox(self):
         settings = self.settings()
         settings.setAttribute(QWebEngineSettings.LocalStorageEnabled, False)
-        settings.setAttribute(QWebEngineSettings.JavascriptEnabled, True)
+        settings.setAttribute(QWebEngineSettings.JavascriptEnabled, False)
         settings.setAttribute(QWebEngineSettings.JavascriptCanOpenWindows, False)
         settings.setAttribute(QWebEngineSettings.JavascriptCanAccessClipboard, False)
         settings.setAttribute(QWebEngineSettings.LocalContentCanAccessRemoteUrls, False)
         settings.setAttribute(QWebEngineSettings.XSSAuditingEnabled, True)
         settings.setAttribute(QWebEngineSettings.ErrorPageEnabled, True)
-        settings.setAttribute(QWebEngineSettings.WebGLEnabled, True)
-        settings.setAttribute(QWebEngineSettings.WebRTCPublicInterfacesOnly, True)
+        settings.setAttribute(QWebEngineSettings.WebGLEnabled, False)
+        settings.setAttribute(QWebEngineSettings.WebRTCPublicInterfacesOnly, False)
         settings.setAttribute(QWebEngineSettings.AllowRunningInsecureContent, False)
 
     def contextMenuEvent(self, event):
