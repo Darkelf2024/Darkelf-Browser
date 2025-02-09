@@ -1,5 +1,5 @@
 ## Darkelf Browser - Extreme Edition 
-- Release of Darkelf Browser Extreme Edition v3.0 [DE Release](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Darkelf%20Extreme.py) This is the Extreme/Private Version - It is released in a Monolithic Style.
+- Release of Darkelf Browser Extreme Edition v3.0 [DE Release](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Darkelf%20Extreme.py) This is the Extreme/Private Version  with Tor DNS - It is released in a Monolithic Style.
 - Release of Darkelf OSINT Edition v3.0 [DE OSINT](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Darkelf%20OSINT.py)
 - Relase of Darkelf Browser Privacy Edition v3.0 [DE Privacy Release]
 - Please Read - Updated 1/31/25: [Export Compliance Notice](ExportComplianceNotice.md)
