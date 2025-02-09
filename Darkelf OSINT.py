@@ -611,7 +611,7 @@ class CustomWebEngineView(QWebEngineView):
         if url.isValid():
             self.browser.create_new_window(url.toString())
 
-class Darkelf(QMainWindow):
+    class Darkelf(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Darkelf Browser")
@@ -781,6 +781,7 @@ class Darkelf(QMainWindow):
             self.start_tor()
             if self.is_tor_running():
                 self.configure_tor_proxy()
+                self.configure_tor_dns()
 
     def start_tor(self):
         try:
@@ -799,6 +800,9 @@ class Darkelf(QMainWindow):
                 config={
                     'SocksPort': '9052',
                     'ControlPort': '9053',
+                    'DNSPort': '9054',
+                    'AutomapHostsOnResolve': '1',
+                    'VirtualAddrNetworkIPv4': '10.192.0.0/10',
                 },
                 init_msg_handler=lambda line: print(line) if 'Bootstrapped ' in line else None,
             )
@@ -825,6 +829,10 @@ class Darkelf(QMainWindow):
         proxy = QNetworkProxy(QNetworkProxy.Socks5Proxy, '127.0.0.1', 9052)
         QNetworkProxy.setApplicationProxy(proxy)
         print("Configured QWebEngineView to use Tor SOCKS proxy.")
+
+    def configure_tor_dns(self):
+        os.environ['DNSPORT'] = '127.0.0.1:9054'
+        print("Configured Tor DNS.")
 
     def stop_tor(self):
         if self.tor_process:
