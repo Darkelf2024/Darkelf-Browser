@@ -2,7 +2,7 @@
 - Darkelf is released in a Monolithic Style.
 - Release of Darkelf Browser Extreme Edition v3.0 [DE Release](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Darkelf%20Extreme.py) This is the Extreme/Private Version  with Tor DNS.
 - Release of Darkelf OSINT Edition v3.0 [DE OSINT](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Darkelf%20OSINT.py) Tor DNS is included.
-- Relase of Darkelf Browser Privacy Edition v3.0 with Socks5 Proxy - Tor [DE Privacy Release](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Darkelf%20Privacy.py)
+- Relase of Darkelf Browser Privacy Edition v3.0 with Socks Proxy - Tor [DE Privacy Release](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Darkelf%20Privacy.py)
 - Please Read - Updated 1/31/25: [Export Compliance Notice](ExportComplianceNotice.md)
 - Reviewing Office: Office of National Security Agency on 11/27/2024 - Closed on 12/17/2024
 - [Open an issue](https://github.com/Darkelf2024/Darkelf-Browser/issues)
@@ -36,7 +36,7 @@ The Darkelf Browser includes Tor DNS, an advanced DNS resolution service that en
 ### **Tor Integration for Anonymity**
 Darkelf Browser integrates seamlessly with the Tor network, allowing users to anonymize their browsing activity and further safeguard their privacy. By routing internet traffic through the Tor network, Darkelf users are able to hide their IP addresses and obscure their browsing behavior from prying eyes, including websites and ISPs. This integration enables access to .onion websites, offering a truly anonymous browsing experience. Whether you're accessing standard web pages or specialized Tor sites, Darkelf ensures that your identity remains concealed, mitigating tracking risks and enhancing overall security. The Tor protocol also prevents traffic analysis, providing an additional layer of protection against potential adversaries who attempt to monitor or intercept your online activity.
 
-- Note: Socks5 Proxy is Fast, but when utilizing Tor DNS speeds are sacrificed due to it's strength.
+- Note: Socks Proxy is Fast, but when utilizing Tor DNS speeds are sacrificed due to it's strength.
 
 ### **Content Security Policy (CSP) Enhancements**  
 Darkelf Browser emphasizes the importance of Content Security Policy (CSP) to mitigate various forms of attacks such as cross-site scripting (XSS) and data injection. We are committed to working closely with the community to fine-tune and adapt the CSP policies for optimal protection.
