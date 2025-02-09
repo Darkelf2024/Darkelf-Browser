@@ -96,6 +96,18 @@ Troubleshooting
     If Darkelf Browser fails to connect through Tor, double-check the Tor configuration and ensure that the Tor process is running.
     For further assistance, consult the Tor Project Documentation.
 
+# Shutdown Instructions
+
+1. **After closing Darkelf**, ensure you also close Tor.  
+2. In the terminal, run:  
+   ```bash
+   sudo pkill tor
+3. Enter the system password when prompted
+
+# Important Note
+
+If you forget to close Tor after closing Darkelf, you may encounter a listener error from the previous session at bootup.
+
 References
 
     Tor Project
