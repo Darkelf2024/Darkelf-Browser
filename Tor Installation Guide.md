@@ -102,7 +102,7 @@ Step 6: Verify Tor Connection
 2. In the terminal, run:  
    ```bash
    sudo pkill tor
-3. Enter the system password when prompted
+3. Enter the your system password when prompted
 
 # Important Note
 
