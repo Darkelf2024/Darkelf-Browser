@@ -33,6 +33,11 @@ Darkelf, a custom PyQt5-based browser, is equipped with a range of advanced secu
 
 The Darkelf Browser includes Tor DNS, an advanced DNS resolution service that enhances privacy by blocking trackers, ads, and phishing domains at the network level. Through the interception of DNS requests, Tor DNS further strengthens browsing privacy, ensuring a cleaner, more seamless, and ad-free online experience.
 
+### **Tor Integration for Anonymity**
+Darkelf Browser integrates seamlessly with the Tor network, allowing users to anonymize their browsing activity and further safeguard their privacy. By routing internet traffic through the Tor network, Darkelf users are able to hide their IP addresses and obscure their browsing behavior from prying eyes, including websites and ISPs. This integration enables access to .onion websites, offering a truly anonymous browsing experience. Whether you're accessing standard web pages or specialized Tor sites, Darkelf ensures that your identity remains concealed, mitigating tracking risks and enhancing overall security. The Tor protocol also prevents traffic analysis, providing an additional layer of protection against potential adversaries who attempt to monitor or intercept your online activity.
+
+- Note: Socks5 Proxy is Fast, but when utilizing Tor DNS speeds are sacrificed due to it's strength.
+
 ### **Content Security Policy (CSP) Enhancements**  
 Darkelf Browser emphasizes the importance of Content Security Policy (CSP) to mitigate various forms of attacks such as cross-site scripting (XSS) and data injection. We are committed to working closely with the community to fine-tune and adapt the CSP policies for optimal protection.
 
@@ -41,9 +46,6 @@ Darkelf Browser leverages sandboxing techniques to isolate potential security vu
 
 ### **CHACHA20 Encryption with x25519 Key Exchange**  
 Darkelf Browser employs the robust CHACHA20 encryption algorithm in conjunction with the x25519 key exchange protocol to ensure secure communication and data integrity. This cutting-edge encryption scheme offers a high level of confidentiality and protection against eavesdropping and tampering.
-
-### **Tor Integration for Anonymity**  
-Darkelf Browser integrates seamlessly with the Tor network, allowing users to anonymize their browsing activity and further safeguard their privacy. By routing internet traffic through the Tor network, Darkelf users are able to hide their IP addresses and obscure their browsing behavior from prying eyes, including websites and ISPs. This integration enables access to .onion websites, offering a truly anonymous browsing experience. Whether you're accessing standard web pages or specialized Tor sites, Darkelf ensures that your identity remains concealed, mitigating tracking risks and enhancing overall security. The Tor protocol also prevents traffic analysis, providing an additional layer of protection against potential adversaries who attempt to monitor or intercept your online activity.
 
 ### **Community Collaboration**  
 We welcome community feedback and contributions to enhance the security of Darkelf Browser. Your input helps us refine our strategies and tackle emerging threats effectively. Our team is committed to providing a secure, privacy-focused browsing experience, empowering users to explore the web with confidence. Stay tuned for updates and join us in building a safer online ecosystem.
