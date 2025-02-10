@@ -43,7 +43,7 @@ We may update this Privacy Policy in the future if there are changes to the way 
 If you have any questions or concerns regarding this Privacy Policy, please feel free to contact us:
 
 - **Email:** [kjm489@km-consultant.pro](mailto:kjm489@km-consultant.pro)
-- **GitHub Repository:** [https://github.com/Darkelf2024/Darkelf-Browser](https://github.com/Darkelf2024/Darkelf-Browser)
+- **GitHub Repository:** [Darkelf Browser](https://github.com/Darkelf2024/Darkelf-Browser](https://github.com/Darkelf2024/Darkelf-Browser)
 
 ---
 
