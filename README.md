@@ -133,7 +133,7 @@ Darkelf Browser implements sandboxing technology to provide an additional layer 
 - **Enhanced Privacy**: Ensures that no browsing data is left behind after your session ends.
 
 ### Additional Features
-- **AdGuard DNS Resolver**: Uses AdGuard DNS servers to enhance security and block ads and trackers at the DNS level.
+- **Tor DNS Resolver**: Uses Tor DNS servers to enhance security and block ads and trackers at the DNS level.
 - **Quantum Encryption**: Optional quantum encryption for enhanced security.
 - **Custom Web Engine Page**: Implements various security measures such as disabling local storage, blocking JavaScript, and enforcing CSP.
 - **Download Manager**: Secure download manager that provides progress updates and ensures safe file downloads.
