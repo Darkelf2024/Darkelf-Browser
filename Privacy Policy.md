@@ -1,6 +1,6 @@
 # Privacy Policy for Darkelf Browser
 
-**Effective Date:** [02/10/2025]
+**Effective Date:** 02/10/2025
 
 Thank you for choosing **Darkelf Browser**. We are committed to protecting your privacy. This Privacy Policy outlines our approach regarding the handling of user data.
 
