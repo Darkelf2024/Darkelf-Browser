@@ -5,7 +5,7 @@
 By using the Darkelf Browser, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use the browser.
 
 ## 2. Description of Service
-Darkelf Browser is a privacy-focused web browser designed to give users full control over their browsing experience. The browser does not collect, store, or share any personal information.
+Darkelf Browser is a privacy-focused web browser designed to give users full control over their browsing experience. The browser does not collect, store, or share any personal information. All search requests are handled by Duckduckgo.
 
 ## 3. User Conduct
 You agree not to use the Darkelf Browser for any unlawful or prohibited activities. This includes, but is not limited to:
