@@ -1,5 +1,3 @@
-# **OSINT Attribution Page**  
-
 This page provides attribution for the external web resources referenced in the OSINT toolkits within the Darkelf OSINT Edition. These links lead to publicly available tools and databases that assist in open-source intelligence (OSINT) investigations.  
 
 > **Note:** Some OSINT tools require **JavaScript** to be enabled and may need additional browser settings to function properly. Please refer to the **Modify Settings** section in the [ReadMe](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/README.md) for further instructions.  
@@ -21,6 +19,8 @@ These tools help in gathering, analyzing, and correlating public data for intell
 - **[GeoIP Lookup](https://ipinfo.io/)** – A tool for geolocating IP addresses.  
 - **[DomainTools](https://www.domaintools.com/)** – A WHOIS lookup and domain intelligence service.  
 - **[Dork’s Collection List](https://github.com/cipher387/Dorks-collections-list/)** – A GitHub repository containing Google dorks for advanced search techniques.  
+- **[theHarvester](https://github.com/laramies/theHarvester)** – A tool for gathering emails, subdomains, IPs, and URLs using multiple search engines.  
+- **[Sherlock](https://github.com/sherlock-project/sherlock)** – A tool to find usernames across many social networks.  
 
 ## **2. Mapping and Geolocation Tools**  
 
