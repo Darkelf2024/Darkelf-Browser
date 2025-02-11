@@ -1239,18 +1239,54 @@ class Darkelf(QMainWindow):
             ("InfoGalactic", "https://infogalactic.com/info/Main_Page"),
             # Open-source alternatives to Hunchly
             ("Maltego", "https://www.maltego.com/"),
-            ("Recon-ng", "https://github.com/lanmaster53/recon-ng"),
+            ("Sherlock", "sherlock"),
+            ("Recon-ng", "recon-ng"),
             # Google Earth alternative online tools
             ("Zoom Earth", "https://zoom.earth/"),
             ("NASA Worldview", "https://worldview.earthdata.nasa.gov/"),
             # Maltego Alternative online tools
             ("Yeti", "https://yeti-platform.github.io/"),
             ("MISP", "https://www.misp-project.org/")
-            
         ]
-        for name, url in urls:
-            action = QAction(name, self)
-            action.triggered.connect(lambda checked, u=url: self.open_url(u))
+
+        def open_tool(url):
+            system = platform.system()
+            if url == "sherlock":
+                if system == "Darwin":  # macOS
+                    apple_script = '''
+                    tell application "Terminal"
+                        do script "brew install sherlock && exec $SHELL"
+                        activate
+                    end tell
+                    '''
+                    subprocess.run(["osascript", "-e", apple_script], check=True)
+                elif system == "Linux":
+                    subprocess.run(["gnome-terminal", "--", "sh", "-c", "brew install sherlock && exec bash"], check=True)
+                elif system == "Windows":
+                    subprocess.run(["cmd.exe", "/c", "start", "cmd.exe", "/k", "brew install sherlock"], check=True)
+                else:
+                    raise OSError("Unsupported operating system: " + system)
+            elif url == "recon-ng":
+                if system == "Darwin":  # macOS
+                    apple_script = '''
+                    tell application "Terminal"
+                        do script "brew install recon-ng && exec $SHELL"
+                        activate
+                    end tell
+                    '''
+                    subprocess.run(["osascript", "-e", apple_script], check=True)
+                elif system == "Linux":
+                    subprocess.run(["gnome-terminal", "--", "sh", "-c", "brew install recon-ng && exec bash"], check=True)
+                elif system == "Windows":
+                    subprocess.run(["cmd.exe", "/c", "start", "cmd.exe", "/k", "brew install recon-ng"], check=True)
+                else:
+                    raise OSError("Unsupported operating system: " + system)
+            else:
+                webbrowser.open(url)
+        
+        for tool_name, tool_url in urls:
+            action = QAction(tool_name, self)
+            action.triggered.connect(lambda checked, url=tool_url: open_tool(url))
             tools_menu.addAction(action)
     
         # Add shortcuts for various actions
