@@ -304,9 +304,14 @@ Themes are based on an auto-detection system of user preferences. The browser ad
 
 - **Please See** [Contributors List](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Contributors.md)
 
-## Acknowledgments & Tools Used  
-- **Heapy** – Used for memory leak testing.
+### Acknowledgments & Tools Used  
+- **Heapy** – Used for memory leak testing.  
 - **ChatGPT by OpenAI** – Assisted with code optimization and error analysis.  
+- **GitHub Copilot Pro** – Provided AI-powered code suggestions and enhancements.  
+- **Bandit Scan** – Used for static security analysis of Python code.  
+- **CodeQL Scan** – Performed semantic code analysis to detect vulnerabilities.  
+- **Semgrep** – Used for lightweight static analysis and security scanning.  
+
 ---
 
 ## Feedback and Contributions
