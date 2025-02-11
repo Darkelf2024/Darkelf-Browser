@@ -48,6 +48,7 @@
 # This software is made available under the GPL 3.0 license.
 
 import sys
+import random
 import os
 import re
 import requests
@@ -63,7 +64,7 @@ from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QTabWidget, QPushButton, QLineEdit, QVBoxLayout, QMenuBar, QAction, QShortcut, QToolBar, QDialog, QMessageBox, QFileDialog, QProgressDialog, QListWidget, QWidget, QLabel
 )
 from PyQt5.QtGui import QPalette, QColor, QKeySequence
-from PyQt5.QtWebEngineWidgets import QWebEngineView, QWebEngineSettings, QWebEnginePage, QWebEngineProfile, QWebEngineDownloadItem
+from PyQt5.QtWebEngineWidgets import QWebEngineView, QWebEngineSettings, QWebEnginePage, QWebEngineScript, QWebEngineProfile, QWebEngineDownloadItem
 from PyQt5.QtNetwork import QNetworkProxy, QSslConfiguration, QSsl
 from PyQt5.QtWebEngineCore import QWebEngineUrlRequestInterceptor
 from PyQt5.QtCore import QUrl, QSettings, Qt, QObject, pyqtSlot
@@ -780,7 +781,7 @@ class Darkelf(QMainWindow):
         settings.setAttribute(QWebEngineSettings.FullScreenSupportEnabled, True)
         settings.setAttribute(QWebEngineSettings.SpatialNavigationEnabled, False)
         settings.setAttribute(QWebEngineSettings.AllowWindowActivationFromJavaScript, False)
-        
+
         adblock_rules = fetch_adblock_rules()
         tracking_domains = fetch_tracking_domains()
         interceptor = AdblockAndTrackerInterceptor(adblock_rules, tracking_domains)
@@ -853,14 +854,14 @@ class Darkelf(QMainWindow):
 
     def apply_theme(self):
         palette = QPalette()
-        palette.setColor(QPalette.Window, QColor(0, 0, 0))
+        palette.setColor(QPalette.Window, QColor(40, 40, 40))
         palette.setColor(QPalette.WindowText, QColor(255, 255, 255))
-        palette.setColor(QPalette.Base, QColor(25, 25, 25))
-        palette.setColor(QPalette.AlternateBase, QColor(53, 53, 53))
+        palette.setColor(QPalette.Base, QColor(30, 30, 30))
+        palette.setColor(QPalette.AlternateBase, QColor(45, 45, 45))
         palette.setColor(QPalette.ToolTipBase, QColor(255, 255, 255))
         palette.setColor(QPalette.ToolTipText, QColor(255, 255, 255))
         palette.setColor(QPalette.Text, QColor(255, 255, 255))
-        palette.setColor(QPalette.Button, QColor(53, 53, 53))
+        palette.setColor(QPalette.Button, QColor(45, 45, 45))
         palette.setColor(QPalette.ButtonText, QColor(255, 255, 255))
         palette.setColor(QPalette.BrightText, QColor(255, 0, 0))
         palette.setColor(QPalette.Link, QColor(42, 130, 218))
@@ -977,7 +978,7 @@ class Darkelf(QMainWindow):
             <style id="theme-style">
                 body {
                     font-family: Arial, sans-serif;
-                    background-color: #000;
+                    background-color: #333;
                     color: #ddd;
                     margin: 0;
                     padding: 0;
@@ -993,11 +994,17 @@ class Darkelf(QMainWindow):
                     flex-direction: column;
                     align-items: center;
                     justify-content: center;
+                    padding: 20px;
+                    border-radius: 10px;
                 }
                 h1 {
-                    font-size: 36px;  /* Increased font size */
+                    font-size: 36px;
                     margin-bottom: 20px;
-                    color: #34C759; /* Same green as the tab */
+                    color: #34C759;
+                }
+                p {
+                    font-size: 18px;
+                    text-align: center;
                 }
                 form {
                     display: flex;
@@ -1012,12 +1019,12 @@ class Darkelf(QMainWindow):
                     border: none;
                     border-radius: 5px;
                     font-size: 16px;
-                    background-color: #333;
+                    background-color: #444;
                     color: #ddd;
                 }
                 button[type="submit"] {
                     padding: 10px 20px;
-                    background-color: #333;
+                    background-color: #34C759;
                     border: none;
                     color: white;
                     border-radius: 5px;
@@ -1028,7 +1035,20 @@ class Darkelf(QMainWindow):
                     justify-content: center;
                 }
                 button[type="submit"]:hover {
+                    background-color: #28A745;
+                }
+                footer {
+                    position: absolute;
+                    bottom: 10px;
+                    color: #ddd;
+                    font-size: 14px;
+                }
+                footer a {
                     color: #34C759;
+                    text-decoration: none;
+                }
+                footer a:hover {
+                    text-decoration: underline;
                 }
             </style>
         </head>
@@ -1059,7 +1079,7 @@ class Darkelf(QMainWindow):
 
     def create_menu_bar(self):
         menu_bar = QMenuBar(self)
-
+        
         # Create menus
         navigation_menu = menu_bar.addMenu("Navigation")
         self.add_navigation_actions(navigation_menu)
@@ -1074,7 +1094,29 @@ class Darkelf(QMainWindow):
         clear_history_action = QAction("Clear History", self)
         clear_history_action.triggered.connect(self.clear_history)
         history_menu.addAction(clear_history_action)
+        about_menu = menu_bar.addMenu("About")
+        about_privacy_action = QAction("Privacy Policy", self)
+        about_privacy_action.triggered.connect(self.show_privacy_policy)
+        about_menu.addAction(about_privacy_action)
+        about_terms_action = QAction("Terms of Service", self)
+        about_terms_action.triggered.connect(self.show_terms_of_service)
+        about_menu.addAction(about_terms_action)
+    
+        self.setMenuBar(menu_bar)
 
+    # Method to show Privacy Policy
+    def show_privacy_policy(self):
+        self.create_new_tab("https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Privacy%20Policy.md")
+
+    # Method to show Terms of Service
+    def show_terms_of_service(self):
+        self.create_new_tab("https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Terms.md")
+        
+    def open_new_tab(self, url):
+        new_tab = QWebEngineView()
+        new_tab.setUrl(QUrl(url))
+        self.tabs.addTab(new_tab, "New Tab")
+        self.tabs.setCurrentWidget(new_tab)
         self.setMenuBar(menu_bar)
 
     def add_navigation_actions(self, navigation_menu):
@@ -1093,9 +1135,6 @@ class Darkelf(QMainWindow):
         new_tab_action = QAction("New Tab", self)
         new_tab_action.triggered.connect(lambda: self.create_new_tab())
         navigation_menu.addAction(new_tab_action)
-        new_window_action = QAction("New Window", self)
-        new_window_action.triggered.connect(lambda: self.create_new_window())
-        navigation_menu.addAction(new_window_action)
         close_tab_action = QAction("Close Tab", self)
         close_tab_action.triggered.connect(lambda: self.close_tab(self.tab_widget.currentIndex()))
         navigation_menu.addAction(close_tab_action)
