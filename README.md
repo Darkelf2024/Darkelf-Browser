@@ -58,7 +58,6 @@ We welcome community feedback and contributions to enhance the security of Darke
 - [QSettings](QSettings.md)
 - [LICENSE](LICENSE)
 - [Copyright](Copyright.md)
-- [Darkelf vs Tor](DarkelfvTor.md)
 - [Darkelf Installation Guide](DarkelfInstallationGuide.md)
 - [Tor Installation Guide](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Tor%20Installation%20Guide.md)
 - [Tor DNS Installation Guide](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Tor%20DNS%20Installation.md)
