@@ -53,6 +53,9 @@ import re
 import requests
 import shutil
 import socket
+import subprocess
+import webbrowser
+import platform
 import dns.resolver
 import json
 import logging
@@ -1288,7 +1291,7 @@ class Darkelf(QMainWindow):
             action = QAction(tool_name, self)
             action.triggered.connect(lambda checked, url=tool_url: open_tool(url))
             tools_menu.addAction(action)
-    
+        
         # Add shortcuts for various actions
         self.init_shortcuts()
         self.configure_web_engine_profile()
