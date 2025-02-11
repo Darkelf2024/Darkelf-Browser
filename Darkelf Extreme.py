@@ -1083,6 +1083,30 @@ class Darkelf(QMainWindow):
         clear_history_action = QAction("Clear History", self)
         clear_history_action.triggered.connect(self.clear_history)
         history_menu.addAction(clear_history_action)
+        about_menu = menu_bar.addMenu("About")
+        about_privacy_action = QAction("Privacy Policy", self)
+        about_privacy_action.triggered.connect(self.show_privacy_policy)
+        about_menu.addAction(about_privacy_action)
+        about_terms_action = QAction("Terms of Service", self)
+        about_terms_action.triggered.connect(self.show_terms_of_service)
+        about_menu.addAction(about_terms_action)
+    
+        self.setMenuBar(menu_bar)
+
+    # Method to show Privacy Policy
+    def show_privacy_policy(self):
+        self.create_new_tab("https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Privacy%20Policy.md")
+
+    # Method to show Terms of Service
+    def show_terms_of_service(self):
+        self.create_new_tab("https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Terms.md")
+        
+    def open_new_tab(self, url):
+        new_tab = QWebEngineView()
+        new_tab.setUrl(QUrl(url))
+        self.tabs.addTab(new_tab, "New Tab")
+        self.tabs.setCurrentWidget(new_tab)
+        self.setMenuBar(menu_bar)
 
         self.setMenuBar(menu_bar)
 
