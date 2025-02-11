@@ -1244,6 +1244,7 @@ class Darkelf(QMainWindow):
             ("Maltego", "https://www.maltego.com/"),
             ("Sherlock", "sherlock"),
             ("Recon-ng", "recon-ng"),
+            ("The Harvester", "theharvester"),
             # Google Earth alternative online tools
             ("Zoom Earth", "https://zoom.earth/"),
             ("NASA Worldview", "https://worldview.earthdata.nasa.gov/"),
@@ -1282,6 +1283,21 @@ class Darkelf(QMainWindow):
                     subprocess.run(["gnome-terminal", "--", "sh", "-c", "brew install recon-ng && exec bash"], check=True)
                 elif system == "Windows":
                     subprocess.run(["cmd.exe", "/c", "start", "cmd.exe", "/k", "brew install recon-ng"], check=True)
+                else:
+                    raise OSError("Unsupported operating system: " + system)
+            elif url == "theharvester":
+                if system == "Darwin":  # macOS
+                    apple_script = '''
+                    tell application "Terminal"
+                        do script "brew install theharvester && exec $SHELL"
+                        activate
+                    end tell
+                    '''
+                    subprocess.run(["osascript", "-e", apple_script], check=True)
+                elif system == "Linux":
+                    subprocess.run(["gnome-terminal", "--", "sh", "-c", "brew install theharvester && exec bash"], check=True)
+                elif system == "Windows":
+                    subprocess.run(["cmd.exe", "/c", "start", "cmd.exe", "/k", "brew install theharvester"], check=True)
                 else:
                     raise OSError("Unsupported operating system: " + system)
             else:
