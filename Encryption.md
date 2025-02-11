@@ -87,7 +87,7 @@ To protect against future quantum computing threats, Darkelf plans to integrate 
 ✅ **Layer 1:** Generate an **ECDH key pair**.  
 ✅ **Layer 2:** Exchange **public keys** and derive a **shared secret** securely.  
 
-### **2. Secure Data Encryption (AES-GCM & AES-CBC)**
+### **2. Secure Data Encryption (AES-GCM)**
 ✅ **Layer 3:** Use the **shared secret** as the **AES-GCM encryption key** for securing data.  
 ✅ **Layer 4:** AES-GCM is used for **local file encryption** to protect stored data.  
 
