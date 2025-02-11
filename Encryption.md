@@ -89,7 +89,7 @@ To protect against future quantum computing threats, Darkelf plans to integrate 
 
 ### **2. Secure Data Encryption (AES-GCM & AES-CBC)**
 ✅ **Layer 3:** Use the **shared secret** as the **AES-GCM encryption key** for securing data.  
-✅ **Layer 4:** AES-CBC is used for **local file encryption** to protect stored data.  
+✅ **Layer 4:** AES-GCM is used for **local file encryption** to protect stored data.  
 
 ### **3. Public Key Encryption (RSA-OAEP)**
 ✅ **Layer 5:** Encrypt **sensitive data** (e.g., user credentials) using **RSA public key**.  
