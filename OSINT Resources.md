@@ -1,5 +1,7 @@
 ## OSINT Tools and Resources
 
+- Note: Sherlock and Recon-ng will bootup a new terminal - Locatd in tools
+
 ### Dorks Collection List
 - Github Repository: [Dorks-Collection](https://github.com/cipher387/Dorks-collections-list)
 - Description: Utilize Dorking Skillset - List of Dorks.
