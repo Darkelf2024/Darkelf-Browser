@@ -1165,9 +1165,6 @@ class Darkelf(QMainWindow):
         clear_cookies_action = QAction("Clear Cookies", self)
         clear_cookies_action.triggered.connect(self.clear_cookies)
         security_menu.addAction(clear_cookies_action)
-        private_browsing_action = QAction("Private Browsing", self, checkable=True)
-        private_browsing_action.triggered.connect(self.enable_private_browsing)
-        security_menu.addAction(private_browsing_action)
 
     def add_settings_actions(self, settings_menu):
         https_action = QAction("Enforce HTTPS", self, checkable=True)
