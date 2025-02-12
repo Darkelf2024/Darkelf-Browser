@@ -1256,22 +1256,25 @@ class Darkelf(QMainWindow):
 
         def open_tool(url):
             system = platform.system()
+
             def run_command(command):
                 subprocess.run(command, check=True)
 
-            if url in ["sherlock", "recon-ng", "theharvester"]:
+            allowed_tools = ["sherlock", "recon-ng", "theharvester"]
+            if url in allowed_tools:
+                sanitized_url = shlex.quote(url)
                 if system == "Darwin":  # macOS
                     apple_script = f'''
                     tell application "Terminal"
-                        do script "brew install {url} && exec $SHELL"
+                        do script "brew install {sanitized_url} && exec $SHELL"
                         activate
                     end tell
                     '''
                     run_command(["osascript", "-e", apple_script])
                 elif system == "Linux":
-                    run_command(["gnome-terminal", "--", "sh", "-c", f"brew install {shlex.quote(url)} && exec bash"])
+                    run_command(["gnome-terminal", "--", "sh", "-c", f"brew install {sanitized_url} && exec bash"])
                 elif system == "Windows":
-                    run_command(["cmd.exe", "/c", "start", "cmd.exe", "/k", f"brew install {shlex.quote(url)}"])
+                    run_command(["cmd.exe", "/c", "start", "cmd.exe", "/k", f"brew install {sanitized_url}"])
                 else:
                     raise OSError("Unsupported operating system: " + system)
             else:
