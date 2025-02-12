@@ -55,6 +55,7 @@ import shutil
 import socket
 import subprocess
 import webbrowser
+import shlex
 import platform
 import dns.resolver
 import json
@@ -1255,49 +1256,22 @@ class Darkelf(QMainWindow):
 
         def open_tool(url):
             system = platform.system()
-            if url == "sherlock":
+            def run_command(command):
+                subprocess.run(command, check=True)
+
+            if url in ["sherlock", "recon-ng", "theharvester"]:
                 if system == "Darwin":  # macOS
-                    apple_script = '''
+                    apple_script = f'''
                     tell application "Terminal"
-                        do script "brew install sherlock && exec $SHELL"
+                        do script "brew install {url} && exec $SHELL"
                         activate
                     end tell
                     '''
-                    subprocess.run(["osascript", "-e", apple_script], check=True)
+                    run_command(["osascript", "-e", apple_script])
                 elif system == "Linux":
-                    subprocess.run(["gnome-terminal", "--", "sh", "-c", "brew install sherlock && exec bash"], check=True)
+                    run_command(["gnome-terminal", "--", "sh", "-c", f"brew install {shlex.quote(url)} && exec bash"])
                 elif system == "Windows":
-                    subprocess.run(["cmd.exe", "/c", "start", "cmd.exe", "/k", "brew install sherlock"], check=True)
-                else:
-                    raise OSError("Unsupported operating system: " + system)
-            elif url == "recon-ng":
-                if system == "Darwin":  # macOS
-                    apple_script = '''
-                    tell application "Terminal"
-                        do script "brew install recon-ng && exec $SHELL"
-                        activate
-                    end tell
-                    '''
-                    subprocess.run(["osascript", "-e", apple_script], check=True)
-                elif system == "Linux":
-                    subprocess.run(["gnome-terminal", "--", "sh", "-c", "brew install recon-ng && exec bash"], check=True)
-                elif system == "Windows":
-                    subprocess.run(["cmd.exe", "/c", "start", "cmd.exe", "/k", "brew install recon-ng"], check=True)
-                else:
-                    raise OSError("Unsupported operating system: " + system)
-            elif url == "theharvester":
-                if system == "Darwin":  # macOS
-                    apple_script = '''
-                    tell application "Terminal"
-                        do script "brew install theharvester && exec $SHELL"
-                        activate
-                    end tell
-                    '''
-                    subprocess.run(["osascript", "-e", apple_script], check=True)
-                elif system == "Linux":
-                    subprocess.run(["gnome-terminal", "--", "sh", "-c", "brew install theharvester && exec bash"], check=True)
-                elif system == "Windows":
-                    subprocess.run(["cmd.exe", "/c", "start", "cmd.exe", "/k", "brew install theharvester"], check=True)
+                    run_command(["cmd.exe", "/c", "start", "cmd.exe", "/k", f"brew install {shlex.quote(url)}"])
                 else:
                     raise OSError("Unsupported operating system: " + system)
             else:
