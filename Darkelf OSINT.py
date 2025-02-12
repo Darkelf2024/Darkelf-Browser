@@ -1282,7 +1282,13 @@ class Darkelf(QMainWindow):
                 else:
                     raise OSError("Unsupported operating system: " + system)
             else:
-                webbrowser.open(url)
+                self.open_url(url)
+
+        def open_url(self, url):
+            """
+            Open the specified URL in a new tab or in the current tab.
+            """
+            self.create_new_tab(url)
         
         for tool_name, tool_url in urls:
             action = QAction(tool_name, self)
