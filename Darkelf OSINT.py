@@ -1258,7 +1258,11 @@ class Darkelf(QMainWindow):
             system = platform.system()
 
             def run_command(command):
-                subprocess.run(command, check=True)
+                # Ensure command is a list of arguments
+                if isinstance(command, list) and all(isinstance(arg, str) for arg in command):
+                    subprocess.run(command, check=True)
+                else:
+                    raise ValueError("Invalid command format")
 
             allowed_tools = ["sherlock", "recon-ng", "theharvester"]
             if url in allowed_tools:
