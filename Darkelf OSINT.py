@@ -54,7 +54,6 @@ import requests
 import shutil
 import socket
 import subprocess
-import webbrowser
 import shlex
 import platform
 import dns.resolver
