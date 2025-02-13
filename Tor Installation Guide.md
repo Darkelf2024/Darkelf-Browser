@@ -106,7 +106,7 @@ Step 6: Verify Tor Connection
 
 # Important Note
 
-If you forget to close Tor after closing Darkelf, you may encounter a listener error from the previous session at bootup.
+If you forget to close Tor after closing Darkelf, you may encounter a listener or break error from the previous session at bootup.
 
 # References
 
