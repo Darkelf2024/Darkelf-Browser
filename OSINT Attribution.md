@@ -4,7 +4,9 @@ This page provides attribution for the external web resources referenced in the 
 
 ## **1. OSINT Investigation Tools**  
 
-These tools help in gathering, analyzing, and correlating public data for intelligence and cybersecurity research.  
+These tools help in gathering, analyzing, and correlating public data for intelligence and cybersecurity research.
+
+Make sure to have Homebrew installed, updated, upgraded, cleanup for certain tools
 
 - **[HackerOne](https://www.hackerone.com/)** – A vulnerability coordination and bug bounty platform.  
 - **[OSINT Framework](https://osintframework.com/)** – A collection of OSINT tools categorized by use case.  
