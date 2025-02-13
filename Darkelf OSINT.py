@@ -1246,6 +1246,7 @@ class Darkelf(QMainWindow):
             ("Recon-ng", "recon-ng"),
             ("The Harvester", "theharvester"),
             ("Nmap", "nmap"),
+            ("Yt-Dlp", "yt-dlp"),
             # Google Earth alternative online tools
             ("Zoom Earth", "https://zoom.earth/"),
             ("NASA Worldview", "https://worldview.earthdata.nasa.gov/"),
@@ -1264,7 +1265,7 @@ class Darkelf(QMainWindow):
                 else:
                     raise ValueError("Invalid command format")
 
-            allowed_tools = ["sherlock", "recon-ng", "theharvester", "nmap"]
+            allowed_tools = ["sherlock", "recon-ng", "theharvester", "nmap", "yt-dlp"]
             if url in allowed_tools:
                 sanitized_url = shlex.quote(url)
                 if system == "Darwin":  # macOS
