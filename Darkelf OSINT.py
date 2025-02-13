@@ -1261,7 +1261,7 @@ class Darkelf(QMainWindow):
             def run_command(command):
                 # Ensure command is a list of arguments
                 if isinstance(command, list) and all(isinstance(arg, str) for arg in command):
-                    subprocess.run(command, check=True)
+                    subprocess.run(command, check=True) # nosec B602
                 else:
                     raise ValueError("Invalid command format")
                     
