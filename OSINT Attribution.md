@@ -20,7 +20,8 @@ These tools help in gathering, analyzing, and correlating public data for intell
 - **[DomainTools](https://www.domaintools.com/)** – A WHOIS lookup and domain intelligence service.  
 - **[Dork’s Collection List](https://github.com/cipher387/Dorks-collections-list/)** – A GitHub repository containing Google dorks for advanced search techniques.  
 - **[theHarvester](https://github.com/laramies/theHarvester)** – A tool for gathering emails, subdomains, IPs, and URLs using multiple search engines.  
-- **[Sherlock](https://github.com/sherlock-project/sherlock)** – A tool to find usernames across many social networks.  
+- **[Sherlock](https://github.com/sherlock-project/sherlock)** – A tool to find usernames across many social networks.
+- **[Nmap](https://nmap.org/)** – A network scanning tool for discovering hosts and services on a computer network.  
 
 ## **2. Mapping and Geolocation Tools**  
 
