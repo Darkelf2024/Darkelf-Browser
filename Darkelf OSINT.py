@@ -1264,10 +1264,15 @@ class Darkelf(QMainWindow):
                     subprocess.run(command, check=True)
                 else:
                     raise ValueError("Invalid command format")
-
+                    
+            # Define a list of allowed tools
             allowed_tools = ["sherlock", "recon-ng", "theharvester", "nmap", "yt-dlp"]
+
+            # Ensure the provided url is in the list of allowed tools
             if url in allowed_tools:
                 sanitized_url = shlex.quote(url)
+
+                # Execute platform-specific commands to open the too
                 if system == "Darwin":  # macOS
                     apple_script = f'''
                     tell application "Terminal"
