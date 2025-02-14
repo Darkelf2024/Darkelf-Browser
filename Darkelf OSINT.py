@@ -626,6 +626,90 @@ class CustomWebEngineView(QWebEngineView):
         if url.isValid():
             self.browser.create_new_window(url.toString())
 
+class TorManager:
+    def __init__(self):
+        self.tor_process = None
+        self.controller = None
+
+    def start_tor(self):
+        try:
+            if self.tor_process:
+                print("Tor is already running.")
+                return
+
+            tor_path = "/opt/homebrew/bin/tor"  # Update this with the correct path
+
+            if not os.path.exists(tor_path):
+                QMessageBox.critical(None, "Tor Error", "Tor executable not found! Install it using 'brew install tor'.")
+                return
+
+            self.tor_process = stem.process.launch_tor_with_config(
+                tor_cmd=tor_path,
+                config={
+                    'SocksPort': '9052',
+                    'ControlPort': '9053',
+                    'DNSPort': '9054',
+                    'AutomapHostsOnResolve': '1',
+                    'VirtualAddrNetworkIPv4': '10.192.0.0/10',
+                    'TrackHostExits': '.',
+                    'ExitNodes': '{US}',  # Only use US nodes
+                    'StrictNodes': '1',   # Enforce the use of specified nodes
+                },
+                init_msg_handler=lambda line: print(line) if 'Bootstrapped ' in line else None,
+            )
+
+            self.controller = Controller.from_port(port=9053)
+            self.controller.authenticate()
+            print("Tor started successfully.")
+
+        except OSError as e:
+            QMessageBox.critical(None, "Tor Error", f"Failed to start Tor: {e}")
+
+    def is_tor_running(self):
+        try:
+            with Controller.from_port(port=9053) as controller:
+                controller.authenticate()
+                print("Tor is running.")
+                return True
+        except Exception as e:
+            print(f"Tor is not running: {e}")
+            return False
+
+    def configure_tor_proxy(self):
+        proxy = QNetworkProxy(QNetworkProxy.Socks5Proxy, '127.0.0.1', 9052)
+        QNetworkProxy.setApplicationProxy(proxy)
+        print("Configured QWebEngineView to use Tor SOCKS proxy.")
+
+    def configure_tor_dns(self):
+        os.environ['DNSPORT'] = '127.0.0.1:9054'
+        print("Configured Tor DNS.")
+
+    def stop_tor(self):
+        if self.tor_process:
+            self.tor_process.terminate()
+            self.tor_process = None
+            print("Tor stopped.")
+
+    def close(self):
+        self.stop_tor()
+
+    def switch_node(self):
+        try:
+            if self.controller:
+                self.controller.signal(Signal.NEWNYM)
+                print("Switched to a new Tor node.")
+        except Exception as e:
+            print(f"Failed to switch Tor node: {e}")
+
+    def handle_website_block(self):
+        # Implement logic to detect when a website is blocked
+        # This is a placeholder for the actual detection mechanism
+        website_blocked = True  # Replace with actual detection logic
+
+        if website_blocked:
+            print("Website blocked. Switching Tor node...")
+            self.switch_node()
+
 class Darkelf(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -665,12 +749,12 @@ class Darkelf(QMainWindow):
         self.chacha20_key = self.generate_chacha20_key(os.urandom(16))
 
         # Initialize settings
-        self.javascript_enabled = self.settings.value("javascript_enabled", False, type=bool)
+        self.javascript_enabled = self.settings.value("javascript_enabled", True, type=bool)
         self.anti_fingerprinting_enabled = self.settings.value("anti_fingerprinting_enabled", True, type=bool)
-        self.tor_network_enabled = self.settings.value("tor_network_enabled", False, type=bool)
+        self.tor_network_enabled = self.settings.value("tor_network_enabled", True, type=bool)
         self.quantum_encryption_enabled = self.settings.value("quantum_encryption_enabled", False, type=bool)
         self.https_enforced = self.settings.value("https_enforced", True, type=bool)
-        self.cookies_enabled = self.settings.value("cookies_enabled", False, type=bool)
+        self.cookies_enabled = self.settings.value("cookies_enabled", True, type=bool)
         self.geolocation_enabled = self.settings.value("geolocation_enabled", False, type=bool)
         self.block_device_orientation = self.settings.value("block_device_orientation", True, type=bool)
         self.block_media_devices = self.settings.value("block_media_devices", True, type=bool)
@@ -679,7 +763,8 @@ class Darkelf(QMainWindow):
         self.configure_web_engine_profile()
 
         # Initialize Tor if enabled
-        self.init_tor()
+        if self.tor_network_enabled:
+            self.init_tor()
 
     def load_aes_key(self):
         pass
@@ -771,93 +856,31 @@ class Darkelf(QMainWindow):
         settings = profile.settings()
         settings.setAttribute(QWebEngineSettings.LocalStorageEnabled, False)
         settings.setAttribute(QWebEngineSettings.JavascriptEnabled, self.javascript_enabled)
-        settings.setAttribute(QWebEngineSettings.JavascriptCanOpenWindows, False)
+        settings.setAttribute(QWebEngineSettings.JavascriptCanOpenWindows, True)
         settings.setAttribute(QWebEngineSettings.JavascriptCanAccessClipboard, False)
         settings.setAttribute(QWebEngineSettings.LocalContentCanAccessRemoteUrls, False)
         settings.setAttribute(QWebEngineSettings.XSSAuditingEnabled, True)
-        settings.setAttribute(QWebEngineSettings.ErrorPageEnabled, False)
-        settings.setAttribute(QWebEngineSettings.WebGLEnabled, False)
+        settings.setAttribute(QWebEngineSettings.ErrorPageEnabled, True)
+        settings.setAttribute(QWebEngineSettings.WebGLEnabled, True)
         settings.setAttribute(QWebEngineSettings.WebRTCPublicInterfacesOnly, False)
         settings.setAttribute(QWebEngineSettings.AutoLoadImages, True)
         settings.setAttribute(QWebEngineSettings.PluginsEnabled, False)
         settings.setAttribute(QWebEngineSettings.HyperlinkAuditingEnabled, False)
         settings.setAttribute(QWebEngineSettings.FullScreenSupportEnabled, True)
         settings.setAttribute(QWebEngineSettings.SpatialNavigationEnabled, False)
-        settings.setAttribute(QWebEngineSettings.AllowWindowActivationFromJavaScript, False)
+        settings.setAttribute(QWebEngineSettings.AllowWindowActivationFromJavaScript, True)
         
+        # Assuming fetch_adblock_rules and fetch_tracking_domains are defined elsewhere
         adblock_rules = fetch_adblock_rules()
         tracking_domains = fetch_tracking_domains()
         interceptor = AdblockAndTrackerInterceptor(adblock_rules, tracking_domains)
         profile.setUrlRequestInterceptor(interceptor)
 
     def init_tor(self):
-        self.tor_process = None
-        if self.tor_network_enabled:
-            self.start_tor()
-            if self.is_tor_running():
-                self.configure_tor_proxy()
-                self.configure_tor_dns()
-
-    def start_tor(self):
-        try:
-            if self.tor_process:
-                print("Tor is already running.")
-                return
-
-            tor_path = "/opt/homebrew/bin/tor"  # Update this with the correct path
-
-            if not os.path.exists(tor_path):
-                QMessageBox.critical(self, "Tor Error", "Tor executable not found! Install it using 'brew install tor'.")
-                return
-
-            self.tor_process = stem.process.launch_tor_with_config(
-                tor_cmd=tor_path,
-                config={
-                    'SocksPort': '9052',
-                    'ControlPort': '9053',
-                    'DNSPort': '9054',
-                    'AutomapHostsOnResolve': '1',
-                    'VirtualAddrNetworkIPv4': '10.192.0.0/10',
-                },
-                init_msg_handler=lambda line: print(line) if 'Bootstrapped ' in line else None,
-            )
-
-            self.controller = Controller.from_port(port=9053)
-            self.controller.authenticate()
-            print("Tor started successfully.")
-
-        except OSError as e:
-            QMessageBox.critical(self, "Tor Error", f"Failed to start Tor: {e}")
-
-    def is_tor_running(self):
-        try:
-            with Controller.from_port(port=9053) as controller:
-                controller.authenticate()
-                print("Tor is running.")
-                return True
-        except Exception as e:
-            print(f"Tor is not running: {e}")
-            return False
-
-    def configure_tor_proxy(self):
-        # Note: QWebEngineProfile does not support proxy configuration directly, use QNetworkProxy
-        proxy = QNetworkProxy(QNetworkProxy.Socks5Proxy, '127.0.0.1', 9052)
-        QNetworkProxy.setApplicationProxy(proxy)
-        print("Configured QWebEngineView to use Tor SOCKS proxy.")
-
-    def configure_tor_dns(self):
-        os.environ['DNSPORT'] = '127.0.0.1:9054'
-        print("Configured Tor DNS.")
-
-    def stop_tor(self):
-        if self.tor_process:
-            self.tor_process.terminate()
-            self.tor_process = None
-            print("Tor stopped.")
-
-    def close(self):
-        self.stop_tor()
-        super().close()
+        self.tor_manager = TorManager()
+        self.tor_manager.start_tor()
+        self.tor_manager.configure_tor_proxy()
+        self.tor_manager.configure_tor_dns()
         
     def init_theme(self):
         self.black_theme_enabled = True
