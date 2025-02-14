@@ -76,6 +76,7 @@ from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
 from adblockparser import AdblockRules
+from stem import Signal
 import stem.process
 from stem.control import Controller
 
