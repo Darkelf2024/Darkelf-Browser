@@ -705,7 +705,7 @@ class TorManager:
 class WebsiteBlockDetector:
     def handle_website_block(self, url):
         try:
-            response = requests.get(url)
+            response = requests.get(url, timeout=10)  # Adding a timeout of 10 seconds
             # Check if the status code indicates that the website is blocked
             if response.status_code == 403:
                 website_blocked = True
