@@ -9,8 +9,7 @@ These tools help in gathering, analyzing, and correlating public data for intell
 Make sure to have Homebrew installed, updated, upgraded, cleanup for certain tools
 
 - **[HackerOne](https://www.hackerone.com/)** – A vulnerability coordination and bug bounty platform.  
-- **[OSINT Framework](https://osintframework.com/)** – A collection of OSINT tools categorized by use case.  
-- **[IntelTechniques](https://inteltechniques.com/tools.html/)** – A resource for advanced OSINT tools and investigative techniques.  
+- **[OSINT Framework](https://osintframework.com/)** – A collection of OSINT tools categorized by use case.    
 - **[Shodan](https://www.shodan.io/)** – A search engine for internet-connected devices.  
 - **[Censys](https://censys.io/)** – A cybersecurity tool to discover and analyze internet assets.  
 - **[LeakCheck](https://leakcheck.io/)** – A tool to check if email addresses or credentials have been exposed in breaches.  
