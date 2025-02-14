@@ -702,14 +702,26 @@ class TorManager:
         except Exception as e:
             print(f"Failed to switch Tor node: {e}")
 
-    def handle_website_block(self):
-        # Implement logic to detect when a website is blocked
-        # This is a placeholder for the actual detection mechanism
-        website_blocked = True  # Replace with actual detection logic
+class WebsiteBlockDetector:
+    def handle_website_block(self, url):
+        try:
+            response = requests.get(url)
+            # Check if the status code indicates that the website is blocked
+            if response.status_code == 403:
+                website_blocked = True
+            else:
+                website_blocked = False
+        except requests.exceptions.RequestException as e:
+            # Handle other exceptions such as connection errors
+            website_blocked = True
 
         if website_blocked:
             print("Website blocked. Switching Tor node...")
             self.switch_node()
+
+    def switch_node(self):
+        # Implement logic to switch Tor node
+        print("Switching Tor node...")
 
 class Darkelf(QMainWindow):
     def __init__(self):
