@@ -13,10 +13,9 @@ Make sure to have Homebrew installed, updated, upgraded, cleanup for certain too
 - **[IntelTechniques](https://inteltechniques.com/tools.html/)** – A resource for advanced OSINT tools and investigative techniques.  
 - **[Shodan](https://www.shodan.io/)** – A search engine for internet-connected devices.  
 - **[Censys](https://censys.io/)** – A cybersecurity tool to discover and analyze internet assets.  
-- **[Have I Been Pwned](https://haveibeenpwned.com/)** – A database to check if email addresses or credentials have been exposed in breaches.  
+- **[LeakCheck](https://leakcheck.io/)** – A tool to check if email addresses or credentials have been exposed in breaches.  
 - **[MXToolBox](https://mxtoolbox.com/whois.aspx/)** – A tool for checking domain, DNS, and email security configurations.  
-- **[PublicWWW](https://publicwww.com/)** – A search engine for website source codes and analytics.  
-- **[BuiltWith](https://builtwith.com/)** – A tool to identify the technology stack of a website.  
+- **[PublicWWW](https://publicwww.com/)** – A search engine for website source codes and analytics.    
 - **[Social Searcher](https://social-searcher.com/)** – A social media search engine for public posts and profiles.  
 - **[GeoIP Lookup](https://ipinfo.io/)** – A tool for geolocating IP addresses.  
 - **[DomainTools](https://www.domaintools.com/)** – A WHOIS lookup and domain intelligence service.  
