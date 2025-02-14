@@ -1277,6 +1277,7 @@ class Darkelf(QMainWindow):
             # Open-source alternatives to Hunchly
             ("Maltego", "https://www.maltego.com/"),
             ("Sherlock", "sherlock"),
+            ("Shodan", "shodan"),
             ("Recon-ng", "recon-ng"),
             ("The Harvester", "theharvester"),
             ("Nmap", "nmap"),
@@ -1300,7 +1301,7 @@ class Darkelf(QMainWindow):
                     raise ValueError("Invalid command format")
                     
             # Define a list of allowed tools
-            allowed_tools = ["sherlock", "recon-ng", "theharvester", "nmap", "yt-dlp"]
+            allowed_tools = ["sherlock", "shodan", "recon-ng", "theharvester", "nmap", "yt-dlp"]
 
             # Ensure the provided url is in the list of allowed tools
             if url in allowed_tools:
