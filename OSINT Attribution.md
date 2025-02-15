@@ -22,7 +22,8 @@ Make sure to have Homebrew installed, updated, upgraded, cleanup for certain too
 - **[theHarvester](https://github.com/laramies/theHarvester)** – A tool for gathering emails, subdomains, IPs, and URLs using multiple search engines.  
 - **[Sherlock](https://github.com/sherlock-project/sherlock)** – A tool to find usernames across many social networks.
 - **[Nmap](https://nmap.org/)** – A network scanning tool for discovering hosts and services on a computer network.
-- **[yt-dlp](https://github.com/yt-dlp/yt-dlp)** – A fork of youtube-dl with additional features and improvements.  
+- **[yt-dlp](https://github.com/yt-dlp/yt-dlp)** – A fork of youtube-dl with additional features and improvements.
+- **[W3Techs](https://w3techs.com/) – A service that provides information about the usage of various types of technologies on the web. 
 
 ## **2. Mapping and Geolocation Tools**  
 
