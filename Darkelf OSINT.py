@@ -1232,6 +1232,17 @@ class Darkelf(QMainWindow):
 
     def add_osint_actions(self, osint_menu):
         urls = [
+            ("Apify", "https://www.apify.com/"),
+            ("Graph.tips", "https://graph.tips/"),
+            ("Intelx.io", "https://intelx.io/"),
+            ("Lookup-id.com", "https://lookup-id.com/"),
+            ("Sowsearch.info", "https://sowsearch.info/"),
+            ("Whopostedwhat.com", "https://whopostedwhat.com/"),
+            ("Hunchly", "https://www.hunch.ly/"),
+            ("OSINT Combine", "https://www.osintcombine.com/"),
+            ("Internet Archive", "https://archive.org/"),
+            ("InfoGalactic", "https://infogalactic.com/info/Main_Page"),
+            ("Maltego", "https://www.maltego.com/"),
             ("HackerOne", "https://www.hackerone.com/"),
             ("OSINT Framework", "https://osintframework.com/"),
             ("Censys", "https://censys.io/"),
@@ -1242,6 +1253,10 @@ class Darkelf(QMainWindow):
             ("Social Search", "https://social-searcher.com/"),
             ("GeoIP Lookup", "https://ipinfo.io/"),
             ("DomainTools", "https://www.domaintools.com/"),
+            ("Zoom Earth", "https://zoom.earth/"),
+            ("NASA Worldview", "https://worldview.earthdata.nasa.gov/"),
+            ("Yeti", "https://yeti-platform.github.io/"),
+            ("MISP", "https://www.misp-project.org/"),
             ("Dork's Collection List", "https://github.com/cipher387/Dorks-collections-list")
         ]
         for name, url in urls:
@@ -1263,33 +1278,19 @@ class Darkelf(QMainWindow):
 
     def add_tools_actions(self, tools_menu):
         urls = [
-            ("Apify", "https://www.apify.com/"),
-            ("Graph.tips", "https://graph.tips/"),
-            ("Intelx.io", "https://intelx.io/"),
-            ("Lookup-id.com", "https://lookup-id.com/"),
-            ("Sowsearch.info", "https://sowsearch.info/"),
-            ("Whopostedwhat.com", "https://whopostedwhat.com/"),
-            ("Hunchly", "https://www.hunch.ly/"),
-            ("OSINT Combine", "https://www.osintcombine.com/"),
-            # Decentralized open-source encyclopedias
-            ("Internet Archive", "https://archive.org/"),
-            ("InfoGalactic", "https://infogalactic.com/info/Main_Page"),
-            # Open-source alternatives to Hunchly
-            ("Maltego", "https://www.maltego.com/"),
+            # OSINT Tools that can be installed via Homebrew
             ("Sherlock", "sherlock"),
             ("Shodan", "shodan"),
             ("Recon-ng", "recon-ng"),
             ("The Harvester", "theharvester"),
             ("Nmap", "nmap"),
             ("Yt-Dlp", "yt-dlp"),
-            # Google Earth alternative online tools
-            ("Zoom Earth", "https://zoom.earth/"),
-            ("NASA Worldview", "https://worldview.earthdata.nasa.gov/"),
-            # Maltego Alternative online tools
-            ("Yeti", "https://yeti-platform.github.io/"),
-            ("MISP", "https://www.misp-project.org/")
+            ("Maltego", "maltego"),
+            ("Masscan", "masscan"),
+            ("Amass", "amass"),
+            ("Subfinder", "subfinder"),
         ]
-
+        
         def open_tool(url):
             system = platform.system()
 
