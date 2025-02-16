@@ -1302,7 +1302,7 @@ class Darkelf(QMainWindow):
                     raise ValueError("Invalid command format")
                     
             # Define a list of allowed tools
-            allowed_tools = ["sherlock", "shodan", "recon-ng", "theharvester", "nmap", "yt-dlp"]
+            allowed_tools = ["sherlock", "shodan", "recon-ng", "theharvester", "nmap", "yt-dlp", "maltego", "masscan", "amass", "subfinder"]
 
             # Ensure the provided url is in the list of allowed tools
             if url in allowed_tools:
