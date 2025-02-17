@@ -21,7 +21,7 @@ This guide explains the step-by-step process to set up and run the Darkelf Brows
 
 ## Create a requirements.txt file with the following content:
 
- 1. PyQt5==5.15.9
+ 1. PyQt5 - Latest
  2. beautifulsoup4 - Latest
  3. requests - Latest
  4. adblockparser - Latest
