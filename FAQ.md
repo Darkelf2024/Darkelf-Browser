@@ -58,3 +58,7 @@ Darkelf Browser is designed for individuals and professionals who prioritize pri
 - OSINT Investigators – Gather intelligence anonymously.
 - Privacy Enthusiasts – Maintain online anonymity and security.
 For further details, visit the [official GitHub repository](https://github.com/Darkelf2024/Darkelf-Browser) or review the code for full transparency.
+
+## 10. Q: Why doesn’t Darkelf Browser support bookmarks or plugins?
+
+A: Bookmarks and plugins can introduce security risks. Malicious scripts can be embedded in bookmarks, and plugins often become attack vectors for malware or data leaks. To enhance security and privacy, Darkelf Browser eliminates these potential vulnerabilities, ensuring a safer browsing experience.
