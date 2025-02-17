@@ -1135,7 +1135,7 @@ class Darkelf(QMainWindow):
 
     def set_up_security_actions(self, security_menu):
         javascript_action = QAction("Enable JavaScript", self, checkable=True)
-        javascript_action.setChecked(self.javascript_enabled)
+        javascript_action.setChecked(False)  # Ensure it is unchecked at startup
         javascript_action.triggered.connect(self.toggle_javascript)
         security_menu.addAction(javascript_action)
         fingerprinting_action = QAction("Enable Anti-Fingerprinting", self, checkable=True)
