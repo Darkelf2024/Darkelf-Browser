@@ -6,6 +6,15 @@
 - Github Repository: [Dorks-Collection](https://github.com/cipher387/Dorks-collections-list)
 - Description: Utilize Dorking Skillset - List of Dorks.
 
+### Notes/Bookmarks
+
+- **[Obsidian](https://obsidian.md) (Community Edition)** – A markdown-based note-taking app for organizing research and storing links securely.  
+- **[Joplin](https://joplinapp.org/)** – An open-source note-taking and to-do app with end-to-end encryption.  
+- **[Logseq](https://logseq.com/)** – A privacy-focused, open-source knowledge management and note-taking app.  
+- **[Shaarli](https://shaarli.readthedocs.io/en/master/)** – A lightweight, self-hosted bookmark manager.  
+- **[LinkAce](https://www.linkace.org/)** – A self-hosted, open-source bookmark archive with tagging and search.  
+- **[Wallabag](https://wallabag.org/)** – A self-hosted read-it-later app for saving and organizing web articles.  
+
 ### Online Tools
 
 1. **Apify.com**
