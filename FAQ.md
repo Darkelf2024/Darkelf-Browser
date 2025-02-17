@@ -61,4 +61,4 @@ For further details, visit the [official GitHub repository](https://github.com/D
 
 ## 10. Q: Why doesn’t Darkelf Browser support bookmarks or plugins?
 
-A: Bookmarks and plugins can introduce security risks. Malicious scripts can be embedded in bookmarks, and plugins often become attack vectors for malware or data leaks. To enhance security and privacy, Darkelf Browser eliminates these potential vulnerabilities, ensuring a safer browsing experience.
+Bookmarks and plugins can introduce security risks. Malicious scripts can be embedded in bookmarks, and plugins often become attack vectors for malware or data leaks. To enhance security and privacy, Darkelf Browser eliminates these potential vulnerabilities, ensuring a safer browsing experience.
