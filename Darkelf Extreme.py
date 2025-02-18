@@ -77,6 +77,24 @@ import stem.process
 from stem.control import Controller
 
 
+# Debounce function to limit the rate at which a function can fire
+def debounce(func, wait):
+    timeout = None
+
+    def debounced(*args, **kwargs):
+        nonlocal timeout
+        if timeout is not None:
+            timeout.cancel()
+
+        def call_it():
+            func(*args, **kwargs)
+
+        timeout = Timer(wait / 1000, call_it)
+        timeout.start()
+
+    return debounced
+
+
 # AES-GCM Implementation
 def generate_aes_gcm_key():
     return os.urandom(32)
