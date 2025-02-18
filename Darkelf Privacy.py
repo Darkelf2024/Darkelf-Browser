@@ -359,84 +359,117 @@ class CustomWebEnginePage(QWebEnginePage):
 
     def inject_crypto_script(self):
         script = """
-        (function() {
-            async function generateKeyPair(curve) {
-                const keyPair = await window.crypto.subtle.generateKey({
-                    name: "ECDH",
-                    namedCurve: curve
-                }, true, ["deriveKey", "deriveBits"]);
-                return keyPair;
-            }
-
-            async function deriveSharedSecret(privateKey, publicKey) {
-                const sharedSecret = await window.crypto.subtle.deriveKey({
-                    name: "ECDH",
-                    public: publicKey
-                }, privateKey, {
+        // AES-GCM Implementation
+        async function generateAesGcmKey() {
+            return window.crypto.subtle.generateKey(
+                {
                     name: "AES-GCM",
-                    length: 256
-                }, true, ["encrypt", "decrypt"]);
-                return sharedSecret;
-            }
+                    length: 256,
+                },
+                true,
+                ["encrypt", "decrypt"]
+            );
+        }
 
-            async function encryptData(secretKey, data) {
-                const encodedData = new TextEncoder().encode(data);
-                const iv = window.crypto.getRandomValues(new Uint8Array(12));
-                const encryptedData = await window.crypto.subtle.encrypt({
+        async function encryptAesGcm(key, data) {
+            const iv = window.crypto.getRandomValues(new Uint8Array(12));
+            const encodedData = new TextEncoder().encode(data);
+            
+            const encrypted = await window.crypto.subtle.encrypt(
+                {
                     name: "AES-GCM",
-                    iv: iv
-                }, secretKey, encodedData);
-                return { iv, encryptedData };
-            }
-
-            async function decryptData(secretKey, iv, encryptedData) {
-                const decryptedData = await window.crypto.subtle.decrypt({
-                    name: "AES-GCM",
-                    iv: iv
-                }, secretKey, encryptedData);
-                return new TextDecoder().decode(decryptedData);
-            }
-
-            async function generateRSAKeyPair() {
-                const keyPair = await window.crypto.subtle.generateKey({
-                    name: "RSA-OAEP",
-                    modulusLength: 4096,
-                    publicExponent: new Uint8Array([1, 0, 1]),
-                    hash: { name: "SHA-256" }
-                }, true, ["encrypt", "decrypt"]);
-                return keyPair;
-            }
-
-            async function encryptRSA(publicKey, data) {
-                const encodedData = new TextEncoder().encode(data);
-                const encryptedData = await window.crypto.subtle.encrypt({
-                    name: "RSA-OAEP"
-                }, publicKey, encodedData);
-                return encryptedData;
-            }
-
-            async function decryptRSA(privateKey, encryptedData) {
-                const decryptedData = await window.crypto.subtle.decrypt({
-                    name: "RSA-OAEP"
-                }, privateKey, encryptedData);
-                return new TextDecoder().decode(decryptedData);
-            }
-
-            function getRandomValues(array) {
-                return window.crypto.getRandomValues(array);
-            }
-
-            window.cryptoAPI = {
-                generateKeyPair,
-                deriveSharedSecret,
-                encryptData,
-                decryptData,
-                generateRSAKeyPair,
-                encryptRSA,
-                decryptRSA,
-                getRandomValues
+                    iv: iv,
+                },
+                key,
+                encodedData
+            );
+            
+            return {
+                iv: iv,
+                ciphertext: new Uint8Array(encrypted)
             };
-        })();
+        }
+
+        async function decryptAesGcm(key, iv, ciphertext) {
+            const decrypted = await window.crypto.subtle.decrypt(
+                {
+                    name: "AES-GCM",
+                    iv: iv,
+                },
+                key,
+                ciphertext
+            );
+            
+            return new TextDecoder().decode(decrypted);
+        }
+
+        // RSA Implementation
+        async function generateRsaKeyPair() {
+            return window.crypto.subtle.generateKey(
+                {
+                    name: "RSA-OAEP",
+                    modulusLength: 2048,
+                    publicExponent: new Uint8Array([1, 0, 1]),
+                    hash: { name: "SHA-256" },
+                },
+                true,
+                ["encrypt", "decrypt"]
+            );
+        }
+
+        async function encryptRsa(publicKey, data) {
+            const encodedData = new TextEncoder().encode(data);
+            
+            const encrypted = await window.crypto.subtle.encrypt(
+                {
+                    name: "RSA-OAEP",
+                },
+                publicKey,
+                encodedData
+            );
+            
+            return new Uint8Array(encrypted);
+        }
+
+        async function decryptRsa(privateKey, ciphertext) {
+            const decrypted = await window.crypto.subtle.decrypt(
+                {
+                    name: "RSA-OAEP",
+                },
+                privateKey,
+                ciphertext
+            );
+            
+            return new TextDecoder().decode(decrypted);
+        }
+
+        // ECDH Implementation
+        async function generateEcdhKeyPair() {
+            return window.crypto.subtle.generateKey(
+                {
+                    name: "ECDH",
+                    namedCurve: "P-256",
+                },
+                true,
+                ["deriveKey", "deriveBits"]
+            );
+        }
+
+        async function deriveSharedSecret(privateKey, publicKey) {
+            return window.crypto.subtle.deriveKey(
+                {
+                    name: "ECDH",
+                    public: publicKey,
+                },
+                privateKey,
+                {
+                    name: "AES-GCM",
+                    length: 256,
+                },
+                true,
+                ["encrypt", "decrypt"]
+            );
+        }
         """
         self.runJavaScript(script)
     
