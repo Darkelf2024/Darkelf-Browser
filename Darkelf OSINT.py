@@ -1339,6 +1339,8 @@ class Darkelf(QMainWindow):
             ("Masscan", "masscan"),
             ("Amass", "amass"),
             ("Subfinder", "subfinder"),
+            ("Exiftool", "exiftool"),
+            ("Mat2", "mat2"),
         ]
         
         def open_tool(url):
@@ -1352,7 +1354,7 @@ class Darkelf(QMainWindow):
                     raise ValueError("Invalid command format")
                     
             # Define a list of allowed tools
-            allowed_tools = ["sherlock", "shodan", "recon-ng", "theharvester", "nmap", "yt-dlp", "maltego", "masscan", "amass", "subfinder"]
+            allowed_tools = ["sherlock", "shodan", "recon-ng", "theharvester", "nmap", "yt-dlp", "maltego", "masscan", "amass", "subfinder", "exiftool", "mat2"]
 
             # Ensure the provided url is in the list of allowed tools
             if url in allowed_tools:
