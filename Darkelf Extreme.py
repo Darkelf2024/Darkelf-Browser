@@ -406,7 +406,7 @@ class CustomWebEnginePage(QWebEnginePage):
             return window.crypto.subtle.generateKey(
                 {
                     name: "RSA-OAEP",
-                    modulusLength: 2048,
+                    modulusLength: 4096,
                     publicExponent: new Uint8Array([1, 0, 1]),
                     hash: { name: "SHA-256" },
                 },
