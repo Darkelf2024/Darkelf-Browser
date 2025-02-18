@@ -80,6 +80,52 @@ from stem import Signal
 import stem.process
 from stem.control import Controller
 
+import sys
+import random
+import os
+import re
+import requests
+import shutil
+import socket
+import dns.resolver
+import json
+import logging
+import time
+from urllib.parse import urlparse
+from base64 import urlsafe_b64encode, urlsafe_b64decode
+from PyQt5.QtWidgets import (
+    QApplication, QMainWindow, QTabWidget, QPushButton, QLineEdit, QVBoxLayout, QMenuBar, QAction, QShortcut, QToolBar, QDialog, QMessageBox, QFileDialog, QProgressDialog, QListWidget, QWidget, QLabel
+)
+from PyQt5.QtGui import QPalette, QColor, QKeySequence
+from PyQt5.QtWebEngineWidgets import QWebEngineView, QWebEngineSettings, QWebEnginePage, QWebEngineScript, QWebEngineProfile, QWebEngineDownloadItem
+from PyQt5.QtNetwork import QNetworkProxy, QSslConfiguration, QSsl
+from PyQt5.QtWebEngineCore import QWebEngineUrlRequestInterceptor
+from PyQt5.QtCore import QUrl, QSettings, Qt, QObject, pyqtSlot
+from cryptography.hazmat.primitives import serialization, hashes
+from cryptography.hazmat.primitives.asymmetric import x25519, rsa, padding
+from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+from cryptography.hazmat.backends import default_backend
+from adblockparser import AdblockRules
+import stem.process
+from stem.control import Controller
+
+# Debounce function to limit the rate at which a function can fire
+def debounce(func, wait):
+    timeout = None
+
+    def debounced(*args, **kwargs):
+        nonlocal timeout
+        if timeout is not None:
+            timeout.cancel()
+
+        def call_it():
+            func(*args, **kwargs)
+
+        timeout = Timer(wait / 1000, call_it)
+        timeout.start()
+
+    return debounced
 
 # AES-GCM Implementation
 def generate_aes_gcm_key():
