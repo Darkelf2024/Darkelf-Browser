@@ -63,9 +63,9 @@ For further details, visit the [official GitHub repository](https://github.com/D
 
 Bookmarks and plugins can introduce security risks. Malicious scripts can be embedded in bookmarks, and plugins often become attack vectors for malware or data leaks. To enhance security and privacy, Darkelf Browser eliminates these potential vulnerabilities, ensuring a safer browsing experience.
 
-## 11. Q: Why does Darkelf Browser separate email from web browsing?
+## 11. Why does Darkelf Browser separate email from web browsing?
 
-A: Darkelf Browser prioritizes privacy and security by keeping email services separate from general web browsing. This approach enhances security in several key ways:
+Darkelf Browser prioritizes privacy and security by keeping email services separate from general web browsing. This approach enhances security in several key ways:
 1.	Prevents WebAssembly (WASM) Exploits
 - Services like ProtonMail and Tutanota rely on WebAssembly (WASM), which can introduce security risks, such as side-channel attacks and browser fingerprinting.
 - PyQt5’s QtWebEngine does not support WASM, preventing potential exploitation.
