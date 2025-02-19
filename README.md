@@ -65,7 +65,6 @@ We welcome community feedback and contributions to enhance the security of Darke
 - [OSINT Resources](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/OSINT%20Resources.md)
 - [No JavaScript Websites](NoJavaScriptWebsites.md)
 - [Privacy Policy](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Privacy%20Policy.md)
-- [Issues](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Issues.md)
 - [FAQ](FAQ.md)
 
 ## Systems
