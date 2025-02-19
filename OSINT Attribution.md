@@ -28,7 +28,8 @@ Make sure to have Homebrew installed, updated, upgraded, cleanup for certain too
 - **[Subfinder](https://github.com/projectdiscovery/subfinder)** - A subdomain discovery tool that discovers valid subdomains.
 - **[W3Techs](https://w3techs.com/)** – A service that provides information about the usage of various types of technologies on the web.
 
-## **2. Privacy and Productivity Tools
+## **2. Privacy and Productivity Tools**
+
 - **[Mat2 - Metadata Removal Tool](https://gitlab.com/mat2/mat2)** – Mat2 (Metadata Anonymization Toolkit) is a tool designed to help you protect your privacy by removing metadata from files. It supports various file types like images, PDFs, and documents, ensuring that any hidden metadata that may contain sensitive information is erased.
 - **[Neomutt - Email Client for Power Users](https://neomutt.org/)** – Neomutt is a text-based email client, designed for power users. It supports a wide range of features, making it perfect for those who prefer customization and control over their email experience.
 - **[Thunderbird - Free Email Application](https://www.mozilla.org/en-US/thunderbird/)** – Thunderbird is a free, open-source email client developed by Mozilla. It's known for its ease of use, customization options, and robust security features. Whether you're a beginner or an advanced user, Thunderbird offers tools to help manage your emails efficiently. 
