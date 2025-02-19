@@ -12,7 +12,10 @@ To ensure compatibility with around 99% of websites, email services, and to bypa
 Moreover, the Darkelf Browser, which is built using PyQt5, does not support Web Assembly (WASM). This limitation further complicates login access to these secure email services, as they rely on WASM for their functionality.
 
 ## Conclusion:
-While the Darkelf Browser prioritizes **privacy** over everything else, it faces challenges in accessing secure email services due to their stringent CSP and reliance on WASM. Darkelf’s focus on user security and client-side protection can conflict with features required for compatibility with these services.
+While the Darkelf Browser prioritizes **privacy** over everything else, it faces challenges in accessing secure email services due to their stringent CSP and reliance on WASM. Darkelf’s focus on user security and client-side protection can conflict with features required for compatibility with these services. 
+Enhances Privacy & Compartmentalization
+- If a malicious website in the browser compromises security, it won’t have access to email sessions or credentials.
+- Compartmentalization, similar to Qubes OS and Tails OS, ensures that sensitive data remains isolated.
 
 ## Alternatives:
 Two potential alternatives for accessing secure email services outside of the Darkelf Browser are:
