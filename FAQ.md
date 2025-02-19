@@ -66,19 +66,19 @@ Bookmarks and plugins can introduce security risks. Malicious scripts can be emb
 ## 11. Q: Why does Darkelf Browser separate email from web browsing?
 
 A: Darkelf Browser prioritizes privacy and security by keeping email services separate from general web browsing. This approach enhances security in several key ways:
-	1.	Prevents WebAssembly (WASM) Exploits
+1.	Prevents WebAssembly (WASM) Exploits
 - Services like ProtonMail and Tutanota rely on WebAssembly (WASM), which can introduce security risks, such as side-channel attacks and browser fingerprinting.
 - PyQt5’s QtWebEngine does not support WASM, preventing potential exploitation.
-	2.	Reduces Attack Surface
+2.	Reduces Attack Surface
 - Email services are high-value targets for phishing and malware.
 - Keeping email in a separate, hardened application (like Thunderbird or Neomutt) isolates vulnerabilities and reduces the risk of cross-site tracking or session hijacking.
-	3.	Enhances Privacy & Compartmentalization
+3.	Enhances Privacy & Compartmentalization
 - If a malicious website in the browser compromises security, it won’t have access to email sessions or credentials.
 - Compartmentalization, similar to Qubes OS and Tails OS, ensures that sensitive data remains isolated.
-	4.	Prevents Persistent Tracking
+4.	Prevents Persistent Tracking
 - Webmail services often use cookies, scripts, and trackers to maintain session persistence across sites.
 - Using a separate email client (like Thunderbird with ProtonMail Bridge) prevents websites from linking your browsing activity to your email identity.
-	5.	Supports Open-Source & Privacy-Focused Alternatives
+5.	Supports Open-Source & Privacy-Focused Alternatives
 - Instead of relying on a browser with potential third-party code execution, Darkelf encourages using secure, open-source email clients like:
 - Neomutt (lightweight, terminal-based).
 - Thunderbird (fully-featured with PGP & ProtonMail Bridge support).
