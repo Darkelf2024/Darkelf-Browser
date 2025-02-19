@@ -21,16 +21,16 @@ This guide explains the step-by-step process to set up and run the Darkelf Brows
 
 ## Create a requirements.txt file with the following content:
 
- 1. PyQt5 - Latest
- 2. beautifulsoup4 - Latest
- 3. requests - Latest
- 4. adblockparser - Latest
- 5. cryptography - Latest
- 6. pycryptodome - Latest
- 7. pqcrypto - Latest
- 8. PyQtWebEngine - Latest
- 9. dns.resolver/dnspython
- 10. stem(Tor Network)
+1. PySide6
+2. PyQt6-WebEngine
+3. beautifulsoup4
+4. requests
+5. adblockparser
+6. cryptography
+7. pycryptodome
+8. pqcrypto
+9. dnspython
+10.stem
 
  *  Upgrade Python3/Pip3 - Latest
  *  Upgrade all required packages to the Latest Versions - Do this before running Darkelf = Preventative Safety Measures
