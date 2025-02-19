@@ -25,7 +25,7 @@ If you would like to review the CopyLeaks report, please feel free to reach out.
 
 # Darkelf Browser: Enhanced Security and Privacy with Tor Integration
 
-Darkelf, a custom PyQt5-based browser, is equipped with a range of advanced security features aimed at safeguarding user privacy and fortifying defenses against online threats. The upcoming release of Darkelf Browser promises an enriching browsing experience, with a strong emphasis on security and privacy.
+Darkelf, a custom PySide6-based browser, is equipped with a range of advanced security features aimed at safeguarding user privacy and fortifying defenses against online threats. The upcoming release of Darkelf Browser promises an enriching browsing experience, with a strong emphasis on security and privacy.
 
 ## Key Highlights and Security Features
 
