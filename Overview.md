@@ -1,6 +1,6 @@
 # Overview
 Darkelf Browser is a privacy-focused web browser designed to provide enhanced security and
-user privacy features. Developed using PyQt5, it incorporates various encryption methods,
+user privacy features. Developed using PySide6, it incorporates various encryption methods,
 security settings, and privacy enhancements to protect user data and browsing activities.
 
 ## Functionality
