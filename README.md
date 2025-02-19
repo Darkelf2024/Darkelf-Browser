@@ -89,7 +89,7 @@ Users can modify and tweak these settings in the codebase
 2. [Initialize Settings](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Initialize%20Settings.py)
 3. [QWebEngine Profile Settings](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/QWebEngine%20Profile%20Settings.py)
 
-Note: Accessing Email Accounts: Persistent JavaScript, Cookies & Local Storage need to be set to True across all settings in the codebase.
+**Note**: Accessing Email Accounts: Persistent JavaScript, Cookies & Local Storage need to be set to True across all settings in the codebase.
 
 ## ⚠️ Important Note  
 
