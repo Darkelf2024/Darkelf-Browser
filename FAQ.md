@@ -1,4 +1,4 @@
-# Darkelf Browser Extreme Edition - FAQ
+# Darkelf Browser v3.0 - FAQ
 
 ## 1. How does Darkelf Browser handle user data?
 Darkelf Browser is designed to be fully self-maintained and user-controlled. It does not collect or transmit any analytics or personal data to external servers.  
