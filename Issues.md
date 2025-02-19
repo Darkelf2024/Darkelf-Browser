@@ -7,7 +7,7 @@ Login access fails due to a Content Security Policy (CSP) issue.
 This issue arises when website CSP rules block specific scripts or resources, leading to login failures. Standard email accounts such as Outlook and Gmail successfully log in without issues. However, login attempts for more secure email services, such as Tutanota and ProtonMail, fail despite enabling JavaScript, Cookies, and Local Storage.
 
 ## Research Findings:
-To achieve compatibility with approximately 99% of websites and bypass Cloudflare blocks, it is essential to enable persistent JavaScript, Cookies, and Local Storage. Unfortunately, enabling these features also allows tracking, which conflicts with the strict CSP enforced by secure email services like Tutanota and ProtonMail.
+To achieve compatibility with approximately 99% of websites, email accounts, and bypass Cloudflare blocks, it is essential to enable persistent JavaScript, Cookies, and Local Storage. Unfortunately, enabling these features also allows tracking, which conflicts with the strict CSP enforced by secure email services like Tutanota and ProtonMail.
 
 Moreover, the Darkelf Browser, which is built using pyQt5, does not support Web Assembly (WASM). This limitation further complicates login access to these secure email services, as they rely on WASM for their functionality.
 
