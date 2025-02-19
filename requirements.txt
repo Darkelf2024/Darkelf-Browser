@@ -1,11 +1,11 @@
 PySide6
+PyQt6-WebEngine
 beautifulsoup4
 requests
 adblockparser
 cryptography
 pycryptodome
 pqcrypto
-PyQtWebEngine
 dnspython
 stem
 
