@@ -22,3 +22,5 @@ Two potential alternatives for accessing secure email services outside of the Da
 - **Neomutt**: A command-line based email client that is highly customizable and efficient. Neomutt is suitable for users who prefer a terminal-based application and need robust email management capabilities.
 
 Both Thunderbird and Neomutt are accessible through the Darkelf OSINT Edition under the tools section, providing users with secure and reliable options for managing their email accounts.
+
+Note: All tools are accessed via terminal from Darkelf OSINT Edition.
