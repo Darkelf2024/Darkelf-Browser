@@ -43,23 +43,21 @@ The Darkelf Browser incorporates Tor DNS, an advanced DNS resolution service tha
   
 
 ## Explanation
-This application uses PyQt-WebEngine, which provides Python bindings for Qt WebEngine, and Qt WebEngine, which is provided by The Qt Company under the LGPL license.
-PyQt-WebEngine enables the integration of web functionality into this application using the Qt framework.
-For more information about PyQt-WebEngine, please refer to the PyQt documentation. 
 
-- Python Standard Library: Covers the standard modules provided by Python, including sys, os, gc, base64, and urllib.parse.
-- PyQt5: A set of Python bindings for the Qt application framework, covering core and widget components.
-- PyQt-WebEngine: Python bindings specifically for the Qt WebEngine module, facilitating web content embedding in Python    applications.
-    
-- Qt WebEngine: The C++ module providing the actual web rendering engine, which PyQt-WebEngine wraps for use in Python.
-- PyCryptodome: A self-contained Python package of low-level cryptographic primitives.
-- Guppy: A Python programming environment & heap analysis toolset, with heapy for heap analysis.
+This application uses **PySide6-WebEngine**, which provides Python bindings for **Qt WebEngine**, a web rendering engine developed by **The Qt Company** under the **LGPL-3.0 license**.  
+**PySide6-WebEngine** enables the integration of web functionality into this application using the **Qt framework**. For more information, refer to the official PySide6 documentation.  
 
-## License
-This project is licensed under the terms of the GNU General Public License v3.0. See the [LICENSE](LICENSE) file for more details.
+### **Key Components and Dependencies:**  
 
-### Third-Party Libraries
-- **PyQt5**: Licensed under the GNU General Public License v3.0. For more details, visit the [PyQt5 project page](https://riverbankcomputing.com/software/pyqt/intro).
-- **Qt WebEngine**: Licensed under the GNU Lesser General Public License v3.0. For more details, visit the [Qt project page](https://www.qt.io/).
+- **Python Standard Library** – Includes built-in modules such as `sys`, `os`, `gc`, `base64`, and `urllib.parse`, essential for system operations, memory management, and URL handling.  
+- **PySide6** – A set of **Python bindings** for the **Qt application framework**, covering core UI components, widgets, and WebEngine integration (**License: LGPL-3.0**).  
+- **PySide6-WebEngine** – Provides **Python bindings** specifically for **Qt WebEngine**, enabling embedded web browsing in Python applications (**License: LGPL-3.0**).  
+- **Qt WebEngine** – A **C++ module** that serves as the actual web rendering engine, wrapped by **PySide6-WebEngine** for Python usage (**License: LGPL-3.0**).  
+- **PyCryptodome** – A **self-contained** Python package offering **low-level cryptographic primitives**, useful for encryption and security-related features (**License: Public Domain**).  
+- **Adblockparser** – A **Python library** used for parsing and applying ad-blocking rules (**License: MIT**).  
+- **dnspython** – A **DNS toolkit** for Python, providing functions for querying and managing DNS records (**License: ISC**).  
+- **Stem** – A **controller library** for **Tor**, allowing applications to interact with the Tor network (**License: GPL-3.0**).  
+
+For detailed licensing information, refer to each library’s official documentation.  
 
 Copyright © 2024 Dr. Kevin Moore. All rights reserved.
