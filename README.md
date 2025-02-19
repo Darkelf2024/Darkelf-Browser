@@ -274,20 +274,14 @@ Themes are based on an auto-detection system of user preferences. The browser ad
 
 ## Known Issues & Future Improvements
 
-### 1. Tuta/Proton Login Access Issue
-- **Problem**: Login access fails due to a **Content Security Policy (CSP)** issue.
-- **Details**: This occurs when website CSP rules block specific scripts or resources, causing login failures.
-- Note: Standard Email Accounts/Login = Success! Outlook, Gmail, etc.
-- JavaScript, Cookies, Local Storage need to be enabled for Login to appear - But still working on this for Proton/Tuta
-
-### 2. Adblockparser Accuracy
+### 1. Adblockparser Accuracy
 - **Problem**: The **adblockparser** tool is not 100% accurate in identifying and blocking all ads and trackers.
 - **Details**:
   - The scope of tracker/ad lists needs expansion to include newer or lesser-known domains.
   - Some rules are skipped or misapplied in edge cases.
   - Dynamically loaded content or obfuscated ads pose detection challenges.
 
-### 3. Suggestions for Improvement
+### 2. Suggestions for Improvement
 - Continuously update and refine filter lists by collaborating with community-maintained projects.
 - Enhance parsing algorithms to address modern, complex web structures (e.g., JavaScript-heavy frameworks).
 - Conduct additional testing across a wider range of websites to identify and resolve gaps.
