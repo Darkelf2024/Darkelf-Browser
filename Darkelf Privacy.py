@@ -60,14 +60,14 @@ import logging
 import time
 from urllib.parse import urlparse
 from base64 import urlsafe_b64encode, urlsafe_b64decode
-from PyQt5.QtWidgets import (
-    QApplication, QMainWindow, QTabWidget, QPushButton, QLineEdit, QVBoxLayout, QMenuBar, QAction, QShortcut, QToolBar, QDialog, QMessageBox, QFileDialog, QProgressDialog, QListWidget, QWidget, QLabel
+from PySide6.QtWidgets import (
+    QApplication, QMainWindow, QTabWidget, QPushButton, QLineEdit, QVBoxLayout, QMenuBar, QToolBar, QDialog, QMessageBox, QFileDialog, QProgressDialog, QListWidget, QWidget, QLabel
 )
-from PyQt5.QtGui import QPalette, QColor, QKeySequence
-from PyQt5.QtWebEngineWidgets import QWebEngineView, QWebEngineSettings, QWebEnginePage, QWebEngineScript, QWebEngineProfile, QWebEngineDownloadItem
-from PyQt5.QtNetwork import QNetworkProxy, QSslConfiguration, QSsl
-from PyQt5.QtWebEngineCore import QWebEngineUrlRequestInterceptor
-from PyQt5.QtCore import QUrl, QSettings, Qt, QObject, pyqtSlot
+from PySide6.QtGui import QPalette, QColor, QKeySequence, QAction, QShortcut
+from PySide6.QtWebEngineWidgets import QWebEngineView
+from PySide6.QtNetwork import QNetworkProxy, QSslConfiguration, QSsl
+from PySide6.QtWebEngineCore import QWebEngineUrlRequestInterceptor, QWebEngineSettings, QWebEnginePage, QWebEngineScript, QWebEngineProfile, QWebEngineDownloadRequest
+from PySide6.QtCore import QUrl, QSettings, Qt, QObject, Slot
 from cryptography.hazmat.primitives import serialization, hashes
 from cryptography.hazmat.primitives.asymmetric import x25519, rsa, padding
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
@@ -76,7 +76,6 @@ from cryptography.hazmat.backends import default_backend
 from adblockparser import AdblockRules
 import stem.process
 from stem.control import Controller
-
 
 # Debounce function to limit the rate at which a function can fire
 def debounce(func, wait):
@@ -94,8 +93,8 @@ def debounce(func, wait):
         timeout.start()
 
     return debounced
-
-
+    
+      
 # AES-GCM Implementation
 def generate_aes_gcm_key():
     return os.urandom(32)
@@ -291,7 +290,7 @@ class DownloadManager(QObject):
         super().__init__(parent)
         self.downloads = []
 
-    @pyqtSlot(QWebEngineDownloadItem)
+    @Slot(QWebEngineDownloadRequest)
     def handle_download(self, download_item):
         self.downloads.append(download_item)
         save_path, _ = QFileDialog.getSaveFileName(self.parent(), "Save File", download_item.path())
@@ -307,21 +306,118 @@ class DownloadManager(QObject):
             download_item.downloadProgress.connect(
                 lambda received, total: self.update_progress(progress_dialog, received, total))
             download_item.finished.connect(lambda: self.finish_download(progress_dialog, download_item))
+        else:
+            QMessageBox.warning(self.parent(), "Download Cancelled", "The download has been cancelled.")
+            self.downloads.remove(download_item)
 
     def update_progress(self, progress_dialog, received, total):
         if total > 0:
-            progress = int(received * 100 / total)
-            progress_dialog.setValue(progress)
+            progress_dialog.setValue(int(received * 100 / total))
 
     def finish_download(self, progress_dialog, download_item):
-        progress_dialog.close()
-        if download_item.state() == QWebEngineDownloadItem.DownloadCompleted:
-            QMessageBox.information(self.parent(), "Download Completed", "The file has been downloaded successfully.")
+        if download_item.state() == QWebEngineDownloadRequest.DownloadCompleted:
+            progress_dialog.setValue(100)
+            progress_dialog.close()
+            QMessageBox.information(self.parent(), "Download Finished", f"Downloaded to {download_item.path()}")
         else:
+            progress_dialog.close()
             QMessageBox.warning(self.parent(), "Download Failed", "The download has failed.")
         self.downloads.remove(download_item)
 
 # Custom Web Engine Page
+class CustomWebEnginePage(QWebEnginePage):
+    def __init__(self, browser, parent=None):
+        super().__init__(parent)
+        self.browser = browser
+        self.setup_ssl_configuration()
+        self.inject_crypto_script()
+        self.inject_crypto_prng_script()
+        self.inject_geolocation_override()
+        self.protect_fingerprinting()
+        self.setup_csp()
+        self.fullScreenRequested.connect(self.handle_fullscreen_request)
+        
+    def handle_fullscreen_request(self, request):
+        request.accept()
+        if request.toggleOn():
+            self.view().window().showFullScreen()
+        else:
+            self.view().window().showNormal()
+            
+class CustomWebEnginePage(QWebEnginePage):
+    def __init__(self, browser, parent=None):
+        super().__init__(parent)
+        self.browser = browser
+        self.fullScreenRequested.connect(self.handle_fullscreen_request)
+
+    def handle_fullscreen_request(self, request):
+        request.accept()
+        if request.toggleOn():
+            self.view().window().showFullScreen()
+        else:
+            self.view().window().showNormal()
+
+class CustomWebEngineView(QWebEngineView):
+    def __init__(self, browser, parent=None):
+        super().__init__(parent)
+        self.browser = browser
+        self.setPage(CustomWebEnginePage(self.browser))
+
+    def enterFullScreenMode(self):
+        self.setWindowFlag(Qt.FramelessWindowHint, True)
+        self.showFullScreen()
+
+    def exitFullScreenMode(self):
+        self.setWindowFlag(Qt.FramelessWindowHint, False)
+        self.showNormal()
+
+class Browser(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.settings = QSettings("MyCompany", "MyApp")
+        self.tab_widget = QTabWidget()
+        self.setCentralWidget(self.tab_widget)
+        self.create_new_tab(QUrl("https://www.youtube.com"))
+
+    def create_new_tab(self, url):
+        new_tab = QWidget()
+        layout = QVBoxLayout()
+        new_tab.setLayout(layout)
+        webview = CustomWebEngineView(self)
+        layout.addWidget(webview)
+        self.tab_widget.addTab(new_tab, "New Tab")
+        self.tab_widget.setCurrentWidget(new_tab)
+        webview.load(url)
+        return webview
+
+    def handle_fullscreen_request(self, request):
+        request.accept()
+    
+    def createWindow(self, _type):
+        return self.browser.create_new_tab().page()
+
+    def acceptNavigationRequest(self, url, _type, isMainFrame):
+        if self.browser.adblock_rules.should_block(url.toString()):
+            return False
+        if url.scheme() == 'http' and self.browser.https_enforced:
+            secure_url = QUrl(url)
+            secure_url.setScheme('https')
+            self.setUrl(secure_url)
+            return False
+        return super().acceptNavigationRequest(url, _type, isMainFrame)
+
+    def setup_ssl_configuration(self):
+        configuration = QSslConfiguration.defaultConfiguration()
+        configuration.setProtocol(QSsl.TlsV1_3)
+        QSslConfiguration.setDefaultConfiguration(configuration)
+        #self.ssl_errors.connect(self.handle_ssl_errors)
+
+    def handle_ssl_errors(self, reply, errors):
+        for error in errors:
+            QMessageBox.critical(self, "SSL Error", f"SSL Error: {error.errorString()}")
+        reply.abort()
+
+
 class CustomWebEnginePage(QWebEnginePage):
     def __init__(self, browser, parent=None):
         super().__init__(parent)
@@ -408,7 +504,7 @@ class CustomWebEnginePage(QWebEnginePage):
             return window.crypto.subtle.generateKey(
                 {
                     name: "RSA-OAEP",
-                    modulusLength: 4096,
+                    modulusLength: 2048,
                     publicExponent: new Uint8Array([1, 0, 1]),
                     hash: { name: "SHA-256" },
                 },
@@ -472,7 +568,7 @@ class CustomWebEnginePage(QWebEnginePage):
         }
         """
         self.runJavaScript(script)
-    
+        
     def inject_crypto_prng_script(self):
         script = """
         (function() {
@@ -643,7 +739,7 @@ class CustomWebEngineView(QWebEngineView):
 
     def configure_sandbox(self):
         settings = self.settings()
-        settings.setAttribute(QWebEngineSettings.LocalStorageEnabled, False)
+        settings.setAttribute(QWebEngineSettings.LocalStorageEnabled, True)
         settings.setAttribute(QWebEngineSettings.JavascriptEnabled, False)
         settings.setAttribute(QWebEngineSettings.JavascriptCanOpenWindows, False)
         settings.setAttribute(QWebEngineSettings.JavascriptCanAccessClipboard, False)
@@ -673,7 +769,46 @@ class CustomWebEngineView(QWebEngineView):
         url = self.page().contextMenuData().linkUrl()
         if url.isValid():
             self.browser.create_new_window(url.toString())
+            
+class YouTubePlayer(QWebEngineView):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.init_ui()
 
+    def init_ui(self):
+        settings = self.settings()
+        settings.setAttribute(QWebEngineSettings.JavascriptEnabled, True)
+        settings.setAttribute(QWebEngineSettings.FullScreenSupportEnabled, True)
+        self.page().loadFinished.connect(self.on_load_finished)
+        self.set_url("https://www.youtube.com")
+
+    def set_url(self, url):
+        self.setUrl(QUrl(url))
+
+    @Slot()
+    def on_load_finished(self):
+        self.page().runJavaScript("""
+            document.addEventListener('fullscreenchange', function() {
+                if (document.fullscreenElement) {
+                    console.log('Entered fullscreen mode');
+                } else {
+                    console.log('Exited fullscreen mode');
+                }
+            });
+
+            document.querySelector('.ytp-fullscreen-button').onclick = function() {
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen().catch(err => {
+                        console.log(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+                    });
+                } else {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    }
+                }
+            };
+        """)
+        
 class Darkelf(QMainWindow):
     def __init__(self):
         super().__init__()
