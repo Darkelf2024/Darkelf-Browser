@@ -9,7 +9,7 @@ This project is licensed under the GNU General Public License v3.0 (GPL-3.0). Se
 This project utilizes third-party libraries, each with its own licensing terms and conditions:
 
 - **Python Standard Library**: PSFL, Copyright © 2001-2024 Python Software Foundation.
-- **PyQt5**: GPL, Copyright © Riverbank Computing Limited.
+- **PySide6 
 - **PyQtWebEngine**: GPL, Copyright © Riverbank Computing Limited.
 - **Crypto (PyCryptodome)**: Public Domain.
 - **base64, urllib, sys, os, gc**: PSFL, Copyright © 2001-2024 Python Software Foundation.
