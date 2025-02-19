@@ -2,15 +2,22 @@
 
 ## Attribution
 
-This project utilizes third-party libraries and resources, which are acknowledged below:
+This project utilizes third-party libraries and resources, which are acknowledged below:  
 
-- **Python**: [Python Software Foundation](https://www.python.org/) (License: [PSF License](https://docs.python.org/3/license.html))
-- **PyQt5**: [Riverbank Computing Limited](https://www.riverbankcomputing.com/software/pyqt/) (License: [GPL](https://www.riverbankcomputing.com/software/pyqt/intro))
-- **PyQt-WebEngine**: [Riverbank Computing Limited](https://www.riverbankcomputing.com/software/pyqtwebengine/) (License: [GPL](https://www.riverbankcomputing.com/software/pyqtwebengine/intro))
-- **Crypto**: [PyCryptodome](https://www.pycryptodome.org/) (License: [Public Domain](https://github.com/Legrandin/pycryptodome/blob/main/LICENSE))
-- **base64**: [Python Standard Library](https://docs.python.org/3/library/base64.html) (License: [PSF License](https://docs.python.org/3/license.html))
-- **urllib**: [Python Standard Library](https://docs.python.org/3/library/urllib.html) (License: [PSF License](https://docs.python.org/3/license.html))
-- **Other standard libraries**: Refer to their respective documentation.
+- **Python** – Python Software Foundation (**License: PSF License**)  
+- **PySide6** – The Qt Company Ltd. (**License: LGPL-3.0**)  
+- **PySide6-WebEngine** – The Qt Company Ltd. (**License: LGPL-3.0**)  
+- **BeautifulSoup4** – Leonard Richardson (**License: MIT**)  
+- **Requests** – Kenneth Reitz & contributors (**License: Apache 2.0**)  
+- **Adblockparser** – Andy Chilton (**License: MIT**)  
+- **Cryptography** – The Python Cryptographic Authority (**License: Apache 2.0**)  
+- **PyCryptodome** – Dario Izzo (**License: Public Domain**)  
+- **PQCrypto** – Post-Quantum Cryptography library (**License: Varies, see package details**)  
+- **dnspython** – Bob Halley & contributors (**License: ISC**)  
+- **Stem** – The Tor Project (**License: GPL-3.0**)  
+- **Base64, urllib, and other Python Standard Libraries** – Python Software Foundation (**License: PSF License**)  
+
+For detailed licensing information, please refer to each library’s official documentation.  
 
 ## Additional Attributions
 
