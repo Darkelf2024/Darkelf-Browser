@@ -26,7 +26,12 @@ Make sure to have Homebrew installed, updated, upgraded, cleanup for certain too
 - **[Masscan](https://github.com/robertdavidgraham/masscan)** - The fastest Internet port scanner.
 - **[Amass](https://github.com/owasp-amass/amass)** -  In-depth DNS enumeration and network mapping.
 - **[Subfinder](https://github.com/projectdiscovery/subfinder)** - A subdomain discovery tool that discovers valid subdomains.
-- **[W3Techs](https://w3techs.com/)** – A service that provides information about the usage of various types of technologies on the web. 
+- **[W3Techs](https://w3techs.com/)** – A service that provides information about the usage of various types of technologies on the web.
+- **[Mat2 - Metadata Removal Tool](https://gitlab.com/mat2/mat2)** – Mat2 (Metadata Anonymization Toolkit) is a tool designed to help you protect your privacy by removing metadata from files. It supports various file types like images, PDFs, and documents, ensuring that any hidden metadata that may contain sensitive information is erased.
+- **[Neomutt - Email Client for Power Users](https://neomutt.org/)** – Neomutt is a text-based email client, designed for power users. It supports a wide range of features, making it perfect for those who prefer customization and control over their email experience.
+- **[Thunderbird - Free Email Application](https://www.mozilla.org/en-US/thunderbird/)** – Thunderbird is a free, open-source email client developed by Mozilla. It's known for its ease of use, customization options, and robust security features. Whether you're a beginner or an advanced user, Thunderbird offers tools to help manage your emails efficiently. 
+- **[ExifTool - Metadata Reader and Editor](https://exiftool.org/)** – ExifTool is a powerful platform-independent Perl library and command-line application for reading, writing, and editing meta information in a wide variety of file formats. It's commonly used by photographers and other professionals to edit metadata in images and media files.
+
 
 ## **2. Mapping and Geolocation Tools**  
 
