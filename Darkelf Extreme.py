@@ -48,6 +48,7 @@
 # This software is made available under the GPL 3.0 license.
 
 import sys
+import random
 import os
 import re
 import requests
@@ -59,14 +60,14 @@ import logging
 import time
 from urllib.parse import urlparse
 from base64 import urlsafe_b64encode, urlsafe_b64decode
-from PyQt5.QtWidgets import (
-    QApplication, QMainWindow, QTabWidget, QPushButton, QLineEdit, QVBoxLayout, QMenuBar, QAction, QShortcut, QToolBar, QDialog, QMessageBox, QFileDialog, QProgressDialog, QListWidget, QWidget, QLabel
+from PySide6.QtWidgets import (
+    QApplication, QMainWindow, QTabWidget, QPushButton, QLineEdit, QVBoxLayout, QMenuBar, QToolBar, QDialog, QMessageBox, QFileDialog, QProgressDialog, QListWidget, QWidget, QLabel
 )
-from PyQt5.QtGui import QPalette, QColor, QKeySequence
-from PyQt5.QtWebEngineWidgets import QWebEngineView, QWebEngineSettings, QWebEnginePage, QWebEngineProfile, QWebEngineDownloadItem
-from PyQt5.QtNetwork import QNetworkProxy, QSslConfiguration, QSsl
-from PyQt5.QtWebEngineCore import QWebEngineUrlRequestInterceptor
-from PyQt5.QtCore import QUrl, QSettings, Qt, QObject, pyqtSlot
+from PySide6.QtGui import QPalette, QColor, QKeySequence, QAction, QShortcut
+from PySide6.QtWebEngineWidgets import QWebEngineView
+from PySide6.QtNetwork import QNetworkProxy, QSslConfiguration, QSsl
+from PySide6.QtWebEngineCore import QWebEngineUrlRequestInterceptor, QWebEngineSettings, QWebEnginePage, QWebEngineScript, QWebEngineProfile, QWebEngineDownloadRequest
+from PySide6.QtCore import QUrl, QSettings, Qt, QObject, Slot
 from cryptography.hazmat.primitives import serialization, hashes
 from cryptography.hazmat.primitives.asymmetric import x25519, rsa, padding
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
@@ -289,7 +290,7 @@ class DownloadManager(QObject):
         super().__init__(parent)
         self.downloads = []
 
-    @pyqtSlot(QWebEngineDownloadItem)
+    @Slot(QWebEngineDownloadRequest)
     def handle_download(self, download_item):
         self.downloads.append(download_item)
         save_path, _ = QFileDialog.getSaveFileName(self.parent(), "Save File", download_item.path())
@@ -305,20 +306,23 @@ class DownloadManager(QObject):
             download_item.downloadProgress.connect(
                 lambda received, total: self.update_progress(progress_dialog, received, total))
             download_item.finished.connect(lambda: self.finish_download(progress_dialog, download_item))
+        else:
+            QMessageBox.warning(self.parent(), "Download Cancelled", "The download has been cancelled.")
+            self.downloads.remove(download_item)
 
     def update_progress(self, progress_dialog, received, total):
         if total > 0:
-            progress = int(received * 100 / total)
-            progress_dialog.setValue(progress)
+            progress_dialog.setValue(int(received * 100 / total))
 
     def finish_download(self, progress_dialog, download_item):
-        progress_dialog.close()
-        if download_item.state() == QWebEngineDownloadItem.DownloadCompleted:
-            QMessageBox.information(self.parent(), "Download Completed", "The file has been downloaded successfully.")
+        if download_item.state() == QWebEngineDownloadRequest.DownloadCompleted:
+            progress_dialog.setValue(100)
+            progress_dialog.close()
+            QMessageBox.information(self.parent(), "Download Finished", f"Downloaded to {download_item.path()}")
         else:
+            progress_dialog.close()
             QMessageBox.warning(self.parent(), "Download Failed", "The download has failed.")
         self.downloads.remove(download_item)
-
 # Custom Web Engine Page
 class CustomWebEnginePage(QWebEnginePage):
     def __init__(self, browser, parent=None):
