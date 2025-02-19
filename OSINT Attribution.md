@@ -27,13 +27,15 @@ Make sure to have Homebrew installed, updated, upgraded, cleanup for certain too
 - **[Amass](https://github.com/owasp-amass/amass)** -  In-depth DNS enumeration and network mapping.
 - **[Subfinder](https://github.com/projectdiscovery/subfinder)** - A subdomain discovery tool that discovers valid subdomains.
 - **[W3Techs](https://w3techs.com/)** – A service that provides information about the usage of various types of technologies on the web.
+
+## **2. Privacy and Productivity Tools
 - **[Mat2 - Metadata Removal Tool](https://gitlab.com/mat2/mat2)** – Mat2 (Metadata Anonymization Toolkit) is a tool designed to help you protect your privacy by removing metadata from files. It supports various file types like images, PDFs, and documents, ensuring that any hidden metadata that may contain sensitive information is erased.
 - **[Neomutt - Email Client for Power Users](https://neomutt.org/)** – Neomutt is a text-based email client, designed for power users. It supports a wide range of features, making it perfect for those who prefer customization and control over their email experience.
 - **[Thunderbird - Free Email Application](https://www.mozilla.org/en-US/thunderbird/)** – Thunderbird is a free, open-source email client developed by Mozilla. It's known for its ease of use, customization options, and robust security features. Whether you're a beginner or an advanced user, Thunderbird offers tools to help manage your emails efficiently. 
 - **[ExifTool - Metadata Reader and Editor](https://exiftool.org/)** – ExifTool is a powerful platform-independent Perl library and command-line application for reading, writing, and editing meta information in a wide variety of file formats. It's commonly used by photographers and other professionals to edit metadata in images and media files.
 
 
-## **2. Mapping and Geolocation Tools**  
+## **3. Mapping and Geolocation Tools**  
 
 These tools provide mapping, geolocation, and satellite imagery for OSINT investigations.  
 
@@ -42,7 +44,7 @@ These tools provide mapping, geolocation, and satellite imagery for OSINT invest
 - **[OpenMapTiles](https://openmaptiles.org/)** – A tool for creating and serving map tiles.  
 - **[Leaflet](https://leafletjs.com/)** – A JavaScript library for interactive maps.  
 
-## **3. OSINT Research and Investigation Platforms**  
+## **4. OSINT Research and Investigation Platforms**  
 
 These platforms help researchers and investigators conduct in-depth intelligence gathering.  
 
@@ -55,28 +57,28 @@ These platforms help researchers and investigators conduct in-depth intelligence
 - **[Hunchly](https://www.hunch.ly/)** – A tool for capturing and organizing web-based investigations.  
 - **[OSINT Combine](https://www.osintcombine.com/)** – A platform offering OSINT courses and tools.  
 
-## **4. Open-Source Knowledge Bases**  
+## **5. Open-Source Knowledge Bases**  
 
 Decentralized online encyclopedias and archives for OSINT research.  
 
 - **[Internet Archive](https://archive.org/)** – A digital library of archived websites, books, and media.  
 - **[InfoGalactic](https://infogalactic.com/info/Main_Page/)** – An open-source alternative to Wikipedia.  
 
-## **5. OSINT Data Correlation & Visualization Tools**  
+## **6. OSINT Data Correlation & Visualization Tools**  
 
 Tools used for network mapping, data correlation, and visualization in OSINT.  
 
 - **[Maltego](https://www.maltego.com/)** – A link analysis tool for OSINT investigations.  
 - **[Recon-ng](https://github.com/lanmaster53/recon-ng/)** – A web-based reconnaissance framework.  
 
-## **6. Satellite & Aerial Mapping Tools**  
+## **7. Satellite & Aerial Mapping Tools**  
 
 Alternative online tools to Google Earth for satellite imagery.  
 
 - **[Zoom Earth](https://zoom.earth/)** – A high-resolution satellite imagery viewer.  
 - **[NASA Worldview](https://worldview.earthdata.nasa.gov/)** – A tool for real-time satellite imagery and environmental monitoring.  
 
-## **7. Threat Intelligence & Cybersecurity Platforms**  
+## **8. Threat Intelligence & Cybersecurity Platforms**  
 
 Open-source threat intelligence platforms and Maltego alternatives.  
 
