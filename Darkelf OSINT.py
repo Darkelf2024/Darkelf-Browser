@@ -812,7 +812,7 @@ class Darkelf(QMainWindow):
         self.chacha20_key = self.generate_chacha20_key(os.urandom(16))
 
         # Initialize settings
-        self.javascript_enabled = self.settings.value("javascript_enabled", True, type=bool)
+        self.javascript_enabled = self.settings.value("javascript_enabled", False, type=bool)
         self.anti_fingerprinting_enabled = self.settings.value("anti_fingerprinting_enabled", True, type=bool)
         self.tor_network_enabled = self.settings.value("tor_network_enabled", True, type=bool)
         self.quantum_encryption_enabled = self.settings.value("quantum_encryption_enabled", False, type=bool)
