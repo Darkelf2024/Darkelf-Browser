@@ -847,7 +847,7 @@ class Darkelf(QMainWindow):
         self.tor_network_enabled = self.settings.value("tor_network_enabled", True, type=bool)
         self.quantum_encryption_enabled = self.settings.value("quantum_encryption_enabled", False, type=bool)
         self.https_enforced = self.settings.value("https_enforced", True, type=bool)
-        self.cookies_enabled = self.settings.value("cookies_enabled", False, type=bool)
+        self.cookies_enabled = self.settings.value("cookies_enabled", True, type=bool)
         self.geolocation_enabled = self.settings.value("geolocation_enabled", False, type=bool)
         self.block_device_orientation = self.settings.value("block_device_orientation", True, type=bool)
         self.block_media_devices = self.settings.value("block_media_devices", True, type=bool)
@@ -1233,8 +1233,6 @@ class Darkelf(QMainWindow):
         self.tabs.setCurrentWidget(new_tab)
         self.setMenuBar(menu_bar)
 
-        self.setMenuBar(menu_bar)
-
     def add_navigation_actions(self, navigation_menu):
         back_action = QAction("Back", self)
         back_action.triggered.connect(self.go_back)
@@ -1420,44 +1418,39 @@ class Darkelf(QMainWindow):
             action = QAction(tool_name, self)
             action.triggered.connect(lambda checked, url=tool_url: open_tool(url))
             tools_menu.addAction(action)
-        
-        # Add shortcuts for various actions
-        self.init_shortcuts()
-        self.configure_web_engine_profile()
-        
+                
     def init_shortcuts(self):
-        # Shortcut for creating a new tab (Ctrl+T)
-        QShortcut(QKeySequence("Ctrl+T"), self, self.create_new_tab)
+        # Shortcut for creating a new tab (Cmd+T on macOS, Ctrl+T on other systems)
+        QShortcut(QKeySequence("Ctrl+T" if sys.platform != 'darwin' else "Meta+T"), self, self.create_new_tab)
 
-        # Shortcut for closing the current tab (Ctrl+W)
-        QShortcut(QKeySequence("Ctrl+W"), self, lambda: self.close_tab(self.tab_widget.currentIndex()))
+        # Shortcut for closing the current tab (Cmd+W on macOS, Ctrl+W on other systems)
+        QShortcut(QKeySequence("Ctrl+W" if sys.platform != 'darwin' else "Meta+W"), self, lambda: self.close_tab(self.tab_widget.currentIndex()))
 
-        # Shortcut for reloading the current page (Ctrl+R)
-        QShortcut(QKeySequence("Ctrl+R"), self, self.reload_page)
+        # Shortcut for reloading the current page (Cmd+R on macOS, Ctrl+R on other systems)
+        QShortcut(QKeySequence("Ctrl+R" if sys.platform != 'darwin' else "Meta+R"), self, self.reload_page)
 
-        # Shortcut for going back (Ctrl+Left)
-        QShortcut(QKeySequence("Ctrl+Left"), self, self.go_back)
+        # Shortcut for going back (Cmd+Left on macOS, Ctrl+Left on other systems)
+        QShortcut(QKeySequence("Ctrl+Left" if sys.platform != 'darwin' else "Meta+Left"), self, self.go_back)
 
-        # Shortcut for going forward (Ctrl+Right)
-        QShortcut(QKeySequence("Ctrl+Right"), self, self.go_forward)
+        # Shortcut for going forward (Cmd+Right on macOS, Ctrl+Right on other systems)
+        QShortcut(QKeySequence("Ctrl+Right" if sys.platform != 'darwin' else "Meta+Right"), self, self.go_forward)
 
         # Shortcut for toggling full screen (F11)
         QShortcut(QKeySequence("F11"), self, self.toggle_full_screen)
 
-        # Shortcut for viewing history (Ctrl+H)
-        QShortcut(QKeySequence("Ctrl+H"), self, self.view_history)
+        # Shortcut for viewing history (Cmd+H on macOS, Ctrl+H on other systems)
+        QShortcut(QKeySequence("Ctrl+H" if sys.platform != 'darwin' else "Meta+H"), self, self.view_history)
 
-        # Shortcut for zooming in (Ctrl++)
-        QShortcut(QKeySequence("Ctrl++"), self, self.zoom_in)
+        # Shortcut for zooming in (Cmd++ on macOS, Ctrl++ on other systems)
+        QShortcut(QKeySequence("Ctrl++" if sys.platform != 'darwin' else "Meta++"), self, self.zoom_in)
 
-        # Shortcut for zooming out (Ctrl+-)
-        QShortcut(QKeySequence("Ctrl+-"), self, self.zoom_out)
-    
+        # Shortcut for zooming out (Cmd+- on macOS, Ctrl+- on other systems)
+        QShortcut(QKeySequence("Ctrl+-" if sys.platform != 'darwin' else "Meta+-"), self, self.zoom_out)
+        
     def create_new_tab(self, url="home"):
-        web_view = CustomWebEngineView(self)
+        web_view = QWebEngineView()
         web_view.loadFinished.connect(self.update_tab_title)
         web_view.urlChanged.connect(self.update_url_bar)
-
         if url == "home":
             web_view.setHtml(self.custom_homepage_html())
             tab_title = "Darkelf"
@@ -1541,11 +1534,6 @@ class Darkelf(QMainWindow):
         profile = QWebEngineProfile.defaultProfile()
         profile.cookieStore().deleteAllCookies()
         QMessageBox.information(self, "Cookies Cleared", "All cookies have been successfully cleared.")
-
-    def enable_private_browsing(self):
-        profile = QWebEngineProfile.defaultProfile()
-        profile.setHttpCacheType(QWebEngineProfile.MemoryHttpCache)
-        profile.setPersistentCookiesPolicy(QWebEngineProfile.NoPersistentCookies)
 
     def search_or_load_url(self):
         text = self.search_bar.text()
