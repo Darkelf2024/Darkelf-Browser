@@ -61,12 +61,12 @@ import time
 from urllib.parse import urlparse
 from base64 import urlsafe_b64encode, urlsafe_b64decode
 from PySide6.QtWidgets import (
-    QApplication, QMainWindow, QTabWidget, QPushButton, QLineEdit, QVBoxLayout, QMenuBar, QToolBar, QDialog, QMessageBox, QFileDialog, QProgressDialog, QListWidget, QWidget, QLabel
+    QApplication, QMainWindow, QTabWidget, QPushButton, QLineEdit, QVBoxLayout, QMenuBar, QToolBar, QDialog, QMessageBox, QFileDialog, QProgressDialog, QListWidget, QMenu, QWidget, QLabel
 )
-from PySide6.QtGui import QPalette, QColor, QKeySequence, QAction, QShortcut
+from PySide6.QtGui import QPalette, QColor, QKeySequence, QShortcut, QAction
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtNetwork import QNetworkProxy, QSslConfiguration, QSsl
-from PySide6.QtWebEngineCore import QWebEngineUrlRequestInterceptor, QWebEngineSettings, QWebEnginePage, QWebEngineScript, QWebEngineProfile, QWebEngineDownloadRequest
+from PySide6.QtWebEngineCore import QWebEngineUrlRequestInterceptor, QWebEngineSettings, QWebEnginePage, QWebEngineScript, QWebEngineProfile, QWebEngineDownloadRequest, QWebEngineContextMenuRequest
 from PySide6.QtCore import QUrl, QSettings, Qt, QObject, Slot
 from cryptography.hazmat.primitives import serialization, hashes
 from cryptography.hazmat.primitives.asymmetric import x25519, rsa, padding
@@ -76,6 +76,7 @@ from cryptography.hazmat.backends import default_backend
 from adblockparser import AdblockRules
 import stem.process
 from stem.control import Controller
+
 
 # Debounce function to limit the rate at which a function can fire
 def debounce(func, wait):
@@ -93,8 +94,8 @@ def debounce(func, wait):
         timeout.start()
 
     return debounced
-    
-      
+
+
 # AES-GCM Implementation
 def generate_aes_gcm_key():
     return os.urandom(32)
@@ -344,91 +345,6 @@ class CustomWebEnginePage(QWebEnginePage):
         else:
             self.view().window().showNormal()
             
-class CustomWebEnginePage(QWebEnginePage):
-    def __init__(self, browser, parent=None):
-        super().__init__(parent)
-        self.browser = browser
-        self.fullScreenRequested.connect(self.handle_fullscreen_request)
-
-    def handle_fullscreen_request(self, request):
-        request.accept()
-        if request.toggleOn():
-            self.view().window().showFullScreen()
-        else:
-            self.view().window().showNormal()
-
-class CustomWebEngineView(QWebEngineView):
-    def __init__(self, browser, parent=None):
-        super().__init__(parent)
-        self.browser = browser
-        self.setPage(CustomWebEnginePage(self.browser))
-
-    def enterFullScreenMode(self):
-        self.setWindowFlag(Qt.FramelessWindowHint, True)
-        self.showFullScreen()
-
-    def exitFullScreenMode(self):
-        self.setWindowFlag(Qt.FramelessWindowHint, False)
-        self.showNormal()
-
-class Browser(QMainWindow):
-    def __init__(self):
-        super().__init__()
-        self.settings = QSettings("MyCompany", "MyApp")
-        self.tab_widget = QTabWidget()
-        self.setCentralWidget(self.tab_widget)
-        self.create_new_tab(QUrl("https://www.youtube.com"))
-
-    def create_new_tab(self, url):
-        new_tab = QWidget()
-        layout = QVBoxLayout()
-        new_tab.setLayout(layout)
-        webview = CustomWebEngineView(self)
-        layout.addWidget(webview)
-        self.tab_widget.addTab(new_tab, "New Tab")
-        self.tab_widget.setCurrentWidget(new_tab)
-        webview.load(url)
-        return webview
-
-    def handle_fullscreen_request(self, request):
-        request.accept()
-    
-    def createWindow(self, _type):
-        return self.browser.create_new_tab().page()
-
-    def acceptNavigationRequest(self, url, _type, isMainFrame):
-        if self.browser.adblock_rules.should_block(url.toString()):
-            return False
-        if url.scheme() == 'http' and self.browser.https_enforced:
-            secure_url = QUrl(url)
-            secure_url.setScheme('https')
-            self.setUrl(secure_url)
-            return False
-        return super().acceptNavigationRequest(url, _type, isMainFrame)
-
-    def setup_ssl_configuration(self):
-        configuration = QSslConfiguration.defaultConfiguration()
-        configuration.setProtocol(QSsl.TlsV1_3)
-        QSslConfiguration.setDefaultConfiguration(configuration)
-        #self.ssl_errors.connect(self.handle_ssl_errors)
-
-    def handle_ssl_errors(self, reply, errors):
-        for error in errors:
-            QMessageBox.critical(self, "SSL Error", f"SSL Error: {error.errorString()}")
-        reply.abort()
-
-
-class CustomWebEnginePage(QWebEnginePage):
-    def __init__(self, browser, parent=None):
-        super().__init__(parent)
-        self.browser = browser
-        self.setup_ssl_configuration()
-        self.inject_crypto_script()
-        self.inject_crypto_prng_script()
-        self.inject_geolocation_override()
-        self.protect_fingerprinting()
-        self.setup_csp()
-
     def createWindow(self, _type):
         return self.browser.create_new_tab().page()
 
@@ -724,52 +640,48 @@ class CustomWebEnginePage(QWebEnginePage):
         script = """
         (function() {
             const meta = document.createElement('meta');
-            <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'nonce-12345' 'strict-dynamic' https:; style-src 'self' 'unsafe-inline'; img-src 'self' http: https: data: blob: cid:; frame-src 'self' blob: data: https://account-api.proton.me; object-src 'self' blob:; child-src 'self' data: blob:; report-uri https://reports.proton.me/reports/csp; frame-ancestors 'self'; base-uri 'self'">
+            meta.httpEquiv = "Content-Security-Policy";
+            meta.content = "default-src 'self'; script-src 'self' 'nonce-12345' 'strict-dynamic' https:; style-src 'self' 'unsafe-inline'; img-src 'self' http: https: data: blob: cid:; frame-src 'self' blob: data: https://account-api.proton.me; object-src 'self' blob:; child-src 'self' data: blob:; report-uri https://reports.proton.me/reports/csp; frame-ancestors 'self'; base-uri 'self'";
+            document.head.appendChild(meta);
         })();
         """
         self.runJavaScript(script)
-        
-        # Custom Web Engine View
+
 class CustomWebEngineView(QWebEngineView):
     def __init__(self, browser, parent=None):
         super().__init__(parent)
         self.browser = browser
-        self.setPage(CustomWebEnginePage(self.browser))
-        self.configure_sandbox()
-
-    def configure_sandbox(self):
-        settings = self.settings()
-        settings.setAttribute(QWebEngineSettings.LocalStorageEnabled, True)
-        settings.setAttribute(QWebEngineSettings.JavascriptEnabled, False)
-        settings.setAttribute(QWebEngineSettings.JavascriptCanOpenWindows, False)
-        settings.setAttribute(QWebEngineSettings.JavascriptCanAccessClipboard, False)
-        settings.setAttribute(QWebEngineSettings.LocalContentCanAccessRemoteUrls, False)
-        settings.setAttribute(QWebEngineSettings.XSSAuditingEnabled, True)
-        settings.setAttribute(QWebEngineSettings.ErrorPageEnabled, True)
-        settings.setAttribute(QWebEngineSettings.WebGLEnabled, False)
-        settings.setAttribute(QWebEngineSettings.WebRTCPublicInterfacesOnly, False)
-        settings.setAttribute(QWebEngineSettings.AllowRunningInsecureContent, False)
+        self.setPage(CustomWebEnginePage(self))
 
     def contextMenuEvent(self, event):
-        menu = self.page().createStandardContextMenu()
+        context_menu_data = self.page().contextMenuData()
+        menu = QMenu(self)
         new_tab_action = QAction('Open Link in New Tab', self)
-        new_tab_action.triggered.connect(self.open_link_in_new_tab)
+        new_tab_action.triggered.connect(lambda: self.open_link_in_new_tab(context_menu_data))
         menu.addAction(new_tab_action)
         new_window_action = QAction('Open Link in New Window', self)
-        new_window_action.triggered.connect(self.open_link_in_new_window)
+        new_window_action.triggered.connect(lambda: self.open_link_in_new_window(context_menu_data))
         menu.addAction(new_window_action)
         menu.exec_(event.globalPos())
 
-    def open_link_in_new_tab(self):
-        url = self.page().contextMenuData().linkUrl()
+    def open_link_in_new_tab(self, context_menu_data):
+        url = context_menu_data.linkUrl()
         if url.isValid():
             self.browser.create_new_tab(url.toString())
 
-    def open_link_in_new_window(self):
-        url = self.page().contextMenuData().linkUrl()
+    def open_link_in_new_window(self, context_menu_data):
+        url = context_menu_data.linkUrl()
         if url.isValid():
             self.browser.create_new_window(url.toString())
-            
+
+class CustomWebEnginePage(QWebEnginePage):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.parent = parent
+
+    def createWindow(self, _type):
+        return self.parent.browser.create_new_tab().page()
+
 class YouTubePlayer(QWebEngineView):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -808,7 +720,7 @@ class YouTubePlayer(QWebEngineView):
                 }
             };
         """)
-        
+
 class Darkelf(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -848,12 +760,12 @@ class Darkelf(QMainWindow):
         self.chacha20_key = self.generate_chacha20_key(os.urandom(16))
 
         # Initialize settings
-        self.javascript_enabled = self.settings.value("javascript_enabled", False, type=bool)
+        self.javascript_enabled = self.settings.value("javascript_enabled", True, type=bool)
         self.anti_fingerprinting_enabled = self.settings.value("anti_fingerprinting_enabled", True, type=bool)
         self.tor_network_enabled = self.settings.value("tor_network_enabled", False, type=bool)
         self.quantum_encryption_enabled = self.settings.value("quantum_encryption_enabled", False, type=bool)
         self.https_enforced = self.settings.value("https_enforced", True, type=bool)
-        self.cookies_enabled = self.settings.value("cookies_enabled", False, type=bool)
+        self.cookies_enabled = self.settings.value("cookies_enabled", True, type=bool)
         self.geolocation_enabled = self.settings.value("geolocation_enabled", False, type=bool)
         self.block_device_orientation = self.settings.value("block_device_orientation", True, type=bool)
         self.block_media_devices = self.settings.value("block_media_devices", True, type=bool)
@@ -952,7 +864,7 @@ class Darkelf(QMainWindow):
         profile.setHttpCacheType(QWebEngineProfile.NoCache)
         profile.setPersistentCookiesPolicy(QWebEngineProfile.NoPersistentCookies)
         settings = profile.settings()
-        settings.setAttribute(QWebEngineSettings.LocalStorageEnabled, False)
+        settings.setAttribute(QWebEngineSettings.LocalStorageEnabled, True)
         settings.setAttribute(QWebEngineSettings.JavascriptEnabled, self.javascript_enabled)
         settings.setAttribute(QWebEngineSettings.JavascriptCanOpenWindows, False)
         settings.setAttribute(QWebEngineSettings.JavascriptCanAccessClipboard, False)
@@ -1033,7 +945,7 @@ class Darkelf(QMainWindow):
     def close(self):
         self.stop_tor()
         super().close()
-        
+
     def init_theme(self):
         self.black_theme_enabled = True
         self.apply_theme()
@@ -1251,7 +1163,7 @@ class Darkelf(QMainWindow):
         </html>
         """
         return html_content
-        
+
     def current_web_view(self):
         return self.tab_widget.currentWidget().findChild(QWebEngineView)
 
@@ -1265,7 +1177,7 @@ class Darkelf(QMainWindow):
 
     def create_menu_bar(self):
         menu_bar = QMenuBar(self)
-        
+    
         # Create menus
         navigation_menu = menu_bar.addMenu("Navigation")
         self.add_navigation_actions(navigation_menu)
@@ -1287,7 +1199,7 @@ class Darkelf(QMainWindow):
         about_terms_action = QAction("Terms of Service", self)
         about_terms_action.triggered.connect(self.show_terms_of_service)
         about_menu.addAction(about_terms_action)
-    
+
         self.setMenuBar(menu_bar)
 
     # Method to show Privacy Policy
@@ -1327,7 +1239,7 @@ class Darkelf(QMainWindow):
         close_window_action = QAction("Close Window", self)
         close_window_action.triggered.connect(self.close)
         navigation_menu.addAction(close_window_action)
-
+        
     def set_up_security_actions(self, security_menu):
         javascript_action = QAction("Enable JavaScript", self, checkable=True)
         javascript_action.setChecked(False)  # Ensure it is unchecked at startup
@@ -1352,12 +1264,13 @@ class Darkelf(QMainWindow):
         clear_cookies_action.triggered.connect(self.clear_cookies)
         security_menu.addAction(clear_cookies_action)
 
+
     def add_settings_actions(self, settings_menu):
         https_action = QAction("Enforce HTTPS", self, checkable=True)
         https_action.setChecked(self.https_enforced)
         https_action.triggered.connect(self.toggle_https_enforcement)
         settings_menu.addAction(https_action)
-        cookies_action = QAction("Enable Cookies", self, checkable=False)
+        cookies_action = QAction("Enable Cookies", self, checkable=True)
         cookies_action.setChecked(not self.cookies_enabled)
         cookies_action.triggered.connect(self.toggle_cookies)
         settings_menu.addAction(cookies_action)
@@ -1405,7 +1318,7 @@ class Darkelf(QMainWindow):
 
         # Shortcut for zooming out (Ctrl+-)
         QShortcut(QKeySequence("Ctrl+-"), self, self.zoom_out)
-    
+        
     def create_new_tab(self, url="home"):
         web_view = CustomWebEngineView(self)
         web_view.loadFinished.connect(self.update_tab_title)
@@ -1469,6 +1382,7 @@ class Darkelf(QMainWindow):
         web_view = self.tab_widget.widget(index)
         web_view.setHtml(self.custom_homepage_html())
 
+
     def zoom_in(self):
         current_tab = self.tab_widget.currentWidget()
         if isinstance(current_tab, QWebEngineView):
@@ -1494,11 +1408,6 @@ class Darkelf(QMainWindow):
         profile = QWebEngineProfile.defaultProfile()
         profile.cookieStore().deleteAllCookies()
         QMessageBox.information(self, "Cookies Cleared", "All cookies have been successfully cleared.")
-
-    def enable_private_browsing(self):
-        profile = QWebEngineProfile.defaultProfile()
-        profile.setHttpCacheType(QWebEngineProfile.MemoryHttpCache)
-        profile.setPersistentCookiesPolicy(QWebEngineProfile.NoPersistentCookies)
 
     def search_or_load_url(self):
         text = self.search_bar.text()
@@ -1598,3 +1507,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
