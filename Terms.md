@@ -38,7 +38,7 @@ This software may not be used for the development, production, or deployment of 
 By downloading, using, or distributing this software, you agree to comply with all applicable U.S. export laws and regulations. Users and redistributors are solely responsible for ensuring their actions adhere to these regulations. You are not permitted to circumvent any export restrictions using VPNs, proxies, or other methods to alter your location.
 
 ### Notification
-This software is made available under the GPL 3.0 license and includes advanced encryption technologies. Even though the software is open-source and licensed for general use, including educational and research purposes, users must ensure compliance with U.S. export control laws when distributing or using the software.
+This software is made available under the LGPL 3.0 license and includes advanced encryption technologies. Even though the software is open-source and licensed for general use, including educational and research purposes, users must ensure compliance with U.S. export control laws when distributing or using the software.
 
 For more information about U.S. export regulations, consult the Bureau of Industry and Security (BIS) at https://www.bis.doc.gov.
 
