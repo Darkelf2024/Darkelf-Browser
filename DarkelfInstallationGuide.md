@@ -22,7 +22,7 @@ This guide explains the step-by-step process to set up and run the Darkelf Brows
 ## Create a requirements.txt file with the following content:
 
 1. PySide6
-2. QtWebEngine
+2. PySide6-Qt6-WebEngine
 3. beautifulsoup4
 4. requests
 5. adblockparser
