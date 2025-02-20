@@ -17,7 +17,6 @@ This project utilizes third-party libraries, each with its own licensing terms a
 
 ## License Links  
 - [Python Software Foundation License](https://docs.python.org/3/license.html)  
-- [GNU General Public License (GPL-3.0)](https://www.gnu.org/licenses/gpl-3.0.html)  
 - [Lesser General Public License (LGPL-3.0)](https://www.gnu.org/licenses/lgpl-3.0.html)  
 - [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0)  
 - [MIT License](https://opensource.org/licenses/MIT)  
