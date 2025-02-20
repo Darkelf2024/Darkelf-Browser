@@ -17,7 +17,7 @@ You agree not to use the Darkelf Browser for any unlawful or prohibited activiti
 Our Privacy Policy outlines how we handle your data. By using the Darkelf Browser, you agree to the terms outlined in the Privacy Policy.
 
 ## 5. Intellectual Property
-All content, trademarks, and data on the Darkelf Browser are the property of their respective owners. The Darkelf Browser is distributed under the GPL 3.0 license, which allows you to use, modify, and distribute it under the terms of that license. However, trademarks and other non-software content may be subject to separate ownership and restrictions.
+All content, trademarks, and data on the Darkelf Browser are the property of their respective owners. The Darkelf Browser is distributed under the LGPL 3.0 license, which allows you to use, modify, and distribute it under the terms of that license. However, trademarks and other non-software content may be subject to separate ownership and restrictions.
 
 ## 6. License and Classification
 Darkelf Browser is distributed under the GPL 3.0 license and has been issued Classification 5D002 with license exception ENC. Users can reproduce the software in accordance with the terms of the GPL 3.0 license.
