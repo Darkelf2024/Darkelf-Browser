@@ -1043,7 +1043,7 @@ class Darkelf(QMainWindow):
             <style id="theme-style">
                 body {
                     font-family: Arial, sans-serif;
-                    background-color: #333;
+                    background-color: #000;
                     color: #ddd;
                     margin: 0;
                     padding: 0;
@@ -1059,17 +1059,11 @@ class Darkelf(QMainWindow):
                     flex-direction: column;
                     align-items: center;
                     justify-content: center;
-                    padding: 20px;
-                    border-radius: 10px;
                 }
                 h1 {
                     font-size: 36px;
                     margin-bottom: 20px;
-                    color: #34C759;
-                }
-                p {
-                    font-size: 18px;
-                    text-align: center;
+                    color: #34C759; /* Same green as the tab */
                 }
                 form {
                     display: flex;
@@ -1084,12 +1078,12 @@ class Darkelf(QMainWindow):
                     border: none;
                     border-radius: 5px;
                     font-size: 16px;
-                    background-color: #444;
+                    background-color: #333;
                     color: #ddd;
                 }
                 button[type="submit"] {
                     padding: 10px 20px;
-                    background-color: #34C759;
+                    background-color: #333;
                     border: none;
                     color: white;
                     border-radius: 5px;
@@ -1100,20 +1094,7 @@ class Darkelf(QMainWindow):
                     justify-content: center;
                 }
                 button[type="submit"]:hover {
-                    background-color: #28A745;
-                }
-                footer {
-                    position: absolute;
-                    bottom: 10px;
-                    color: #ddd;
-                    font-size: 14px;
-                }
-                footer a {
                     color: #34C759;
-                    text-decoration: none;
-                }
-                footer a:hover {
-                    text-decoration: underline;
                 }
             </style>
         </head>
