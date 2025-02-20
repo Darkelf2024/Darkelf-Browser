@@ -284,7 +284,7 @@ Themes are based on an auto-detection system of user preferences. The browser ad
 - The scope of tracker/ad lists needs expansion to include newer or lesser-known domains.
 - Some rules are skipped or misapplied in edge cases.
 - Dynamically loaded content or obfuscated ads pose detection challenges.
-- Hotkeys with Mac have a known issue - Fix in progress fixed except OSINT Edition - In a few days 
+- Hotkeys with MacOS have a known issue - Use Crtl+ - Works Fine/Ignore Keymapper Warning
 
 ### 2. Suggestions for Improvement
 - Continuously update and refine filter lists by collaborating with community-maintained projects.
