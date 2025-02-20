@@ -1,5 +1,5 @@
 PySide6
-PyQt6-WebEngine
+QtWebEngine
 beautifulsoup4
 requests
 adblockparser
