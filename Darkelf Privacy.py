@@ -199,7 +199,6 @@ def load_or_generate_ecdh_key_pair():
         print(f"Error: {e}")
         return None
 
-
 # Load Adblock Rules
 def fetch_adblock_rules():
     urls = [
@@ -324,7 +323,7 @@ class DownloadManager(QObject):
             progress_dialog.close()
             QMessageBox.warning(self.parent(), "Download Failed", "The download has failed.")
         self.downloads.remove(download_item)
-
+        
 # Custom Web Engine Page
 class CustomWebEnginePage(QWebEnginePage):
     def __init__(self, browser, parent=None):
@@ -336,15 +335,7 @@ class CustomWebEnginePage(QWebEnginePage):
         self.inject_geolocation_override()
         self.protect_fingerprinting()
         self.setup_csp()
-        self.fullScreenRequested.connect(self.handle_fullscreen_request)
-        
-    def handle_fullscreen_request(self, request):
-        request.accept()
-        if request.toggleOn():
-            self.view().window().showFullScreen()
-        else:
-            self.view().window().showNormal()
-            
+
     def createWindow(self, _type):
         return self.browser.create_new_tab().page()
 
@@ -420,7 +411,7 @@ class CustomWebEnginePage(QWebEnginePage):
             return window.crypto.subtle.generateKey(
                 {
                     name: "RSA-OAEP",
-                    modulusLength: 2048,
+                    modulusLength: 4096,
                     publicExponent: new Uint8Array([1, 0, 1]),
                     hash: { name: "SHA-256" },
                 },
@@ -484,7 +475,7 @@ class CustomWebEnginePage(QWebEnginePage):
         }
         """
         self.runJavaScript(script)
-        
+    
     def inject_crypto_prng_script(self):
         script = """
         (function() {
@@ -641,85 +632,52 @@ class CustomWebEnginePage(QWebEnginePage):
         (function() {
             const meta = document.createElement('meta');
             meta.httpEquiv = "Content-Security-Policy";
-            meta.content = "default-src 'self'; script-src 'self' 'nonce-12345' 'strict-dynamic' https:; style-src 'self' 'unsafe-inline'; img-src 'self' http: https: data: blob: cid:; frame-src 'self' blob: data: https://account-api.proton.me; object-src 'self' blob:; child-src 'self' data: blob:; report-uri https://reports.proton.me/reports/csp; frame-ancestors 'self'; base-uri 'self'";
+            meta.content = "default-src 'self', script-src 'self' 'nonce-12345' 'strict-dynamic' https:, style-src 'self' 'unsafe-inline', img-src 'self' http: https: data: blob:, frame-src 'self' blob: data: https://account-api.proton.me, object-src 'self' blob:, child-src 'self' data: blob:, report-uri https://reports.proton.me/reports/csp, frame-ancestors 'self', base-uri 'self'";
             document.head.appendChild(meta);
         })();
         """
         self.runJavaScript(script)
-
+        
+        # Custom Web Engine View
 class CustomWebEngineView(QWebEngineView):
     def __init__(self, browser, parent=None):
         super().__init__(parent)
         self.browser = browser
-        self.setPage(CustomWebEnginePage(self))
+        self.setPage(CustomWebEnginePage(self.browser))
+        self.configure_sandbox()
+
+    def configure_sandbox(self):
+        settings = self.settings()
+        settings.setAttribute(QWebEngineSettings.LocalStorageEnabled, False)
+        settings.setAttribute(QWebEngineSettings.JavascriptEnabled, False)
+        settings.setAttribute(QWebEngineSettings.JavascriptCanOpenWindows, False)
+        settings.setAttribute(QWebEngineSettings.JavascriptCanAccessClipboard, False)
+        settings.setAttribute(QWebEngineSettings.LocalContentCanAccessRemoteUrls, False)
+        settings.setAttribute(QWebEngineSettings.XSSAuditingEnabled, True)
+        settings.setAttribute(QWebEngineSettings.ErrorPageEnabled, False)
+        settings.setAttribute(QWebEngineSettings.WebGLEnabled, False)
+        settings.setAttribute(QWebEngineSettings.WebRTCPublicInterfacesOnly, False)
+        settings.setAttribute(QWebEngineSettings.AllowRunningInsecureContent, False)
 
     def contextMenuEvent(self, event):
-        context_menu_data = self.page().contextMenuData()
-        menu = QMenu(self)
+        menu = self.page().createStandardContextMenu()
         new_tab_action = QAction('Open Link in New Tab', self)
-        new_tab_action.triggered.connect(lambda: self.open_link_in_new_tab(context_menu_data))
+        new_tab_action.triggered.connect(self.open_link_in_new_tab)
         menu.addAction(new_tab_action)
         new_window_action = QAction('Open Link in New Window', self)
-        new_window_action.triggered.connect(lambda: self.open_link_in_new_window(context_menu_data))
+        new_window_action.triggered.connect(self.open_link_in_new_window)
         menu.addAction(new_window_action)
         menu.exec_(event.globalPos())
 
-    def open_link_in_new_tab(self, context_menu_data):
-        url = context_menu_data.linkUrl()
+    def open_link_in_new_tab(self):
+        url = self.page().contextMenuData().linkUrl()
         if url.isValid():
             self.browser.create_new_tab(url.toString())
 
-    def open_link_in_new_window(self, context_menu_data):
-        url = context_menu_data.linkUrl()
+    def open_link_in_new_window(self):
+        url = self.page().contextMenuData().linkUrl()
         if url.isValid():
             self.browser.create_new_window(url.toString())
-
-class CustomWebEnginePage(QWebEnginePage):
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        self.parent = parent
-
-    def createWindow(self, _type):
-        return self.parent.browser.create_new_tab().page()
-
-class YouTubePlayer(QWebEngineView):
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        self.init_ui()
-
-    def init_ui(self):
-        settings = self.settings()
-        settings.setAttribute(QWebEngineSettings.JavascriptEnabled, True)
-        settings.setAttribute(QWebEngineSettings.FullScreenSupportEnabled, True)
-        self.page().loadFinished.connect(self.on_load_finished)
-        self.set_url("https://www.youtube.com")
-
-    def set_url(self, url):
-        self.setUrl(QUrl(url))
-
-    @Slot()
-    def on_load_finished(self):
-        self.page().runJavaScript("""
-            document.addEventListener('fullscreenchange', function() {
-                if (document.fullscreenElement) {
-                    console.log('Entered fullscreen mode');
-                } else {
-                    console.log('Exited fullscreen mode');
-                }
-            });
-
-            document.querySelector('.ytp-fullscreen-button').onclick = function() {
-                if (!document.fullscreenElement) {
-                    document.documentElement.requestFullscreen().catch(err => {
-                        console.log(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
-                    });
-                } else {
-                    if (document.exitFullscreen) {
-                        document.exitFullscreen();
-                    }
-                }
-            };
-        """)
 
 class Darkelf(QMainWindow):
     def __init__(self):
@@ -1166,7 +1124,7 @@ class Darkelf(QMainWindow):
         </html>
         """
         return html_content
-
+        
     def current_web_view(self):
         return self.tab_widget.currentWidget().findChild(QWebEngineView)
 
@@ -1321,7 +1279,6 @@ class Darkelf(QMainWindow):
         web_view = QWebEngineView()
         web_view.loadFinished.connect(self.update_tab_title)
         web_view.urlChanged.connect(self.update_url_bar)
-
         if url == "home":
             web_view.setHtml(self.custom_homepage_html())
             tab_title = "Darkelf"
