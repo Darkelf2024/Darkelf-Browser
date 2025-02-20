@@ -21,4 +21,6 @@ This project utilizes third-party libraries, each with its own licensing terms a
 - [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0)  
 - [MIT License](https://opensource.org/licenses/MIT)  
 - [ISC License](https://opensource.org/licenses/ISC)  
+- [GNU General Public License (GPL-3.0)](https://www.gnu.org/licenses/gpl-3.0.html)  
+
 Copyright © 2024 Dr. Kevin Moore.
