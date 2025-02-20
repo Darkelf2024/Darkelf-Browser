@@ -277,11 +277,15 @@ Themes are based on an auto-detection system of user preferences. The browser ad
 ## Known Issues & Future Improvements
 
 ### 1. Adblockparser Accuracy
+
 - **Problem**: The **adblockparser** tool is not 100% accurate in identifying and blocking all ads and trackers.
-- **Details**:
-  - The scope of tracker/ad lists needs expansion to include newer or lesser-known domains.
-  - Some rules are skipped or misapplied in edge cases.
-  - Dynamically loaded content or obfuscated ads pose detection challenges.
+
+### Other Issues
+- The scope of tracker/ad lists needs expansion to include newer or lesser-known domains.
+- Some rules are skipped or misapplied in edge cases.
+- Dynamically loaded content or obfuscated ads pose detection challenges.
+- ContextMenu is in the process of being fixed with right-clicking.
+- Hotkeys with Mac have a known issue - Fix in progress.
 
 ### 2. Suggestions for Improvement
 - Continuously update and refine filter lists by collaborating with community-maintained projects.
