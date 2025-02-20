@@ -77,6 +77,7 @@ from adblockparser import AdblockRules
 import stem.process
 from stem.control import Controller
 
+
 # Debounce function to limit the rate at which a function can fire
 def debounce(func, wait):
     timeout = None
@@ -322,6 +323,7 @@ class DownloadManager(QObject):
             progress_dialog.close()
             QMessageBox.warning(self.parent(), "Download Failed", "The download has failed.")
         self.downloads.remove(download_item)
+        
 # Custom Web Engine Page
 class CustomWebEnginePage(QWebEnginePage):
     def __init__(self, browser, parent=None):
@@ -1266,7 +1268,6 @@ class Darkelf(QMainWindow):
         web_view = QWebEngineView()
         web_view.loadFinished.connect(self.update_tab_title)
         web_view.urlChanged.connect(self.update_url_bar)
-
         if url == "home":
             web_view.setHtml(self.custom_homepage_html())
             tab_title = "Darkelf"
@@ -1449,3 +1450,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+
