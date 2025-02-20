@@ -30,7 +30,7 @@ This guide explains the step-by-step process to set up and run the Darkelf Brows
 7. pycryptodome
 8. pqcrypto
 9. dnspython
-10.stem
+10. stem
 
  *  Upgrade Python3/Pip3 - Latest
  *  Upgrade all required packages to the Latest Versions - Do this before running Darkelf = Preventative Safety Measures
