@@ -64,8 +64,8 @@ For detailed licensing information, refer to each library’s official documenta
 
 ## License
 
-Darkelf Browser is released under the **GNU General Public License v3.0 (GPL-3.0)**.  
-See the full license text [here](https://www.gnu.org/licenses/gpl-3.0.html).
+Darkelf Browser is released under the **GNU Lesser General Public License v3.0 (LGPL-3.0)**.  
+See the full license text [here](https://www.gnu.org/licenses/lgpl-3.0.html).
 
 ## Contributions
 
