@@ -60,7 +60,7 @@ This guide explains the step-by-step process to set up and run the Darkelf Brows
 	1. python3 /Users/YouruserName/Desktop/DE\ Public.py
  	2. You can also drag and drop the .py file into the terminal after you type python3
   	3. Wait for it to boot! Enjoy!
-   	4. Since Latest Update with Pip3 24.xx and adblockparser is running slower - Just wait 
+   	4. Since Latest Update with Pip3 - adblockparser is running slower - Just wait 
 
     Python Program will autodetect what packages are needed at boot if you miss a package during 
     installation if it can't find the package to boot up etc. Just install the package with Pip3 - Remember - You will receive an error if a package is not installed 
