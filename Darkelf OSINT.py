@@ -64,12 +64,12 @@ import time
 from urllib.parse import urlparse
 from base64 import urlsafe_b64encode, urlsafe_b64decode
 from PySide6.QtWidgets import (
-    QApplication, QMainWindow, QTabWidget, QPushButton, QLineEdit, QVBoxLayout, QMenuBar, QToolBar, QDialog, QMessageBox, QFileDialog, QProgressDialog, QListWidget, QWidget, QLabel
+    QApplication, QMainWindow, QTabWidget, QPushButton, QLineEdit, QVBoxLayout, QMenuBar, QToolBar, QDialog, QMessageBox, QFileDialog, QProgressDialog, QListWidget, QMenu, QWidget, QLabel
 )
-from PySide6.QtGui import QPalette, QColor, QKeySequence, QAction, QShortcut
+from PySide6.QtGui import QPalette, QColor, QKeySequence, QShortcut, QAction
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtNetwork import QNetworkProxy, QSslConfiguration, QSsl
-from PySide6.QtWebEngineCore import QWebEngineUrlRequestInterceptor, QWebEngineSettings, QWebEnginePage, QWebEngineScript, QWebEngineProfile, QWebEngineDownloadRequest
+from PySide6.QtWebEngineCore import QWebEngineUrlRequestInterceptor, QWebEngineSettings, QWebEnginePage, QWebEngineScript, QWebEngineProfile, QWebEngineDownloadRequest, QWebEngineContextMenuRequest
 from PySide6.QtCore import QUrl, QSettings, Qt, QObject, Slot
 from cryptography.hazmat.primitives import serialization, hashes
 from cryptography.hazmat.primitives.asymmetric import x25519, rsa, padding
@@ -79,7 +79,6 @@ from cryptography.hazmat.backends import default_backend
 from adblockparser import AdblockRules
 import stem.process
 from stem.control import Controller
-
 
 # Debounce function to limit the rate at which a function can fire
 def debounce(func, wait):
@@ -325,6 +324,7 @@ class DownloadManager(QObject):
             progress_dialog.close()
             QMessageBox.warning(self.parent(), "Download Failed", "The download has failed.")
         self.downloads.remove(download_item)
+        
 # Custom Web Engine Page
 class CustomWebEnginePage(QWebEnginePage):
     def __init__(self, browser, parent=None):
@@ -644,7 +644,7 @@ class CustomWebEngineView(QWebEngineView):
     def __init__(self, browser, parent=None):
         super().__init__(parent)
         self.browser = browser
-        self.setPage(CustomWebEnginePage(self.browser))
+        self.setPage(CustomWebEnginePage(self))
         self.configure_sandbox()
 
     def configure_sandbox(self):
@@ -660,23 +660,47 @@ class CustomWebEngineView(QWebEngineView):
         settings.setAttribute(QWebEngineSettings.WebRTCPublicInterfacesOnly, False)
         settings.setAttribute(QWebEngineSettings.AllowRunningInsecureContent, False)
 
+class WebEngineView(QWebEngineView):
     def contextMenuEvent(self, event):
-        menu = self.page().createStandardContextMenu()
-        new_tab_action = QAction('Open Link in New Tab', self)
-        new_tab_action.triggered.connect(self.open_link_in_new_tab)
-        menu.addAction(new_tab_action)
-        new_window_action = QAction('Open Link in New Window', self)
-        new_window_action.triggered.connect(self.open_link_in_new_window)
-        menu.addAction(new_window_action)
-        menu.exec_(event.globalPos())
+        menu = QMenu(self)
+        context_menu_data = self.page().contextMenuData()
 
-    def open_link_in_new_tab(self):
-        url = self.page().contextMenuData().linkUrl()
+        if context_menu_data.isContentEditable():
+            menu.addAction("Undo", self.page().triggerAction, QWebEnginePage.Undo)
+            menu.addAction("Redo", self.page().triggerAction, QWebEnginePage.Redo)
+            menu.addSeparator()
+            menu.addAction("Cut", self.page().triggerAction, QWebEnginePage.Cut)
+            menu.addAction("Copy", self.page().triggerAction, QWebEnginePage.Copy)
+            menu.addAction("Paste", self.page().triggerAction, QWebEnginePage.Paste)
+            menu.addAction("Delete", self.page().triggerAction, QWebEnginePage.Delete)
+            menu.addSeparator()
+            menu.addAction("Select All", self.page().triggerAction, QWebEnginePage.SelectAll)
+        else:
+            menu.addAction("Back", self.page().triggerAction, QWebEnginePage.Back)
+            menu.addAction("Forward", self.page().triggerAction, QWebEnginePage.Forward)
+            menu.addAction("Reload", self.page().triggerAction, QWebEnginePage.Reload)
+            menu.addSeparator()
+
+            if context_menu_data.linkUrl().isValid():
+                new_tab_action = QAction('Open Link in New Tab', self)
+                new_tab_action.triggered.connect(lambda: self.open_link_in_new_tab(context_menu_data))
+                menu.addAction(new_tab_action)
+
+                new_window_action = QAction('Open Link in New Window', self)
+                new_window_action.triggered.connect(lambda: self.open_link_in_new_window(context_menu_data))
+                menu.addAction(new_window_action)
+
+                menu.addAction("Copy Link Address", self.page().triggerAction, QWebEnginePage.CopyLinkToClipboard)
+
+        menu.exec(event.globalPos())
+
+    def open_link_in_new_tab(self, context_menu_data):
+        url = context_menu_data.linkUrl()
         if url.isValid():
             self.browser.create_new_tab(url.toString())
 
-    def open_link_in_new_window(self):
-        url = self.page().contextMenuData().linkUrl()
+    def open_link_in_new_window(self, context_menu_data):
+        url = context_menu_data.linkUrl()
         if url.isValid():
             self.browser.create_new_window(url.toString())
 
@@ -797,7 +821,10 @@ class Darkelf(QMainWindow):
 
         # Initialize history log
         self.history_log = []
-
+        
+        # Add shortcuts for various actions
+        self.init_shortcuts()
+        
     def init_settings(self):
         self.settings = QSettings("DarkelfBrowser", "Darkelf")
         self.load_settings()
@@ -1618,4 +1645,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
