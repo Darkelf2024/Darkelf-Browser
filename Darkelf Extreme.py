@@ -61,12 +61,12 @@ import time
 from urllib.parse import urlparse
 from base64 import urlsafe_b64encode, urlsafe_b64decode
 from PySide6.QtWidgets import (
-    QApplication, QMainWindow, QTabWidget, QPushButton, QLineEdit, QVBoxLayout, QMenuBar, QToolBar, QDialog, QMessageBox, QFileDialog, QProgressDialog, QListWidget, QWidget, QLabel
+    QApplication, QMainWindow, QTabWidget, QPushButton, QLineEdit, QVBoxLayout, QMenuBar, QToolBar, QDialog, QMessageBox, QFileDialog, QProgressDialog, QListWidget, QMenu, QWidget, QLabel
 )
-from PySide6.QtGui import QPalette, QColor, QKeySequence, QAction, QShortcut
+from PySide6.QtGui import QPalette, QColor, QKeySequence, QShortcut, QAction
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtNetwork import QNetworkProxy, QSslConfiguration, QSsl
-from PySide6.QtWebEngineCore import QWebEngineUrlRequestInterceptor, QWebEngineSettings, QWebEnginePage, QWebEngineScript, QWebEngineProfile, QWebEngineDownloadRequest
+from PySide6.QtWebEngineCore import QWebEngineUrlRequestInterceptor, QWebEngineSettings, QWebEnginePage, QWebEngineScript, QWebEngineProfile, QWebEngineDownloadRequest, QWebEngineContextMenuRequest
 from PySide6.QtCore import QUrl, QSettings, Qt, QObject, Slot
 from cryptography.hazmat.primitives import serialization, hashes
 from cryptography.hazmat.primitives.asymmetric import x25519, rsa, padding
@@ -76,7 +76,6 @@ from cryptography.hazmat.backends import default_backend
 from adblockparser import AdblockRules
 import stem.process
 from stem.control import Controller
-
 
 # Debounce function to limit the rate at which a function can fire
 def debounce(func, wait):
@@ -699,7 +698,10 @@ class Darkelf(QMainWindow):
 
         # Initialize history log
         self.history_log = []
-
+        
+        # Add shortcuts for various actions
+        self.init_shortcuts()
+        
     def init_settings(self):
         self.settings = QSettings("DarkelfBrowser", "Darkelf")
         self.load_settings()
@@ -722,7 +724,7 @@ class Darkelf(QMainWindow):
         self.tor_network_enabled = self.settings.value("tor_network_enabled", False, type=bool)
         self.quantum_encryption_enabled = self.settings.value("quantum_encryption_enabled", False, type=bool)
         self.https_enforced = self.settings.value("https_enforced", True, type=bool)
-        self.cookies_enabled = self.settings.value("cookies_enabled", False, type=bool)
+        self.cookies_enabled = self.settings.value("cookies_enabled", True, type=bool)
         self.geolocation_enabled = self.settings.value("geolocation_enabled", False, type=bool)
         self.block_device_orientation = self.settings.value("block_device_orientation", True, type=bool)
         self.block_media_devices = self.settings.value("block_media_devices", True, type=bool)
@@ -836,7 +838,7 @@ class Darkelf(QMainWindow):
         settings.setAttribute(QWebEngineSettings.FullScreenSupportEnabled, True)
         settings.setAttribute(QWebEngineSettings.SpatialNavigationEnabled, False)
         settings.setAttribute(QWebEngineSettings.AllowWindowActivationFromJavaScript, False)
-        
+
         adblock_rules = fetch_adblock_rules()
         tracking_domains = fetch_tracking_domains()
         interceptor = AdblockAndTrackerInterceptor(adblock_rules, tracking_domains)
@@ -910,21 +912,21 @@ class Darkelf(QMainWindow):
     def close(self):
         self.stop_tor()
         super().close()
-        
+
     def init_theme(self):
         self.black_theme_enabled = True
         self.apply_theme()
 
     def apply_theme(self):
         palette = QPalette()
-        palette.setColor(QPalette.Window, QColor(0, 0, 0))
+        palette.setColor(QPalette.Window, QColor(40, 40, 40))
         palette.setColor(QPalette.WindowText, QColor(255, 255, 255))
-        palette.setColor(QPalette.Base, QColor(25, 25, 25))
-        palette.setColor(QPalette.AlternateBase, QColor(53, 53, 53))
+        palette.setColor(QPalette.Base, QColor(30, 30, 30))
+        palette.setColor(QPalette.AlternateBase, QColor(45, 45, 45))
         palette.setColor(QPalette.ToolTipBase, QColor(255, 255, 255))
         palette.setColor(QPalette.ToolTipText, QColor(255, 255, 255))
         palette.setColor(QPalette.Text, QColor(255, 255, 255))
-        palette.setColor(QPalette.Button, QColor(53, 53, 53))
+        palette.setColor(QPalette.Button, QColor(45, 45, 45))
         palette.setColor(QPalette.ButtonText, QColor(255, 255, 255))
         palette.setColor(QPalette.BrightText, QColor(255, 0, 0))
         palette.setColor(QPalette.Link, QColor(42, 130, 218))
@@ -1041,7 +1043,7 @@ class Darkelf(QMainWindow):
             <style id="theme-style">
                 body {
                     font-family: Arial, sans-serif;
-                    background-color: #000;
+                    background-color: #333;
                     color: #ddd;
                     margin: 0;
                     padding: 0;
@@ -1057,11 +1059,17 @@ class Darkelf(QMainWindow):
                     flex-direction: column;
                     align-items: center;
                     justify-content: center;
+                    padding: 20px;
+                    border-radius: 10px;
                 }
                 h1 {
-                    font-size: 36px;  /* Increased font size */
+                    font-size: 36px;
                     margin-bottom: 20px;
-                    color: #34C759; /* Same green as the tab */
+                    color: #34C759;
+                }
+                p {
+                    font-size: 18px;
+                    text-align: center;
                 }
                 form {
                     display: flex;
@@ -1076,12 +1084,12 @@ class Darkelf(QMainWindow):
                     border: none;
                     border-radius: 5px;
                     font-size: 16px;
-                    background-color: #333;
+                    background-color: #444;
                     color: #ddd;
                 }
                 button[type="submit"] {
                     padding: 10px 20px;
-                    background-color: #333;
+                    background-color: #34C759;
                     border: none;
                     color: white;
                     border-radius: 5px;
@@ -1092,7 +1100,20 @@ class Darkelf(QMainWindow):
                     justify-content: center;
                 }
                 button[type="submit"]:hover {
+                    background-color: #28A745;
+                }
+                footer {
+                    position: absolute;
+                    bottom: 10px;
+                    color: #ddd;
+                    font-size: 14px;
+                }
+                footer a {
                     color: #34C759;
+                    text-decoration: none;
+                }
+                footer a:hover {
+                    text-decoration: underline;
                 }
             </style>
         </head>
@@ -1109,7 +1130,7 @@ class Darkelf(QMainWindow):
         </html>
         """
         return html_content
-        
+
     def current_web_view(self):
         return self.tab_widget.currentWidget().findChild(QWebEngineView)
 
@@ -1123,7 +1144,7 @@ class Darkelf(QMainWindow):
 
     def create_menu_bar(self):
         menu_bar = QMenuBar(self)
-
+    
         # Create menus
         navigation_menu = menu_bar.addMenu("Navigation")
         self.add_navigation_actions(navigation_menu)
@@ -1145,7 +1166,7 @@ class Darkelf(QMainWindow):
         about_terms_action = QAction("Terms of Service", self)
         about_terms_action.triggered.connect(self.show_terms_of_service)
         about_menu.addAction(about_terms_action)
-    
+
         self.setMenuBar(menu_bar)
 
     # Method to show Privacy Policy
@@ -1159,11 +1180,8 @@ class Darkelf(QMainWindow):
     def open_new_tab(self, url):
         new_tab = QWebEngineView()
         new_tab.setUrl(QUrl(url))
-        self.tabs.addTab(new_tab, "New Tab")
-        self.tabs.setCurrentWidget(new_tab)
-        self.setMenuBar(menu_bar)
-
-        self.setMenuBar(menu_bar)
+        self.tab_widget.addTab(new_tab, "New Tab")
+        self.tab_widget.setCurrentWidget(new_tab)
 
     def add_navigation_actions(self, navigation_menu):
         back_action = QAction("Back", self)
@@ -1187,7 +1205,7 @@ class Darkelf(QMainWindow):
         close_window_action = QAction("Close Window", self)
         close_window_action.triggered.connect(self.close)
         navigation_menu.addAction(close_window_action)
-
+        
     def set_up_security_actions(self, security_menu):
         javascript_action = QAction("Enable JavaScript", self, checkable=True)
         javascript_action.setChecked(False)  # Ensure it is unchecked at startup
@@ -1212,12 +1230,13 @@ class Darkelf(QMainWindow):
         clear_cookies_action.triggered.connect(self.clear_cookies)
         security_menu.addAction(clear_cookies_action)
 
+
     def add_settings_actions(self, settings_menu):
         https_action = QAction("Enforce HTTPS", self, checkable=True)
         https_action.setChecked(self.https_enforced)
         https_action.triggered.connect(self.toggle_https_enforcement)
         settings_menu.addAction(https_action)
-        cookies_action = QAction("Enable Cookies", self, checkable=False)
+        cookies_action = QAction("Enable Cookies", self, checkable=True)
         cookies_action.setChecked(not self.cookies_enabled)
         cookies_action.triggered.connect(self.toggle_cookies)
         settings_menu.addAction(cookies_action)
@@ -1234,40 +1253,36 @@ class Darkelf(QMainWindow):
         media_devices_action.triggered.connect(self.toggle_media_devices)
         settings_menu.addAction(media_devices_action)
 
-        # Add shortcuts for various actions
-        self.init_shortcuts()
-        self.configure_web_engine_profile()
-        
     def init_shortcuts(self):
-        # Shortcut for creating a new tab (Ctrl+T)
-        QShortcut(QKeySequence("Ctrl+T"), self, self.create_new_tab)
+        # Shortcut for creating a new tab (Cmd+T on macOS, Ctrl+T on other systems)
+        QShortcut(QKeySequence("Ctrl+T" if sys.platform != 'darwin' else "Meta+T"), self, self.create_new_tab)
 
-        # Shortcut for closing the current tab (Ctrl+W)
-        QShortcut(QKeySequence("Ctrl+W"), self, lambda: self.close_tab(self.tab_widget.currentIndex()))
+        # Shortcut for closing the current tab (Cmd+W on macOS, Ctrl+W on other systems)
+        QShortcut(QKeySequence("Ctrl+W" if sys.platform != 'darwin' else "Meta+W"), self, lambda: self.close_tab(self.tab_widget.currentIndex()))
 
-        # Shortcut for reloading the current page (Ctrl+R)
-        QShortcut(QKeySequence("Ctrl+R"), self, self.reload_page)
+        # Shortcut for reloading the current page (Cmd+R on macOS, Ctrl+R on other systems)
+        QShortcut(QKeySequence("Ctrl+R" if sys.platform != 'darwin' else "Meta+R"), self, self.reload_page)
 
-        # Shortcut for going back (Ctrl+Left)
-        QShortcut(QKeySequence("Ctrl+Left"), self, self.go_back)
+        # Shortcut for going back (Cmd+Left on macOS, Ctrl+Left on other systems)
+        QShortcut(QKeySequence("Ctrl+Left" if sys.platform != 'darwin' else "Meta+Left"), self, self.go_back)
 
-        # Shortcut for going forward (Ctrl+Right)
-        QShortcut(QKeySequence("Ctrl+Right"), self, self.go_forward)
+        # Shortcut for going forward (Cmd+Right on macOS, Ctrl+Right on other systems)
+        QShortcut(QKeySequence("Ctrl+Right" if sys.platform != 'darwin' else "Meta+Right"), self, self.go_forward)
 
         # Shortcut for toggling full screen (F11)
         QShortcut(QKeySequence("F11"), self, self.toggle_full_screen)
 
-        # Shortcut for viewing history (Ctrl+H)
-        QShortcut(QKeySequence("Ctrl+H"), self, self.view_history)
+        # Shortcut for viewing history (Cmd+H on macOS, Ctrl+H on other systems)
+        QShortcut(QKeySequence("Ctrl+H" if sys.platform != 'darwin' else "Meta+H"), self, self.view_history)
 
-        # Shortcut for zooming in (Ctrl++)
-        QShortcut(QKeySequence("Ctrl++"), self, self.zoom_in)
+        # Shortcut for zooming in (Cmd++ on macOS, Ctrl++ on other systems)
+        QShortcut(QKeySequence("Ctrl++" if sys.platform != 'darwin' else "Meta++"), self, self.zoom_in)
 
-        # Shortcut for zooming out (Ctrl+-)
-        QShortcut(QKeySequence("Ctrl+-"), self, self.zoom_out)
-    
+        # Shortcut for zooming out (Cmd+- on macOS, Ctrl+- on other systems)
+        QShortcut(QKeySequence("Ctrl+-" if sys.platform != 'darwin' else "Meta+-"), self, self.zoom_out)
+        
     def create_new_tab(self, url="home"):
-        web_view = CustomWebEngineView(self)
+        web_view = QWebEngineView()
         web_view.loadFinished.connect(self.update_tab_title)
         web_view.urlChanged.connect(self.update_url_bar)
 
@@ -1354,11 +1369,6 @@ class Darkelf(QMainWindow):
         profile = QWebEngineProfile.defaultProfile()
         profile.cookieStore().deleteAllCookies()
         QMessageBox.information(self, "Cookies Cleared", "All cookies have been successfully cleared.")
-
-    def enable_private_browsing(self):
-        profile = QWebEngineProfile.defaultProfile()
-        profile.setHttpCacheType(QWebEngineProfile.MemoryHttpCache)
-        profile.setPersistentCookiesPolicy(QWebEngineProfile.NoPersistentCookies)
 
     def search_or_load_url(self):
         text = self.search_bar.text()
@@ -1449,23 +1459,7 @@ class HistoryDialog(QDialog):
         layout.addWidget(close_button)
         
         self.setLayout(layout)
-        
-    def style_button(self, button):
-        button.setStyleSheet("""
-            QPushButton {
-                border: 1px solid #ccc;
-                border-radius: 10px;
-                padding: 5px;
-                margin: 3px;
-                font-size: 12px;
-                background-color: #333;
-                color: #fff;
-            }
-            QPushButton:hover {
-                color: #34C759;
-            }
-        """)
-        
+
 def main():
     app = QApplication(sys.argv)
     darkelf_browser = Darkelf()
@@ -1474,5 +1468,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-    
