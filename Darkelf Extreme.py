@@ -1419,7 +1419,7 @@ class Darkelf(QMainWindow):
 
     def view_history(self):
         dialog = HistoryDialog(self.history_log, self)
-        dialog.exec_()
+        dialog.exec()
 
     def clear_history(self):
         self.history_log.clear()
