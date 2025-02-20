@@ -20,7 +20,7 @@ Our Privacy Policy outlines how we handle your data. By using the Darkelf Browse
 All content, trademarks, and data on the Darkelf Browser are the property of their respective owners. The Darkelf Browser is distributed under the LGPL 3.0 license, which allows you to use, modify, and distribute it under the terms of that license. However, trademarks and other non-software content may be subject to separate ownership and restrictions.
 
 ## 6. License and Classification
-Darkelf Browser is distributed under the GPL 3.0 license and has been issued Classification 5D002 with license exception ENC. Users can reproduce the software in accordance with the terms of the GPL 3.0 license.
+Darkelf Browser is distributed under the LGPL 3.0 license and has been issued Classification 5D002 with license exception ENC. Users can reproduce the software in accordance with the terms of the LGPL 3.0 license.
 
 This software, Darkelf Browser v3.0, is classified under ECCN 5D002 c.1 and is authorized for export under License Exception ENC, as described in Sections 740.17(a) and 740.17(b)(1) of the U.S. Export Administration Regulations (EAR). The software includes encryption technologies (such as AES, RSA, ChaCha20, and X25519) used for secure data storage and transmission, which may subject it to U.S. export control laws.
 
