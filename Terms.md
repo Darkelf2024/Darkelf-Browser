@@ -1,5 +1,5 @@
 # Terms of Service for Darkelf Browser
-**Effective Date:** 02/11/2025
+**Effective Date:** 02/21/2025
 
 ## 1. Acceptance of Terms
 By using the Darkelf Browser, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use the browser.
