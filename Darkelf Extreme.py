@@ -199,7 +199,39 @@ def load_or_generate_ecdh_key_pair():
         print(f"Error: {e}")
         return None
 
-# Load Adblock Rules
+# Clean adblock rule for validation
+def clean_adblock_rule(rule):
+    try:
+        re.compile(rule)
+        return rule
+    except re.error:
+        try:
+            escaped_rule = re.escape(rule)
+            re.compile(escaped_rule)
+            return escaped_rule
+        except re.error:
+            print(f"Invalid rule discarded: {rule}")
+            return None
+
+class AdblockAndTrackerInterceptor(QWebEngineUrlRequestInterceptor):
+    def __init__(self, adblock_rules, tracking_domains, script_block_rules):
+        super().__init__()
+        self.adblock_rules = AdblockRules(adblock_rules)
+        self.tracking_domains = tracking_domains
+        self.script_block_rules = AdblockRules(script_block_rules)
+
+    def interceptRequest(self, info):
+        url = info.requestUrl().toString()
+        if self.adblock_rules.should_block(url):
+            print(f"Blocked by Adblock: {url}")
+            info.block(True)
+        elif any(domain in url for domain in self.tracking_domains):
+            print(f"Blocked by Tracker Rules: {url}")
+            info.block(True)
+        elif self.script_block_rules.should_block(url):
+            print(f"Blocked by Script Rules: {url}")
+            info.block(True)
+
 def fetch_adblock_rules():
     urls = [
         "https://easylist.to/easylist/easylist.txt",
@@ -211,7 +243,7 @@ def fetch_adblock_rules():
     rules = []
     for url in urls:
         try:
-            response = requests.get(url, timeout=10)  # Set timeout to 10 seconds
+            response = requests.get(url, timeout=10)
             response.raise_for_status()
             raw_rules = response.text.splitlines()
             for rule in raw_rules:
@@ -224,19 +256,26 @@ def fetch_adblock_rules():
     print(f"Total adblock rules fetched: {len(rules)}")
     return rules
 
-def clean_adblock_rule(rule):
-    # Validate and clean adblock rule
-    try:
-        re.compile(rule)
-        return rule
-    except re.error:
+def fetch_script_block_rules():
+    urls = [
+        "https://easylist.to/easylist/easylist.txt",
+        "https://easylist.to/easylist/easyprivacy.txt",
+    ]
+    rules = []
+    for url in urls:
         try:
-            escaped_rule = re.escape(rule)
-            re.compile(escaped_rule)
-            return escaped_rule
-        except re.error:
-            print(f"Invalid rule discarded: {rule}")
-            return None
+            response = requests.get(url, timeout=10)
+            response.raise_for_status()
+            raw_rules = response.text.splitlines()
+            for rule in raw_rules:
+                clean_rule = clean_adblock_rule(rule)
+                if clean_rule:
+                    rules.append(clean_rule)
+            print(f"Successfully loaded script block list from {url}")
+        except requests.RequestException as e:
+            print(f"Failed to load script block list from {url}: {e}")
+    print(f"Total script block rules fetched: {len(rules)}")
+    return rules
 
 def fetch_tracking_domains():
     tracking_domains = set()
@@ -254,35 +293,6 @@ def fetch_tracking_domains():
         except requests.RequestException as e:
             print(f"Failed to load tracking domains from {url}: {e}")
     return tracking_domains
-
-# Define AdblockUrlRequestInterceptor
-class AdblockUrlRequestInterceptor(QWebEngineUrlRequestInterceptor):
-    def __init__(self, rules):
-        super().__init__()
-        self.rules = AdblockRules(rules)
-
-    def interceptRequest(self, info):
-        url = info.requestUrl().toString()
-        if self.rules.should_block(url):
-            print(f"Blocked by Adblock: {url}")
-            info.block(True)
-
-# Unified Adblock and Tracker Interceptor
-class AdblockAndTrackerInterceptor(QWebEngineUrlRequestInterceptor):
-    def __init__(self, adblock_rules, tracking_domains):
-        super().__init__()
-        self.adblock_rules = AdblockRules(adblock_rules)
-        self.tracking_domains = tracking_domains
-
-    def interceptRequest(self, info):
-        url = info.requestUrl().toString()
-        # Block if it matches Adblock rules or tracking domains
-        if self.adblock_rules.should_block(url):
-            print(f"Blocked by Adblock: {url}")
-            info.block(True)
-        elif any(domain in url for domain in self.tracking_domains):
-            print(f"Blocked by Tracker Rules: {url}")
-            info.block(True)
             
 # Download Manager
 class DownloadManager(QObject):
@@ -843,7 +853,8 @@ class Darkelf(QMainWindow):
 
         adblock_rules = fetch_adblock_rules()
         tracking_domains = fetch_tracking_domains()
-        interceptor = AdblockAndTrackerInterceptor(adblock_rules, tracking_domains)
+        script_block_rules = fetch_script_block_rules()
+        interceptor = AdblockAndTrackerInterceptor(adblock_rules, tracking_domains, script_block_rules)
         profile.setUrlRequestInterceptor(interceptor)
 
     def init_tor(self):
