@@ -1213,7 +1213,7 @@ class Darkelf(QMainWindow):
         
     def set_up_security_actions(self, security_menu):
         javascript_action = QAction("Enable JavaScript", self, checkable=True)
-        javascript_action.setChecked(False)  # Ensure it is unchecked at startup
+        javascript_action.setChecked(self.javascript_enabled)  # Set based on stored value, default is False
         javascript_action.triggered.connect(self.toggle_javascript)
         security_menu.addAction(javascript_action)
         fingerprinting_action = QAction("Enable Anti-Fingerprinting", self, checkable=True)
@@ -1234,7 +1234,6 @@ class Darkelf(QMainWindow):
         clear_cookies_action = QAction("Clear Cookies", self)
         clear_cookies_action.triggered.connect(self.clear_cookies)
         security_menu.addAction(clear_cookies_action)
-
 
     def add_settings_actions(self, settings_menu):
         https_action = QAction("Enforce HTTPS", self, checkable=True)
@@ -1385,8 +1384,9 @@ class Darkelf(QMainWindow):
         self.javascript_enabled = enabled
         self.settings.setValue("javascript_enabled", enabled)
         index = self.tab_widget.currentIndex()
-        web_view = self.tab_widget.widget(index)
-        web_view.settings().setAttribute(QWebEngineSettings.JavascriptEnabled, enabled)
+        if index != -1:
+            web_view = self.tab_widget.widget(index)
+            web_view.settings().setAttribute(QWebEngineSettings.JavascriptEnabled, enabled)
 
     def toggle_anti_fingerprinting(self, enabled):
         self.anti_fingerprinting_enabled = enabled
