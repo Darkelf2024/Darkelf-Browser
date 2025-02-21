@@ -115,6 +115,14 @@ Darkelf Browser implements sandboxing technology to provide an additional layer 
 - **Enabled by Default**: Darkelf Browser comes with a custom ad blocker enabled by default, ensuring an ad-free browsing experience.
 - **Updated Adblock Rules**: Regularly fetches and updates adblock rules from multiple trusted sources to effectively block ads and trackers.
 
+### NoScript Filtering
+
+**Darkelf Browser** includes NoScript Filtering to enhance security by blocking potentially harmful scripts from executing:
+
+- **Script Blocking**: The NoScript Filtering feature blocks scripts from untrusted sources, reducing the risk of malicious code execution.
+- **Customizable Rules**: Users can define their own script blocking rules to tailor the browsing experience to their needs.
+- **Integration with Ad Blocker**: The NoScript Filtering works alongside the custom ad blocker to provide a comprehensive security solution.
+
 ### Content Security Policy (CSP)
 - **Strict Security Policies**: Sets strict content security policies to prevent cross-site scripting (XSS), clickjacking, and other code injection attacks.
 
