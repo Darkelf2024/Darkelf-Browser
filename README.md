@@ -290,7 +290,7 @@ Themes are based on an auto-detection system of user preferences. The browser ad
 - Continuously update and refine filter lists by collaborating with community-maintained projects.
 - Enhance parsing algorithms to address modern, complex web structures (e.g., JavaScript-heavy frameworks).
 - Conduct additional testing across a wider range of websites to identify and resolve gaps.
-- Implement NoScript Filtering - Work in Progress
+
   
 ## Future Implementation:
 - Implementation of Rust Hybrid Encryption with Kyber1024
