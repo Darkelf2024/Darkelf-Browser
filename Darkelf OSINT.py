@@ -847,7 +847,7 @@ class Darkelf(QMainWindow):
         self.tor_network_enabled = self.settings.value("tor_network_enabled", True, type=bool)
         self.quantum_encryption_enabled = self.settings.value("quantum_encryption_enabled", False, type=bool)
         self.https_enforced = self.settings.value("https_enforced", True, type=bool)
-        self.cookies_enabled = self.settings.value("cookies_enabled", True, type=bool)
+        self.cookies_enabled = self.settings.value("cookies_enabled", False, type=bool)
         self.geolocation_enabled = self.settings.value("geolocation_enabled", False, type=bool)
         self.block_device_orientation = self.settings.value("block_device_orientation", True, type=bool)
         self.block_media_devices = self.settings.value("block_media_devices", True, type=bool)
@@ -1602,7 +1602,7 @@ class Darkelf(QMainWindow):
 
     def view_history(self):
         dialog = HistoryDialog(self.history_log, self)
-        dialog.exec_()
+        dialog.exec()
 
     def clear_history(self):
         self.history_log.clear()
