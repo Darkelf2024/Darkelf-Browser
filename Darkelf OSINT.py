@@ -739,9 +739,6 @@ class TorManager:
                     'DNSPort': '9054',
                     'AutomapHostsOnResolve': '1',
                     'VirtualAddrNetworkIPv4': '10.192.0.0/10',
-                    'TrackHostExits': '.',
-                    'ExitNodes': '{US}',  # Only use US nodes
-                    'StrictNodes': '1',   # Enforce the use of specified nodes
                 },
                 init_msg_handler=lambda line: print(line) if 'Bootstrapped ' in line else None,
             )
