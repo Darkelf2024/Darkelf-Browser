@@ -958,7 +958,7 @@ class Darkelf(QMainWindow):
         profile.setPersistentCookiesPolicy(QWebEngineProfile.NoPersistentCookies)
         settings = profile.settings()
         settings.setAttribute(QWebEngineSettings.LocalStorageEnabled, False)
-        settings.setAttribute(QWebEngineSettings.JavascriptEnabled, self.javascript_enabled)
+        settings.setAttribute(QWebEngineSettings.JavascriptEnabled, False)  # Ensure JavaScript is disabled by default
         settings.setAttribute(QWebEngineSettings.JavascriptCanOpenWindows, False)
         settings.setAttribute(QWebEngineSettings.JavascriptCanAccessClipboard, False)
         settings.setAttribute(QWebEngineSettings.LocalContentCanAccessRemoteUrls, False)
@@ -1269,8 +1269,8 @@ class Darkelf(QMainWindow):
 
     def set_up_security_actions(self, security_menu):
         javascript_action = QAction("Enable JavaScript", self, checkable=True)
-        javascript_action.setChecked(False)  # Ensure it is unchecked at startup
-        javascript_action.triggered.connect(self.toggle_javascript)
+        javascript_action.setChecked (False) # Ensure it is unchecked at startup
+        javascript_action.triggered.connect(lambda: self.toggle_javascript(javascript_action.isChecked()))
         security_menu.addAction(javascript_action)
         fingerprinting_action = QAction("Enable Anti-Fingerprinting", self, checkable=True)
         fingerprinting_action.setChecked(self.anti_fingerprinting_enabled)
@@ -1557,9 +1557,10 @@ class Darkelf(QMainWindow):
         self.javascript_enabled = enabled
         self.settings.setValue("javascript_enabled", enabled)
         index = self.tab_widget.currentIndex()
-        web_view = self.tab_widget.widget(index)
-        web_view.settings().setAttribute(QWebEngineSettings.JavascriptEnabled, enabled)
-
+        if index != -1:
+            web_view = self.tab_widget.widget(index)
+            web_view.settings().setAttribute(QWebEngineSettings.JavascriptEnabled, enabled)
+            
     def toggle_anti_fingerprinting(self, enabled):
         self.anti_fingerprinting_enabled = enabled
         self.settings.setValue("anti_fingerprinting_enabled", enabled)
