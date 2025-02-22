@@ -332,3 +332,7 @@ Your feedback is invaluable to the growth and improvement of **Darkelf Browser**
 I actively welcome constructive criticism and diverse perspectives, as they help make **Darkelf Browser** better for everyone. Let’s collaborate to foster a vibrant and supportive community around this project.  
 
 Thank you for your continued support in making **Darkelf Browser** the best it can be!  
+
+## License & Terms of Use
+Darkelf Browser is licensed under **LGPL**, but additional **terms of use** apply.
+**Read the full [Terms of Use](Terms.md) and the [Export Compliance Notice](ExportComplianceNotice.md).**
