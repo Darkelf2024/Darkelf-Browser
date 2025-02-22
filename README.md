@@ -51,6 +51,7 @@ Darkelf Browser employs the robust CHACHA20 encryption algorithm in conjunction 
 We welcome community feedback and contributions to enhance the security of Darkelf Browser. Your input helps us refine our strategies and tackle emerging threats effectively. Our team is committed to providing a secure, privacy-focused browsing experience, empowering users to explore the web with confidence. Stay tuned for updates and join us in building a safer online ecosystem.
 
 ## Table of Contents
+- [EULA](EULA.md)
 - [Attribution](Attribution.md)
 - [BrowserAudit](BrowserAudit.md)
 - [Encryption](Encryption.md)
