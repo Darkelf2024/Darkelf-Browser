@@ -26,6 +26,6 @@ For more information about U.S. export regulations, consult the **Bureau of Indu
 
 ## Release and Licensing
 
-This software is released under the **GNU General Public License (GPL) v3.0**. Users are encouraged to review the license terms prior to redistribution or modification.
+This software is released under the **Lesser General Public License (LGPL) v3.0**. Users are encouraged to review the license terms prior to redistribution or modification.
 
 **Disclaimer**: Export control laws are subject to change. For additional information on compliance requirements, consult the **Bureau of Industry and Security (BIS)** or contact a legal expert in export control.
