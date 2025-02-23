@@ -305,6 +305,7 @@ Themes are based on an auto-detection system of user preferences. The browser ad
 - Implementation of Rust Hybrid Encryption with Kyber1024
 - ios/Android App Creation
 - Desktop App dmg,exe for Mac/Windows
+- Custom Darkelf Video Player Integration
 
 ---
 
