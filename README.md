@@ -7,6 +7,8 @@
 - Reviewing Office: Office of National Security Agency on 11/27/2024 - Closed on 12/17/2024
 - [Open an issue](https://github.com/Darkelf2024/Darkelf-Browser/issues)
 
+- X25519 + Kyber768 Hybrid Encryption: Implemented Successfully - At Network Level - Can't release until BIS.gov approval - 3-6 MONTHS Wait for updated release
+
 ## Tech Stack
 
 ![HTML5](https://img.shields.io/badge/HTML5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)  
