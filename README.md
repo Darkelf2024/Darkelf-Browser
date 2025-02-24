@@ -304,7 +304,7 @@ Themes are based on an auto-detection system of user preferences. The browser ad
 
   
 ## Future Implementation:
-- Implementation of Rust Hybrid Encryption with Kyber1024
+- Implementation of Rust Hybrid Encryption with Kyber768 + X25519 Hybrid Encryption: It is ready - Needs BIS Approval 3-6 months Wait
 - ios/Android App Creation
 - Desktop App dmg,exe for Mac/Windows
 - Custom Darkelf Video Player Integration
