@@ -7,7 +7,7 @@
 - Reviewing Office: Office of National Security Agency on 11/27/2024 - Closed on 12/17/2024
 - [Open an issue](https://github.com/Darkelf2024/Darkelf-Browser/issues)
 
-- X25519 + Kyber768 Hybrid Encryption: Implemented Successfully - At Network Level - Can't release until BIS.gov approval - 3-6 MONTHS Wait for updated release
+- X25519 + Kyber768 Hybrid Post Quantum Encryption: Implemented Successfully - At Network Level - Can't release until BIS.gov approval - 3-6 MONTHS Wait for updated release
 
 ## Tech Stack
 
