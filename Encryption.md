@@ -8,7 +8,16 @@ Darkelf Browser implements multiple layers of encryption to ensure **secure comm
 
 ---
 
-## **1. ECDH (Elliptic Curve Diffie-Hellman) - Secure Key Exchange**
+## **1. Post-Quantum Cryptography (PQC) Integration:
+
+Kyber768 and X25519:
+
+- Kyber768: A post-quantum cryptographic algorithm designed to be secure against quantum attacks. It ensures that even if large-scale quantum computers become a reality, the key exchange remains secure.
+- X25519: A widely-used elliptic curve algorithm for secure key exchange, known for its efficiency and security against classical computers.
+- Hybrid Key Exchange: By combining Kyber768 and X25519, your implementation provides a robust shared secret that is secure against both classical and quantum attacks. This hybrid approach ensures that the communication channel remains secure even in the post-quantum era.
+
+
+## **2. ECDH (Elliptic Curve Diffie-Hellman) - Secure Key Exchange**
 ### **Purpose:**  
 ECDH is used to establish a **shared secret** between parties over an untrusted channel.
 
@@ -24,7 +33,7 @@ ECDH is used to establish a **shared secret** between parties over an untrusted 
 
 ---
 
-## **2. RSA-OAEP (Rivest-Shamir-Adleman with Optimal Asymmetric Encryption Padding) - Public Key Encryption**
+## **3. RSA-OAEP (Rivest-Shamir-Adleman with Optimal Asymmetric Encryption Padding) - Public Key Encryption**
 ### **Purpose:**  
 RSA-OAEP is used for **securely encrypting and decrypting data** using public and private keys.
 
@@ -40,7 +49,7 @@ RSA-OAEP is used for **securely encrypting and decrypting data** using public an
 
 ---
 
-## **3. AES-GCM (Advanced Encryption Standard - Galois/Counter Mode) - Authenticated Encryption**
+## **4. AES-GCM (Advanced Encryption Standard - Galois/Counter Mode) - Authenticated Encryption**
 ### **Purpose:**  
 AES-GCM is used as an **authenticated encryption** method after the **ECDH key exchange**.
 
@@ -56,7 +65,7 @@ AES-GCM is used as an **authenticated encryption** method after the **ECDH key e
 
 ---
 
-## **4. Secure Pseudo-Random Number Generator (PRNG) - WebCrypto API**
+## **5. Secure Pseudo-Random Number Generator (PRNG) - WebCrypto API**
 ### **Purpose:**  
 Darkelf uses **cryptographically secure random number generation** to enhance security.
 
@@ -96,7 +105,10 @@ To protect against future quantum computing threats, Darkelf plans to integrate 
 ✅ **Layer 6:** Decrypt data securely with the **RSA private key**.  
 
 ### **4. Secure Randomness (WebCrypto PRNG)**
-✅ **Layer 7:** Use **WebCrypto's secure PRNG** for cryptographic operations.  
+✅ **Layer 7:** Use **WebCrypto's secure PRNG** for cryptographic operations.
+
+### **5. Post Quantum Hybrid Encryption Kyber768+X25519 Will be updated & Integrated in New Release!
+- Waiting for BIS Approval
 
 ---
 
