@@ -8,7 +8,7 @@ Darkelf Browser implements multiple layers of encryption to ensure **secure comm
 
 ---
 
-## **1. Post-Quantum Cryptography (PQC) Integration:
+## **1. Post-Quantum Cryptography (PQC) Integration**
 
 Kyber768 and X25519:
 
