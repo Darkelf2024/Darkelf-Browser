@@ -162,8 +162,7 @@ Darkelf Browser is designed with privacy and security at its core, ensuring a sa
   Asymmetric encryption algorithms used for key exchange and digital signatures, providing an additional layer of security.
 
 - **Quantum Encryption**:
-  Option to enable quantum encryption for advanced security against future quantum computing threats. (Research/Testing Phase - Kyber1024/XMSS) - Currently, there is an error with Python 3.12 where key pairs cannot be found. The module is hidden and work is ongoing to resolve this issue.
-
+  Option to enable quantum encryption for advanced security against future quantum computing threats. (x25519 + Kyber768) Hybrid Post Quantum Encryption Integrated in Latest Tests - Successful!
 ## Privacy Features
 
 - **JavaScript Control**:
