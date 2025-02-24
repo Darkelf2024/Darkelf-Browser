@@ -41,10 +41,21 @@ This guide explains the step-by-step process to set up and run the Darkelf Brows
  - Install the dependencies: pip install -r requirements.txt (Creating a "requirement" txt file will batch dependencies together - It is optional)
  - You can pip install all packages manually in terminal etc. - Your choice.
 
-## Verify System Compatibility for PyQt5:
-	1. Linux: sudo apt-get install python3-pyqt5 python3-pyqt5.qtwebengine
- 	2. MacOS: brew install qt
-	3. Windows: python -m pip install --upgrade pip
+## Verify System Compatibility for PySide6
+
+To install PySide6 on different operating systems, use the following commands:
+
+# Linux (Debian/Ubuntu-based)
+sudo apt update && sudo apt install python3-pip
+python3 -m pip install PySide6
+
+# MacOS
+brew install qt  
+python3 -m pip install PySide6
+
+# Windows
+python -m pip install --upgrade pip  
+python -m pip install PySide6
 
 ## Install OpenSSL for Secure Communication:
 	1. Linux: sudo apt-get install openssl libssl-dev
