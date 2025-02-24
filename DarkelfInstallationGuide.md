@@ -45,15 +45,15 @@ This guide explains the step-by-step process to set up and run the Darkelf Brows
 
 To install PySide6 on different operating systems, use the following commands:
 
-# Linux (Debian/Ubuntu-based)
+## Linux (Debian/Ubuntu-based)
 sudo apt update && sudo apt install python3-pip
 python3 -m pip install PySide6
 
-# MacOS
+## MacOS
 brew install qt  
 python3 -m pip install PySide6
 
-# Windows
+## Windows
 python -m pip install --upgrade pip  
 python -m pip install PySide6
 
