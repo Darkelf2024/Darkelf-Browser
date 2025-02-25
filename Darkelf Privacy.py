@@ -199,7 +199,7 @@ def load_or_generate_ecdh_key_pair():
         print(f"Error: {e}")
         return None
 
-#Hybrid Kyber768 + X25519 Encryption at Network Level: It is successful - 3-6 months wait from BIS.gov
+#Hybrid Kyber768 + X25519 Encryption.
 
 # Clean adblock rule for validation
 def clean_adblock_rule(rule):
