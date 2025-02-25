@@ -7,7 +7,7 @@
 - Reviewing Office: Office of National Security Agency on 11/27/2024 - Closed on 12/17/2024
 - [Open an issue](https://github.com/Darkelf2024/Darkelf-Browser/issues)
 
-- X25519 + Kyber768 Hybrid Post Quantum Encryption: Implemented Successfully - Can't release until BIS.gov approval - 3-6 Months: Wait for updated release
+- X25519 + Kyber Hybrid Post Quantum Encryption: Wait for Updated Release
 
 ## Tech Stack
 
@@ -303,7 +303,7 @@ Themes are based on an auto-detection system of user preferences. The browser ad
 
   
 ## Future Implementation:
-- Implementation of Hybrid Encryption with Kyber768 + X25519 Hybrid Post-Quantum Encryption: It is ready - Needs BIS Approval 3-6 months Wait
+- Implementation of Hybrid Encryption with Kyber + X25519 Hybrid Post-Quantum Encryption: Wait for Update
 - ios/Android App Creation
 - Desktop App dmg,exe for Mac/Windows
 - Custom Darkelf Video Player Integration
