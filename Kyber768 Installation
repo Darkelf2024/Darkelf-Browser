@@ -14,6 +14,7 @@ Before installing `liboqs`, ensure you have the required tools:
 brew update
 brew install cmake ninja git python3 openssl
 brew install open-quantum-safe/liboqs/liboqs
+brew install pqcrypto
 ```
 
 ---
@@ -123,6 +124,8 @@ If you disabled **System Integrity Protection (SIP)** to fix permission errors, 
    ```
 4. Restart and verify everything still works.
 
+Note: Works with Python3.11
+
 ---
 
 ## 🚀 You're Ready!
@@ -131,4 +134,5 @@ You have successfully installed **Open Quantum Safe (OQS)**, `liboqs`, and `libo
 
 Let me know if you need help! 🚀
 ```
-
+- The information provided is for research and educational purposes
+- Darkelf Browser Kyber768 Edition is in testing phases - Release in the future 
