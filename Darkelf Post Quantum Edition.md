@@ -75,3 +75,5 @@ Welcome to the Darkelf Post-Quantum Edition, a highly secure and privacy-focused
 
 - **Session Management:**
   - Supports restoring previous sessions, including tabs and their state.
+
+- There is a CopyLeaks Report over 1000 Lines of Code - 4.2%
