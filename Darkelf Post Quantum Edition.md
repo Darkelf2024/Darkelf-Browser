@@ -9,6 +9,7 @@
 2. **Script Blocking**
    - Uses a machine learning model (pre-trained) to classify and block potentially malicious JavaScript code.
    - Extracts specific features from JavaScript code to determine if it is malicious.
+   - Machine learning model is self-hosted on client-side with the installation of certain packages and script.
 
 3. **SSL/TLS Configuration**
    - Forces the use of the latest version of TLS (v1.3) for secure communication.
