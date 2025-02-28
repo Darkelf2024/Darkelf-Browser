@@ -58,6 +58,7 @@ import dns.resolver
 import json
 import logging
 import time
+from concurrent.futures import ThreadPoolExecutor
 from urllib.parse import urlparse
 from base64 import urlsafe_b64encode, urlsafe_b64decode
 from PySide6.QtWidgets import (
@@ -76,6 +77,7 @@ from cryptography.hazmat.backends import default_backend
 from adblockparser import AdblockRules
 import stem.process
 from stem.control import Controller
+from collections import defaultdict
 
 
 # Debounce function to limit the rate at which a function can fire
@@ -199,6 +201,33 @@ def load_or_generate_ecdh_key_pair():
         print(f"Error: {e}")
         return None
 
+# Trie Node
+class TrieNode:
+    def __init__(self):
+        self.children = defaultdict(TrieNode)
+        self.is_end_of_rule = False
+
+# Trie for Rule Matching
+class Trie:
+    def __init__(self):
+        self.root = TrieNode()
+
+    def insert(self, rule):
+        node = self.root
+        for char in rule:
+            node = node.children[char]
+        node.is_end_of_rule = True
+
+    def search(self, url):
+        node = self.root
+        for char in url:
+            if char not in node.children:
+                return False
+            node = node.children[char]
+            if node.is_end_of_rule:
+                return True
+        return node.is_end_of_rule
+
 # Clean adblock rule for validation
 def clean_adblock_rule(rule):
     try:
@@ -216,20 +245,27 @@ def clean_adblock_rule(rule):
 class AdblockAndTrackerInterceptor(QWebEngineUrlRequestInterceptor):
     def __init__(self, adblock_rules, tracking_domains, script_block_rules):
         super().__init__()
-        self.adblock_rules = AdblockRules(adblock_rules)
-        self.tracking_domains = tracking_domains
-        self.script_block_rules = AdblockRules(script_block_rules)
+        self.adblock_trie = Trie()
+        self.script_block_trie = Trie()
+        self.tracking_domains = set(tracking_domains)
+        self.cache = {}
+
+        # Insert adblock and script block rules into tries
+        for rule in adblock_rules:
+            self.adblock_trie.insert(rule)
+        for rule in script_block_rules:
+            self.script_block_trie.insert(rule)
 
     def interceptRequest(self, info):
         url = info.requestUrl().toString()
-        if self.adblock_rules.should_block(url):
-            print(f"Blocked by Adblock: {url}")
-            info.block(True)
-        elif any(domain in url for domain in self.tracking_domains):
-            print(f"Blocked by Tracker Rules: {url}")
-            info.block(True)
-        elif self.script_block_rules.should_block(url):
-            print(f"Blocked by Script Rules: {url}")
+        if url in self.cache:
+            should_block = self.cache[url]
+        else:
+            should_block = self.adblock_trie.search(url) or any(domain in url for domain in self.tracking_domains) or self.script_block_trie.search(url)
+            self.cache[url] = should_block
+
+        if should_block:
+            print(f"Blocked by Adblock/Tracking/Script Rules: {url}")
             info.block(True)
 
 def fetch_adblock_rules():
@@ -241,19 +277,26 @@ def fetch_adblock_rules():
         "https://pgl.yoyo.org/as/serverlist.php?hostformat=plain&showintro=0&mimetype=plaintext",
     ]
     rules = []
-    for url in urls:
-        try:
-            response = requests.get(url, timeout=10)
-            response.raise_for_status()
-            raw_rules = response.text.splitlines()
-            for rule in raw_rules:
-                clean_rule = clean_adblock_rule(rule)
-                if clean_rule:
-                    rules.append(clean_rule)
-            print(f"Successfully loaded ad block list from {url}")
-        except requests.RequestException as e:
-            print(f"Failed to load ad block list from {url}: {e}")
+    with ThreadPoolExecutor() as executor:
+        futures = [executor.submit(download_rules, url) for url in urls]
+        for future in futures:
+            rules.extend(future.result())
     print(f"Total adblock rules fetched: {len(rules)}")
+    return rules
+
+def download_rules(url):
+    rules = []
+    try:
+        response = requests.get(url, timeout=10)
+        response.raise_for_status()
+        raw_rules = response.text.splitlines()
+        for rule in raw_rules:
+            clean_rule = clean_adblock_rule(rule)
+            if clean_rule:
+                rules.append(clean_rule)
+        print(f"Successfully loaded rules from {url}")
+    except requests.RequestException as e:
+        print(f"Failed to load rules from {url}: {e}")
     return rules
 
 def fetch_script_block_rules():
@@ -262,36 +305,23 @@ def fetch_script_block_rules():
         "https://easylist.to/easylist/easyprivacy.txt",
     ]
     rules = []
-    for url in urls:
-        try:
-            response = requests.get(url, timeout=10)
-            response.raise_for_status()
-            raw_rules = response.text.splitlines()
-            for rule in raw_rules:
-                clean_rule = clean_adblock_rule(rule)
-                if clean_rule:
-                    rules.append(clean_rule)
-            print(f"Successfully loaded script block list from {url}")
-        except requests.RequestException as e:
-            print(f"Failed to load script block list from {url}: {e}")
+    with ThreadPoolExecutor() as executor:
+        futures = [executor.submit(download_rules, url) for url in urls]
+        for future in futures:
+            rules.extend(future.result())
     print(f"Total script block rules fetched: {len(rules)}")
     return rules
 
 def fetch_tracking_domains():
     tracking_domains = set()
-    services_json_url = 'https://raw.githubusercontent.com/disconnectme/disconnect-tracking-protection/master/services.json'
-    entities_json_url = 'https://raw.githubusercontent.com/disconnectme/disconnect-tracking-protection/master/entities.json'
-    for url in [services_json_url, entities_json_url]:
-        try:
-            response = requests.get(url, timeout=10)
-            response.raise_for_status()
-            data = response.json()
-            for entity, details in data.items():
-                if 'properties' in details:
-                    for domain in details['properties']:
-                        tracking_domains.add(domain)
-        except requests.RequestException as e:
-            print(f"Failed to load tracking domains from {url}: {e}")
+    urls = [
+        'https://raw.githubusercontent.com/disconnectme/disconnect-tracking-protection/master/services.json',
+        'https://raw.githubusercontent.com/disconnectme/disconnect-tracking-protection/master/entities.json'
+    ]
+    with ThreadPoolExecutor() as executor:
+        futures = [executor.submit(download_tracking_domains, url) for url in urls]
+        for future in futures:
+            tracking_domains.update(future.result())
     return tracking_domains
             
 # Download Manager
