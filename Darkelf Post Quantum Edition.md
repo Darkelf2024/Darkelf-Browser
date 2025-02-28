@@ -1,79 +1,87 @@
-# Darkelf Post-Quantum Edition
+# Darkelf Browser Post Quantum Edition Features
 
-Welcome to the Darkelf Post-Quantum Edition, a highly secure and privacy-focused web browser designed to protect your online activities using advanced encryption techniques, including post-quantum cryptography.
+## Security Features
+1. **Adblock and Tracker Blocking**
+   - Uses Trie data structure to efficiently match and block URLs based on adblock rules.
+   - Fetches adblock rules from popular sources such as EasyList.
+   - Blocks tracking domains using lists from Disconnect.me.
 
-## Features
+2. **Script Blocking**
+   - Uses a machine learning model (pre-trained) to classify and block potentially malicious JavaScript code.
+   - Extracts specific features from JavaScript code to determine if it is malicious.
 
-### Security Features
+3. **SSL/TLS Configuration**
+   - Forces the use of the latest version of TLS (v1.3) for secure communication.
+   - Configures SSL settings to ensure the highest level of security.
 
-- **Anti-Fingerprinting Techniques:**
-  - Canvas Fingerprinting Protection
-  - User-Agent Spoofing
-  - WebGL Fingerprinting Protection
-  - Font Fingerprinting Protection
-  - Media Device Enumeration Blocking
-  - Timezone Spoofing
-  - Language and Locale Spoofing
-  - Screen Resolution and Color Depth Spoofing
-  - Hardware Concurrency Spoofing
-  - Audio Fingerprinting Protection
-  - Battery Status API Blocking
-  - Network Information API Blocking
-  - ETag and Cache-Control Manipulation
+4. **Content Security Policy (CSP)**
+   - Injects a strict CSP header to restrict the sources from which content can be loaded.
+   - Blocks unsafe inline scripts and restricts script sources to self and HTTPS.
 
-- **HTTPS Enforcement:**
-  - Forces all HTTP requests to be upgraded to HTTPS for secure communication.
+5. **Sandboxing**
+   - Disables potentially risky features such as LocalStorage, JavaScript, WebGL, and WebRTC.
+   - Enables XSS auditing and disables error pages to prevent information leakage.
 
-- **Tor Network Integration:**
-  - Routes traffic through the Tor network for anonymous browsing.
-  - Configures Tor DNS and SOCKS proxy for enhanced privacy.
+6. **Tor Network Integration**
+   - Supports browsing through the Tor network for enhanced anonymity.
+   - Configures Tor proxy and DNS to route traffic through the Tor network.
 
-- **Cookie Management:**
-  - Options to enable or disable cookies.
-  - Automatically clears cookies and cache after closing tabs.
+7. **JavaScript Blocking**
+   - Disables JavaScript by default to prevent script-based attacks.
+   - Allows users to enable or disable JavaScript through the settings menu.
 
-- **Security Settings Management:**
-  - Persistent storage of security settings using `QSettings`.
-  - User interface for enabling or disabling various security settings dynamically.
+8. **Anti-Fingerprinting**
+   - Overrides the user agent string to prevent browser fingerprinting.
+   - Disables geolocation access to avoid location-based tracking.
 
-### Encryption Features
+## Encryption Features
+1. **Hybrid Key Exchange**
+   - Implements a hybrid key exchange mechanism using X25519 and Kyber512 (a post-quantum cryptographic algorithm).
+   - Derives a final secret key using the HKDF scheme with SHA-256 hash.
 
-- **ChaCha20 Cipher:**
-  - Symmetric encryption algorithm known for its speed and security.
+2. **Cryptographic PRNG**
+   - Provides a function to generate secure random bytes using the browser's crypto API.
 
-- **RSA and X25519:**
-  - Asymmetric encryption algorithms for key exchange and digital signatures.
+## Privacy Features
+1. **HTTPS Enforcement**
+   - Redirects HTTP URLs to HTTPS to ensure secure communication.
+   - Can be toggled on or off through the settings menu.
 
-- **Hybrid Quantum Encryption:**
-  - Combines x25519 and Kyber512 for advanced security against quantum computing threats.
+2. **Cookie Management**
+   - Disables persistent cookies by default to prevent tracking.
+   - Allows users to enable or disable cookies through the settings menu.
 
-- **AES-GCM Implementation:**
-  - Ensures data integrity and confidentiality with AES-GCM encryption.
+3. **Geolocation Blocking**
+   - Overrides geolocation functions to deny access to location information.
 
-- **ECDH Implementation:**
-  - Derives shared secrets securely using ECDH, ensuring perfect forward secrecy.
+4. **Device Orientation and Media Devices Blocking**
+   - Blocks access to device orientation and media devices to prevent unauthorized access.
 
-### Privacy Features
+5. **History and Cache Management**
+   - Provides options to clear browsing history and cache.
+   - Clears cache and history on browser close to maintain privacy.
 
-- **JavaScript Control:**
-  - Allows users to enable or disable JavaScript to reduce the risk of malicious scripts.
+6. **SSL Configuration and Protection**
+   - Ensures the use of the latest SSL/TLS protocols.
+   - Configures SSL settings to protect against insecure connections.
 
-- **Geolocation Control:**
-  - Option to enable or disable geolocation to prevent websites from accessing physical location data.
+## UI and Additional Features
+1. **User Interface**
+   - Provides a tabbed browsing interface with customizable tabs.
+   - Includes a toolbar with navigation controls, search bar, and zoom buttons.
+   - Customizable homepage with a search form for DuckDuckGo.
 
-- **Device Orientation and Media Device Blocking:**
-  - Blocks device orientation sensors and media devices (camera, microphone) to prevent unauthorized access.
+2. **Menu and Shortcuts**
+   - Includes navigation, security, settings, history, and about menus.
+   - Provides keyboard shortcuts for common actions like opening new tabs, closing tabs, and reloading pages.
 
-- **Customizable Home Page with Integrated Search:**
-  - Offers a customizable home page with DuckDuckGo search for privacy-focused search functionality.
+3. **Download Manager**
+   - Manages file downloads with a progress dialog and save file dialog.
+   - Allows users to cancel downloads and provides notifications upon completion.
 
-- **Adblock Features:**
-  - **Domain Blocking:** Blocks requests to specific domains.
-  - **Rule-Based Filtering:** Custom rules to filter content based on type.
-  - **Adblock Pattern Management:** Aggregates adblock patterns from multiple sources.
-  - **Tracking Protection:** Prevents requests to known tracking domains.
+4. **Custom Web Engine Page**
+   - Extends QWebEnginePage to add custom security and privacy behaviors.
+   - Intercepts JavaScript console messages to block malicious scripts.
 
-- **Session Management:**
-  - Supports restoring previous sessions, including tabs and their state.
-
-- There is a CopyLeaks Report over 1000 Lines of Code - 4.2%
+### Summary
+The Darkelf Browser is designed with a strong emphasis on security, privacy, and anonymity. It leverages advanced cryptographic techniques, strict content security policies, and various anti-tracking mechanisms to protect users from online threats. The integration of the Tor network further enhances anonymity, while the user-friendly interface and customizable settings provide a seamless browsing experience.
