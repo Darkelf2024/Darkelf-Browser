@@ -7,7 +7,7 @@
 - Reviewing Office: Office of National Security Agency on 11/27/2024 - Closed on 12/17/2024
 - [Open an issue](https://github.com/Darkelf2024/Darkelf-Browser/issues)
 
-- X25519 + Kyber512 Hybrid Post Quantum Encryption: Wait for Updated Release! It is fast and Smooth! Kyber768 needs some more tweaks! Both updates will have Tor Integrated - It is ready and fast!
+- X25519 + Kyber512/Kyber768 Hybrid Post Quantum Encryption: Wait for Updated Release! It is fast and Smooth! Both updates will have Tor Integrated - It is ready and fast!
 
 ## Tech Stack
 
@@ -303,10 +303,10 @@ Themes are based on an auto-detection system of user preferences. The browser ad
 
   
 ## Future Implementation:
-- Implementation of Hybrid Encryption with Kyber + X25519 Hybrid Post-Quantum Encryption: Wait for Update
+- Implementation of Hybrid Encryption with Kyber512/768 + X25519 Hybrid Post-Quantum Encryption: Wait for Update
 - ios/Android App Creation
 - Desktop App dmg,exe for Mac/Windows
-- Custom Darkelf Video Player Integration
+- Render Youtube FullScreen Mode Fix - In Progress!
 
 ---
 
