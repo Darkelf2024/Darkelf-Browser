@@ -1,4 +1,4 @@
-# Darkelf Browser Post Quantum Edition Features
+# Darkelf Browser Post Quantum Edition Kyber512/Kyber768 Features
 
 ## Security Features
 1. **Adblock and Tracker Blocking**
@@ -37,7 +37,7 @@
 
 ## Encryption Features
 1. **Hybrid Key Exchange**
-   - Implements a hybrid key exchange mechanism using X25519 and Kyber512 (a post-quantum cryptographic algorithm).
+   - Implements a hybrid key exchange mechanism using X25519 and Kyber512/Kyber768 (a post-quantum cryptographic algorithm).
    - Derives a final secret key using the HKDF scheme with SHA-256 hash.
 
 2. **Cryptographic PRNG**
