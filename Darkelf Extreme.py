@@ -64,7 +64,7 @@ from base64 import urlsafe_b64encode, urlsafe_b64decode
 from PySide6.QtWidgets import (
     QApplication, QMainWindow, QTabWidget, QPushButton, QLineEdit, QVBoxLayout, QMenuBar, QToolBar, QDialog, QMessageBox, QFileDialog, QProgressDialog, QListWidget, QMenu, QWidget, QLabel
 )
-from PySide6.QtGui import QPalette, QColor, QKeySequence, QShortcut, QAction
+from PySide6.QtGui import QPalette, QColor, QKeySequence, QShortcut, QAction, QGuiApplication
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtNetwork import QNetworkProxy, QSslConfiguration, QSsl
 from PySide6.QtWebEngineCore import QWebEngineUrlRequestInterceptor, QWebEngineSettings, QWebEnginePage, QWebEngineScript, QWebEngineProfile, QWebEngineDownloadRequest, QWebEngineContextMenuRequest
@@ -1486,9 +1486,28 @@ class HistoryDialog(QDialog):
         self.setLayout(layout)
 
 def main():
-    app = QApplication(sys.argv)
+    # Apply correct High DPI scaling (replaces deprecated AA_EnableHighDpiScaling)
+    QGuiApplication.setHighDpiScaleFactorRoundingPolicy(Qt.HighDpiScaleFactorRoundingPolicy.PassThrough)
+    
+    # Disable WebRTC completely using multiple Chromium flags
+    os.environ["QTWEBENGINE_CHROMIUM_FLAGS"] = (
+        "--disable-webrtc "
+        "--disable-rtc-sctp-data-channels "
+        "--disable-rtc-multiple-routes "
+        "--disable-rtc-stun-origin "
+        "--force-webrtc-ip-handling-policy=disable_non_proxied_udp"
+    )
+
+    # Create the application instance
+    app = QApplication.instance()
+    if app is None:
+        app = QApplication(sys.argv)
+
+    # Initialize and show the browser
     darkelf_browser = Darkelf()
     darkelf_browser.show()
+    
+    # Execute the app
     sys.exit(app.exec())
 
 if __name__ == '__main__':
