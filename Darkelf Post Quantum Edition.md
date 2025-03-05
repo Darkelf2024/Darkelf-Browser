@@ -34,6 +34,7 @@
 8. **Anti-Fingerprinting**
    - Overrides the user agent string to prevent browser fingerprinting.
    - Disables geolocation access to avoid location-based tracking.
+   - Uses a machine learning model (pre-trained) to block all fingerprinting techniques.
 
 ## Encryption Features
 1. **Hybrid Key Exchange**
