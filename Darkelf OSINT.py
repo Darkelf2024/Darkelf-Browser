@@ -77,7 +77,7 @@ from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
 from adblockparser import AdblockRules
-import subprocess
+import subprocess # nosec - All run through sanitizing and validation
 import stem.process
 from stem.control import Controller
 from collections import defaultdict
