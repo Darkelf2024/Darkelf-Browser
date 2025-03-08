@@ -45,7 +45,7 @@
 
 **2. Rust-Powered Encryption for Secure Data Handling**
 - Rust is integrated into Python via `crypto_rust`, ensuring **fast and memory-safe encryption**.  
-- All sensitive data, including **HTTP requests, stored session data, and cookies**, can be **encrypted/decrypted using Rust** inside the Python-based browser.  
+- All sensitive data, including **HTTPS requests, stored session data, and cookies**, can be **encrypted/decrypted using Rust** inside the Python-based browser.  
 - The Rust implementation provides **protection against memory leaks and side-channel attacks**.  
 
 **3. Cryptographic PRNG (Pseudo-Random Number Generator)**
