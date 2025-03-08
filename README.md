@@ -7,7 +7,7 @@
 - Reviewing Office: Office of National Security Agency on 11/27/2024 - Closed on 12/17/2024
 - [Open an issue](https://github.com/Darkelf2024/Darkelf-Browser/issues)
 
-- X25519 + Kyber512/Kyber768 Hybrid Post Quantum Encryption: Wait for Updated Release! It is fast and Smooth! Both updates will have Tor Integrated - It is ready and fast!
+- X25519 + Kyber512/Kyber768 Hybrid Post Quantum Encryption: Wait for Updated Release! It is fast and Smooth! Both updates will have Tor Integrated - It is ready and fast! Rust is implemented.
 
 ## Tech Stack
 
@@ -61,6 +61,7 @@ We welcome community feedback and contributions to enhance the security of Darke
 - [QSettings](QSettings.md)
 - [LICENSE](LICENSE)
 - [Copyright](Copyright.md)
+- [Darkelf Post Quantum Kyber512/768 Edition](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Darkelf%20Post%20Quantum%20Edition.md)
 - [Darkelf Installation Guide](DarkelfInstallationGuide.md)
 - [Tor Installation Guide](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Tor%20Installation%20Guide.md)
 - [Tor DNS Installation Guide](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Tor%20DNS%20Installation.md)
