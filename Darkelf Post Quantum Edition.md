@@ -36,13 +36,23 @@
    - Disables geolocation access to avoid location-based tracking.
    - Uses a machine learning model (pre-trained) to block all fingerprinting techniques.
 
-## Encryption Features
-1. **Hybrid Key Exchange**
-   - Implements a hybrid key exchange mechanism using X25519 and Kyber512/Kyber768 (a post-quantum cryptographic algorithm).
-   - Derives a final secret key using the HKDF scheme with SHA-256 hash.
+# 🔐 Encryption Features
 
-2. **Cryptographic PRNG**
-   - Provides a function to generate secure random bytes using the browser's crypto API.
+## 1. Hybrid Key Exchange (Rust-Powered)
+- Implements a **hybrid key exchange mechanism** using **X25519** (Elliptic Curve Diffie-Hellman) and **Kyber512/Kyber768** (a post-quantum cryptographic algorithm).  
+- Rust handles the key exchange efficiently, providing **high security and performance**.  
+- The final **shared secret** is derived using **HKDF (HMAC-based Key Derivation Function) with SHA-256**, ensuring strong cryptographic security.  
+
+## 2. Rust-Powered Encryption for Secure Data Handling
+- Rust is integrated into Python via `crypto_rust`, ensuring **fast and memory-safe encryption**.  
+- All sensitive data, including **HTTP requests, stored session data, and cookies**, can be **encrypted/decrypted using Rust** inside the Python-based browser.  
+- The Rust implementation provides **protection against memory leaks and side-channel attacks**.  
+
+## 3. Cryptographic PRNG (Pseudo-Random Number Generator)
+- Provides a function to generate **secure random bytes** using:  
+  - The **browser’s crypto API** (for in-browser security).  
+  - **Rust’s cryptographically secure random generator** for Python-based encryption.  
+- Ensures strong entropy for cryptographic operations like key generation and nonce creation.  
 
 ## Privacy Features
 1. **HTTPS Enforcement**
