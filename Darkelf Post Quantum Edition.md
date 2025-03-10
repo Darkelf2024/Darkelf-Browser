@@ -26,6 +26,7 @@
 6. **Tor Network Integration**
    - Supports browsing through the Tor network for enhanced anonymity.
    - Configures Tor proxy and DNS to route traffic through the Tor network.
+   - Onion Routing Available
 
 7. **JavaScript Blocking**
    - Disables JavaScript by default to prevent script-based attacks.
