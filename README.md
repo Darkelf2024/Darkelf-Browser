@@ -40,6 +40,11 @@ Darkelf Browser integrates seamlessly with the Tor network, allowing users to an
 
 - Note: Socks Proxy is Fast, but when utilizing Tor DNS speeds are sacrificed due to it's strength.
 
+### **Onion Routing in Darkelf Browser**
+
+The **Onion Routing** feature in Darkelf Browser enhances privacy by routing all browsing traffic through the **Tor network**, anonymizing the user's activity. This feature uses **multiple layers of encryption**, ensuring that the user’s IP address is hidden and their browsing behavior is protected from surveillance. Users can access regular websites and **.onion sites** (the deep web) securely, with all traffic routed through Tor's onion relays. While it improves privacy, it may slightly reduce browsing speed due to the nature of the Tor network. This feature can be enabled or disabled from the browser’s privacy settings.
+
+
 ### **Content Security Policy (CSP) Enhancements**  
 Darkelf Browser emphasizes the importance of Content Security Policy (CSP) to mitigate various forms of attacks such as cross-site scripting (XSS) and data injection. We are committed to working closely with the community to fine-tune and adapt the CSP policies for optimal protection.
 
