@@ -33,17 +33,24 @@ The browser is designed to minimize reliance on external dependencies.
 - **External Libraries:** Open-source libraries may be used within the browser’s codebase but are bundled and self-contained.  
 
 ## 5. How is my data secured when stored locally?
-The browser takes measures to ensure local data security:  
-- **Quantum Encryption (Optional):** Users can enable quantum-resistant encryption for sensitive local data.  
-- **Sandboxing:** The browser operates in a sandboxed environment to isolate stored data from other applications.  
-- **User-Controlled Cookies and Sessions:** Since cookies are disabled by default, session management is entirely within the user’s control.  
+The browser takes measures to ensure local data security:
+
+Quantum Encryption: By default, quantum-resistant encryption is implemented using enhanced web crypto for sensitive local data.
+
+Sandboxing: The browser operates in a sandboxed environment to isolate stored data from other applications.
+
+User-Controlled Cookies and Sessions: Since cookies are disabled by default, session management is entirely within the user’s control.
 
 ## 6. How can I customize the browser for enhanced privacy?
-You can further enhance privacy by adjusting the browser’s settings:  
-- **Enable Tor Network:** Use Tor for anonymous browsing.  
-- **Quantum Encryption:** Turn on quantum encryption for advanced data security.  
-- **Disable JavaScript:** Keep JavaScript disabled unless absolutely necessary for specific sites.  
-- **Block Cookies:** Continue using the default setting to block cookies, or selectively enable them for trusted websites.  
+You can further enhance privacy by adjusting the browser’s settings:
+
+Enable Tor Network: Use Tor for anonymous browsing.
+
+Quantum Encryption: Quantum encryption is turned on by default for advanced data security.
+
+Disable JavaScript: Keep JavaScript disabled unless absolutely necessary for specific sites.
+
+Block Cookies: Continue using the default setting to block cookies, or selectively enable them for trusted websites.
 
 ## 7. Does the browser support geolocation or media device access?
 By default, these features are disabled:  
