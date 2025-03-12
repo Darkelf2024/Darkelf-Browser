@@ -77,9 +77,10 @@ We welcome community feedback and contributions to enhance the security of Darke
 - [FAQ](FAQ.md)
 
 ## Systems
-- MAC OS - Ready
+- macOS (Intel & Apple Silicon) – Ready
 - Linux - Ready
 - Windows - Ready
+- arm
 
 ## Variations/Types
 - Darkelf Extreme Privacy - Released
