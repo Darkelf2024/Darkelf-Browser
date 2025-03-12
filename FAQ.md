@@ -7,13 +7,17 @@ Darkelf Browser is designed to be fully self-maintained and user-controlled. It 
 - **User Responsibility:** Users are empowered to maintain and manage their own data without interference.
 
 ## 2. What privacy features are enabled by default?
-Darkelf Browser is configured with strong privacy protections right out of the box:  
-- **Anti-Fingerprinting:** Enabled by default to block websites from uniquely identifying your browser.  
-- **HTTPS Enforcement:** Ensures all connections use secure HTTPS protocols, whenever possible.  
-- **Media Device Blocking:** Access to microphones and cameras is blocked by default to prevent unauthorized use.  
-- **Device Orientation Blocking:** Stops websites from accessing device motion or orientation data.  
-- **Cookies Disabled:** By default, cookies are disabled, preventing websites from tracking your activity.  
-- **Geolocation Disabled:** Location data is not shared with websites.  
+Darkelf Browser is configured with strong privacy protections right out of the box:
+- **Anti-Fingerprinting:** Enabled by default to block websites from uniquely identifying your browser.
+- **HTTPS Enforcement:** Ensures all connections use secure HTTPS protocols, whenever possible.
+- **Media Device Blocking:** Access to microphones and cameras is blocked by default to prevent unauthorized use.
+- **Device Orientation Blocking:** Stops websites from accessing device motion or orientation data.
+- **Cookies Disabled:** By default, cookies are disabled, preventing websites from tracking your activity.
+- **Geolocation Disabled:** Location data is not shared with websites.
+- **WebGL Disabled:** By default, WebGL is disabled to prevent potential security risks and fingerprinting.
+- **WebRTC Disabled:** WebRTC is disabled by default to prevent IP leaks and enhance privacy.
+- **JavaScript Disabled:** JavaScript is disabled by default to block potentially harmful scripts and improve security.
+- **Tor Integration:** Enabled by default to provide anonymous browsing and enhance privacy.
 
 ## 3. What external requests does the browser make in its default configuration?
 With default settings, Darkelf Browser minimizes external connections:  
