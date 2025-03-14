@@ -1,4 +1,4 @@
-# Darkelf Browser Post Quantum Edition Kyber512/Kyber768 Features
+# Darkelf Browser Post Quantum Edition Hybrid Kyber768 Features
 
 ## Security Features
 1. **Adblock and Tracker Blocking**
@@ -98,3 +98,6 @@
 
 ### Summary
 The Darkelf Browser is designed with a strong emphasis on security, privacy, and anonymity. It leverages advanced cryptographic techniques, strict content security policies, and various anti-tracking mechanisms to protect users from online threats. The integration of the Tor network further enhances anonymity, while the user-friendly interface and customizable settings provide a seamless browsing experience.
+
+### Note on Key Storage
+- The hybrid encryption keys are temporarily stored in RAM for the duration of the browser session. They are not written to disk to ensure maximum security and privacy.
