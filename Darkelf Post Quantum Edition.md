@@ -40,7 +40,7 @@
 ## 🔐 Encryption Features
 
 **1. Hybrid Key Exchange (Rust-Powered)**
-- Implements a **hybrid key exchange mechanism** using **X25519** (Elliptic Curve Diffie-Hellman) and **Kyber512/Kyber768** (a post-quantum cryptographic algorithm).  
+- Implements a **hybrid key exchange mechanism** using **X25519** (Elliptic Curve Diffie-Hellman) and **KyberKyber768** (a post-quantum cryptographic algorithm).  
 - Rust handles the key exchange efficiently, providing **high security and performance**.  
 - The final **shared secret** is derived using **HKDF (HMAC-based Key Derivation Function) with SHA-256**, ensuring strong cryptographic security.  
 
