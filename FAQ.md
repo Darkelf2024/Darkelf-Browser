@@ -74,7 +74,7 @@ For further details, visit the [official GitHub repository](https://github.com/D
 
 Bookmarks and plugins can introduce security risks. Malicious scripts can be embedded in bookmarks, and plugins often become attack vectors for malware or data leaks. To enhance security and privacy, Darkelf Browser eliminates these potential vulnerabilities, ensuring a safer browsing experience.
 
-## 11. How is Post-Quantum Cryptography (PQC) Kyber 512/768 implemented, and how are the keys stored?
+## 11. How is Post-Quantum Cryptography (PQC) Kyber768 implemented, and how are the keys stored?
 
 Key Generation: Generate public and private key pairs using Kyber.
 
