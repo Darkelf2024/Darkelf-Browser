@@ -7,7 +7,8 @@
 - Reviewing Office: Office of National Security Agency on 11/27/2024 - Closed on 12/17/2024
 - [Open an issue](https://github.com/Darkelf2024/Darkelf-Browser/issues)
 
-- [Discord](https://discord.gg/czAb2c2T)
+- [Follow us on Discord](https://discord.gg/czAb2c2T)
+- [Darkelf Info](https://darkelfbrowser.com)
 
 - X25519 + Kyber768 Hybrid Post Quantum Encryption: Wait for Updated Release! It is fast and Smooth! Both updates will have Tor Integrated - It is ready and fast! Has Rust Hybrid Implemented.
 
