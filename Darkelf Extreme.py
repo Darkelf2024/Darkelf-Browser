@@ -66,7 +66,7 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtGui import QPalette, QColor, QKeySequence, QShortcut, QAction, QGuiApplication
 from PySide6.QtWebEngineWidgets import QWebEngineView
-from PySide6.QtNetwork import QNetworkProxy, QSslConfiguration, QSsl
+from PySide6.QtNetwork import QNetworkProxy, QSslConfiguration,QSslSocket, QSsl, QSslCipher
 from PySide6.QtWebEngineCore import QWebEngineUrlRequestInterceptor, QWebEngineSettings, QWebEnginePage, QWebEngineScript, QWebEngineProfile, QWebEngineDownloadRequest, QWebEngineContextMenuRequest
 from PySide6.QtCore import QUrl, QSettings, Qt, QObject, Slot
 from cryptography.hazmat.primitives import serialization, hashes
@@ -323,7 +323,21 @@ def fetch_tracking_domains():
         for future in futures:
             tracking_domains.update(future.result())
     return tracking_domains
-            
+
+def download_tracking_domains(url):
+    domains = set()
+    try:
+        response = requests.get(url, timeout=10)
+        response.raise_for_status()
+        data = response.json()
+        for entity, details in data.items():
+            if 'properties' in details:
+                for domain in details['properties']:
+                    domains.add(domain)
+    except requests.RequestException as e:
+        print(f"Failed to load tracking domains from {url}: {e}")
+    return domains
+    
 # Download Manager
 class DownloadManager(QObject):
     def __init__(self, parent=None):
@@ -566,11 +580,6 @@ class CustomWebEnginePage(QWebEnginePage):
                 return imageData;
             };
 
-            // User-Agent Spoofing
-            Object.defineProperty(navigator, 'userAgent', {
-                get: function() { return 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.5790.110 Safari/537.36'; }
-            });
-
             // WebGL Fingerprinting Protection
             const originalGetParameter = WebGLRenderingContext.prototype.getParameter;
             WebGLRenderingContext.prototype.getParameter = function(parameter) {
@@ -666,7 +675,7 @@ class CustomWebEnginePage(QWebEnginePage):
         })();
         """
         self.runJavaScript(script)
-
+        
     def setup_csp(self):
         script = """
         (function() {
@@ -777,7 +786,43 @@ class Darkelf(QMainWindow):
 
         # Initialize Tor if enabled
         self.init_tor()
+        
+        # Configure user agent to mimic Firefox ESR
+        self.configure_user_agent()
+    
+    def configure_tls(self):
+        ssl_configuration = QSslConfiguration.defaultConfiguration()
 
+        # Mimic Firefox ESR cipher suites
+        firefox_cipher_suites = [
+            'TLS_AES_128_GCM_SHA256',
+            'TLS_AES_256_GCM_SHA384',
+            'TLS_CHACHA20_POLY1305_SHA256',
+            'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256',
+            'TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256',
+            'TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384',
+            'TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384',
+            'TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256',
+            'TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256'
+        ]
+
+        # Convert the cipher suite strings to QSslCipher objects
+        cipher_objects = [QSslCipher(cipher) for cipher in firefox_cipher_suites]
+        ssl_configuration.setCiphers(cipher_objects)
+
+        # Set the modified configuration as the default
+        QSslConfiguration.setDefaultConfiguration(ssl_configuration)
+
+        # Mimic Firefox ESR TLS versions
+        ssl_configuration.setProtocol(QSsl.TlsV1_2OrLater)
+        QSslSocket.setDefaultSslConfiguration(ssl_configuration)
+        
+    def configure_user_agent(self):
+        profile = QWebEngineProfile.defaultProfile()
+        # Mimic Firefox ESR user agent string
+        firefox_user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101 Firefox/78.0"
+        profile.setHttpUserAgent(firefox_user_agent)
+        
     def load_aes_key(self):
         pass
 
