@@ -262,6 +262,34 @@ Darkelf Browser incorporates robust adblocking functionality to enhance privacy 
 - **ETag and Cache-Control Manipulation**:
   Modifies or disables ETag headers and cache-control mechanisms to prevent tracking via caching techniques.
 
+### TLS and User Agent Configuration
+
+Darkelf Browser is configured to provide enhanced security and privacy similar to the Tor Browser:
+
+#### TLS Configuration
+
+Darkelf Browser mimics the TLS cipher suites used by Firefox ESR to ensure secure communication. The supported cipher suites include:
+
+- **TLS_AES_128_GCM_SHA256**
+- **TLS_AES_256_GCM_SHA384**
+- **TLS_CHACHA20_POLY1305_SHA256**
+- **TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256**
+- **TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256**
+- **TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384**
+- **TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384**
+- **TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256**
+- **TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256**
+
+These cipher suites are configured to provide robust encryption and forward secrecy, similar to the configurations found in the Tor Browser.
+
+#### User Agent Spoofing
+
+To further enhance privacy, Darkelf Browser uses user agent spoofing techniques similar to those in the Tor Browser:
+
+- **Randomized User Agents**: The user agent string is randomized for each session to prevent tracking.
+- **Custom User Agent Strings**: Users can specify custom user agent strings if needed.
+- **Default User Agent**: By default, Darkelf Browser mimics the Firefox ESR user agent string:
+
 ## Implementation Details
 
 - **JavaScript Hooks**:
