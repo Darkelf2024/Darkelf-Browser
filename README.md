@@ -288,7 +288,7 @@ To further enhance privacy, Darkelf Browser uses user agent spoofing techniques 
 
 - **Randomized User Agents**: The user agent string is randomized for each session to prevent tracking.
 - **Custom User Agent Strings**: Users can specify custom user agent strings if needed.
-- **Default User Agent**: By default, Darkelf Browser mimics the Firefox ESR user agent string:
+- **Default User Agent**: By default, Darkelf Browser mimics the Firefox ESR user agent string.
 
 ## Implementation Details
 
