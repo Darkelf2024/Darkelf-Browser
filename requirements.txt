@@ -1,14 +1,11 @@
-PySide6
-PySide6-Qt6-WebEngine  # Required for QWebEngineView and other WebEngine components
-beautifulsoup4
-requests
-adblockparser
-cryptography
-pycryptodome
-pqcrypto
-dnspython
-stem
+adblockparser==0.7
+cryptography==44.0.2
+dnspython==2.7.0
+PySide6==6.8.2.1
+PySide6_Addons==6.8.2.1
+PySide6_Essentials==6.8.2.1
+Requests==2.32.3
+stem==1.8.2
 
 # Packages need to be maintained and upgraded to the latest
-# pqcrypto - Post Quantum - This is in testing phases currently with Kyber1024 - Planned for future releases
 # If you receive a "Name/NoModule Error = It means "pip install that particular missing package"
