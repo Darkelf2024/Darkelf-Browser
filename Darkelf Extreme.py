@@ -384,10 +384,18 @@ class CustomWebEnginePage(QWebEnginePage):
         super().__init__(parent)
         self.browser = browser
         self.setup_ssl_configuration()
+        self.profile = QWebEngineProfile.defaultProfile()
+        self.profile.setHttpUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101 Firefox/78.0")
+        
+        self.inject_scripts()
+
+    def inject_scripts(self):
         self.inject_crypto_script()
         self.inject_crypto_prng_script()
         self.inject_geolocation_override()
         self.protect_fingerprinting()
+        self.block_canvas_api()
+        self.disable_webrtc()
         self.setup_csp()
 
     def createWindow(self, _type):
@@ -414,6 +422,9 @@ class CustomWebEnginePage(QWebEnginePage):
             QMessageBox.critical(self, "SSL Error", f"SSL Error: {error.errorString()}")
         reply.abort()
 
+    def runJavaScript(self, script):
+        self.profile.scripts().insert(script)
+
     def inject_crypto_script(self):
         script = """
         // AES-GCM Implementation
@@ -431,7 +442,7 @@ class CustomWebEnginePage(QWebEnginePage):
         async function encryptAesGcm(key, data) {
             const iv = window.crypto.getRandomValues(new Uint8Array(12));
             const encodedData = new TextEncoder().encode(data);
-            
+
             const encrypted = await window.crypto.subtle.encrypt(
                 {
                     name: "AES-GCM",
@@ -440,7 +451,7 @@ class CustomWebEnginePage(QWebEnginePage):
                 key,
                 encodedData
             );
-            
+
             return {
                 iv: iv,
                 ciphertext: new Uint8Array(encrypted)
@@ -456,7 +467,7 @@ class CustomWebEnginePage(QWebEnginePage):
                 key,
                 ciphertext
             );
-            
+
             return new TextDecoder().decode(decrypted);
         }
 
@@ -476,7 +487,7 @@ class CustomWebEnginePage(QWebEnginePage):
 
         async function encryptRsa(publicKey, data) {
             const encodedData = new TextEncoder().encode(data);
-            
+
             const encrypted = await window.crypto.subtle.encrypt(
                 {
                     name: "RSA-OAEP",
@@ -484,7 +495,7 @@ class CustomWebEnginePage(QWebEnginePage):
                 publicKey,
                 encodedData
             );
-            
+
             return new Uint8Array(encrypted);
         }
 
@@ -496,7 +507,7 @@ class CustomWebEnginePage(QWebEnginePage):
                 privateKey,
                 ciphertext
             );
-            
+
             return new TextDecoder().decode(decrypted);
         }
 
@@ -529,7 +540,7 @@ class CustomWebEnginePage(QWebEnginePage):
         }
         """
         self.runJavaScript(script)
-    
+
     def inject_crypto_prng_script(self):
         script = """
         (function() {
@@ -564,20 +575,88 @@ class CustomWebEnginePage(QWebEnginePage):
         })();
         """
         self.runJavaScript(script)
+        
+class SecureWebEnginePage(QWebEnginePage):
+    def javaScriptConsoleMessage(self, level, message, lineNumber, sourceID):
+        print(f"JS [{level}]: {message} (line {lineNumber}) in {sourceID}")
+
+    def injectSecurityScripts(self):
+        """Inject JavaScript to block canvas fingerprinting"""
+        script = """
+        (function() {
+            let originalToDataURL = HTMLCanvasElement.prototype.toDataURL;
+            let originalToBlob = HTMLCanvasElement.prototype.toBlob;
+            
+            HTMLCanvasElement.prototype.toDataURL = function() {
+                console.warn('Blocked Canvas Fingerprinting - toDataURL');
+                return "";
+            };
+
+            HTMLCanvasElement.prototype.toBlob = function() {
+                console.warn('Blocked Canvas Fingerprinting - toBlob');
+                return null;
+            };
+        })();
+        """
+        self.runJavaScript(script)
+        
+    def block_webrtc_js():
+        script = """
+        (function() {
+            let OriginalPeerConnection = window.RTCPeerConnection || window.webkitRTCPeerConnection;
+        
+            if (OriginalPeerConnection) {
+                window.RTCPeerConnection = function() {
+                    console.warn('Blocked WebRTC - RTCPeerConnection');
+                    return null;
+                };
+                window.webkitRTCPeerConnection = window.RTCPeerConnection;
+            }
+        })();
+        """
+        return script
+        
+    def injectSecurityScripts(self):
+        """Inject security scripts to block fingerprinting & WebRTC"""
+        self.runJavaScript("""
+            (function() {
+                let originalToDataURL = HTMLCanvasElement.prototype.toDataURL;
+                let originalToBlob = HTMLCanvasElement.prototype.toBlob;
+            
+                HTMLCanvasElement.prototype.toDataURL = function() {
+                    console.warn('Blocked Canvas Fingerprinting - toDataURL');
+                    return "";
+                };
+
+                HTMLCanvasElement.prototype.toBlob = function() {
+                    console.warn('Blocked Canvas Fingerprinting - toBlob');
+                    return null;
+                };
+
+                let OriginalPeerConnection = window.RTCPeerConnection || window.webkitRTCPeerConnection;
+                if (OriginalPeerConnection) {
+                    window.RTCPeerConnection = function() {
+                        console.warn('Blocked WebRTC - RTCPeerConnection');
+                        return null;
+                    };
+                    window.webkitRTCPeerConnection = window.RTCPeerConnection;
+                }
+            })();
+        """)
 
     def protect_fingerprinting(self):
         script = """
         (function() {
-            // Canvas Fingerprinting Protection
+            // Canvas Fingerprinting Protection with Randomization
             const originalGetImageData = CanvasRenderingContext2D.prototype.getImageData;
-            CanvasRenderingContext2D.prototype.getImageData = function() {
-                const imageData = originalGetImageData.apply(this, arguments);
-                for (let i = 0; i < imageData.data.length; i += 4) {
-                    imageData.data[i] = 0;       // Red
-                    imageData.data[i + 1] = 0;   // Green
-                    imageData.data[i + 2] = 0;   // Blue
+            CanvasRenderingContext2D.prototype.getImageData = function(x, y, w, h) {
+                let data = originalGetImageData.apply(this, arguments);
+                for (let i = 0; i < data.data.length; i += 4) {
+                    data.data[i] = data.data[i] + Math.floor(Math.random() * 10) - 5;       // Red
+                    data.data[i + 1] = data.data[i + 1] + Math.floor(Math.random() * 10) - 5;   // Green
+                    data.data[i + 2] = data.data[i + 2] + Math.floor(Math.random() * 10) - 5;   // Blue
                 }
-                return imageData;
+                return data;
             };
 
             // WebGL Fingerprinting Protection
@@ -672,6 +751,57 @@ class CustomWebEnginePage(QWebEnginePage):
                 });
                 return computedStyle;
             };
+        })();
+        """
+        self.runJavaScript(script)
+
+    def block_canvas_api(self):
+        script = """
+        (function() {
+            // Completely block Canvas API
+            const blockedApi = [
+                'getContext',
+                'toDataURL',
+                'toBlob',
+                'getImageData',
+                'fillText',
+                'strokeText'
+            ];
+            const noop = function() {};
+
+            blockedApi.forEach(api => {
+                HTMLCanvasElement.prototype[api] = noop;
+                OffscreenCanvas.prototype[api] = noop;
+            });
+
+            // Block WebGL API
+            const blockedWebGLApi = [
+                'getExtension',
+                'getSupportedExtensions',
+                'getParameter',
+                'getContextAttributes'
+            ];
+            blockedWebGLApi.forEach(api => {
+                WebGLRenderingContext.prototype[api] = noop;
+                WebGL2RenderingContext.prototype[api] = noop;
+            });
+        })();
+        """
+        self.runJavaScript(script)
+
+    def disable_webrtc(self):
+        script = """
+        (function() {
+            // Disable WebRTC
+            const noop = function() {};
+            window.RTCPeerConnection = noop;
+            window.RTCSessionDescription = noop;
+            window.RTCIceCandidate = noop;
+            window.MediaStream = noop;
+            window.MediaStreamTrack = noop;
+            window.MediaStreamEvent = noop;
+            window.RTCDataChannel = noop;
+            window.RTCDataChannelEvent = noop;
         })();
         """
         self.runJavaScript(script)
@@ -1540,7 +1670,11 @@ def main():
         "--disable-rtc-sctp-data-channels "
         "--disable-rtc-multiple-routes "
         "--disable-rtc-stun-origin "
-        "--force-webrtc-ip-handling-policy=disable_non_proxied_udp"
+        "--force-webrtc-ip-handling-policy=default_public_interface_only "
+        "--force-webrtc-ip-handling-policy=disable_non_proxied_udp "
+        "--disable-rtc-event-log "
+        "--disable-rtc-sdp-logs "
+        "--disable-rtc-sctp-data-channels "
     )
 
     # Create the application instance
@@ -1557,5 +1691,4 @@ def main():
 
 if __name__ == '__main__':
     main()
-
 
