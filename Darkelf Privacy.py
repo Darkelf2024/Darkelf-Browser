@@ -1187,7 +1187,7 @@ class Darkelf(QMainWindow):
         toolbar.addWidget(forward_button)
         reload_button = self.create_button('↺', self.reload_page)
         toolbar.addWidget(reload_button)
-        home_button = self.create_button('⏺', self.load_homepage)
+        home_button = self.create_button('⏻', self.load_homepage)  # Unicode character for power button
         toolbar.addWidget(home_button)
         self.search_bar = QLineEdit(self)
         self.search_bar.setPlaceholderText("Search or enter URL")
