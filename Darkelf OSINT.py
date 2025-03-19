@@ -69,7 +69,7 @@ from PySide6.QtWidgets import (
 from PySide6.QtGui import QPalette, QColor, QKeySequence, QShortcut, QAction, QGuiApplication
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtNetwork import QNetworkProxy, QSslConfiguration, QSslSocket, QSsl, QSslCipher
-from PySide6.QtWebEngineCore import QWebEngineUrlRequestInterceptor, QWebEngineSettings, QWebEnginePage, QWebEngineScript, QWebEngineProfile, QWebEngineDownloadRequest, QWebEngineContextMenuRequest
+from PySide6.QtWebEngineCore import QWebEngineUrlRequestInterceptor, QWebEngineSettings, QWebEnginePage, QWebEngineScript, QWebEngineProfile, QWebEngineDownloadRequest, QWebEngineContextMenuRequest, QTimer
 from PySide6.QtCore import QUrl, QSettings, Qt, QObject, Slot
 from cryptography.hazmat.primitives import serialization, hashes
 from cryptography.hazmat.primitives.asymmetric import x25519, rsa, padding
@@ -81,6 +81,8 @@ import subprocess # nosec - All run through sanitizing and validation
 import stem.process
 from stem.control import Controller
 from collections import defaultdict
+from PIL import Image
+import piexif
 
 # Debounce function to limit the rate at which a function can fire
 def debounce(func, wait):
@@ -348,9 +350,10 @@ class DownloadManager(QObject):
     @Slot(QWebEngineDownloadRequest)
     def handle_download(self, download_item):
         self.downloads.append(download_item)
-        save_path, _ = QFileDialog.getSaveFileName(self.parent(), "Save File", download_item.path())
+        save_path, _ = QFileDialog.getSaveFileName(self.parent(), "Save File", download_item.url().fileName())
         if save_path:
-            download_item.setPath(save_path)
+            download_item.setDownloadDirectory(os.path.dirname(save_path))
+            download_item.setDownloadFileName(os.path.basename(save_path))
             download_item.accept()
             progress_dialog = QProgressDialog("Downloading...", "Cancel", 0, 100, self.parent())
             progress_dialog.setWindowTitle("Download")
@@ -358,28 +361,47 @@ class DownloadManager(QObject):
             progress_dialog.setMinimumDuration(0)
             progress_dialog.setValue(0)
             progress_dialog.canceled.connect(lambda: download_item.cancel())
-            download_item.downloadProgress.connect(
-                lambda received, total: self.update_progress(progress_dialog, received, total))
-            download_item.finished.connect(lambda: self.finish_download(progress_dialog, download_item))
+
+            def update_progress():
+                received = download_item.receivedBytes()
+                total = download_item.totalBytes()
+                if total > 0:
+                    progress_dialog.setValue(int(received * 100 / total))
+                if download_item.isFinished():
+                    self.finish_download(progress_dialog, download_item, save_path)
+
+            self.timer = QTimer()
+            self.timer.timeout.connect(update_progress)
+            self.timer.start(100)
         else:
             QMessageBox.warning(self.parent(), "Download Cancelled", "The download has been cancelled.")
             self.downloads.remove(download_item)
 
-    def update_progress(self, progress_dialog, received, total):
-        if total > 0:
-            progress_dialog.setValue(int(received * 100 / total))
-
-    def finish_download(self, progress_dialog, download_item):
+    def finish_download(self, progress_dialog, download_item, save_path):
+        self.timer.stop()
         if download_item.state() == QWebEngineDownloadRequest.DownloadCompleted:
             progress_dialog.setValue(100)
             progress_dialog.close()
-            QMessageBox.information(self.parent(), "Download Finished", f"Downloaded to {download_item.path()}")
+            self.strip_metadata(save_path)
+            QMessageBox.information(self.parent(), "Download Finished", f"Downloaded to {save_path}")
         else:
             progress_dialog.close()
             QMessageBox.warning(self.parent(), "Download Failed", "The download has failed.")
         self.downloads.remove(download_item)
-        
-# Custom Web Engine Page
+
+    def strip_metadata(self, file_path):
+        try:
+            image = Image.open(file_path)
+            if "exif" in image.info:
+                exif_dict = piexif.load(image.info["exif"])
+                exif_bytes = piexif.dump({})
+                image.save(file_path, exif=exif_bytes)
+                print("Metadata stripped from image:", file_path)
+            else:
+                print("No EXIF metadata found in image:", file_path)
+        except Exception as e:
+            print(f"Failed to strip metadata from {file_path}: {e}")
+
 # Custom Web Engine Page
 class CustomWebEnginePage(QWebEnginePage):
     def __init__(self, browser, parent=None):
