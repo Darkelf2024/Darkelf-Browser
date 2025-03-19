@@ -291,7 +291,7 @@ To further enhance privacy, Darkelf Browser uses user agent spoofing techniques 
 - **Default User Agent**: By default, Darkelf Browser mimics the Firefox ESR user agent string.
 
 ### Python-Based Metadata Stripping
-- **Metadata Strippiing**: Automatically removes identifying data from images after download is complete.
+- **Metadata Stripping**: Automatically removes identifying data from images after download is complete.
 
 ## Implementation Details
 
