@@ -371,7 +371,7 @@ class DownloadManager(QObject):
 
             self.timer = QTimer()
             self.timer.timeout.connect(update_progress)
-            self.timer.start(100)
+            self.timer.start(500)
         else:
             QMessageBox.warning(self.parent(), "Download Cancelled", "The download has been cancelled.")
             self.downloads.remove(download_item)
