@@ -78,6 +78,7 @@ from adblockparser import AdblockRules
 import stem.process
 from stem.control import Controller
 from collections import defaultdict
+import mimetypes
 from PIL import Image
 import piexif
 
@@ -344,21 +345,46 @@ class DownloadManager(QObject):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.downloads = []
+        self.timers = {}
 
     @Slot(QWebEngineDownloadRequest)
     def handle_download(self, download_item):
+        """Handles file downloads and assigns correct file extensions."""
         self.downloads.append(download_item)
-        save_path, _ = QFileDialog.getSaveFileName(self.parent(), "Save File", download_item.url().fileName())
+
+        # Get the suggested file name from the URL
+        suggested_name = download_item.suggestedFileName() if download_item.suggestedFileName() else download_item.url().fileName()
+
+        # Fallback if the name is still empty
+        if not suggested_name:
+            suggested_name = download_item.url().path().split("/")[-1]  # Extract from URL
+
+        file_ext = os.path.splitext(suggested_name)[1]
+
+        # Use MIME type if no extension is detected
+        if not file_ext or file_ext == "":
+            mime_type = download_item.mimeType() if hasattr(download_item, 'mimeType') else None
+            ext = self.get_extension_from_mime(mime_type)
+            
+            if ext:
+                suggested_name += ext  # Append correct extension
+
+        # Ask user where to save the file
+        save_path, _ = QFileDialog.getSaveFileName(self.parent(), "Save File", suggested_name)
         if save_path:
             download_item.setDownloadDirectory(os.path.dirname(save_path))
             download_item.setDownloadFileName(os.path.basename(save_path))
             download_item.accept()
+
             progress_dialog = QProgressDialog("Downloading...", "Cancel", 0, 100, self.parent())
             progress_dialog.setWindowTitle("Download")
             progress_dialog.setWindowModality(Qt.WindowModal)
             progress_dialog.setMinimumDuration(0)
             progress_dialog.setValue(0)
             progress_dialog.canceled.connect(lambda: download_item.cancel())
+
+            timer = QTimer(self)
+            self.timers[download_item] = timer
 
             def update_progress():
                 received = download_item.receivedBytes()
@@ -368,15 +394,51 @@ class DownloadManager(QObject):
                 if download_item.isFinished():
                     self.finish_download(progress_dialog, download_item, save_path)
 
-            self.timer = QTimer()
-            self.timer.timeout.connect(update_progress)
-            self.timer.start(500)
+            timer.timeout.connect(update_progress)
+            timer.start(500)
         else:
             QMessageBox.warning(self.parent(), "Download Cancelled", "The download has been cancelled.")
             self.downloads.remove(download_item)
 
+    def get_extension_from_mime(self, mime_type):
+        """Maps MIME types to correct file extensions."""
+        mime_map = {
+            "application/x-apple-diskimage": ".dmg",
+            "application/octet-stream": "",  # Avoid forcing dmg for unknown types
+            "application/x-msdownload": ".exe",
+            "application/pdf": ".pdf",
+            "application/zip": ".zip",
+            "application/x-rar-compressed": ".rar",
+            "application/x-7z-compressed": ".7z",
+            "image/png": ".png",
+            "image/jpeg": ".jpg",
+            "image/webp": ".webp",
+            "image/gif": ".gif",
+            "image/bmp": ".bmp",
+            "image/tiff": ".tiff",
+            "image/x-icon": ".ico",
+            "text/plain": ".txt",
+            "application/msword": ".doc",
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document": ".docx",
+            "application/vnd.ms-excel": ".xls",
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": ".xlsx"
+        }
+
+        # First, check our predefined mapping
+        if mime_type in mime_map:
+            return mime_map[mime_type]
+
+        # If not found, use Python's mimetypes module as a fallback
+        guessed_ext = mimetypes.guess_extension(mime_type)
+        
+        return guessed_ext if guessed_ext else ""
+
     def finish_download(self, progress_dialog, download_item, save_path):
-        self.timer.stop()
+        """Handles post-download tasks, including metadata stripping."""
+        if download_item in self.timers:
+            self.timers[download_item].stop()
+            del self.timers[download_item]
+
         if download_item.state() == QWebEngineDownloadRequest.DownloadCompleted:
             progress_dialog.setValue(100)
             progress_dialog.close()
@@ -385,18 +447,36 @@ class DownloadManager(QObject):
         else:
             progress_dialog.close()
             QMessageBox.warning(self.parent(), "Download Failed", "The download has failed.")
+
         self.downloads.remove(download_item)
 
     def strip_metadata(self, file_path):
+        """Removes metadata from images (JPEG, PNG, WebP) and PDFs."""
         try:
-            image = Image.open(file_path)
-            if "exif" in image.info:
-                exif_dict = piexif.load(image.info["exif"])
-                exif_bytes = piexif.dump({})
-                image.save(file_path, exif=exif_bytes)
-                print("Metadata stripped from image:", file_path)
+            if file_path.lower().endswith((".jpg", ".jpeg", ".png", ".webp")):
+                image = Image.open(file_path)
+                if "exif" in image.info:
+                    exif_bytes = piexif.dump({})
+                    image.save(file_path, exif=exif_bytes)
+                    print("Metadata stripped from image:", file_path)
+                else:
+                    print("No EXIF metadata found in image:", file_path)
+            elif file_path.lower().endswith(".pdf"):
+                from PyPDF2 import PdfReader, PdfWriter
+                reader = PdfReader(file_path)
+                writer = PdfWriter()
+                
+                for page in reader.pages:
+                    writer.add_page(page)
+
+                # Strip metadata
+                writer.add_metadata({})
+                with open(file_path, "wb") as output_pdf:
+                    writer.write(output_pdf)
+                print("Metadata stripped from PDF:", file_path)
             else:
-                print("No EXIF metadata found in image:", file_path)
+                print("Metadata removal not supported for:", file_path)
+
         except Exception as e:
             print(f"Failed to strip metadata from {file_path}: {e}")
         
