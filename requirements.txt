@@ -6,7 +6,7 @@ Pillow==11.1.0
 PySide6==6.8.2.1
 PySide6_Addons==6.8.2.1
 PySide6_Essentials==6.8.2.1
-PyQt6-WebEngiine==6.8.0
+PyQt6-WebEngiine==6.9.0
 QtPy==2.4.3
 Requests==2.32.3
 stem==1.8.2
