@@ -35,8 +35,7 @@ ControlPort 9053
 DNSPort 9054
 AutomapHostsOnResolve 1
 VirtualAddrNetworkIPv4 10.192.0.0/10
-ExitNodes {us}  # Optional: restrict exit nodes to specific countries, e.g., US
-Log notice file /var/log/tor/notices.log
+
 
 Explanation of Key Settings
 
