@@ -14,7 +14,7 @@
 
 Enhancements for Darkelf Browser – UI Upgrade & Performance Boost
 
-Led by <@Raz>
+Led by [Raz](https://github.com/Raz-js)
 
 1️⃣ Adopt DelphiFMX as the Primary UI Framework – Provides a fast, responsive, and cross-platform experience.
 
