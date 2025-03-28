@@ -12,6 +12,15 @@
 
 - X25519 + Kyber768 Hybrid Post Quantum Encryption: Wait for Updated Release! It is fast and Smooth! Both updates will have Tor Integrated - It is ready and fast! Has Rust Hybrid Implemented.
 
+Enhancements for Darkelf Browser – UI Upgrade & Performance Boost
+
+Led by <@Raz>
+
+1️⃣ Adopt DelphiFMX as the Primary UI Framework – Provides a fast, responsive, and cross-platform experience.
+
+2️⃣ Integrate PySide6’s QtWebEngine – Embedding QtWebEngine within DelphiFMX enhances web browsing capabilities while maintaining flexibility.
+
+3️⃣ Enable Bidirectional Communication – Implement seamless event-driven interaction between DelphiFMX and PySide6 for enhanced functionality and user experience.
 ## Tech Stack
 
 ![HTML5](https://img.shields.io/badge/HTML5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)  
