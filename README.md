@@ -10,6 +10,8 @@
 - [Follow us on Discord](https://discord.gg/czAb2c2T)
 - [Darkelf Info](https://darkelfbrowser.com)
 
+- Darkelf Player is in Progress!
+
 - X25519 + Kyber768 Hybrid Post Quantum Encryption: Wait for Updated Release! It is fast and Smooth! Both updates will have Tor Integrated - It is ready and fast! Has Rust Hybrid Implemented.
 
 Enhancements for Darkelf Browser – UI Upgrade & Performance Boost
