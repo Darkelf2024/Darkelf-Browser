@@ -992,10 +992,14 @@ class Darkelf(QMainWindow):
 
     def load_settings(self):
         self.download_path = self.settings.value("download_path", os.path.expanduser("~"), type=str)
+        self.homepage_mode = self.settings.value("homepage_mode", "dark", type=str)  # Initialize homepage_mode
+        
 
     def save_settings(self):
         self.settings.setValue("download_path", self.download_path)
-
+        self.settings.setValue("homepage_mode", self.homepage_mode)  # Save homepage_mode
+        
+        
     def init_security(self):
         self.aes_key = self.load_aes_key()
         self.ecdh_key_pair = self.load_or_generate_ecdh_key_pair()
@@ -1352,8 +1356,16 @@ class Darkelf(QMainWindow):
         if web_view:
             web_view.setHtml(self.custom_homepage_html())
 
+    def enable_light_mode(self, enabled):
+        self.homepage_mode = "dark" if enabled else "light"
+        self.save_settings()
+        self.load_homepage()
+
     def custom_homepage_html(self):
-        html_content = """
+        background_color = "#000" if self.homepage_mode == "dark" else "#fff"
+        text_color = "#ddd" if self.homepage_mode == "dark" else "#000"
+        button_color = "#34C759" if self.homepage_mode == "dark" else "#4CAF50"
+        html_content = f"""
         <!DOCTYPE html>
         <html lang="en">
         <head>
@@ -1362,10 +1374,10 @@ class Darkelf(QMainWindow):
             <title>Darkelf</title>
             <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
             <style id="theme-style">
-                body {
+                body {{
                     font-family: Arial, sans-serif;
-                    background-color: #000;
-                    color: #ddd;
+                    background-color: {background_color};
+                    color: {text_color};
                     margin: 0;
                     padding: 0;
                     display: flex;
@@ -1373,26 +1385,26 @@ class Darkelf(QMainWindow):
                     height: 100vh;
                     align-items: center;
                     justify-content: center;
-                }
-                .content {
+                }}
+                .content {{
                     flex: 1;
                     display: flex;
                     flex-direction: column;
                     align-items: center;
                     justify-content: center;
-                }
-                h1 {
+                }}
+                h1 {{
                     font-size: 36px;
                     margin-bottom: 20px;
-                    color: #34C759; /* Same green as the tab */
-                }
-                form {
+                    color: {button_color};
+                }}
+                form {{
                     display: flex;
                     align-items: center;
                     justify-content: center;
                     margin-top: 20px;
-                }
-                input[type="text"] {
+                }}
+                input[type="text"] {{
                     padding: 10px;
                     width: 500px;
                     margin-right: 10px;
@@ -1401,10 +1413,10 @@ class Darkelf(QMainWindow):
                     font-size: 16px;
                     background-color: #333;
                     color: #ddd;
-                }
-                button[type="submit"] {
+                }}
+                button[type="submit"] {{
                     padding: 10px 20px;
-                    background-color: #333;
+                    background-color: {button_color};
                     border: none;
                     color: white;
                     border-radius: 5px;
@@ -1413,10 +1425,10 @@ class Darkelf(QMainWindow):
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                }
-                button[type="submit"]:hover {
-                    color: #34C759;
-                }
+                }}
+                button[type="submit"]:hover {{
+                    background-color: #28A745;
+                }}
             </style>
         </head>
         <body>
@@ -1432,7 +1444,7 @@ class Darkelf(QMainWindow):
         </html>
         """
         return html_content
-
+        
     def current_web_view(self):
         return self.tab_widget.currentWidget().findChild(QWebEngineView)
 
@@ -1554,6 +1566,17 @@ class Darkelf(QMainWindow):
         media_devices_action.setChecked(self.block_media_devices)
         media_devices_action.triggered.connect(self.toggle_media_devices)
         settings_menu.addAction(media_devices_action)
+                
+        # Add toggle for homepage mode
+        homepage_mode_action = QAction("Enable Light Mode", self, checkable=True)
+        homepage_mode_action.setChecked(self.homepage_mode == "dark")
+        homepage_mode_action.triggered.connect(self.enable_light_mode)
+        settings_menu.addAction(homepage_mode_action)
+        
+    def enable_light_mode(self, enabled):
+        self.homepage_mode = "light" if enabled else "dark"
+        self.save_settings()
+        self.load_homepage()
 
     def init_shortcuts(self):
         # Shortcut for creating a new tab (Cmd+T on macOS, Ctrl+T on other systems)
@@ -1793,4 +1816,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
 
