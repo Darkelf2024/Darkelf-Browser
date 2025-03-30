@@ -361,7 +361,7 @@ This applies to the homepage.
 
   
 ## Future Implementation:
-- Implementation of Hybrid Encryption with Kyber512/768 + X25519 Hybrid Post-Quantum Encryption: Wait for Update
+- Implementation of Hybrid Encryption with Kyber768 + X25519 Hybrid Post-Quantum Encryption: Wait for Update
 - ios/Android App Creation
 - Desktop App dmg,exe for Mac/Windows
 - Render Youtube FullScreen Mode Fix - In Progress!
