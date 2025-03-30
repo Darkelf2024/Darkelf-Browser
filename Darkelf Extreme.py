@@ -1583,7 +1583,7 @@ class Darkelf(QMainWindow):
         https_action.triggered.connect(self.toggle_https_enforcement)
         settings_menu.addAction(https_action)
         cookies_action = QAction("Enable Cookies", self, checkable=True)
-        cookies_action.setChecked(not self.cookies_enabled)
+        cookies_action.setChecked(self.cookies_enabled)
         cookies_action.triggered.connect(self.toggle_cookies)
         settings_menu.addAction(cookies_action)
         geolocation_action = QAction("Enable Geolocation", self, checkable=True)
