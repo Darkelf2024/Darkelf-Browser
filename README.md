@@ -2,7 +2,6 @@
 - Darkelf is released in a Monolithic Style.
 - Release of Darkelf Browser Extreme Edition v3.0 [DE Release](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Darkelf%20Extreme.py) This is the Extreme version and Light Mode with Tor DNS.
 - Release of Darkelf OSINT Edition v3.0 [DE OSINT](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Darkelf%20OSINT.py) Tor DNS is included.
-- Relase of Darkelf Browser Privacy Edition v3.0 is now New Extreme Edition with Toggle Light Mode in Settings.
 - Please Read - Updated 1/31/25: [Export Compliance Notice](ExportComplianceNotice.md)
 - Reviewing Office: Office of National Security Agency on 11/27/2024 - Closed on 12/17/2024
 - [Open an issue](https://github.com/Darkelf2024/Darkelf-Browser/issues)
