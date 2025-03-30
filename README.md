@@ -316,12 +316,18 @@ To further enhance privacy, Darkelf Browser uses user agent spoofing techniques 
 
 These techniques collectively reduce the uniqueness of the user's browser environment, making it harder for websites to track users based on their browser and device characteristics.
 
-## Themes
+## Window Themes
 
 - **Dark Theme**
 - **White Theme**
 
 Themes are based on an auto-detection system of user preferences. The browser adapts its theme to match the system-wide preferences set by the user on their operating system.
+
+## Color Mode
+
+- **Light Mode** 
+- **Grey Mode**
+- **Dark Mode**
 
 ## Hot Key Functions 
 
