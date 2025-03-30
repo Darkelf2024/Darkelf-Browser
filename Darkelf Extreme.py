@@ -64,7 +64,7 @@ from base64 import urlsafe_b64encode, urlsafe_b64decode
 from PySide6.QtWidgets import (
     QApplication, QMainWindow, QTabWidget, QPushButton, QLineEdit, QVBoxLayout, QMenuBar, QToolBar, QDialog, QMessageBox, QFileDialog, QProgressDialog, QListWidget, QMenu, QWidget, QLabel
 )
-from PySide6.QtGui import QPalette, QColor, QKeySequence, QShortcut, QAction, QGuiApplication
+from PySide6.QtGui import QPalette, QColor, QKeySequence, QShortcut, QAction, QGuiApplication, QActionGroup
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtNetwork import QNetworkProxy, QSslConfiguration,QSslSocket, QSsl, QSslCipher
 from PySide6.QtWebEngineCore import QWebEngineUrlRequestInterceptor, QWebEngineSettings, QWebEnginePage, QWebEngineScript, QWebEngineProfile, QWebEngineDownloadRequest, QWebEngineContextMenuRequest
@@ -997,7 +997,7 @@ class Darkelf(QMainWindow):
 
     def save_settings(self):
         self.settings.setValue("download_path", self.download_path)
-        self.settings.setValue("homepage_mode", self.homepage_mode)  # Save homepage_mode
+
         
         
     def init_security(self):
@@ -1355,16 +1355,32 @@ class Darkelf(QMainWindow):
         web_view = current_tab.findChild(QWebEngineView)
         if web_view:
             web_view.setHtml(self.custom_homepage_html())
+    
+    def enable_light_mode(self):
+        self.homepage_mode = "light"
+        self.load_homepage()
 
-    def enable_light_mode(self, enabled):
-        self.homepage_mode = "dark" if enabled else "light"
-        self.save_settings()
+    def enable_grey_mode(self):
+        self.homepage_mode = "grey"
+        self.load_homepage()
+
+    def enable_dark_mode(self):
+        self.homepage_mode = "dark"
         self.load_homepage()
 
     def custom_homepage_html(self):
-        background_color = "#000" if self.homepage_mode == "dark" else "#fff"
-        text_color = "#ddd" if self.homepage_mode == "dark" else "#000"
-        button_color = "#34C759" if self.homepage_mode == "dark" else "#4CAF50"
+        if self.homepage_mode == "dark":
+            background_color = "#000"
+            text_color = "#ddd"
+            button_color = "#34C759"
+        elif self.homepage_mode == "grey":
+            background_color = "#808080"
+            text_color = "#000"
+            button_color = "#A9A9A9"
+        else:  # light mode
+            background_color = "#fff"
+            text_color = "#000"
+            button_color = "#4CAF50"
         html_content = f"""
         <!DOCTYPE html>
         <html lang="en">
@@ -1459,9 +1475,25 @@ class Darkelf(QMainWindow):
     def create_menu_bar(self):
         menu_bar = QMenuBar(self)
     
-        # Create menus
+         # Create menus
+                  # Create menus
         navigation_menu = menu_bar.addMenu("Navigation")
         self.add_navigation_actions(navigation_menu)
+        mode_menu = menu_bar.addMenu("Mode")
+        mode_action_group = QActionGroup(self)
+        light_mode_action = QAction("Light Mode (White)", self, checkable=True)
+        light_mode_action.triggered.connect(self.enable_light_mode)
+        mode_action_group.addAction(light_mode_action)
+        mode_menu.addAction(light_mode_action)
+        grey_mode_action = QAction("Grey Mode", self, checkable=True)
+        grey_mode_action.triggered.connect(self.enable_grey_mode)
+        mode_action_group.addAction(grey_mode_action)
+        mode_menu.addAction(grey_mode_action)
+        dark_mode_action = QAction("Dark Mode", self, checkable=True)
+        dark_mode_action.triggered.connect(self.enable_dark_mode)
+        mode_action_group.addAction(dark_mode_action)
+        mode_menu.addAction(dark_mode_action)
+        dark_mode_action.setChecked(True)  # Set Dark Mode as the default checked mode
         security_menu = menu_bar.addMenu("Security")
         self.set_up_security_actions(security_menu)
         settings_menu = menu_bar.addMenu("Settings")
@@ -1567,17 +1599,6 @@ class Darkelf(QMainWindow):
         media_devices_action.triggered.connect(self.toggle_media_devices)
         settings_menu.addAction(media_devices_action)
                 
-        # Add toggle for homepage mode
-        homepage_mode_action = QAction("Enable Light Mode", self, checkable=True)
-        homepage_mode_action.setChecked(self.homepage_mode == "dark")
-        homepage_mode_action.triggered.connect(self.enable_light_mode)
-        settings_menu.addAction(homepage_mode_action)
-        
-    def enable_light_mode(self, enabled):
-        self.homepage_mode = "light" if enabled else "dark"
-        self.save_settings()
-        self.load_homepage()
-
     def init_shortcuts(self):
         # Shortcut for creating a new tab (Cmd+T on macOS, Ctrl+T on other systems)
         QShortcut(QKeySequence("Ctrl+T" if sys.platform != 'darwin' else "Meta+T"), self, self.create_new_tab)
