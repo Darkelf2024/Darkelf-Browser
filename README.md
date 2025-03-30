@@ -329,6 +329,8 @@ Themes are based on an auto-detection system of user preferences. The browser ad
 - **Grey Mode**
 - **Dark Mode**
 
+This applies to the homepage.
+
 ## Hot Key Functions 
 
 - **Back**
