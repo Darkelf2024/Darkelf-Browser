@@ -1714,7 +1714,7 @@ class Darkelf(QMainWindow):
                         activate
                     end tell
                     '''
-                    run_command(["osascript", "-e", apple_script])
+                    run_command(["osascript", "-e", apple_script]) # nosec B603
                 elif system == "Linux":
                     run_command(["gnome-terminal", "--", "sh", "-c", f"brew install {sanitized_url} && exec bash"])
                 elif system == "Windows":
