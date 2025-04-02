@@ -1,3 +1,10 @@
+## Legal Disclaimer  
+
+This list of OSINT tools and websites is provided for informational and educational purposes only. The inclusion of any website or tool does not imply endorsement, and the user assumes full responsibility for their use. Some tools may access publicly available data, but misuse or unauthorized access to private information may violate local, national, or international laws.  
+
+Users should ensure that their activities comply with applicable laws and ethical guidelines. The author of this document assumes no liability for any actions taken based on the information provided. Always conduct OSINT investigations responsibly and with proper legal authorization.  
+
+
 # 50 Online-Based OSINT Websites (No JavaScript)
 
 ## General OSINT Search Engines
