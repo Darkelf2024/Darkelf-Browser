@@ -81,7 +81,7 @@ We welcome community feedback and contributions to enhance the security of Darke
 - [Copyright](Copyright.md)
 - [Darkelf Post Quantum Kyber768 Edition](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Darkelf%20Post%20Quantum%20Edition.md)
 - [Darkelf Installation Guide](DarkelfInstallationGuide.md)
-- [Tor Installation Guide](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Tor%20DNS%20Installation.md)
+- [Tor Installation Guide](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Tor%20Installation%20Guide.md)
 - [OSINT Attribution](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/OSINT%20Attribution.md)
 - [OSINT Resources](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/OSINT%20Resources.md)
 - [No JavaScript Websites](NoJavaScriptWebsites.md)
