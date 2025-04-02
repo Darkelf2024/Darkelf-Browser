@@ -99,4 +99,4 @@ This list of 100 websites is provided for educational and research purposes only
 97. [The Federal Bureau of Investigation](https://www.fbi.gov)
 98. [The White House](https://www.whitehouse.gov)
 99. [The U.S. Geological Survey](https://www.usgs.gov)
-100. [The U.S. Census Bureau](https://www.census.gov
+100. [The U.S. Census Bureau](https://www.census.gov)
