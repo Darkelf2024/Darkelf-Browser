@@ -42,7 +42,7 @@ This guide will help you add Homebrew to your PATH on macOS, Linux, and Windows.
 
 This guide will help you add Homebrew to your PATH on Linux.
 
-## Steps
+## Linux
 
 2. **Add Homebrew to your PATH**:
    ```sh
