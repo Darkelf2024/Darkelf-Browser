@@ -138,7 +138,7 @@ This guide will help you add Homebrew to your PATH on macOS, Linux
    echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.profile
    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-### Windows 10/11
+## Windows 10/11
 
 To use Homebrew from any PowerShell session, you need to add it to your system's PATH. Follow the steps below:
 
