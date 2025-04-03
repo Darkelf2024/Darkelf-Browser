@@ -97,7 +97,6 @@ We welcome community feedback and contributions to enhance the security of Darke
 ## Variations/Types
 - Darkelf Extreme Privacy - Released
 - Darkelf OSINT Version - Released 
-- Darkelf Privacy Version - Is Now New Extreme Edition with Light Mode
 - Each Browser/Type - Can be modified within the python code
 - Pick a style
 
