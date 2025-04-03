@@ -84,7 +84,8 @@ We welcome community feedback and contributions to enhance the security of Darke
 - [Tor Installation Guide](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Tor%20Installation%20Guide.md)
 - [OSINT Attribution](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/OSINT%20Attribution.md)
 - [OSINT Resources](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/OSINT%20Resources.md)
-- [No JavaScript Websites](NoJavaScriptWebsites.md)
+- [OSINT Websites (No Java)](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/OSINT%20Websites(No%20Java).md))
+- [100 No JavaScript Websites](
 - [Privacy Policy](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Privacy%20Policy.md)
 - [FAQ](FAQ.md)
 
