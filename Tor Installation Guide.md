@@ -21,7 +21,8 @@ Before starting, ensure you have the following:
 ## Step-by-Step Installation Guide
 
 - MacOS
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 - Linux
 
