@@ -27,7 +27,7 @@ If you're using macOS, you need to install Homebrew, a package manager for macOS
 ```sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
-# Installing Homebrew on Windows 10/11 Using Scoop
+### Installing Homebrew on Windows 10/11 Using Scoop
 
 Homebrew is a popular package manager for macOS, but it can also be installed on Windows 10/11 using Scoop. This guide will walk you through the installation process.
 
@@ -120,9 +120,9 @@ You have successfully installed Homebrew on your Windows 10/11 machine using Sco
 
 If you encounter any issues, refer to the [Homebrew documentation](https://docs.brew.sh/Homebrew-on-Linux) or the [Scoop documentation](https://scoop.sh/).
 
-### Step 2: Adding Homebrew to Your PATH on macOS, Linux, and Windows
+### Step 2: Adding Homebrew to Your PATH on macOS, Linux
 
-This guide will help you add Homebrew to your PATH on macOS, Linux, and Windows.
+This guide will help you add Homebrew to your PATH on macOS, Linux
 
 ## macOS
 
