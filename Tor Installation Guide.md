@@ -28,7 +28,9 @@ If you're using macOS, you need to install Homebrew, a package manager for macOS
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-### Step 2: Install Tor
+### Step 2: Adding Homebrew to Your Path
+
+### Step 3: Install Tor
 
 For macOS and Linux:
 
