@@ -5,7 +5,7 @@ This list of OSINT tools and websites is provided for informational and educatio
 Users should ensure that their activities comply with applicable laws and ethical guidelines. The author of this document assumes no liability for any actions taken based on the information provided. Always conduct OSINT investigations responsibly and with proper legal authorization.  
 
 
-## 50 Online-Based OSINT Websites (No JavaScript)
+## 50 Online-Based OSINT Websites (No JavaScript/Limited JavaScript)
 
 ## General OSINT Search Engines
 1. [OSINT Framework](https://osintframework.com/) – Categorized OSINT tools.
