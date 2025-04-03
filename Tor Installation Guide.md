@@ -27,8 +27,19 @@ If you're using macOS, you need to install Homebrew, a package manager for macOS
 ```sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
-
 ### Step 2: Adding Homebrew to Your Path
+
+# Adding Homebrew to Your PATH on macOS, Linux, and Windows
+
+This guide will help you add Homebrew to your PATH on macOS, Linux, and Windows.
+
+## macOS
+
+1. **Add Homebrew to your PATH**:
+   ```sh
+   echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+   eval "$(/opt/homebrew/bin/brew shellenv)"
+
 
 ### Step 3: Install Tor
 
