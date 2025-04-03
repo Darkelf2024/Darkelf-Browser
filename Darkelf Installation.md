@@ -21,18 +21,9 @@ This guide explains the step-by-step process to set up and run the Darkelf Brows
 
 ## Create a requirements.txt file with the following content:
 
-1. PySide6
-2. PySide6-Qt6-WebEngine
-3. beautifulsoup4
-4. requests
-5. adblockparser
-6. cryptography
-7. pycryptodome
-8. pqcrypto
-9. dnspython
-10. stem
+- Use pipreqs to scan Darkelf Edition py file and create a requirements txt 
 
- *  Upgrade Python3/Pip3 - Latest
+ *  Install Python3.11/Pip3 - Latest
  *  Upgrade all required packages to the Latest Versions - Do this before running Darkelf = Preventative Safety Measures
  
 
