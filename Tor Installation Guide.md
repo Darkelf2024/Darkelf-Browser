@@ -20,7 +20,7 @@ Before starting, ensure you have the following:
 
 ## Step-by-Step Installation Guide
 
-### Step 1: Install Homebrew (macOS Only)
+### Step 1: Install Homebrew (MacOS & Linux)
 
 If you're using macOS, you need to install Homebrew, a package manager for macOS. Open Terminal and run the following command:
 
