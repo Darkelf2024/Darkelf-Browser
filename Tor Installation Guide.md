@@ -29,7 +29,7 @@ If you're using macOS, you need to install Homebrew, a package manager for macOS
 ```
 ### Step 2: Adding Homebrew to Your Path
 
-# Adding Homebrew to Your PATH on macOS, Linux, and Windows
+### Adding Homebrew to Your PATH on macOS, Linux, and Windows
 
 This guide will help you add Homebrew to your PATH on macOS, Linux, and Windows.
 
