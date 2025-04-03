@@ -38,6 +38,19 @@ This guide will help you add Homebrew to your PATH on macOS, Linux, and Windows.
    echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
    eval "$(/opt/homebrew/bin/brew shellenv)"
 
+### Adding Homebrew to Your PATH on Linux
+
+This guide will help you add Homebrew to your PATH on Linux.
+
+## Steps
+
+2. **Add Homebrew to your PATH**:
+   ```sh
+   echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.profile
+   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+
+
 
 ### Step 3: Install Tor
 
