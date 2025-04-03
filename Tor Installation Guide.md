@@ -27,9 +27,7 @@ If you're using macOS, you need to install Homebrew, a package manager for macOS
 ```sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
-### Step 2: Adding Homebrew to Your Path
-
-### Adding Homebrew to Your PATH on macOS, Linux, and Windows
+### Step 2: Adding Homebrew to Your PATH on macOS, Linux, and Windows
 
 This guide will help you add Homebrew to your PATH on macOS, Linux, and Windows.
 
