@@ -27,6 +27,99 @@ If you're using macOS, you need to install Homebrew, a package manager for macOS
 ```sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
+# Installing Homebrew on Windows 10/11 Using Scoop
+
+Homebrew is a popular package manager for macOS, but it can also be installed on Windows 10/11 using Scoop. This guide will walk you through the installation process.
+
+## Prerequisites
+
+1. **Windows 10/11**
+2. **PowerShell 5.1 or later** (included with Windows 10 and 11)
+3. **Administrator access** to your machine
+
+## Step-by-Step Guide
+
+### 1. Install Scoop
+
+Scoop is a command-line installer for Windows. To install Scoop, follow these steps:
+
+1. Open PowerShell as an Administrator.
+2. Run the following command to set the execution policy:
+
+    ```powershell
+    Set-ExecutionPolicy RemoteSigned -scope CurrentUser
+    ```
+
+3. Install Scoop by running the following command:
+
+    ```powershell
+    iwr -useb get.scoop.sh | iex
+    ```
+
+4. Verify the installation by running:
+
+    ```powershell
+    scoop --version
+    ```
+
+### 2. Install Git with Scoop
+
+Git is required for Homebrew. Install Git using Scoop by running:
+
+```powershell
+scoop install git
+```
+
+### 3. Install Homebrew
+
+Now, you can install Homebrew using Scoop. Follow these steps:
+
+1. Add the Scoop bucket for non-default packages:
+
+    ```powershell
+    scoop bucket add versions
+    ```
+
+2. Install Homebrew:
+
+    ```powershell
+    scoop install homebrew
+    ```
+
+3. Verify the Homebrew installation by running:
+
+    ```powershell
+    brew --version
+    ```
+
+### 4. Add Homebrew to Path
+
+To use Homebrew from any PowerShell session, add it to your system's PATH. Follow these steps:
+
+1. Open PowerShell as an Administrator.
+2. Run the following commands to add Homebrew to your PATH:
+
+    ```powershell
+    $env:PATH += ";C:\Users\<YourUsername>\scoop\apps\homebrew\current\bin"
+    [Environment]::SetEnvironmentVariable("PATH", $env:PATH, "User")
+    ```
+
+    Replace `<YourUsername>` with your actual Windows username.
+
+### 5. Update Homebrew
+
+Keep Homebrew up to date by running:
+
+```powershell
+brew update
+```
+
+## Conclusion
+
+You have successfully installed Homebrew on your Windows 10/11 machine using Scoop. You can now use Homebrew to install and manage packages just like you would on macOS.
+
+If you encounter any issues, refer to the [Homebrew documentation](https://docs.brew.sh/Homebrew-on-Linux) or the [Scoop documentation](https://scoop.sh/).
+
 ### Step 2: Adding Homebrew to Your PATH on macOS, Linux, and Windows
 
 This guide will help you add Homebrew to your PATH on macOS, Linux, and Windows.
@@ -44,6 +137,37 @@ This guide will help you add Homebrew to your PATH on macOS, Linux, and Windows.
    ```sh
    echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.profile
    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+### Windows 10/11
+
+To use Homebrew from any PowerShell session, you need to add it to your system's PATH. Follow the steps below:
+
+1. **Open PowerShell as an Administrator:**
+    - Click on the Start menu.
+    - Search for "PowerShell".
+    - Right-click on "Windows PowerShell" and select "Run as Administrator".
+
+2. **Add Homebrew to the PATH:**
+    - Run the following commands to add Homebrew to your PATH:
+
+        ```powershell
+        $env:PATH += ";C:\Users\<YourUsername>\scoop\apps\homebrew\current\bin"
+        [Environment]::SetEnvironmentVariable("PATH", $env:PATH, "User")
+        ```
+
+    - Replace `<YourUsername>` with your actual Windows username.
+
+3. **Verify Homebrew is in the PATH:**
+    - Close the current PowerShell session and open a new one.
+    - Run the following command to verify Homebrew is accessible:
+
+        ```powershell
+        brew --version
+        ```
+
+    - You should see the version of Homebrew printed in the terminal.
+
+By adding Homebrew to your system's PATH, you can now use Homebrew commands from any PowerShell session without specifying the full path to the Homebrew executable.
 
 ### Step 3: Install Tor
 
@@ -91,15 +215,6 @@ For Windows:
    AutomapHostsOnResolve 1
    VirtualAddrNetworkIPv4 10.192.0.0/10
    ```
-
-### Step 4: Start Tor
-
-1. Open Terminal or Command Prompt.
-2. Run the following command to start Tor:
-   ```sh
-   tor
-   ```
-3. Ensure that you see the message indicating that Tor has started successfully and is accepting connections.
 
 ### Step 4: Verify Tor Connection
 
