@@ -1968,6 +1968,27 @@ def main():
         "--disable-reading-from-canvas "
         "--disable-offscreen-canvas "
         "--use-angle=none"
+        "--disable-extensions "
+        "--disable-background-networking "
+        "--disable-sync "
+        "--disable-translate "
+        "--disable-plugins "
+        "--disable-features=CookiesWithoutSameSiteMustBeSecure,AutofillServerCommunication "
+        "--disable-client-side-phishing-detection "
+        "--disable-font-subpixel-positioning "
+        "--disable-kerning "
+        "--disable-web-fonts "
+        "--disable-client-side-phishing-detection "
+        "--disable-background-networking "
+        "--disable-sync "
+        "--disable-translate "
+        "--disable-speech-api "
+        "--disable-sensor "
+        "--disable-features=InterestCohortAPI,PrivacySandboxAdsAPIs "
+        "--disable-javascript-harmony "
+        "--no-referrers "
+        "--disable---no-referrers "
+        "--disable--disable-features=AudioServiceSandbox "
     )
 
     # Create the application
@@ -1982,4 +2003,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
