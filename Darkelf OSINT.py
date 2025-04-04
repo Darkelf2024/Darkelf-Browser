@@ -1943,32 +1943,41 @@ class HistoryDialog(QDialog):
         self.setLayout(layout)
 
 def main():
-    # Apply correct High DPI scaling (replaces deprecated AA_EnableHighDpiScaling)
-    QGuiApplication.setHighDpiScaleFactorRoundingPolicy(Qt.HighDpiScaleFactorRoundingPolicy.PassThrough)
-    
-    # Disable WebRTC completely using multiple Chromium flags
+    # Apply correct High DPI scaling
+    QGuiApplication.setHighDpiScaleFactorRoundingPolicy(
+        Qt.HighDpiScaleFactorRoundingPolicy.PassThrough
+    )
+
+    # Set Chromium flags to disable WebRTC, WebGL, Canvas API, GPU, etc.
     os.environ["QTWEBENGINE_CHROMIUM_FLAGS"] = (
         "--disable-webrtc "
+        "--disable-webgl "
+        "--disable-3d-apis "
         "--disable-rtc-sctp-data-channels "
         "--disable-rtc-multiple-routes "
         "--disable-rtc-stun-origin "
-        "--force-webrtc-ip-handling-policy=default_public_interface_only "
         "--force-webrtc-ip-handling-policy=disable_non_proxied_udp "
         "--disable-rtc-event-log "
         "--disable-rtc-sdp-logs "
-        "--disable-rtc-sctp-data-channels "
+        "--disable-webgl-2 "
+        "--disable-gpu "
+        "--disable-d3d11 "
+        "--disable-accelerated-2d-canvas "
+        "--disable-software-rasterizer "
+        "--disable-features=Canvas2DImageChromium,WebGLImageChromium "
+        "--disable-reading-from-canvas "
+        "--disable-offscreen-canvas "
+        "--use-angle=none"
     )
 
-    # Create the application instance
-    app = QApplication.instance()
-    if app is None:
-        app = QApplication(sys.argv)
+    # Create the application
+    app = QApplication.instance() or QApplication(sys.argv)
 
     # Initialize and show the browser
     darkelf_browser = Darkelf()
     darkelf_browser.show()
-    
-    # Execute the app
+
+    # Run the application
     sys.exit(app.exec())
 
 if __name__ == '__main__':
