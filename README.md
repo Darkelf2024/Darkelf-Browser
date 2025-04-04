@@ -271,6 +271,9 @@ Darkelf Browser incorporates robust adblocking functionality to enhance privacy 
 - **ETag and Cache-Control Manipulation**:
   Modifies or disables ETag headers and cache-control mechanisms to prevent tracking via caching techniques.
 
+- **WebRTC Blocking**:
+  Disables WebRTC to prevent IP address leaks and enhance privacy.
+
 ### TLS and User Agent Configuration
 
 Darkelf Browser is configured to provide enhanced security and privacy similar to the Tor Browser:
