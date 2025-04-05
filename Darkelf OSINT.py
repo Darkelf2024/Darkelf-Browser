@@ -1986,7 +1986,6 @@ def main():
         "--disable-font-subpixel-positioning "
         "--disable-kerning "
         "--disable-web-fonts "
-        "--disable-client-side-phishing-detection "
         "--disable-background-networking "
         "--disable-sync "
         "--disable-translate "
