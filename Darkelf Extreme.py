@@ -1146,6 +1146,8 @@ class Darkelf(QMainWindow):
         profile = QWebEngineProfile.defaultProfile()
         profile.setHttpCacheType(QWebEngineProfile.NoCache)
         profile.setPersistentCookiesPolicy(QWebEngineProfile.NoPersistentCookies)
+        profile.setPersistentStoragePath("")
+        profile.setSpellCheckEnabled(False)
         settings = profile.settings()
         settings.setAttribute(QWebEngineSettings.LocalStorageEnabled, False)
         settings.setAttribute(QWebEngineSettings.JavascriptEnabled, False)  # Ensure JavaScript is disabled by default
@@ -1851,7 +1853,7 @@ def main():
         "--disable-features=InterestCohortAPI,PrivacySandboxAdsAPIs "
         "--disable-javascript-harmony "
         "--no-referrers "
-        "--disable---no-referrers "
+        "--incognito "
         "--disable--disable-features=AudioServiceSandbox "
     )
 
