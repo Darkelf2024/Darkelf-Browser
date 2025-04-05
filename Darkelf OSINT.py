@@ -489,7 +489,7 @@ class CustomWebEnginePage(QWebEnginePage):
         self.browser = browser
         self.setup_ssl_configuration()
         self.profile = QWebEngineProfile.defaultProfile()
-        self.profile.setHttpUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101 Firefox/78.0")
+        self.profile.setHttpUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:137.0) Gecko/20100101 Firefox/137.0")
         
         self.inject_scripts()
 
@@ -1170,9 +1170,18 @@ class Darkelf(QMainWindow):
         
     def configure_user_agent(self):
         profile = QWebEngineProfile.defaultProfile()
-        # Mimic Firefox ESR user agent string
-        firefox_user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101 Firefox/78.0"
+        # Default to Firefox 137.0
+        firefox_user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:137.0) Gecko/20100101 Firefox/137.0"
         profile.setHttpUserAgent(firefox_user_agent)
+
+    def toggle_firefox_user_agent(self, enabled):
+        profile = QWebEngineProfile.defaultProfile()
+        if enabled:
+            firefox_user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:137.0) Gecko/20100101 Firefox/137.0"
+            profile.setHttpUserAgent(firefox_user_agent)
+        else:
+            chrome_user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36"
+            profile.setHttpUserAgent(chrome_user_agent)
         
     def load_aes_key(self):
         pass
@@ -1585,10 +1594,10 @@ class Darkelf(QMainWindow):
         tor_action.setChecked(self.tor_network_enabled)
         tor_action.triggered.connect(self.toggle_tor_network)
         security_menu.addAction(tor_action)
-        quantum_action = QAction("Enable Quantum Encryption", self, checkable=True)
-        quantum_action.setChecked(self.quantum_encryption_enabled)
-        quantum_action.triggered.connect(self.toggle_quantum_encryption)
-        security_menu.addAction(quantum_action)
+        firefox_user_agent_action = QAction("Enable Firefox Agent", self, checkable=True)
+        firefox_user_agent_action.setChecked(True)
+        firefox_user_agent_action.triggered.connect(lambda: self.toggle_firefox_user_agent(firefox_user_agent_action.isChecked()))
+        security_menu.addAction(firefox_user_agent_action)
         clear_cache_action = QAction("Clear Cache", self)
         clear_cache_action.triggered.connect(self.clear_cache)
         security_menu.addAction(clear_cache_action)
@@ -1967,9 +1976,8 @@ def main():
         "--disable-features=Canvas2DImageChromium,WebGLImageChromium "
         "--disable-reading-from-canvas "
         "--disable-offscreen-canvas "
-        "--use-angle=none"
+        "--use-angle=none "
         "--disable-extensions "
-        "--disable-background-networking "
         "--disable-sync "
         "--disable-translate "
         "--disable-plugins "
@@ -1987,8 +1995,9 @@ def main():
         "--disable-features=InterestCohortAPI,PrivacySandboxAdsAPIs "
         "--disable-javascript-harmony "
         "--no-referrers "
-        "--disable---no-referrers "
+        "--disable--no-referrers "
         "--disable--disable-features=AudioServiceSandbox "
+        "--enable-features=StrictOriginIsolation,PartitionedCookies "
     )
 
     # Create the application
