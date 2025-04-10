@@ -69,7 +69,7 @@ from PySide6.QtWidgets import (
 from PySide6.QtGui import QPalette, QColor, QKeySequence, QShortcut, QAction, QGuiApplication
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtNetwork import QNetworkProxy, QSslConfiguration, QSslSocket, QSsl, QSslCipher
-from PySide6.QtWebEngineCore import QWebEngineUrlRequestInterceptor, QWebEngineSettings, QWebEnginePage, QWebEngineScript, QWebEngineProfile, QWebEngineDownloadRequest, QWebEngineContextMenuRequest
+from PySide6.QtWebEngineCore import QWebEngineUrlRequestInterceptor, QWebEngineSettings, QWebEnginePage, QWebEngineScript, QWebEngineProfile, QWebEngineDownloadRequest, QWebEngineContextMenuRequest, QWebEngineCookieStore
 from PySide6.QtCore import QUrl, QSettings, Qt, QObject, Slot, QTimer
 from cryptography.hazmat.primitives import serialization, hashes
 from cryptography.hazmat.primitives.asymmetric import x25519, rsa, padding
@@ -81,9 +81,35 @@ import subprocess # nosec - All run through sanitizing and validation
 import stem.process
 from stem.control import Controller
 from collections import defaultdict
+from cryptography.fernet import Fernet
 import mimetypes
 from PIL import Image
 import piexif
+
+class EncryptedCookieStore:
+    def __init__(self, qt_cookie_store: QWebEngineCookieStore):
+        self.key = Fernet.generate_key()
+        self.cipher = Fernet(self.key)
+        self.store = {}
+        self.qt_cookie_store = qt_cookie_store
+        self.qt_cookie_store.cookieAdded.connect(self.intercept_cookie)
+
+    def intercept_cookie(self, cookie):
+        name = bytes(cookie.name()).decode()
+        value = bytes(cookie.value()).decode()
+        self.set_cookie(name, value)
+
+    def set_cookie(self, name, value):
+        encrypted = self.cipher.encrypt(value.encode())
+        self.store[name] = encrypted
+
+    def get_cookie(self, name):
+        encrypted = self.store.get(name)
+        return self.cipher.decrypt(encrypted).decode() if encrypted else None
+
+    def clear(self):
+        self.store.clear()
+        self.qt_cookie_store.deleteAllCookies()
 
 # Debounce function to limit the rate at which a function can fire
 def debounce(func, wait):
@@ -1298,6 +1324,10 @@ class Darkelf(QMainWindow):
         script_block_rules = fetch_script_block_rules()
         interceptor = AdblockAndTrackerInterceptor(adblock_rules, tracking_domains, script_block_rules)
         profile.setUrlRequestInterceptor(interceptor)
+
+        # Attach encrypted in-memory cookie store
+        cookie_store = profile.cookieStore()
+        self.encrypted_store = EncryptedCookieStore(cookie_store)
 
     def init_tor(self):
         self.tor_manager = TorManager()
