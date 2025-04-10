@@ -83,6 +83,7 @@ from stem.control import Controller
 from collections import defaultdict
 from cryptography.fernet import Fernet
 import mimetypes
+import tempfile
 from PIL import Image
 import piexif
 
@@ -1293,7 +1294,10 @@ class Darkelf(QMainWindow):
         return plaintext.decode()
 
     def configure_web_engine_profile(self):
+        self.ram_path = tempfile.mkdtemp()
         profile = QWebEngineProfile.defaultProfile()
+        profile.setCachePath(self.ram_path)
+        profile.setPersistentStoragePath(self.ram_path)
         profile.setHttpCacheType(QWebEngineProfile.NoCache)
         profile.setPersistentCookiesPolicy(QWebEngineProfile.NoPersistentCookies)
         profile.setPersistentStoragePath("")
