@@ -44,6 +44,10 @@ Darkelf, a custom PySide6-based browser, is equipped with a range of advanced se
 
 ## Key Highlights and Security Features
 
+## Forensic-Resistant Ephemeral Sessions
+
+Darkelf Browser implements encrypted, RAM-only storage natively within the browser runtime—no OS-level configuration required. All session data (cache, cookies, session keys) is stored in volatile memory and securely encrypted on-the-fly. Upon shutdown, this data vanishes instantly, leaving no forensic footprint. This surpasses traditional private modes and even privacy-focused OSes by embedding data volatility directly into browser logic.
+
 ### **Tor DNS Integration**
 
 The Darkelf Browser includes Tor DNS, an advanced DNS resolution service that enhances privacy by blocking trackers, ads, and phishing domains at the network level. Through the interception of DNS requests, Tor DNS further strengthens browsing privacy, ensuring a cleaner, more seamless, and ad-free online experience.
