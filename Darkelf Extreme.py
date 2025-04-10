@@ -1147,6 +1147,7 @@ class Darkelf(QMainWindow):
         profile.setHttpCacheType(QWebEngineProfile.NoCache)
         profile.setPersistentCookiesPolicy(QWebEngineProfile.NoPersistentCookies)
         profile.setPersistentStoragePath("")
+        profile.setHttpCacheMaximumSize(0)
         profile.setSpellCheckEnabled(False)
         settings = profile.settings()
         settings.setAttribute(QWebEngineSettings.LocalStorageEnabled, False)
@@ -1164,7 +1165,9 @@ class Darkelf(QMainWindow):
         settings.setAttribute(QWebEngineSettings.FullScreenSupportEnabled, True)
         settings.setAttribute(QWebEngineSettings.SpatialNavigationEnabled, False)
         settings.setAttribute(QWebEngineSettings.AllowWindowActivationFromJavaScript, False)
-
+        settings.setAttribute(QWebEngineSettings.ScreenCaptureEnabled, False)
+        settings.setAttribute(QWebEngineSettings.PdfViewerEnabled, False)
+        
         adblock_rules = fetch_adblock_rules()
         tracking_domains = fetch_tracking_domains()
         script_block_rules = fetch_script_block_rules()
@@ -1855,6 +1858,8 @@ def main():
         "--no-referrers "
         "--incognito "
         "--disable--disable-features=AudioServiceSandbox "
+        "--use-fake-ui-for-media-stream "
+        "--disable-third-party-cookies " 
     )
 
     # Create the application
