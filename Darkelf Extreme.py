@@ -93,21 +93,36 @@ class EncryptedCookieStore:
         self.qt_cookie_store.cookieAdded.connect(self.intercept_cookie)
 
     def intercept_cookie(self, cookie):
+        """Intercepts cookies as they are added and encrypts them."""
         name = bytes(cookie.name()).decode()
         value = bytes(cookie.value()).decode()
         self.set_cookie(name, value)
 
     def set_cookie(self, name, value):
+        """Encrypts and stores a cookie."""
         encrypted = self.cipher.encrypt(value.encode())
         self.store[name] = encrypted
 
     def get_cookie(self, name):
+        """Decrypts and retrieves a cookie."""
         encrypted = self.store.get(name)
         return self.cipher.decrypt(encrypted).decode() if encrypted else None
 
     def clear(self):
-        self.store.clear()
+        """Clears all cookies and securely wipes in-memory values."""
+        # Securely wipe the in-memory cookie values
+        for key in list(self.store.keys()):
+            self.store[key] = None  # Overwrite value
+            del self.store[key]     # Remove key-value pair
+
+        # Clear cookies from the QWebEngineCookieStore
         self.qt_cookie_store.deleteAllCookies()
+
+    def wipe_memory(self):
+        """Securely wipes all in-memory values."""
+        for key in list(self.store.keys()):
+            self.store[key] = None  # Overwrite value
+        self.store.clear()          # Clear dictionary
 
 # Debounce function to limit the rate at which a function can fire
 def debounce(func, wait):
