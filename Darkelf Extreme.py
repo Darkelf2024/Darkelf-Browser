@@ -1887,7 +1887,6 @@ def main():
         "--disable-offscreen-canvas "
         "--use-angle=none"
         "--disable-extensions "
-        "--disable-background-networking "
         "--disable-sync "
         "--disable-translate "
         "--disable-plugins "
@@ -1896,7 +1895,6 @@ def main():
         "--disable-font-subpixel-positioning "
         "--disable-kerning "
         "--disable-web-fonts "
-        "--disable-client-side-phishing-detection "
         "--disable-background-networking "
         "--disable-sync "
         "--disable-translate "
@@ -1907,10 +1905,30 @@ def main():
         "--no-referrers "
         "--incognito "
         "--disable--disable-features=AudioServiceSandbox "
+        "--enable-features=StrictOriginIsolation,PartitionedCookies "
+        "--disable-renderer-backgrounding "
+        "--disable-background-timer-throttling "
+        "--disable-third-party-cookies "
+        "--disable-webrtc-hw-encoding "
+        "--disable-webrtc-hw-decoding "
+        "--disable-webrtc-cpu-overuse-detection "
+        "--enable-strict-powerful-feature-restrictions "
+        "--disable-features=WebRTCMediaDevices"
         "--use-fake-ui-for-media-stream "
-        "--disable-third-party-cookies " 
+        "--disable-blink-features=NavigatorOnLine,UserAgentClientHint,WebAuthn "
+        "--disable-features=HTMLImports "
+        "--disable-features=AudioContext "
+        "--disable-features=HardwareConcurrency "
+        "--disable-backgrounding-occluded-windows "
+        "--disable-lcd-text "
+        "--disable-accelerated-video "
+        "--disable-gpu-compositing "
+        "--disable-features=IndexedDB "
+        "--disable-webgl-image-chromium "
+        "--disable-text-autosizing "
+        "--disable-peer-connection"
     )
-
+    
     # Create the application
     app = QApplication.instance() or QApplication(sys.argv)
 
@@ -1923,3 +1941,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
