@@ -1310,7 +1310,7 @@ class Darkelf(QMainWindow):
 
     def configure_web_engine_profile(self):
         self.ram_path = tempfile.mkdtemp()
-        profile = QWebEngineProfile.defaultProfile()
+        profile = QWebEngineProfile(self)
         profile.setCachePath(self.ram_path)
         profile.setPersistentStoragePath(self.ram_path)
         profile.setHttpCacheType(QWebEngineProfile.NoCache)
@@ -1318,6 +1318,7 @@ class Darkelf(QMainWindow):
         profile.setPersistentStoragePath("")
         profile.setHttpCacheMaximumSize(0)
         profile.setSpellCheckEnabled(False)
+        profile.setHttpAcceptLanguage("en")
         settings = profile.settings()
         settings.setAttribute(QWebEngineSettings.LocalStorageEnabled, False)
         settings.setAttribute(QWebEngineSettings.JavascriptEnabled, False)  # Ensure JavaScript is disabled by default
@@ -1336,6 +1337,7 @@ class Darkelf(QMainWindow):
         settings.setAttribute(QWebEngineSettings.AllowWindowActivationFromJavaScript, False)
         settings.setAttribute(QWebEngineSettings.ScreenCaptureEnabled, False)
         settings.setAttribute(QWebEngineSettings.PdfViewerEnabled, False)
+        settings.setAttribute(QWebEngineSettings.LocalContentCanAccessFileUrls, False)
         
         # Assuming fetch_adblock_rules and fetch_tracking_domains are defined elsewhere
         adblock_rules = fetch_adblock_rules()
@@ -1343,6 +1345,11 @@ class Darkelf(QMainWindow):
         script_block_rules = fetch_script_block_rules()
         interceptor = AdblockAndTrackerInterceptor(adblock_rules, tracking_domains, script_block_rules)
         profile.setUrlRequestInterceptor(interceptor)
+
+        # Apply this profile to your web view
+        self.web_view = QWebEngineView()
+        page = QWebEnginePage(profile, self.web_view)
+        self.web_view.setPage(page)
 
         # Attach encrypted in-memory cookie store
         cookie_store = profile.cookieStore()
