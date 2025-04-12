@@ -1776,7 +1776,7 @@ class Darkelf(QMainWindow):
         else:
             self.create_new_tab(f"https://lite.duckduckgo.com/lite/?q={text}")
 
-       def toggle_javascript(self, enabled):
+    def toggle_javascript(self, enabled):
         self.javascript_enabled = enabled
         self.settings.setValue("javascript_enabled", enabled)
         for i in range(self.tab_widget.count()):
