@@ -1036,12 +1036,9 @@ class Darkelf(QMainWindow):
         self.download_path = self.settings.value("download_path", os.path.expanduser("~"), type=str)
         self.homepage_mode = self.settings.value("homepage_mode", "dark", type=str)  # Initialize homepage_mode
         
-
     def save_settings(self):
         self.settings.setValue("download_path", self.download_path)
 
-        
-        
     def init_security(self):
         self.aes_key = self.load_aes_key()
         self.ecdh_key_pair = self.load_or_generate_ecdh_key_pair()
@@ -1626,10 +1623,6 @@ class Darkelf(QMainWindow):
         tor_action.setChecked(self.tor_network_enabled)
         tor_action.triggered.connect(self.toggle_tor_network)
         security_menu.addAction(tor_action)
-        quantum_action = QAction("Enable Quantum Encryption", self, checkable=True)
-        quantum_action.setChecked(self.quantum_encryption_enabled)
-        quantum_action.triggered.connect(self.toggle_quantum_encryption)
-        security_menu.addAction(quantum_action)
         clear_cache_action = QAction("Clear Cache", self)
         clear_cache_action.triggered.connect(self.clear_cache)
         security_menu.addAction(clear_cache_action)
@@ -1783,14 +1776,13 @@ class Darkelf(QMainWindow):
         else:
             self.create_new_tab(f"https://lite.duckduckgo.com/lite/?q={text}")
 
-    def toggle_javascript(self, enabled):
+       def toggle_javascript(self, enabled):
         self.javascript_enabled = enabled
         self.settings.setValue("javascript_enabled", enabled)
-        index = self.tab_widget.currentIndex()
-        if index != -1:
-            web_view = self.tab_widget.widget(index)
+        for i in range(self.tab_widget.count()):
+            web_view = self.tab_widget.widget(i)
             web_view.settings().setAttribute(QWebEngineSettings.JavascriptEnabled, enabled)
-
+            
     def toggle_anti_fingerprinting(self, enabled):
         self.anti_fingerprinting_enabled = enabled
         self.settings.setValue("anti_fingerprinting_enabled", enabled)
@@ -1802,10 +1794,6 @@ class Darkelf(QMainWindow):
             self.start_tor()
         else:
             self.stop_tor()
-
-    def toggle_quantum_encryption(self, enabled):
-        self.quantum_encryption_enabled = enabled
-        self.settings.setValue("quantum_encryption_enabled", enabled)
 
     def toggle_https_enforcement(self, enabled):
         self.https_enforced = enabled
@@ -1829,9 +1817,56 @@ class Darkelf(QMainWindow):
         self.settings.setValue("block_media_devices", enabled)
 
     def closeEvent(self, event):
-        self.save_settings()
-        self.clear_cache_and_history()
-        super().closeEvent(event)
+        """Cleanly shut down the application and auto-destruct."""
+        try:
+            # Stop Tor process if running
+            self.stop_tor()
+
+            # Securely wipe in-memory cookies
+            if hasattr(self, 'encrypted_store'):
+                self.encrypted_store.wipe_memory()
+
+            # Save user settings
+            self.save_settings()
+
+            # Clear cache and browsing history
+            self.clear_cache_and_history()
+
+            # Terminate any background threads or timers
+            if hasattr(self.download_manager, 'timers'):
+                for timer in self.download_manager.timers.values():
+                    timer.stop()
+
+            # Clean up any QWebEngineView/QWebEnginePage instances from tab widget
+            if hasattr(self, 'tab_widget'):
+                for i in range(self.tab_widget.count()):
+                    widget = self.tab_widget.widget(i)
+                    if isinstance(widget, QWebEngineView):
+                        page = widget.page()
+                        if page:
+                            page.deleteLater()
+                        widget.deleteLater()
+
+            # If you're tracking standalone views (e.g., popups), clean those too
+            if hasattr(self, 'web_views'):
+                for view in self.web_views:
+                    if view.page():
+                        view.page().deleteLater()
+                    view.deleteLater()
+
+            # Clean up any custom QWebEngineProfile if you're using one
+            if hasattr(self, 'web_profile'):
+                self.web_profile.deleteLater()
+
+            # Clear only your app's temporary files, not the entire temp dir
+            temp_subdir = os.path.join(tempfile.gettempdir(), "darkelf_temp")
+            if os.path.exists(temp_subdir):
+                shutil.rmtree(temp_subdir, ignore_errors=True)
+
+        except Exception as e:
+            logging.error(f"Error during shutdown: {e}")
+        finally:
+            super().closeEvent(event)
 
     def handle_download(self, download_item):
         self.download_manager.handle_download(download_item)
@@ -1919,9 +1954,7 @@ def main():
         "--disable-webrtc-hw-encoding "
         "--disable-webrtc-hw-decoding "
         "--disable-webrtc-cpu-overuse-detection "
-        "--enable-strict-powerful-feature-restrictions "
         "--disable-features=WebRTCMediaDevices"
-        "--use-fake-ui-for-media-stream "
         "--disable-blink-features=NavigatorOnLine,UserAgentClientHint,WebAuthn "
         "--disable-features=HTMLImports "
         "--disable-features=AudioContext "
@@ -1934,6 +1967,7 @@ def main():
         "--disable-webgl-image-chromium "
         "--disable-text-autosizing "
         "--disable-peer-connection"
+        "--disable-javascript"
     )
     
     # Create the application
