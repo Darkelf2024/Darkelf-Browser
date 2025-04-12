@@ -1822,25 +1822,25 @@ class Darkelf(QMainWindow):
     def closeEvent(self, event):
         """Cleanly shut down the application and auto-destruct."""
         try:
-            # Stop Tor process if running
+            # 1. Stop Tor process if running
             self.stop_tor()
 
-            # Securely wipe in-memory cookies
+            # 2. Securely wipe in-memory cookies
             if hasattr(self, 'encrypted_store'):
                 self.encrypted_store.wipe_memory()
 
-            # Save user settings
+            # 3. Save user settings
             self.save_settings()
 
-            # Clear cache and browsing history
+            # 4. Clear cache and browsing history
             self.clear_cache_and_history()
 
-            # Terminate any background threads or timers
+            # 5. Stop background timers/threads
             if hasattr(self.download_manager, 'timers'):
                 for timer in self.download_manager.timers.values():
                     timer.stop()
 
-            # Clean up any QWebEngineView/QWebEnginePage instances from tab widget
+            # 6. Clean up QWebEngineView/QWebEnginePage from tab widget
             if hasattr(self, 'tab_widget'):
                 for i in range(self.tab_widget.count()):
                     widget = self.tab_widget.widget(i)
@@ -1850,18 +1850,18 @@ class Darkelf(QMainWindow):
                             page.deleteLater()
                         widget.deleteLater()
 
-            # If you're tracking standalone views (e.g., popups), clean those too
+            # 7. Clean up standalone web views/popups
             if hasattr(self, 'web_views'):
                 for view in self.web_views:
                     if view.page():
                         view.page().deleteLater()
                     view.deleteLater()
 
-            # Clean up any custom QWebEngineProfile if you're using one
+            # 8. Delay deletion of QWebEngineProfile slightly to avoid Qt warning
             if hasattr(self, 'web_profile'):
-                self.web_profile.deleteLater()
+                QTimer.singleShot(100, self.web_profile.deleteLater)
 
-            # Clear only your app's temporary files, not the entire temp dir
+            # 9. Clear app-specific temp directory
             temp_subdir = os.path.join(tempfile.gettempdir(), "darkelf_temp")
             if os.path.exists(temp_subdir):
                 shutil.rmtree(temp_subdir, ignore_errors=True)
