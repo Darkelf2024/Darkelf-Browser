@@ -1035,10 +1035,12 @@ class Darkelf(QMainWindow):
     def load_settings(self):
         self.download_path = self.settings.value("download_path", os.path.expanduser("~"), type=str)
         self.homepage_mode = self.settings.value("homepage_mode", "dark", type=str)  # Initialize homepage_mode
-        
+        self.javascript_enabled = self.settings.value("javascript_enabled", False, type=bool)  # Load JavaScript setting
+
     def save_settings(self):
         self.settings.setValue("download_path", self.download_path)
-
+        self.settings.setValue("javascript_enabled", self.javascript_enabled)  # Save JavaScript setting
+    
     def init_security(self):
         self.aes_key = self.load_aes_key()
         self.ecdh_key_pair = self.load_or_generate_ecdh_key_pair()
@@ -1049,7 +1051,6 @@ class Darkelf(QMainWindow):
         self.javascript_enabled = self.settings.value("javascript_enabled", False, type=bool)
         self.anti_fingerprinting_enabled = self.settings.value("anti_fingerprinting_enabled", True, type=bool)
         self.tor_network_enabled = self.settings.value("tor_network_enabled", False, type=bool)
-        self.quantum_encryption_enabled = self.settings.value("quantum_encryption_enabled", False, type=bool)
         self.https_enforced = self.settings.value("https_enforced", True, type=bool)
         self.cookies_enabled = self.settings.value("cookies_enabled", False, type=bool)
         self.geolocation_enabled = self.settings.value("geolocation_enabled", False, type=bool)
@@ -1683,6 +1684,7 @@ class Darkelf(QMainWindow):
         
     def create_new_tab(self, url="home"):
         web_view = QWebEngineView()
+        web_view.settings().setAttribute(QWebEngineSettings.JavascriptEnabled, self.javascript_enabled)  # Apply JavaScript setting
         web_view.loadFinished.connect(self.update_tab_title)
         web_view.urlChanged.connect(self.update_url_bar)
         if url == "home":
@@ -1779,8 +1781,9 @@ class Darkelf(QMainWindow):
     def toggle_javascript(self, enabled):
         self.javascript_enabled = enabled
         self.settings.setValue("javascript_enabled", enabled)
-        for i in range(self.tab_widget.count()):
-            web_view = self.tab_widget.widget(i)
+        index = self.tab_widget.currentIndex()
+        if index != -1:
+            web_view = self.tab_widget.widget(index)
             web_view.settings().setAttribute(QWebEngineSettings.JavascriptEnabled, enabled)
             
     def toggle_anti_fingerprinting(self, enabled):
