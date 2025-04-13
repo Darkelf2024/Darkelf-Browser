@@ -1153,11 +1153,11 @@ class Darkelf(QMainWindow):
     def load_settings(self):
         self.download_path = self.settings.value("download_path", os.path.expanduser("~"), type=str)
         self.javascript_enabled = self.settings.value("javascript_enabled", False, type=bool)  # Load JavaScript setting
-    
+
     def save_settings(self):
         self.settings.setValue("download_path", self.download_path)
         self.settings.setValue("javascript_enabled", self.javascript_enabled)  # Save JavaScript setting
-    
+
     def init_security(self):
         self.aes_key = self.load_aes_key()
         self.ecdh_key_pair = self.load_or_generate_ecdh_key_pair()
@@ -1847,6 +1847,10 @@ class Darkelf(QMainWindow):
             web_view.setUrl(QUrl(url))
             tab_title = "New Tab"
 
+        index = self.tab_widget.addTab(web_view, tab_title)
+        self.tab_widget.setCurrentIndex(index)
+        return web_view
+
     def load_url(self, url):
         return QUrl(url)
 
@@ -1934,6 +1938,7 @@ class Darkelf(QMainWindow):
         if index != -1:
             web_view = self.tab_widget.widget(index)
             web_view.settings().setAttribute(QWebEngineSettings.JavascriptEnabled, enabled)
+
             
     def toggle_anti_fingerprinting(self, enabled):
         self.anti_fingerprinting_enabled = enabled
@@ -1946,10 +1951,6 @@ class Darkelf(QMainWindow):
             self.start_tor()
         else:
             self.stop_tor()
-
-    def toggle_quantum_encryption(self, enabled):
-        self.quantum_encryption_enabled = enabled
-        self.settings.setValue("quantum_encryption_enabled", enabled)
 
     def toggle_https_enforcement(self, enabled):
         self.https_enforced = enabled
@@ -1975,9 +1976,8 @@ class Darkelf(QMainWindow):
     def closeEvent(self, event):
         """Cleanly shut down the application and auto-destruct."""
         try:
-            # 1. Stop Tor process if available
-            if callable(getattr(self, 'stop_tor', None)):
-                self.stop_tor()
+            # 1. Stop Tor process if running
+            #self.stop_tor()
 
             # 2. Securely wipe in-memory cookies
             if hasattr(self, 'encrypted_store'):
@@ -1990,37 +1990,30 @@ class Darkelf(QMainWindow):
             self.clear_cache_and_history()
 
             # 5. Stop background timers/threads
-            if hasattr(self, 'download_manager') and hasattr(self.download_manager, 'timers'):
+            if hasattr(self.download_manager, 'timers'):
                 for timer in self.download_manager.timers.values():
-                    try:
-                        timer.stop()
-                    except Exception as t_err:
-                        logging.warning(f"Failed to stop timer: {t_err}")
+                    timer.stop()
 
-            # 6. Clean up QWebEngineViews and QWebEnginePages from tab widget
+            # 6. Clean up QWebEngineView/QWebEnginePage from tab widget
             if hasattr(self, 'tab_widget'):
                 for i in range(self.tab_widget.count()):
                     widget = self.tab_widget.widget(i)
                     if isinstance(widget, QWebEngineView):
                         page = widget.page()
                         if page:
-                            page.setParent(None)
                             page.deleteLater()
-                        widget.setParent(None)
                         widget.deleteLater()
 
             # 7. Clean up standalone web views/popups
             if hasattr(self, 'web_views'):
                 for view in self.web_views:
                     if view.page():
-                        view.page().setParent(None)
                         view.page().deleteLater()
-                    view.setParent(None)
                     view.deleteLater()
 
             # 8. Delay deletion of QWebEngineProfile slightly to avoid Qt warning
             if hasattr(self, 'web_profile'):
-                QTimer.singleShot(200, lambda: self.web_profile.deleteLater())
+                QTimer.singleShot(100, self.web_profile.deleteLater)
 
             # 9. Clear app-specific temp directory
             temp_subdir = os.path.join(tempfile.gettempdir(), "darkelf_temp")
@@ -2118,9 +2111,7 @@ def main():
         "--disable-webrtc-hw-encoding "
         "--disable-webrtc-hw-decoding "
         "--disable-webrtc-cpu-overuse-detection "
-        "--enable-strict-powerful-feature-restrictions "
         "--disable-features=WebRTCMediaDevices"
-        "--use-fake-ui-for-media-stream "
         "--disable-blink-features=NavigatorOnLine,UserAgentClientHint,WebAuthn "
         "--disable-features=HTMLImports "
         "--disable-features=AudioContext "
@@ -2133,6 +2124,7 @@ def main():
         "--disable-webgl-image-chromium "
         "--disable-text-autosizing "
         "--disable-peer-connection"
+        "--disable-javascript"
     )
     
     # Create the application
