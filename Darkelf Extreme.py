@@ -1818,25 +1818,21 @@ class Darkelf(QMainWindow):
     def toggle_media_devices(self, enabled):
         self.block_media_devices = enabled
         self.settings.setValue("block_media_devices", enabled)
-
+        
     def closeEvent(self, event):
         """Cleanly shut down the application and auto-destruct."""
         try:
-            # 1. Stop Tor process if available
-            if callable(getattr(self, 'stop_tor', None)):
-                self.stop_tor()
-
-            # 2. Securely wipe in-memory cookies
+            # 1. Securely wipe in-memory cookies
             if hasattr(self, 'encrypted_store'):
                 self.encrypted_store.wipe_memory()
 
-            # 3. Save user settings
+            # 2. Save user settings
             self.save_settings()
 
-            # 4. Clear cache and browsing history
+            # 3. Clear cache and browsing history
             self.clear_cache_and_history()
-
-            # 5. Stop background timers/threads
+    
+            # 4. Stop background timers/threads
             if hasattr(self, 'download_manager') and hasattr(self.download_manager, 'timers'):
                 for timer in self.download_manager.timers.values():
                     try:
@@ -1844,7 +1840,7 @@ class Darkelf(QMainWindow):
                     except Exception as t_err:
                         logging.warning(f"Failed to stop timer: {t_err}")
 
-            # 6. Clean up QWebEngineViews and QWebEnginePages from tab widget
+            # 5. Clean up QWebEngineViews and QWebEnginePages from tab widget
             if hasattr(self, 'tab_widget'):
                 for i in range(self.tab_widget.count()):
                     widget = self.tab_widget.widget(i)
@@ -1856,7 +1852,7 @@ class Darkelf(QMainWindow):
                         widget.setParent(None)
                         widget.deleteLater()
 
-            # 7. Clean up standalone web views/popups
+            # 6. Clean up standalone web views/popups
             if hasattr(self, 'web_views'):
                 for view in self.web_views:
                     if view.page():
@@ -1865,11 +1861,11 @@ class Darkelf(QMainWindow):
                     view.setParent(None)
                     view.deleteLater()
 
-            # 8. Delay deletion of QWebEngineProfile slightly to avoid Qt warning
+            # 7. Delay deletion of QWebEngineProfile slightly to avoid Qt warning
             if hasattr(self, 'web_profile'):
-                QTimer.singleShot(200, lambda: self.web_profile.deleteLater())
+                QTimer.singleShot(1000, lambda: self.web_profile.deleteLater())
 
-            # 9. Clear app-specific temp directory
+            # 8. Clear app-specific temp directory
             temp_subdir = os.path.join(tempfile.gettempdir(), "darkelf_temp")
             if os.path.exists(temp_subdir):
                 shutil.rmtree(temp_subdir, ignore_errors=True)
