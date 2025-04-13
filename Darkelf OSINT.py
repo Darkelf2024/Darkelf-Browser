@@ -1152,10 +1152,12 @@ class Darkelf(QMainWindow):
 
     def load_settings(self):
         self.download_path = self.settings.value("download_path", os.path.expanduser("~"), type=str)
-
+        self.javascript_enabled = self.settings.value("javascript_enabled", False, type=bool)  # Load JavaScript setting
+    
     def save_settings(self):
         self.settings.setValue("download_path", self.download_path)
-
+        self.settings.setValue("javascript_enabled", self.javascript_enabled)  # Save JavaScript setting
+    
     def init_security(self):
         self.aes_key = self.load_aes_key()
         self.ecdh_key_pair = self.load_or_generate_ecdh_key_pair()
@@ -1835,6 +1837,7 @@ class Darkelf(QMainWindow):
         
     def create_new_tab(self, url="home"):
         web_view = QWebEngineView()
+        web_view.settings().setAttribute(QWebEngineSettings.JavascriptEnabled, self.javascript_enabled)  # Apply JavaScript setting
         web_view.loadFinished.connect(self.update_tab_title)
         web_view.urlChanged.connect(self.update_url_bar)
         if url == "home":
@@ -1843,10 +1846,6 @@ class Darkelf(QMainWindow):
         else:
             web_view.setUrl(QUrl(url))
             tab_title = "New Tab"
-
-        index = self.tab_widget.addTab(web_view, tab_title)
-        self.tab_widget.setCurrentIndex(index)
-        return web_view
 
     def load_url(self, url):
         return QUrl(url)
@@ -1974,9 +1973,64 @@ class Darkelf(QMainWindow):
         self.settings.setValue("block_media_devices", enabled)
 
     def closeEvent(self, event):
-        self.save_settings()
-        self.clear_cache_and_history()
-        super().closeEvent(event)
+        """Cleanly shut down the application and auto-destruct."""
+        try:
+            # 1. Stop Tor process if available
+            if callable(getattr(self, 'stop_tor', None)):
+                self.stop_tor()
+
+            # 2. Securely wipe in-memory cookies
+            if hasattr(self, 'encrypted_store'):
+                self.encrypted_store.wipe_memory()
+
+            # 3. Save user settings
+            self.save_settings()
+
+            # 4. Clear cache and browsing history
+            self.clear_cache_and_history()
+
+            # 5. Stop background timers/threads
+            if hasattr(self, 'download_manager') and hasattr(self.download_manager, 'timers'):
+                for timer in self.download_manager.timers.values():
+                    try:
+                        timer.stop()
+                    except Exception as t_err:
+                        logging.warning(f"Failed to stop timer: {t_err}")
+
+            # 6. Clean up QWebEngineViews and QWebEnginePages from tab widget
+            if hasattr(self, 'tab_widget'):
+                for i in range(self.tab_widget.count()):
+                    widget = self.tab_widget.widget(i)
+                    if isinstance(widget, QWebEngineView):
+                        page = widget.page()
+                        if page:
+                            page.setParent(None)
+                            page.deleteLater()
+                        widget.setParent(None)
+                        widget.deleteLater()
+
+            # 7. Clean up standalone web views/popups
+            if hasattr(self, 'web_views'):
+                for view in self.web_views:
+                    if view.page():
+                        view.page().setParent(None)
+                        view.page().deleteLater()
+                    view.setParent(None)
+                    view.deleteLater()
+
+            # 8. Delay deletion of QWebEngineProfile slightly to avoid Qt warning
+            if hasattr(self, 'web_profile'):
+                QTimer.singleShot(200, lambda: self.web_profile.deleteLater())
+
+            # 9. Clear app-specific temp directory
+            temp_subdir = os.path.join(tempfile.gettempdir(), "darkelf_temp")
+            if os.path.exists(temp_subdir):
+                shutil.rmtree(temp_subdir, ignore_errors=True)
+
+        except Exception as e:
+            logging.error(f"Error during shutdown: {e}")
+        finally:
+            super().closeEvent(event)
 
     def handle_download(self, download_item):
         self.download_manager.handle_download(download_item)
