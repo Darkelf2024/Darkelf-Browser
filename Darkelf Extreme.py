@@ -68,7 +68,7 @@ from PySide6.QtGui import QPalette, QColor, QKeySequence, QShortcut, QAction, QG
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtNetwork import QNetworkProxy, QSslConfiguration,QSslSocket, QSsl, QSslCipher
 from PySide6.QtWebEngineCore import QWebEngineUrlRequestInterceptor, QWebEngineSettings, QWebEnginePage, QWebEngineScript, QWebEngineProfile, QWebEngineDownloadRequest, QWebEngineContextMenuRequest, QWebEngineCookieStore
-from PySide6.QtCore import QUrl, QSettings, Qt, QObject, Slot, QTimer
+from PySide6.QtCore import QUrl, QSettings, Qt, QObject, Slot, QTimer, QCoreApplication
 from cryptography.hazmat.primitives import serialization, hashes
 from cryptography.hazmat.primitives.asymmetric import x25519, rsa, padding
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
@@ -1843,36 +1843,50 @@ class Darkelf(QMainWindow):
                     except Exception as t_err:
                         logging.warning(f"Failed to stop timer: {t_err}")
 
-            # 5. Clean up QWebEngineViews and QWebEnginePages from tab widget
+             # 5. Clean up QWebEngineViews and QWebEnginePages from tab widget
             if hasattr(self, 'tab_widget'):
                 for i in range(self.tab_widget.count()):
                     widget = self.tab_widget.widget(i)
                     if isinstance(widget, QWebEngineView):
-                        page = widget.page()
-                        if page:
+                        try:
+                            page = widget.page()
+                            if page:
+                                widget.setPage(None)  # Detach from view
                                 page.setParent(None)
                                 page.deleteLater()
-                        # Clean up the QWebEngineView itself
+                        except Exception:
+                            pass  # Page might already be deleted
                         widget.setParent(None)
                         widget.deleteLater()
+                self.tab_widget.clear()
 
             # 6. Clean up standalone web views/popups
             if hasattr(self, 'web_views'):
                 for view in self.web_views:
-                    if view.page() and view.page().isValid():
-                        view.page().deleteLater()
+                    try:
+                        page = view.page()
+                        if page and page.isValid():
+                            view.setPage(None)
+                            page.setParent(None)
+                            page.deleteLater()
+                    except Exception:
+                        pass
                     view.deleteLater()
+                self.web_views.clear()
 
-            # 7. Delay deletion of QWebEngineProfile slightly to avoid Qt warning
+            # 7. Force event loop to process deletions
+            QCoreApplication.processEvents()
+
+            # 8. Delay deletion of QWebEngineProfile to ensure all pages are deleted
             if hasattr(self, 'web_profile'):
-                QTimer.singleShot(0, self.delayed_profile_cleanup)
+                QTimer.singleShot(5000, self.delayed_profile_cleanup)
 
-            # 8. Clear app-specific temp directory
+            # 9. Clear app-specific temp directory
             temp_subdir = os.path.join(tempfile.gettempdir(), "darkelf_temp")
             if os.path.exists(temp_subdir):
                 shutil.rmtree(temp_subdir, ignore_errors=True)
 
-            # 9. Clear ram_path created for in-memory profile storage
+            # 10. Clear ram_path created for in-memory profile storage
             if hasattr(self, 'ram_path') and os.path.exists(self.ram_path):
                 shutil.rmtree(self.ram_path, ignore_errors=True)
 
@@ -1883,7 +1897,12 @@ class Darkelf(QMainWindow):
 
     def delayed_profile_cleanup(self):
         if hasattr(self, 'web_profile'):
-            QTimer.singleShot(1000, lambda: self.web_profile.deleteLater())
+            try:
+                QCoreApplication.processEvents()
+                self.web_profile.deleteLater()
+                self.web_profile = None  # Clear reference
+            except Exception:
+                pass  # Already deleted or invalid
 
     def handle_download(self, download_item):
         self.download_manager.handle_download(download_item)
