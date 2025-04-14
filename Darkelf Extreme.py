@@ -1048,7 +1048,6 @@ class Darkelf(QMainWindow):
         self.chacha20_key = self.generate_chacha20_key(os.urandom(16))
 
         # Initialize settings
-        self.javascript_enabled = self.settings.value("javascript_enabled", False, type=bool)
         self.anti_fingerprinting_enabled = self.settings.value("anti_fingerprinting_enabled", True, type=bool)
         self.tor_network_enabled = self.settings.value("tor_network_enabled", False, type=bool)
         self.https_enforced = self.settings.value("https_enforced", True, type=bool)
@@ -1219,13 +1218,17 @@ class Darkelf(QMainWindow):
         interceptor = AdblockAndTrackerInterceptor(adblock_rules, tracking_domains, script_block_rules)
         profile.setUrlRequestInterceptor(interceptor)
 
-        # Apply this profile to your web view
+        self.web_profile = profile  # Store reference for cleanup
         self.web_view = QWebEngineView()
         page = QWebEnginePage(profile, self.web_view)
         self.web_view.setPage(page)
-
+        
+        self.setup_encrypted_cookie_store(profile)
+        
         # Attach encrypted in-memory cookie store
+    def setup_encrypted_cookie_store(self, profile):
         cookie_store = profile.cookieStore()
+        factory = EncryptedCookieStore(cookie_store)
         self.encrypted_store = EncryptedCookieStore(cookie_store)
 
     def init_tor(self):
@@ -1831,7 +1834,7 @@ class Darkelf(QMainWindow):
 
             # 3. Clear cache and browsing history
             self.clear_cache_and_history()
-    
+
             # 4. Stop background timers/threads
             if hasattr(self, 'download_manager') and hasattr(self.download_manager, 'timers'):
                 for timer in self.download_manager.timers.values():
@@ -1847,33 +1850,40 @@ class Darkelf(QMainWindow):
                     if isinstance(widget, QWebEngineView):
                         page = widget.page()
                         if page:
-                            page.setParent(None)
-                            page.deleteLater()
+                                page.setParent(None)
+                                page.deleteLater()
+                        # Clean up the QWebEngineView itself
                         widget.setParent(None)
                         widget.deleteLater()
 
             # 6. Clean up standalone web views/popups
             if hasattr(self, 'web_views'):
                 for view in self.web_views:
-                    if view.page():
-                        view.page().setParent(None)
+                    if view.page() and view.page().isValid():
                         view.page().deleteLater()
-                    view.setParent(None)
                     view.deleteLater()
 
             # 7. Delay deletion of QWebEngineProfile slightly to avoid Qt warning
             if hasattr(self, 'web_profile'):
-                QTimer.singleShot(1000, lambda: self.web_profile.deleteLater())
+                QTimer.singleShot(0, self.delayed_profile_cleanup)
 
             # 8. Clear app-specific temp directory
             temp_subdir = os.path.join(tempfile.gettempdir(), "darkelf_temp")
             if os.path.exists(temp_subdir):
                 shutil.rmtree(temp_subdir, ignore_errors=True)
 
+            # 9. Clear ram_path created for in-memory profile storage
+            if hasattr(self, 'ram_path') and os.path.exists(self.ram_path):
+                shutil.rmtree(self.ram_path, ignore_errors=True)
+
         except Exception as e:
             logging.error(f"Error during shutdown: {e}")
         finally:
             super().closeEvent(event)
+
+    def delayed_profile_cleanup(self):
+        if hasattr(self, 'web_profile'):
+            QTimer.singleShot(1000, lambda: self.web_profile.deleteLater())
 
     def handle_download(self, download_item):
         self.download_manager.handle_download(download_item)
