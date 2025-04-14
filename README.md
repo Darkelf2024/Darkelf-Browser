@@ -33,7 +33,7 @@ Led by [Raz](https://github.com/Raz-js)
 
 
 ## Originality Statement
-This project consists of over 1,800+ lines of original code. A CopyLeaks report has been generated to verify its uniqueness, indicating a 1.5-3.5% similarity based on type of DE Browser: OSINT, Extreme or Privacy Version. The flagged similarity is attributed to standard coding patterns and false positives. Upon review, the content is verified as 0% plagiarized and fully original.
+This project consists of over 2000+ lines of original code. A CopyLeaks report has been generated to verify its uniqueness, indicating a 1.5-3.5% similarity based on type of DE Browser: OSINT, Extreme or Privacy Version. The flagged similarity is attributed to standard coding patterns and false positives. Upon review, the content is verified as 0% plagiarized and fully original.
 If you would like to review the CopyLeaks report, please feel free to reach out.
 
 ## Intro
