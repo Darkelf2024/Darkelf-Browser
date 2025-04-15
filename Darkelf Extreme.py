@@ -79,6 +79,7 @@ import stem.process
 from stem.control import Controller
 from collections import defaultdict
 from cryptography.fernet import Fernet
+from shiboken6 import isValid
 import mimetypes
 import tempfile
 from PIL import Image
@@ -1825,17 +1826,15 @@ class Darkelf(QMainWindow):
     def closeEvent(self, event):
         """Cleanly shut down the application and auto-destruct."""
         try:
-            # 1. Securely wipe in-memory cookies
+            if callable(getattr(self, 'stop_tor', None)):
+                self.stop_tor()
+
             if hasattr(self, 'encrypted_store'):
                 self.encrypted_store.wipe_memory()
 
-            # 2. Save user settings
             self.save_settings()
-
-            # 3. Clear cache and browsing history
             self.clear_cache_and_history()
 
-            # 4. Stop background timers/threads
             if hasattr(self, 'download_manager') and hasattr(self.download_manager, 'timers'):
                 for timer in self.download_manager.timers.values():
                     try:
@@ -1843,66 +1842,72 @@ class Darkelf(QMainWindow):
                     except Exception as t_err:
                         logging.warning(f"Failed to stop timer: {t_err}")
 
-             # 5. Clean up QWebEngineViews and QWebEnginePages from tab widget
+            # Failsafe cleanup of all tab pages
             if hasattr(self, 'tab_widget'):
-                for i in range(self.tab_widget.count()):
+                for i in reversed(range(self.tab_widget.count())):
                     widget = self.tab_widget.widget(i)
                     if isinstance(widget, QWebEngineView):
                         try:
                             page = widget.page()
-                            if page:
-                                widget.setPage(None)  # Detach from view
+                            if isValid(page):
                                 page.setParent(None)
+                                widget.setPage(None)
                                 page.deleteLater()
-                        except Exception:
-                            pass  # Page might already be deleted
-                        widget.setParent(None)
-                        widget.deleteLater()
-                self.tab_widget.clear()
+                        except RuntimeError:
+                            logging.warning("QWebEnginePage for tab already deleted.")
+                        widget.close()
+                    self.tab_widget.removeTab(i)
+                    widget.setParent(None)
+                    widget.deleteLater()
 
-            # 6. Clean up standalone web views/popups
+            # Standalone views/popups
             if hasattr(self, 'web_views'):
                 for view in self.web_views:
                     try:
                         page = view.page()
-                        if page and page.isValid():
-                            view.setPage(None)
+                        if isValid(page):
                             page.setParent(None)
+                            view.setPage(None)
                             page.deleteLater()
-                    except Exception:
-                        pass
+                    except RuntimeError:
+                        logging.warning("Standalone QWebEnginePage already deleted.")
+                    view.close()
+                    view.setParent(None)
                     view.deleteLater()
-                self.web_views.clear()
 
-            # 7. Force event loop to process deletions
-            QCoreApplication.processEvents()
+            # Primary web_view
+            if hasattr(self, 'web_view'):
+                try:
+                    page = self.web_view.page()
+                    if isValid(page):
+                        page.setParent(None)
+                        self.web_view.setPage(None)
+                        page.deleteLater()
+                except RuntimeError:
+                    logging.warning("Main web_view QWebEnginePage already deleted.")
+                self.web_view.close()
+                self.web_view.setParent(None)
+                self.web_view.deleteLater()
 
-            # 8. Delay deletion of QWebEngineProfile to ensure all pages are deleted
+            QApplication.processEvents()
+            QApplication.processEvents()
+
             if hasattr(self, 'web_profile'):
-                QTimer.singleShot(5000, self.delayed_profile_cleanup)
+                if self.web_profile:
+                    QTimer.singleShot(5000, lambda: self.web_profile.deleteLater())
+                else:
+                    logging.warning("web_profile exists but is None — skipping deleteLater.")
+            else:
+                logging.warning("web_profile attribute not found on shutdown.")
 
-            # 9. Clear app-specific temp directory
             temp_subdir = os.path.join(tempfile.gettempdir(), "darkelf_temp")
             if os.path.exists(temp_subdir):
                 shutil.rmtree(temp_subdir, ignore_errors=True)
-
-            # 10. Clear ram_path created for in-memory profile storage
-            if hasattr(self, 'ram_path') and os.path.exists(self.ram_path):
-                shutil.rmtree(self.ram_path, ignore_errors=True)
 
         except Exception as e:
             logging.error(f"Error during shutdown: {e}")
         finally:
             super().closeEvent(event)
-
-    def delayed_profile_cleanup(self):
-        if hasattr(self, 'web_profile'):
-            try:
-                QCoreApplication.processEvents()
-                self.web_profile.deleteLater()
-                self.web_profile = None  # Clear reference
-            except Exception:
-                pass  # Already deleted or invalid
 
     def handle_download(self, download_item):
         self.download_manager.handle_download(download_item)
