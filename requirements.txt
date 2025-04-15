@@ -9,6 +9,7 @@ PySide6_Essentials==6.8.2.1
 PyQt6-WebEngine==6.9.0 # Fail Safe/Fallback
 QtPy==2.4.3 #Fail Safe/Fallback
 Requests==2.32.3
+shiboken6==6.9.0
 stem==1.8.2
 
 # Packages need to be maintained and upgraded to the latest
