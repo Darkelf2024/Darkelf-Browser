@@ -1175,17 +1175,17 @@ class Darkelf(QMainWindow):
         try:
             if os_type == "Linux":
                 # Use absolute paths for executables
-                subprocess.run(["/usr/bin/sudo", "/sbin/swapoff", "-a"], check=True)
+                subprocess.run(["/usr/bin/sudo", "/sbin/swapoff", "-a"], check=True, shell=False)
                 with open('/proc/sys/vm/swappiness', 'w') as f:
                     f.write("0")
             elif os_type == "Windows":
                 # Use PowerShell command to disable memory compression
                 subprocess.run(["C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-                                "-Command", "Disable-MMAgent -MemoryCompression"], check=True)
+                                "-Command", "Disable-MMAgent -MemoryCompression"], check=True, shell=False)
             elif os_type == "Darwin":  # macOS
                 # Unload the macOS dynamic pager
                 subprocess.run(["/usr/bin/sudo", "/bin/launchctl", "unload", "-w",
-                                "/System/Library/LaunchDaemons/com.apple.dynamic_pager.plist"], check=True)
+                                "/System/Library/LaunchDaemons/com.apple.dynamic_pager.plist"], check=True, shell=False)
             else:
                 print(f"[-] Unsupported OS type: {os_type}")
                 return
