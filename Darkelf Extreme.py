@@ -80,12 +80,19 @@ from stem.control import Controller
 from collections import defaultdict
 from cryptography.fernet import Fernet
 from shiboken6 import isValid
+import hashlib
 import mimetypes
 import tempfile
 from PIL import Image
 import piexif
 
-class EncryptedCookieStore:
+def random_delay(min_delay=0.1, max_delay=1.0):
+    """Introduce a random delay to confuse forensic analysis."""
+    delay = random.uniform(min_delay, max_delay)
+    time.sleep(delay)
+    print(f"Random delay: {delay:.2f}s")
+
+class ObfuscatedEncryptedCookieStore:
     def __init__(self, qt_cookie_store: QWebEngineCookieStore):
         self.key = Fernet.generate_key()
         self.cipher = Fernet(self.key)
@@ -93,37 +100,47 @@ class EncryptedCookieStore:
         self.qt_cookie_store = qt_cookie_store
         self.qt_cookie_store.cookieAdded.connect(self.intercept_cookie)
 
+    def obfuscate_name(self, name: str) -> str:
+        """Obfuscate cookie name using SHA-256 and truncate for storage."""
+        return hashlib.sha256(name.encode()).hexdigest()[:16]
+
     def intercept_cookie(self, cookie):
-        """Intercepts cookies as they are added and encrypts them."""
+        """Intercept cookies, obfuscate and encrypt."""
+        random_delay(0.2, 1.5)
         name = bytes(cookie.name()).decode()
         value = bytes(cookie.value()).decode()
-        self.set_cookie(name, value)
+        obfuscated_name = self.obfuscate_name(name)
+        self.set_cookie(obfuscated_name, value)
 
-    def set_cookie(self, name, value):
-        """Encrypts and stores a cookie."""
+    def set_cookie(self, name: str, value: str):
+        """Encrypts and stores a cookie using obfuscated name."""
+        random_delay(0.2, 1.5)
         encrypted = self.cipher.encrypt(value.encode())
         self.store[name] = encrypted
+        print(f"[+] Stored cookie: {name}")
 
-    def get_cookie(self, name):
-        """Decrypts and retrieves a cookie."""
+    def get_cookie(self, name: str) -> str:
+        """Retrieves and decrypts a cookie."""
+        random_delay(0.1, 1.0)
         encrypted = self.store.get(name)
         return self.cipher.decrypt(encrypted).decode() if encrypted else None
 
     def clear(self):
-        """Clears all cookies and securely wipes in-memory values."""
-        # Securely wipe the in-memory cookie values
+        """Clears all cookies and memory."""
+        random_delay(0.3, 1.0)
         for key in list(self.store.keys()):
-            self.store[key] = None  # Overwrite value
-            del self.store[key]     # Remove key-value pair
-
-        # Clear cookies from the QWebEngineCookieStore
+            self.store[key] = None
+            del self.store[key]
         self.qt_cookie_store.deleteAllCookies()
+        print("[+] Cleared cookies and memory.")
 
     def wipe_memory(self):
-        """Securely wipes all in-memory values."""
+        """Wipe memory securely."""
+        random_delay(0.2, 0.8)
         for key in list(self.store.keys()):
-            self.store[key] = None  # Overwrite value
-        self.store.clear()          # Clear dictionary
+            self.store[key] = None
+        self.store.clear()
+        print("[+] Wiped in-memory store.")
 
 # Debounce function to limit the rate at which a function can fire
 def debounce(func, wait):
@@ -1181,7 +1198,8 @@ class Darkelf(QMainWindow):
         decryptor = cipher.decryptor()
         plaintext = decryptor.update(ciphertext) + decryptor.finalize()
         return plaintext.decode()
-
+        
+        
     def configure_web_engine_profile(self):
         self.ram_path = tempfile.mkdtemp()
         profile = QWebEngineProfile(self)
@@ -1224,13 +1242,9 @@ class Darkelf(QMainWindow):
         page = QWebEnginePage(profile, self.web_view)
         self.web_view.setPage(page)
         
-        self.setup_encrypted_cookie_store(profile)
-        
-        # Attach encrypted in-memory cookie store
     def setup_encrypted_cookie_store(self, profile):
         cookie_store = profile.cookieStore()
-        factory = EncryptedCookieStore(cookie_store)
-        self.encrypted_store = EncryptedCookieStore(cookie_store)
+        self.encrypted_store = ObfuscatedEncryptedCookieStore(cookie_store)
 
     def init_tor(self):
         self.tor_process = None
@@ -1840,7 +1854,7 @@ class Darkelf(QMainWindow):
                     try:
                         timer.stop()
                     except Exception as t_err:
-                        logging.warning(f"Failed to stop timer: {t_err}")
+                        pass
 
             # Failsafe cleanup of all tab pages
             if hasattr(self, 'tab_widget'):
@@ -1854,7 +1868,7 @@ class Darkelf(QMainWindow):
                                 widget.setPage(None)
                                 page.deleteLater()
                         except RuntimeError:
-                            logging.warning("QWebEnginePage for tab already deleted.")
+                            pass
                         widget.close()
                     self.tab_widget.removeTab(i)
                     widget.setParent(None)
@@ -1870,7 +1884,7 @@ class Darkelf(QMainWindow):
                             view.setPage(None)
                             page.deleteLater()
                     except RuntimeError:
-                        logging.warning("Standalone QWebEnginePage already deleted.")
+                        pass
                     view.close()
                     view.setParent(None)
                     view.deleteLater()
@@ -1884,7 +1898,7 @@ class Darkelf(QMainWindow):
                         self.web_view.setPage(None)
                         page.deleteLater()
                 except RuntimeError:
-                    logging.warning("Main web_view QWebEnginePage already deleted.")
+                    pass
                 self.web_view.close()
                 self.web_view.setParent(None)
                 self.web_view.deleteLater()
@@ -1896,16 +1910,16 @@ class Darkelf(QMainWindow):
                 if self.web_profile:
                     QTimer.singleShot(5000, lambda: self.web_profile.deleteLater())
                 else:
-                    logging.warning("web_profile exists but is None — skipping deleteLater.")
+                    pass
             else:
-                logging.warning("web_profile attribute not found on shutdown.")
+                pass
 
             temp_subdir = os.path.join(tempfile.gettempdir(), "darkelf_temp")
             if os.path.exists(temp_subdir):
                 shutil.rmtree(temp_subdir, ignore_errors=True)
 
         except Exception as e:
-            logging.error(f"Error during shutdown: {e}")
+            pass
         finally:
             super().closeEvent(event)
 
