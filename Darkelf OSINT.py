@@ -86,6 +86,7 @@ from shiboken6 import isValid
 import hashlib
 import mimetypes
 import tempfile
+import psutil
 from PIL import Image
 import piexif
 
@@ -1163,6 +1164,59 @@ class Darkelf(QMainWindow):
         
         # Add shortcuts for various actions
         self.init_shortcuts()
+
+        # Start monitoring for forensic tools (AFTER FULL INIT)
+        self.start_forensic_tool_monitor()
+
+    def disable_system_swap(self):
+        """Disable swap memory to enhance security."""
+        os_type = platform.system()
+        try:
+            if os_type == "Linux":
+                subprocess.run(["sudo", "swapoff", "-a"], check=True)
+                with open('/proc/sys/vm/swappiness', 'w') as f:
+                    f.write("0")
+            elif os_type == "Windows":
+                subprocess.run(["powershell", "-Command", "Disable-MMAgent -MemoryCompression"], check=True)
+            elif os_type == "Darwin":  # macOS
+                subprocess.run(["sudo", "launchctl", "unload", "-w", "/System/Library/LaunchDaemons/com.apple.dynamic_pager.plist"], check=True)
+            print("[+] Swap memory disabled.")
+        except Exception as e:
+            print(f"[-] Failed to disable swap: {e}")
+
+    def start_forensic_tool_monitor(self):
+        """Start monitoring for forensic tools."""
+        self.monitor_timer = QTimer(self)
+        self.monitor_timer.timeout.connect(self.check_for_forensic_tools)
+        self.monitor_timer.start(5000)  # Check every 5 seconds
+
+    def check_for_forensic_tools(self):
+        """Check for forensic tools and self-destruct if found."""
+        forensic_tools = ["wireshark", "volatility", "autopsy", "tcpdump"]
+        try:
+            for process in psutil.process_iter(['name']):
+                for tool in forensic_tools:
+                    if tool.lower() in process.info['name'].lower():
+                        print(f"[!] Forensic tool detected: {process.info['name']}")
+                        self.self_destruct()
+        except Exception as e:
+            print(f"[-] Error during forensic tool monitoring: {e}")
+
+    def self_destruct(self):
+        """Trigger self-destruct sequence."""
+        print("[!] Forensic tool detected. Triggering self-destruct...")
+        # Clear sensitive files
+        sensitive_files = ["private_key.pem", "ecdh_private_key.pem"]
+        for file in sensitive_files:
+            try:
+                if os.path.exists(file):
+                    os.remove(file)
+                    print(f"[+] Securely deleted: {file}")
+            except Exception as e:
+                print(f"[-] Failed to delete {file}: {e}")
+
+        # Exit the application
+        os._exit(1)
         
     def init_settings(self):
         self.settings = QSettings("DarkelfBrowser", "Darkelf")
