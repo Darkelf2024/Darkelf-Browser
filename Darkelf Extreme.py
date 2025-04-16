@@ -81,6 +81,7 @@ from collections import defaultdict
 from cryptography.fernet import Fernet
 from shiboken6 import isValid
 import hashlib
+import secrets
 import mimetypes
 import tempfile
 from PIL import Image
@@ -88,7 +89,7 @@ import piexif
 
 def random_delay(min_delay=0.1, max_delay=1.0):
     """Introduce a random delay to confuse forensic analysis."""
-    delay = random.uniform(min_delay, max_delay)
+    delay = secrets.uniform(min_delay, max_delay)
     time.sleep(delay)
     print(f"Random delay: {delay:.2f}s")
 
