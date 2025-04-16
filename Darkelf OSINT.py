@@ -1192,7 +1192,14 @@ class Darkelf(QMainWindow):
 
     def check_for_forensic_tools(self):
         """Check for forensic tools and self-destruct if found."""
-        forensic_tools = ["wireshark", "volatility", "autopsy", "tcpdump"]
+        # Extended list of forensic tools (as of 2025)
+        forensic_tools = [
+            "wireshark", "volatility", "autopsy", "tcpdump", "sysinternals", "processhacker",
+            "networkminer", "bulk_extractor", "sleuthkit", "xplico", "oxygen", "magnetaxiom",
+            "chainsaw", "cape", "redline", "dumpzilla", "mftdump", "regshot", "nkprocmgr",
+            "cyberchef", "prodiscover", "xways", "hexeditor", "binwalk", "foremost",
+            "regripper", "plaso", "timesketch", "arkime"
+        ]
         try:
             for process in psutil.process_iter(['name']):
                 for tool in forensic_tools:
