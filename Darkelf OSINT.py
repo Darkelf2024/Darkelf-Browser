@@ -84,6 +84,7 @@ from collections import defaultdict
 from cryptography.fernet import Fernet
 from shiboken6 import isValid
 import hashlib
+import secrets
 import mimetypes
 import tempfile
 import psutil
@@ -92,7 +93,7 @@ import piexif
 
 def random_delay(min_delay=0.1, max_delay=1.0):
     """Introduce a random delay to confuse forensic analysis."""
-    delay = random.uniform(min_delay, max_delay)
+    delay = secrets.uniform(min_delay, max_delay)
     time.sleep(delay)
     print(f"Random delay: {delay:.2f}s")
 
@@ -1173,16 +1174,28 @@ class Darkelf(QMainWindow):
         os_type = platform.system()
         try:
             if os_type == "Linux":
-                subprocess.run(["sudo", "swapoff", "-a"], check=True)
+                # Use absolute paths for executables
+                subprocess.run(["/usr/bin/sudo", "/sbin/swapoff", "-a"], check=True)
                 with open('/proc/sys/vm/swappiness', 'w') as f:
                     f.write("0")
             elif os_type == "Windows":
-                subprocess.run(["powershell", "-Command", "Disable-MMAgent -MemoryCompression"], check=True)
+                # Use PowerShell command to disable memory compression
+                subprocess.run(["C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+                                "-Command", "Disable-MMAgent -MemoryCompression"], check=True)
             elif os_type == "Darwin":  # macOS
-                subprocess.run(["sudo", "launchctl", "unload", "-w", "/System/Library/LaunchDaemons/com.apple.dynamic_pager.plist"], check=True)
-            print("[+] Swap memory disabled.")
+                # Unload the macOS dynamic pager
+                subprocess.run(["/usr/bin/sudo", "/bin/launchctl", "unload", "-w",
+                                "/System/Library/LaunchDaemons/com.apple.dynamic_pager.plist"], check=True)
+            else:
+                print(f"[-] Unsupported OS type: {os_type}")
+                return
+            print("[+] Swap memory disabled successfully.")
+        except FileNotFoundError as fnf_error:
+            print(f"[-] Command not found: {fnf_error}")
+        except PermissionError:
+            print("[-] Permission denied. Please run as an administrator or use sudo.")
         except Exception as e:
-            print(f"[-] Failed to disable swap: {e}")
+            print(f"[-] Failed to disable swap due to: {e}")
 
     def start_forensic_tool_monitor(self):
         """Start monitoring for forensic tools."""
