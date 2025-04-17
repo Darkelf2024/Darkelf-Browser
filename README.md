@@ -11,7 +11,10 @@
 
 - Darkelf Player is in Progress!
 
-- X25519 + Kyber768 Hybrid Post Quantum Encryption: Wait for Updated Release! It is fast and Smooth! Both updates will have Tor Integrated - It is ready and fast! Has Rust Hybrid Implemented.
+- X25519 + Kyber768 Hybrid Post Quantum Encryption: Wait for Updated Release! It is fast and Smooth! Both updates will have Tor Integrated
+- Standalone Kyber768/1024 Editions Ready!
+  
+- It is ready and fast! Has Rust Hybrid Implemented.
 
 Enhancements for Darkelf Browser – UI Upgrade & Performance Boost
 
@@ -76,6 +79,7 @@ We welcome community feedback and contributions to enhance the security of Darke
 
 ## Table of Contents
 - [EULA](EULA.md)
+- [Anti-Forensics](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Anti-Forensics.md)
 - [Attribution](Attribution.md)
 - [BrowserAudit](BrowserAudit.md)
 - [Encryption](Encryption.md)
