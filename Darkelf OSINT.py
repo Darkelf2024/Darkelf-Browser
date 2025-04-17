@@ -1174,69 +1174,107 @@ class Darkelf(QMainWindow):
         os_type = platform.system()
         try:
             if os_type == "Linux":
-                # Use absolute paths for executables
-                subprocess.run(["/usr/bin/sudo", "/sbin/swapoff", "-a"], check=True, shell=False)
+                sudo_path = shutil.which("sudo") or "/usr/bin/sudo"
+                swapoff_path = shutil.which("swapoff") or "/sbin/swapoff"
+                subprocess.run([sudo_path, swapoff_path, "-a"], check=True, shell=False)
                 with open('/proc/sys/vm/swappiness', 'w') as f:
                     f.write("0")
             elif os_type == "Windows":
-                # Use PowerShell command to disable memory compression
-                subprocess.run(["C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-                                "-Command", "Disable-MMAgent -MemoryCompression"], check=True, shell=False)
+                powershell_path = shutil.which("powershell.exe") or "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+                subprocess.run([powershell_path, "-Command", "Disable-MMAgent -MemoryCompression"], check=True, shell=False)
             elif os_type == "Darwin":  # macOS
-                # Unload the macOS dynamic pager
-                subprocess.run(["/usr/bin/sudo", "/bin/launchctl", "unload", "-w",
+                sudo_path = shutil.which("sudo") or "/usr/bin/sudo"
+                launchctl_path = shutil.which("launchctl") or "/bin/launchctl"
+                subprocess.run([sudo_path, launchctl_path, "unload", "-w",
                                 "/System/Library/LaunchDaemons/com.apple.dynamic_pager.plist"], check=True, shell=False)
             else:
                 print(f"[-] Unsupported OS type: {os_type}")
                 return
             print("[+] Swap memory disabled successfully.")
-        except FileNotFoundError as fnf_error:
-            print(f"[-] Command not found: {fnf_error}")
+        except FileNotFoundError:
+            print("[-] Command not found. Ensure required tools are installed.")
+        except subprocess.CalledProcessError as e:
+            print(f"[-] Command failed with error: {e}")
         except PermissionError:
             print("[-] Permission denied. Please run as an administrator or use sudo.")
         except Exception as e:
             print(f"[-] Failed to disable swap due to: {e}")
 
     def start_forensic_tool_monitor(self):
-        """Start monitoring for forensic tools."""
-        self.monitor_timer = QTimer(self)
+        """Start monitoring for forensic and debugging tools."""
+        self.monitor_timer = QTimer()
         self.monitor_timer.timeout.connect(self.check_for_forensic_tools)
-        self.monitor_timer.start(5000)  # Check every 5 seconds
+        interval = 5000 + secrets.randbelow(1000)  # Randomize interval slightly
+        self.monitor_timer.start(interval)  # Check every 5-6 seconds
 
     def check_for_forensic_tools(self):
-        """Check for forensic tools and self-destruct if found."""
-        # Extended list of forensic tools (as of 2025)
+        """
+        Check for forensic and debugging tools and self-destruct if found.
+
+        NOTE: Users can modify this list or logic to include other anti-forensics measures
+              tailored to their specific requirements.
+        """
         forensic_tools = [
+            # Forensic tools
             "wireshark", "volatility", "autopsy", "tcpdump", "sysinternals", "processhacker",
             "networkminer", "bulk_extractor", "sleuthkit", "xplico", "oxygen", "magnetaxiom",
             "chainsaw", "cape", "redline", "dumpzilla", "mftdump", "regshot", "nkprocmgr",
             "cyberchef", "prodiscover", "xways", "hexeditor", "binwalk", "foremost",
-            "regripper", "plaso", "timesketch", "arkime"
+            "regripper", "plaso", "timesketch", "arkime",
+            # Debugging tools
+            "gdb", "lldb", "ida", "ollydbg", "windbg", "radare2", "x64dbg", "immunitydebugger",
+            "debugdiag", "strace", "ltrace"
         ]
+        
         try:
             for process in psutil.process_iter(['name']):
                 for tool in forensic_tools:
                     if tool.lower() in process.info['name'].lower():
-                        print(f"[!] Forensic tool detected: {process.info['name']}")
+                        print(f"[!] Forensic or debugging tool detected: {process.info['name']}")
                         self.self_destruct()
         except Exception as e:
             print(f"[-] Error during forensic tool monitoring: {e}")
 
     def self_destruct(self):
-        """Trigger self-destruct sequence."""
-        print("[!] Forensic tool detected. Triggering self-destruct...")
-        # Clear sensitive files
+        """
+        Trigger self-destruct sequence.
+
+        NOTE: Users can enhance or modify this method to include additional
+              anti-forensics measures such as clearing memory, overwriting logs, or
+              other security-related actions.
+        """
+        print("[!] Forensic or debugging tool detected. Triggering self-destruct...")
+
+        # Securely delete sensitive files
         sensitive_files = ["private_key.pem", "ecdh_private_key.pem"]
         for file in sensitive_files:
             try:
                 if os.path.exists(file):
-                    os.remove(file)
+                    self.secure_delete(file)
                     print(f"[+] Securely deleted: {file}")
             except Exception as e:
                 print(f"[-] Failed to delete {file}: {e}")
 
         # Exit the application
         os._exit(1)
+
+    def secure_delete(self, file_path):
+        """
+        Securely delete a file by overwriting its contents.
+
+        NOTE: Users can modify the overwrite count or integrate advanced secure deletion
+              tools for enhanced anti-forensics.
+        """
+        try:
+            with open(file_path, "ba+", buffering=0) as f:
+                length = f.tell()
+                overwrite_count = 7  # DoD 5220.22-M standard
+                for _ in range(overwrite_count):
+                    f.seek(0)
+                    f.write(secrets.token_bytes(length))
+            os.remove(file_path)  # Delete the file after overwriting
+        except Exception as e:
+            print(f"[-] Failed to securely delete {file_path}: {e}")
         
     def init_settings(self):
         self.settings = QSettings("DarkelfBrowser", "Darkelf")
