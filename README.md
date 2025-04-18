@@ -81,7 +81,6 @@ We welcome community feedback and contributions to enhance the security of Darke
 - [EULA](EULA.md)
 - [Anti-Forensics](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Anti-Forensics.md)
 - [Attribution](Attribution.md)
-- [BrowserAudit](BrowserAudit.md)
 - [Encryption](Encryption.md)
 - [Overview](Overview.md)
 - [QSettings](QSettings.md)
