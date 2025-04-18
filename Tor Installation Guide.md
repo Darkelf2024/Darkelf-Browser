@@ -189,7 +189,7 @@ For Windows:
 
 #### Configuration for macOS and Linux:
 
-1. Locate the Tor configuration file. Typically, this is found at `/usr/local/etc/tor/torrc` or `/opt/homebrew/etc/tor/torrc` (for Homebrew installation).
+1. Locate the Tor configuration file. Typically, this is found at `/usr/local/etc/tor/torrc` or `sudo nano /opt/homebrew/etc/tor/torrc` (for Homebrew installation).
 2. Open the `torrc` file in a text editor with administrative privileges:
    ```bash
    sudo nano /usr/local/etc/tor/torrc
