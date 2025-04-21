@@ -1260,9 +1260,15 @@ class Darkelf(QMainWindow):
     def _is_hypervisor_present(self):
         """Check for hypervisor in CPU info."""
         try:
-            cpu_info = subprocess.getoutput("lscpu")
+            # Use subprocess without a shell to run the command securely
+            result = subprocess.run(["lscpu"], capture_output=True, text=True, check=True)
+            cpu_info = result.stdout
             return "hypervisor" in cpu_info.lower()
+        except subprocess.CalledProcessError:
+            # Handle cases where the lscpu command fails
+            return False
         except Exception:
+            # Catch any other exceptions
             return False
 
 
