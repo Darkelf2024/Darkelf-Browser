@@ -8,6 +8,8 @@ The following versions of Darkelf Browser receive security updates:
 |-----------------|-------------|
 | DE Extreme 3.0   | ✅         |
 | DE OSINT 3.0     | ✅         |
+| DE OSINT STEALTH | ✅         |
+| DE OSINT TL      | ✅         |
 
 ## Reporting a Vulnerability
 
