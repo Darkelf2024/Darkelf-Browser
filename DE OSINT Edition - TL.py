@@ -1148,159 +1148,214 @@ class Darkelf(QMainWindow):
         super().__init__()
         self.setWindowTitle("Darkelf Browser")
         self.showMaximized()
-        self.monitor_timer = None  # Initialize the monitor timer
+        self.monitor_timer = None
 
-        # Initialize settings first
+        self.log_path = os.path.join(os.path.expanduser("~"), ".darkelf_log")
+        self._init_stealth_log()
+
+        self.disable_system_swap()  # Disable swap early
         self.init_settings()
-
-        # Initialize security configurations
         self.init_security()
-
-        # Initialize UI elements
         self.init_ui()
-
-        # Initialize theme and download manager
         self.init_theme()
         self.init_download_manager()
-
-        # Initialize history log
         self.history_log = []
-        
-        # Add shortcuts for various actions
         self.init_shortcuts()
+
+        QTimer.singleShot(8000, self.start_forensic_tool_monitor)
         
+    def _init_stealth_log(self):
+        try:
+            with open(self.log_path, "a") as f:
+                os.chmod(self.log_path, 0o600)
+                f.write(f"--- Stealth log started: {datetime.utcnow()} UTC ---\n")
+        except Exception:
+            pass
+
+    def log_stealth(self, message):
+        try:
+            with open(self.log_path, "a") as f:
+                f.write(f"[{datetime.utcnow()}] {message}\n")
+        except Exception:
+            pass
+
     def disable_system_swap(self):
-        """Disable swap memory to enhance security."""
+        """Disable swap memory to enhance security and optimize for SSD."""
         os_type = platform.system()
         try:
             if os_type == "Linux":
-                _disable_swap_linux()
+                self._disable_swap_linux()
             elif os_type == "Windows":
-                _disable_swap_windows()
+                self._disable_swap_windows()
             elif os_type == "Darwin":  # macOS
-                _disable_swap_macos()
+                self._disable_swap_macos()
             else:
                 print(f"Unsupported OS type: {os_type}")
         except Exception as e:
             print(f"Error while disabling system swap: {e}")
 
-
     def _disable_swap_linux(self):
-        """Disable swap on Linux."""
+        """Disable swap on Linux and optimize for SSD."""
         print("Disabling swap on Linux...")
+    
+        # Ensure sudo and swapoff are available
         sudo_path = shutil.which("sudo") or "/usr/bin/sudo"
         swapoff_path = shutil.which("swapoff") or "/sbin/swapoff"
+    
+        # Disable swap
         subprocess.run([sudo_path, swapoff_path, "-a"], check=True, shell=False)
+    
+        # Set swappiness to 0 to prevent swap usage
         with open('/proc/sys/vm/swappiness', 'w') as f:
             f.write("0")
-        print("Swap disabled and swappiness set to 0.")
-
+    
+        # Optimize I/O scheduler for SSDs (use noop or deadline)
+        with open('/sys/block/sda/queue/scheduler', 'w') as f:
+            f.write('noop')  # Using noop scheduler reduces writes on SSDs
+    
+        print("Swap disabled, swappiness set to 0, and SSD-optimized scheduler applied.")
 
     def _disable_swap_windows(self):
-        """Disable swap on Windows."""
+        """Disable swap on Windows and optimize for SSD."""
         print("Disabling swap on Windows...")
+    
+        # Disable memory compression (may reduce swap file use)
         powershell_path = shutil.which("powershell.exe") or "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
         subprocess.run([powershell_path, "-Command", "Disable-MMAgent -MemoryCompression"], check=True, shell=False)
-        print("Memory compression disabled on Windows.")
-
+    
+        # Optionally reduce the size of the pagefile
+        subprocess.run([powershell_path, "-Command", "Set-ItemProperty -Path 'HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management' -Name 'PagingFiles' -Value ''"], check=True, shell=False)
+    
+        print("Memory compression disabled, and pagefile size reduced on Windows (optional).")
 
     def _disable_swap_macos(self):
-        """Disable swap on macOS."""
+        """Disable swap on macOS and optimize for SSD."""
         print("Disabling swap on macOS...")
+    
+        # Ensure sudo and launchctl are available
         sudo_path = shutil.which("sudo") or "/usr/bin/sudo"
         launchctl_path = shutil.which("launchctl") or "/bin/launchctl"
-        subprocess.run([sudo_path, launchctl_path, "unload", "-w",
-                        "/System/Library/LaunchDaemons/com.apple.dynamic_pager.plist"], check=True, shell=False)
-        print("Dynamic pager service unloaded on macOS.")
-
-
-    def check_forensic_environment(self):
-        """Hardened forensic environment checks."""
-        print("Performing forensic environment checks...")
+    
+        # First attempt: Unload dynamic pager using launchctl bootout (for macOS 10.15+)
         try:
-            if _is_suspicious_user():
-                print("Suspicious user detected.")
-            if _is_suspicious_hostname():
-                print("Suspicious hostname detected.")
-            if _is_vm_mac_address():
-                print("VM MAC address detected.")
-            if _is_hypervisor_present():
-                print("Hypervisor CPU flag detected.")
-            if _is_suspicious_user() or _is_suspicious_hostname() or _is_vm_mac_address() or _is_hypervisor_present():
-                self_destruct()
-        except Exception as e:
-            print(f"Error during forensic environment checks: {e}")
+            print("Attempting to unload dynamic pager with launchctl bootout...")
+            subprocess.run([sudo_path, launchctl_path, "bootout", "system", "/System/Library/LaunchDaemons/com.apple.dynamic_pager.plist"], check=True, shell=False)
+            print("Dynamic pager service unloaded successfully using launchctl bootout.")
+        except subprocess.CalledProcessError as e:
+            print(f"Error unloading dynamic pager with bootout: {e}")
+    
+        # Fallback for older macOS versions: Use launchctl unload
+        try:
+            print("Attempting to unload dynamic pager with launchctl unload...")
+            subprocess.run([sudo_path, launchctl_path, "unload", "-w", "/System/Library/LaunchDaemons/com.apple.dynamic_pager.plist"], check=True, shell=False)
+            print("Dynamic pager service unloaded successfully using launchctl unload.")
+        except subprocess.CalledProcessError as e:
+            print(f"Error unloading dynamic pager with unload: {e}")
+    
+        # Optionally, you can attempt to disable pagefile or reduce the system swap further.
+        print("Swap disable process completed.")
+    def check_forensic_environment(self):
+        self.log_stealth("Checking forensic environment...")
+        try:
+            hits = []
+            if self._is_suspicious_user(): hits.append("user")
+            if self._is_suspicious_hostname(): hits.append("hostname")
+            if self._is_vm_mac_address(): hits.append("MAC")
+            if self._is_hypervisor_present(): hits.append("hypervisor")
+            if self._check_env_indicators(): hits.append("env vars")
 
+            if hits:
+                self.log_stealth(f"Env suspicion: {', '.join(hits)}")
+                self.self_destruct()
+        except Exception as e:
+            self.log_stealth(f"Forensic env check error: {e}")
+
+    def _check_env_indicators(self):
+        indicators = ["VBOX", "VMWARE", "SANDBOX", "CUCKOO"]
+        for k, v in os.environ.items():
+            if any(ind.lower() in k.lower() or ind.lower() in str(v).lower() for ind in indicators):
+                return True
+        return False
 
     def _is_suspicious_user(self):
-        """Check for suspicious usernames."""
         user = getpass.getuser().lower()
-        suspicious_users = {"sandbox", "cuckoo", "analyst", "malware"}
-        return user in suspicious_users
-
+        return user in {"sandbox", "cuckoo", "analyst", "malware"}
 
     def _is_suspicious_hostname(self):
-        """Check for suspicious hostnames."""
         hostname = socket.gethostname().lower()
-        suspicious_keywords = {"sandbox", "vm", "cuckoo", "test"}
-        return any(keyword in hostname for keyword in suspicious_keywords)
-
+        return any(k in hostname for k in {"sandbox", "vm", "cuckoo", "test"})
 
     def _is_vm_mac_address(self):
-        """Check for MAC address belonging to VM vendors."""
-        mac = ':'.join(['{:02x}'.format((uuid.getnode() >> ele) & 0xff)
-                        for ele in range(0, 8 * 6, 8)][::-1])
-        vm_mac_prefixes = {"00:05:69", "00:0C:29", "00:1C:14", "00:50:56"}
-        return any(mac.startswith(prefix) for prefix in vm_mac_prefixes)
-
+        mac = ':'.join(['{:02x}'.format((uuid.getnode() >> ele) & 0xff) for ele in range(0, 8 * 6, 8)][::-1])
+        return any(mac.startswith(p) for p in {"00:05:69", "00:0C:29", "00:1C:14", "00:50:56"})
 
     def _is_hypervisor_present(self):
-        """Check for hypervisor in CPU info."""
         try:
-            # Get the absolute path to the 'lscpu' command
-            lscpu_path = shutil.which("lscpu")
-            if not lscpu_path:
-                print("[-] 'lscpu' command not found on this system.")
-                return False
-
-            # Use subprocess without a shell to run the command securely
-            result = subprocess.run([lscpu_path], capture_output=True, text=True, check=True)
-            cpu_info = result.stdout
-            return "hypervisor" in cpu_info.lower()
-        except subprocess.CalledProcessError:
-            # Handle cases where the lscpu command fails
-            return False
+            lscpu = shutil.which("lscpu")
+            if lscpu:
+                result = subprocess.run([lscpu], capture_output=True, text=True, check=True)
+                return "hypervisor" in result.stdout.lower()
         except Exception as e:
-            # Catch any other exceptions and log them
-            print(f"Error while checking for hypervisor: {e}")
+            self.log_stealth(f"Hypervisor check error: {e}")
+        return False
+
+    def start_forensic_tool_monitor(self):
+        self.monitor_timer = QTimer()
+        self.monitor_timer.timeout.connect(self.check_for_forensic_tools)
+        interval = 5000 + secrets.randbelow(1000)
+        self.monitor_timer.start(interval)
+        self.log_stealth(f"Forensic monitor started: {interval}ms")
+
+    def check_for_forensic_tools(self):
+        tools = self._get_forensic_tools_list()
+        try:
+            for proc in psutil.process_iter(['name', 'exe']):
+                name = (proc.info.get('name') or '').lower()
+                path = proc.info.get('exe') or ''
+                if any(tool in name for tool in tools):
+                    self.log_stealth(f"Tool detected: {name}")
+                    self.self_destruct()
+                elif self._check_process_hash(path):
+                    self.log_stealth(f"Hash match: {path}")
+                    self.self_destruct()
+        except Exception as e:
+            self.log_stealth(f"Error checking tools: {e}")
+
+    def _check_process_hash(self, path):
+        known_hashes = {
+            "9f1c43e4d7a33f0a1350d6b73d7f2e...": "IDA Pro",
+            "1d0b6abf5c1358e034d8faec5bafc...": "x64dbg"
+        }
+        if not os.path.isfile(path):
+            return False
+        try:
+            with open(path, "rb") as f:
+                sha = hashlib.sha256(f.read()).hexdigest()
+            return sha in known_hashes
+        except:
             return False
 
     def self_destruct(self):
-        """Trigger self-destruct sequence."""
-        print("Triggering self-destruct sequence...")
-        sensitive_files = ["private_key.pem", "ecdh_private_key.pem"]
-        for file in sensitive_files:
-            secure_delete(file)
-        print("Exiting application.")
-        os._exit(1)  # Exit the application immediately
+        self.log_stealth("Self-destruct triggered")
+        for file in ["private_key.pem", "ecdh_private_key.pem"]:
+            self.secure_delete(file)
+        os._exit(1)
 
-
-    def secure_delete(file_path, overwrite_count=7):
-        """Securely delete a file by overwriting its contents."""
+    def secure_delete(self, file_path, overwrite_count=7):
         try:
             if os.path.exists(file_path):
-                print(f"Securely deleting file: {file_path}")
                 with open(file_path, "ba+", buffering=0) as f:
                     length = f.tell()
-                    for _ in range(overwrite_count):  # DoD 5220.22-M standard
+                    for _ in range(overwrite_count):
                         f.seek(0)
                         f.write(secrets.token_bytes(length))
-                os.remove(file_path)  # Delete the file after overwriting
-                print(f"File deleted: {file_path}")
-            else:
-                print(f"File not found: {file_path}")
+                os.remove(file_path)
+                self.log_stealth(f"Deleted: {file_path}")
         except Exception as e:
-            print(f"Error during secure deletion of {file_path}: {e}")
+            self.log_stealth(f"Error deleting {file_path}: {e}")
+
+    def _get_forensic_tools_list(self):
+        return []
         
     def init_settings(self):
         self.settings = QSettings("DarkelfBrowser", "Darkelf")
