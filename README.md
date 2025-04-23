@@ -93,7 +93,8 @@ For a full list, see [Contributors](https://github.com/Darkelf2024/Darkelf-Brows
 ## 🛡️ **Community & Feedback**  
 We value your input!  
 - **[Open an Issue](https://github.com/Darkelf2024/Darkelf-Browser/issues)** for bug reports or feature requests.  
-- Join us on [Discord](https://discord.gg/czAb2c2T) to contribute ideas.  
+- Join us on [Discord](https://discord.gg/czAb2c2T) to contribute ideas.
+- Join Our Discord Channel for further Walthrough/Visuals for Guidance with Darkelf Browser.
 
 ---
 
