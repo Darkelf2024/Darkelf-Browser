@@ -8,7 +8,7 @@
 - **Forensic-Resistant Sessions**: RAM-only storage ensures no data persists after shutdown.  
 - **Sandboxing**: Isolate processes to prevent unauthorized access.  
 - **Anti-Fingerprinting**: Blocks canvas/WebGL fingerprinting, spoofs user agents, and hides hardware details.  
-- **Quantum Encryption**: Post-quantum hybrid encryption with Kyber768/1024 + X25519 and standalone editions for future-proof security.  
+- **Quantum Encryption**: Post-quantum hybrid encryption with Kyber768/1024 + X25519 and standalone editions for future-proof security. (Waiting Release)  
 
 ### 🛡️ **Advanced Security Measures**  
 - **Custom Ad Blocker**: Blocks domains, trackers, and dynamic ads.  
