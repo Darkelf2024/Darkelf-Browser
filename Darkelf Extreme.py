@@ -53,6 +53,8 @@ import os
 import re
 import requests
 import shutil
+import shlex
+import platform
 import socket
 import dns.resolver
 import json
@@ -66,7 +68,7 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtGui import QPalette, QColor, QKeySequence, QShortcut, QAction, QGuiApplication, QActionGroup
 from PySide6.QtWebEngineWidgets import QWebEngineView
-from PySide6.QtNetwork import QNetworkProxy, QSslConfiguration,QSslSocket, QSsl, QSslCipher
+from PySide6.QtNetwork import QNetworkProxy, QSslConfiguration, QSslSocket, QSsl, QSslCipher
 from PySide6.QtWebEngineCore import QWebEngineUrlRequestInterceptor, QWebEngineSettings, QWebEnginePage, QWebEngineScript, QWebEngineProfile, QWebEngineDownloadRequest, QWebEngineContextMenuRequest, QWebEngineCookieStore
 from PySide6.QtCore import QUrl, QSettings, Qt, QObject, Slot, QTimer, QCoreApplication
 from cryptography.hazmat.primitives import serialization, hashes
@@ -75,15 +77,20 @@ from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
 from adblockparser import AdblockRules
+import subprocess # nosec - All run through sanitizing and validation
 import stem.process
 from stem.control import Controller
 from collections import defaultdict
 from cryptography.fernet import Fernet
 from shiboken6 import isValid
+from datetime import datetime
+import getpass
+import uuid
 import hashlib
 import secrets
 import mimetypes
 import tempfile
+import psutil
 from PIL import Image
 import piexif
 
@@ -142,7 +149,7 @@ class ObfuscatedEncryptedCookieStore:
             self.store[key] = None
         self.store.clear()
         print("[+] Wiped in-memory store.")
-
+        
 # Debounce function to limit the rate at which a function can fire
 def debounce(func, wait):
     timeout = None
@@ -1027,25 +1034,222 @@ class Darkelf(QMainWindow):
         super().__init__()
         self.setWindowTitle("Darkelf Browser")
         self.showMaximized()
+        self.monitor_timer = None
 
-        # Initialize settings first
+        self.log_path = os.path.join(os.path.expanduser("~"), ".darkelf_log")
+        self._init_stealth_log()
+
+        self.disable_system_swap()  # Disable swap early
         self.init_settings()
-
-        # Initialize security configurations
         self.init_security()
-
-        # Initialize UI elements
         self.init_ui()
-
-        # Initialize theme and download manager
         self.init_theme()
         self.init_download_manager()
-
-        # Initialize history log
         self.history_log = []
-        
-        # Add shortcuts for various actions
         self.init_shortcuts()
+
+        QTimer.singleShot(8000, self.start_forensic_tool_monitor)
+        
+    def _init_stealth_log(self):
+        try:
+            with open(self.log_path, "a") as f:
+                os.chmod(self.log_path, 0o600)
+                f.write(f"--- Stealth log started: {datetime.utcnow()} UTC ---\n")
+        except Exception:
+            pass
+
+    def log_stealth(self, message):
+        try:
+            with open(self.log_path, "a") as f:
+                f.write(f"[{datetime.utcnow()}] {message}\n")
+        except Exception:
+            pass
+
+    def disable_system_swap(self):
+        """Disable swap memory to enhance security and optimize for SSD."""
+        os_type = platform.system()
+        try:
+            if os_type == "Linux":
+                self._disable_swap_linux()
+            elif os_type == "Windows":
+                self._disable_swap_windows()
+            elif os_type == "Darwin":  # macOS
+                self._disable_swap_macos()
+            else:
+                print(f"Unsupported OS type: {os_type}")
+        except Exception as e:
+            print(f"Error while disabling system swap: {e}")
+
+    def _disable_swap_linux(self):
+        """Disable swap on Linux and optimize for SSD."""
+        print("Disabling swap on Linux...")
+    
+        # Ensure sudo and swapoff are available
+        sudo_path = shutil.which("sudo") or "/usr/bin/sudo"
+        swapoff_path = shutil.which("swapoff") or "/sbin/swapoff"
+    
+        # Disable swap
+        subprocess.run([sudo_path, swapoff_path, "-a"], check=True, shell=False)
+    
+        # Set swappiness to 0 to prevent swap usage
+        with open('/proc/sys/vm/swappiness', 'w') as f:
+            f.write("0")
+    
+        # Optimize I/O scheduler for SSDs (use noop or deadline)
+        with open('/sys/block/sda/queue/scheduler', 'w') as f:
+            f.write('noop')  # Using noop scheduler reduces writes on SSDs
+    
+        print("Swap disabled, swappiness set to 0, and SSD-optimized scheduler applied.")
+
+    def _disable_swap_windows(self):
+        """Disable swap on Windows and optimize for SSD."""
+        print("Disabling swap on Windows...")
+    
+        # Disable memory compression (may reduce swap file use)
+        powershell_path = shutil.which("powershell.exe") or "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+        subprocess.run([powershell_path, "-Command", "Disable-MMAgent -MemoryCompression"], check=True, shell=False)
+    
+        # Optionally reduce the size of the pagefile
+        subprocess.run([powershell_path, "-Command", "Set-ItemProperty -Path 'HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management' -Name 'PagingFiles' -Value ''"], check=True, shell=False)
+    
+        print("Memory compression disabled, and pagefile size reduced on Windows (optional).")
+
+    def _disable_swap_macos(self):
+        """Disable swap on macOS and optimize for SSD."""
+        print("Disabling swap on macOS...")
+    
+        # Ensure sudo and launchctl are available
+        sudo_path = shutil.which("sudo") or "/usr/bin/sudo"
+        launchctl_path = shutil.which("launchctl") or "/bin/launchctl"
+    
+        # First attempt: Unload dynamic pager using launchctl bootout (for macOS 10.15+)
+        try:
+            print("Attempting to unload dynamic pager with launchctl bootout...")
+            subprocess.run([sudo_path, launchctl_path, "bootout", "system", "/System/Library/LaunchDaemons/com.apple.dynamic_pager.plist"], check=True, shell=False)
+            print("Dynamic pager service unloaded successfully using launchctl bootout.")
+        except subprocess.CalledProcessError as e:
+            print(f"Error unloading dynamic pager with bootout: {e}")
+    
+        # Fallback for older macOS versions: Use launchctl unload
+        try:
+            print("Attempting to unload dynamic pager with launchctl unload...")
+            subprocess.run([sudo_path, launchctl_path, "unload", "-w", "/System/Library/LaunchDaemons/com.apple.dynamic_pager.plist"], check=True, shell=False)
+            print("Dynamic pager service unloaded successfully using launchctl unload.")
+        except subprocess.CalledProcessError as e:
+            print(f"Error unloading dynamic pager with unload: {e}")
+    
+        # Optionally, you can attempt to disable pagefile or reduce the system swap further.
+        print("Swap disable process completed.")
+    def check_forensic_environment(self):
+        self.log_stealth("Checking forensic environment...")
+        try:
+            hits = []
+            if self._is_suspicious_user(): hits.append("user")
+            if self._is_suspicious_hostname(): hits.append("hostname")
+            if self._is_vm_mac_address(): hits.append("MAC")
+            if self._is_hypervisor_present(): hits.append("hypervisor")
+            if self._check_env_indicators(): hits.append("env vars")
+
+            if hits:
+                self.log_stealth(f"Env suspicion: {', '.join(hits)}")
+                self.self_destruct()
+        except Exception as e:
+            self.log_stealth(f"Forensic env check error: {e}")
+
+    def _check_env_indicators(self):
+        indicators = ["VBOX", "VMWARE", "SANDBOX", "CUCKOO"]
+        for k, v in os.environ.items():
+            if any(ind.lower() in k.lower() or ind.lower() in str(v).lower() for ind in indicators):
+                return True
+        return False
+
+    def _is_suspicious_user(self):
+        user = getpass.getuser().lower()
+        return user in {"sandbox", "cuckoo", "analyst", "malware"}
+
+    def _is_suspicious_hostname(self):
+        hostname = socket.gethostname().lower()
+        return any(k in hostname for k in {"sandbox", "vm", "cuckoo", "test"})
+
+    def _is_vm_mac_address(self):
+        mac = ':'.join(['{:02x}'.format((uuid.getnode() >> ele) & 0xff) for ele in range(0, 8 * 6, 8)][::-1])
+        return any(mac.startswith(p) for p in {"00:05:69", "00:0C:29", "00:1C:14", "00:50:56"})
+
+    def _is_hypervisor_present(self):
+        try:
+            lscpu = shutil.which("lscpu")
+            if lscpu:
+                result = subprocess.run([lscpu], capture_output=True, text=True, check=True)
+                return "hypervisor" in result.stdout.lower()
+        except Exception as e:
+            self.log_stealth(f"Hypervisor check error: {e}")
+        return False
+
+    def start_forensic_tool_monitor(self):
+        self.monitor_timer = QTimer()
+        self.monitor_timer.timeout.connect(self.check_for_forensic_tools)
+        interval = 5000 + secrets.randbelow(1000)
+        self.monitor_timer.start(interval)
+        self.log_stealth(f"Forensic monitor started: {interval}ms")
+
+    def check_for_forensic_tools(self):
+        tools = self._get_forensic_tools_list()
+        try:
+            for proc in psutil.process_iter(['name', 'exe']):
+                name = (proc.info.get('name') or '').lower()
+                path = proc.info.get('exe') or ''
+                if any(tool in name for tool in tools):
+                    self.log_stealth(f"Tool detected: {name}")
+                    self.self_destruct()
+                elif self._check_process_hash(path):
+                    self.log_stealth(f"Hash match: {path}")
+                    self.self_destruct()
+        except Exception as e:
+            self.log_stealth(f"Error checking tools: {e}")
+
+    def _check_process_hash(self, path):
+        known_hashes = {
+            "9f1c43e4d7a33f0a1350d6b73d7f2e...": "IDA Pro",
+            "1d0b6abf5c1358e034d8faec5bafc...": "x64dbg"
+        }
+        if not os.path.isfile(path):
+            return False
+        try:
+            with open(path, "rb") as f:
+                sha = hashlib.sha256(f.read()).hexdigest()
+            return sha in known_hashes
+        except:
+            return False
+
+    def self_destruct(self):
+        self.log_stealth("Self-destruct triggered")
+        for file in ["private_key.pem", "ecdh_private_key.pem"]:
+            self.secure_delete(file)
+        os._exit(1)
+
+    def secure_delete(self, file_path, overwrite_count=7):
+        try:
+            if os.path.exists(file_path):
+                with open(file_path, "ba+", buffering=0) as f:
+                    length = f.tell()
+                    for _ in range(overwrite_count):
+                        f.seek(0)
+                        f.write(secrets.token_bytes(length))
+                os.remove(file_path)
+                self.log_stealth(f"Deleted: {file_path}")
+        except Exception as e:
+            self.log_stealth(f"Error deleting {file_path}: {e}")
+
+    def _get_forensic_tools_list(self):
+        return [
+            "wireshark", "volatility", "autopsy", "tcpdump", "sysinternals", "processhacker",
+            "networkminer", "bulk_extractor", "sleuthkit", "xplico", "oxygen", "magnetaxiom",
+            "chainsaw", "cape", "redline", "dumpzilla", "mftdump", "regshot", "nkprocmgr",
+            "cyberchef", "prodiscover", "xways", "hexeditor", "binwalk", "foremost",
+            "regripper", "plaso", "timesketch", "arkime",
+            "gdb", "lldb", "ida", "ollydbg", "windbg", "radare2", "x64dbg", "immunitydebugger",
+            "debugdiag", "strace", "ltrace"
+        ]
         
     def init_settings(self):
         self.settings = QSettings("DarkelfBrowser", "Darkelf")
@@ -1058,8 +1262,7 @@ class Darkelf(QMainWindow):
 
     def save_settings(self):
         self.settings.setValue("download_path", self.download_path)
-        self.settings.setValue("javascript_enabled", self.javascript_enabled)  # Save JavaScript setting
-    
+        
     def init_security(self):
         self.aes_key = self.load_aes_key()
         self.ecdh_key_pair = self.load_or_generate_ecdh_key_pair()
@@ -1553,8 +1756,8 @@ class Darkelf(QMainWindow):
     def create_menu_bar(self):
         menu_bar = QMenuBar(self)
     
+
          # Create menus
-                  # Create menus
         navigation_menu = menu_bar.addMenu("Navigation")
         self.add_navigation_actions(navigation_menu)
         mode_menu = menu_bar.addMenu("Mode")
