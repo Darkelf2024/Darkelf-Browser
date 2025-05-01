@@ -54,7 +54,7 @@ For more details, refer to the full [Anti-Forensics Documentation](https://githu
 - **Darkelf Extreme Edition**: [Get It Here](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Darkelf%20Extreme.py)  
 - **Darkelf OSINT Stealth Edition**: [Get It Here](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Darkelf%20OSINT%20Stealth.py)
 
-For installation, consult the [Installation Guide](DarkelfInstallationGuide.md).  
+For installation, consult the [Installation Guide](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Darkelf%20Installation.md)
 
 ---
 
