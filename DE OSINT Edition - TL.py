@@ -164,7 +164,8 @@ class NetworkProtector:
             min_jitter (float): Minimum jitter in seconds.
             max_jitter (float): Maximum jitter in seconds.
         """
-        jitter = random.uniform(min_jitter, max_jitter)
+        secure_random = random.SystemRandom()
+        jitter = secure_random.uniform(min_jitter, max_jitter)
         time.sleep(jitter)
         print(f"Added network jitter: {jitter:.2f}s")
 
