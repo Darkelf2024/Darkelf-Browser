@@ -98,7 +98,8 @@ import piexif
 
 def random_delay(min_delay=0.1, max_delay=1.0):
     """Introduce a random delay to confuse forensic analysis."""
-    delay = secrets.uniform(min_delay, max_delay)
+    secure_random = random.SystemRandom()
+    delay = secure_random.uniform(min_delay, max_delay)
     time.sleep(delay)
     print(f"Random delay: {delay:.2f}s")
 
@@ -155,19 +156,19 @@ class ObfuscatedEncryptedCookieStore:
 class NetworkProtector:
     def __init__(self, sock: socket.socket):
         self.sock = sock
+        self.secure_random = random.SystemRandom()
 
-    def add_jitter(self, min_jitter=0.05, max_jitter=0.2):
+    def add_jitter(self, base=0.1, variance=0.1):
         """
         Add random jitter to outgoing network traffic to obfuscate timing patterns.
 
         Args:
-            min_jitter (float): Minimum jitter in seconds.
-            max_jitter (float): Maximum jitter in seconds.
+            base (float): Minimum jitter in seconds.
+            variance (float): Maximum random variation in seconds added to base.
         """
-        secure_random = random.SystemRandom()
-        jitter = secure_random.uniform(min_jitter, max_jitter)
+        jitter = base + self.secure_random.uniform(0, variance)
         time.sleep(jitter)
-        print(f"Added network jitter: {jitter:.2f}s")
+        print(f"[Darkelf] Jitter applied: {jitter:.2f}s")
 
     def send_with_padding(self, data: bytes, padding_size=128):
         """
@@ -177,10 +178,11 @@ class NetworkProtector:
             data (bytes): The data to send.
             padding_size (int): The padding size in bytes.
         """
-        padded_data = data + b"\x00" * (padding_size - len(data) % padding_size)
+        pad_len = (padding_size - len(data) % padding_size) % padding_size
+        padded_data = data + b"\x00" * pad_len
         self.sock.sendall(padded_data)
-        print(f"Sent data with padding (original size: {len(data)}, padded size: {len(padded_data)}).")
-        
+        print(f"[Darkelf] Sent data with padding (original size: {len(data)}, padded size: {len(padded_data)}).")
+  
 # Debounce function to limit the rate at which a function can fire
 def debounce(func, wait):
     timeout = None
@@ -781,12 +783,13 @@ class SecureWebEnginePage(QWebEnginePage):
         print(f"JS [{level}]: {message} (line {lineNumber}) in {sourceID}")
 
     def injectSecurityScripts(self):
-        """Inject JavaScript to block canvas fingerprinting"""
+        """Inject JavaScript to block fingerprinting and WebRTC."""
         script = """
         (function() {
-            let originalToDataURL = HTMLCanvasElement.prototype.toDataURL;
-            let originalToBlob = HTMLCanvasElement.prototype.toBlob;
-            
+            // Canvas Fingerprinting Protection
+            const originalToDataURL = HTMLCanvasElement.prototype.toDataURL;
+            const originalToBlob = HTMLCanvasElement.prototype.toBlob;
+
             HTMLCanvasElement.prototype.toDataURL = function() {
                 console.warn('Blocked Canvas Fingerprinting - toDataURL');
                 return "";
@@ -796,15 +799,9 @@ class SecureWebEnginePage(QWebEnginePage):
                 console.warn('Blocked Canvas Fingerprinting - toBlob');
                 return null;
             };
-        })();
-        """
-        self.runJavaScript(script)
-        
-    def block_webrtc_js():
-        script = """
-        (function() {
-            let OriginalPeerConnection = window.RTCPeerConnection || window.webkitRTCPeerConnection;
-        
+
+            // WebRTC Blocking
+            const OriginalPeerConnection = window.RTCPeerConnection || window.webkitRTCPeerConnection;
             if (OriginalPeerConnection) {
                 window.RTCPeerConnection = function() {
                     console.warn('Blocked WebRTC - RTCPeerConnection');
@@ -814,35 +811,7 @@ class SecureWebEnginePage(QWebEnginePage):
             }
         })();
         """
-        return script
-        
-    def injectSecurityScripts(self):
-        """Inject security scripts to block fingerprinting & WebRTC"""
-        self.runJavaScript("""
-            (function() {
-                let originalToDataURL = HTMLCanvasElement.prototype.toDataURL;
-                let originalToBlob = HTMLCanvasElement.prototype.toBlob;
-            
-                HTMLCanvasElement.prototype.toDataURL = function() {
-                    console.warn('Blocked Canvas Fingerprinting - toDataURL');
-                    return "";
-                };
-
-                HTMLCanvasElement.prototype.toBlob = function() {
-                    console.warn('Blocked Canvas Fingerprinting - toBlob');
-                    return null;
-                };
-
-                let OriginalPeerConnection = window.RTCPeerConnection || window.webkitRTCPeerConnection;
-                if (OriginalPeerConnection) {
-                    window.RTCPeerConnection = function() {
-                        console.warn('Blocked WebRTC - RTCPeerConnection');
-                        return null;
-                    };
-                    window.webkitRTCPeerConnection = window.RTCPeerConnection;
-                }
-            })();
-        """)
+        self.runJavaScript(script)
 
     def protect_fingerprinting(self):
         script = """
@@ -1022,7 +991,7 @@ class CustomWebEngineView(QWebEngineView):
     def __init__(self, browser, parent=None):
         super().__init__(parent)
         self.browser = browser
-        self.setPage(CustomWebEnginePage(self))
+        self.setPage(SecureWebEnginePage(self))
         self.configure_sandbox()
 
     def configure_sandbox(self):
