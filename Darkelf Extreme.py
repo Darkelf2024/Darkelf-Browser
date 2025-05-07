@@ -152,6 +152,34 @@ class ObfuscatedEncryptedCookieStore:
         self.store.clear()
         print("[+] Wiped in-memory store.")
         
+class NetworkProtector:
+    def __init__(self, sock: socket.socket):
+        self.sock = sock
+
+    def add_jitter(self, min_jitter=0.05, max_jitter=0.2):
+        """
+        Add random jitter to outgoing network traffic to obfuscate timing patterns.
+
+        Args:
+            min_jitter (float): Minimum jitter in seconds.
+            max_jitter (float): Maximum jitter in seconds.
+        """
+        jitter = random.uniform(min_jitter, max_jitter)
+        time.sleep(jitter)
+        print(f"Added network jitter: {jitter:.2f}s")
+
+    def send_with_padding(self, data: bytes, padding_size=128):
+        """
+        Add padding to outgoing data to prevent timing analysis of packet size.
+
+        Args:
+            data (bytes): The data to send.
+            padding_size (int): The padding size in bytes.
+        """
+        padded_data = data + b"\x00" * (padding_size - len(data) % padding_size)
+        self.sock.sendall(padded_data)
+        print(f"Sent data with padding (original size: {len(data)}, padded size: {len(padded_data)}).")
+        
 # Debounce function to limit the rate at which a function can fire
 def debounce(func, wait):
     timeout = None
@@ -1040,6 +1068,8 @@ class Darkelf(QMainWindow):
 
         self.log_path = os.path.join(os.path.expanduser("~"), ".darkelf_log")
         self._init_stealth_log()
+        
+        self.load_or_generate_ecdh_key_pair()
 
         self.disable_system_swap()  # Disable swap early
         self.init_settings()
@@ -1225,8 +1255,23 @@ class Darkelf(QMainWindow):
 
     def self_destruct(self):
         self.log_stealth("Self-destruct triggered")
-        for file in ["private_key.pem", "ecdh_private_key.pem"]:
-            self.secure_delete(file)
+    
+        # Delete sensitive files first
+        self.secure_delete("private_key.pem")
+        self.secure_delete("ecdh_private_key.pem")
+
+        # Then delete the log last, but WITHOUT logging that deletion
+        try:
+            if os.path.exists(self.log_path):
+                with open(self.log_path, "ba+", buffering=0) as f:
+                    length = f.tell()
+                    for _ in range(7):
+                        f.seek(0)
+                        f.write(secrets.token_bytes(length))
+                os.remove(self.log_path)
+        except Exception:
+            pass
+
         os._exit(1)
 
     def secure_delete(self, file_path, overwrite_count=7):
@@ -2044,25 +2089,37 @@ class Darkelf(QMainWindow):
         self.settings.setValue("block_media_devices", enabled)
         
     def closeEvent(self, event):
-        """Cleanly shut down the application and auto-destruct."""
+        """Enhanced clean shutdown with anti-forensics measures and secure deletion."""
         try:
+            # Log shutdown activity
+            self.log_stealth("Initiating clean shutdown...")
+
+            # Final forensic environment check
+            self.check_forensic_environment()
+
+            # Stop Tor if running
             if callable(getattr(self, 'stop_tor', None)):
                 self.stop_tor()
 
+            # Wipe memory for encrypted store
             if hasattr(self, 'encrypted_store'):
                 self.encrypted_store.wipe_memory()
 
+            # Save user settings
             self.save_settings()
-            self.clear_cache_and_history()
 
+            # Clear cache and history securely
+            self.secure_clear_cache_and_history()
+
+            # Stop download manager timers
             if hasattr(self, 'download_manager') and hasattr(self.download_manager, 'timers'):
                 for timer in self.download_manager.timers.values():
                     try:
                         timer.stop()
-                    except Exception as t_err:
+                    except Exception:
                         pass
 
-            # Failsafe cleanup of all tab pages
+            # Clean up all tab pages
             if hasattr(self, 'tab_widget'):
                 for i in reversed(range(self.tab_widget.count())):
                     widget = self.tab_widget.widget(i)
@@ -2080,7 +2137,7 @@ class Darkelf(QMainWindow):
                     widget.setParent(None)
                     widget.deleteLater()
 
-            # Standalone views/popups
+            # Clean up standalone views/popups
             if hasattr(self, 'web_views'):
                 for view in self.web_views:
                     try:
@@ -2095,7 +2152,7 @@ class Darkelf(QMainWindow):
                     view.setParent(None)
                     view.deleteLater()
 
-            # Primary web_view
+            # Clean up primary web_view
             if hasattr(self, 'web_view'):
                 try:
                     page = self.web_view.page()
@@ -2109,25 +2166,67 @@ class Darkelf(QMainWindow):
                 self.web_view.setParent(None)
                 self.web_view.deleteLater()
 
+            # Process remaining events
             QApplication.processEvents()
             QApplication.processEvents()
 
-            if hasattr(self, 'web_profile'):
-                if self.web_profile:
-                    QTimer.singleShot(5000, lambda: self.web_profile.deleteLater())
-                else:
-                    pass
-            else:
-                pass
+            # Delete web profile
+            if hasattr(self, 'web_profile') and self.web_profile:
+                QTimer.singleShot(5000, lambda: self.web_profile.deleteLater())
 
+            # Securely delete temporary files
             temp_subdir = os.path.join(tempfile.gettempdir(), "darkelf_temp")
             if os.path.exists(temp_subdir):
-                shutil.rmtree(temp_subdir, ignore_errors=True)
+                self.secure_delete_directory(temp_subdir)
+
+            # Securely delete stealth log
+            log_file_path = os.path.expanduser("~/.darkelf_log")
+            if os.path.exists(log_file_path):
+                self.secure_delete(log_file_path)
 
         except Exception as e:
-            pass
+            self.log_stealth(f"Error during shutdown: {e}")
         finally:
+            self.log_stealth("Shutdown complete.")
             super().closeEvent(event)
+
+    def secure_clear_cache_and_history(self):
+        """Securely clear cache and history."""
+        try:
+            self.log_stealth("Clearing cache and history securely...")
+            # Clear cache directory securely
+            cache_dir = os.path.join(tempfile.gettempdir(), "darkelf_cache")
+            if os.path.exists(cache_dir):
+                self.secure_delete_directory(cache_dir)
+        except Exception as e:
+            self.log_stealth(f"Error clearing cache and history: {e}")
+
+    def secure_delete_directory(self, directory_path):
+        """Securely delete a directory and its contents."""
+        try:
+            for root, dirs, files in os.walk(directory_path, topdown=False):
+                for name in files:
+                    file_path = os.path.join(root, name)
+                    self.secure_delete(file_path)
+                for name in dirs:
+                    os.rmdir(os.path.join(root, name))
+            os.rmdir(directory_path)
+            self.log_stealth(f"Securely deleted directory: {directory_path}")
+        except Exception as e:
+            self.log_stealth(f"Error deleting directory {directory_path}: {e}")
+
+    def secure_delete(self, file_path, overwrite_count=7):
+        try:
+            if os.path.exists(file_path):
+                with open(file_path, "ba+", buffering=0) as f:
+                    length = f.tell()
+                    for _ in range(overwrite_count):
+                        f.seek(0)
+                        f.write(secrets.token_bytes(length))
+                os.remove(file_path)
+                self.log_stealth(f"Deleted: {file_path}")
+        except Exception as e:
+            self.log_stealth(f"Error deleting {file_path}: {e}")
 
     def handle_download(self, download_item):
         self.download_manager.handle_download(download_item)
