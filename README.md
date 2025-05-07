@@ -18,15 +18,29 @@
 - **Automatic Cookie & Cache Clearing**: Clears browsing data on exit.
 
 ### 🔍 **Anti-Forensics Capabilities**  
+# Darkelf Browser: Robust Anti-Forensics Measures for Privacy and Security
+
 Darkelf Browser incorporates robust anti-forensics measures to ensure maximum privacy and security:
-1. **Forensic Tool Detection**: Monitors for tools like `wireshark`, `volatility`, and `ollydbg`, triggering a **self-destruct sequence** to prevent analysis.  
-2. **Self-Destruct Sequence**: Securely deletes sensitive files with **7-pass overwrites** (DoD 5220.22-M standards).  
-3. **Disable Swap Memory**: Prevents sensitive data from being written to disk by disabling system swap (Linux, macOS, Windows).  
-4. **Secure File Deletion**: Implements multi-pass overwriting for permanent file removal.  
-5. **Encrypted & Obfuscated Cookie Management**: Uses **SHA-256 hashing** and `Fernet` cipher to secure cookies.  
-6. **Memory Wiping**: Clears sensitive in-memory data securely during app shutdown.  
-7. **Dynamic Path Resolution & Randomized Monitoring**: Improves stealth and introduces unpredictable intervals for forensic tool detection.  
-8. **Auto-Destruct on Exit**: Shuts down Tor services and wipes all session data during browser termination.  
+
+- **Forensic Tool Detection**: Monitors for tools like Wireshark, Volatility, and Ollydbg, triggering a self-destruct sequence to prevent analysis.
+- **Self-Destruct Sequence**: Securely deletes sensitive files with 7-pass overwrites (DoD 5220.22-M standards).
+- **Disable Swap Memory**: Prevents sensitive data from being written to disk by disabling system swap (Linux, macOS, Windows).
+- **Secure File Deletion**: Implements multi-pass overwriting for permanent file removal.
+- **Encrypted & Obfuscated Cookie Management**: Uses SHA-256 hashing and Fernet cipher to secure cookies.
+- **Memory Wiping**: Clears sensitive in-memory data securely during app shutdown.
+- **Dynamic Path Resolution & Randomized Monitoring**: Improves stealth and introduces unpredictable intervals for forensic tool detection.
+- **Auto-Destruct on Exit**: Shuts down Tor services and wipes all session data during browser termination.
+
+### Additional Highlights
+
+- **Stealth Log Integration**: Tracks suspicious activities, such as forensic tool detections or anomalies in the environment, and stores logs securely with strict permissions. Stealth logs are securely deleted during shutdown or self-destruction.
+- **Network Protection**: Introduces randomized delays (jitter) and data padding to obscure network communication patterns, making traffic analysis more difficult. Data is transmitted securely and obfuscated.
+- **Tor Obfuscation**: Encrypts and pads messages sent through the Tor SOCKS proxy to prevent traffic analysis. Randomized intervals and dynamic path resolution further enhance stealth.
+- **Advanced Anti-Fingerprinting**: Blocks tracking methods like Canvas API, WebGL, and WebRTC, and spoofs browser characteristics such as screen resolution, hardware concurrency, and timezone.
+- **Metadata Stripping**: Strips metadata from downloaded files, including images (JPEG, PNG) and PDFs, to ensure no identifiable traces are left behind.
+- **Custom Chromium Flags**: Configures Chromium with enhanced privacy settings, including disabling WebRTC, WebGL, speculative connections, and third-party cookies, while enforcing incognito mode by default.
+- **Quantum-Resistant Encryption**: Leverages advanced cryptographic protocols like ChaCha20, AES-GCM, RSA, and ECDH. Certain editions implement post-quantum algorithms (e.g., Kyber768/1024).
+- **Comprehensive Sandboxing**: Disables local storage, IndexedDB, and other persistent storage mechanisms. Enforces strict XSS auditing and blocks insecure content.
 
 For more details, refer to the full [Anti-Forensics Documentation](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Anti-Forensics.md).
 
