@@ -18,7 +18,7 @@
 - **Automatic Cookie & Cache Clearing**: Clears browsing data on exit.
 
 ### 🔍 **Anti-Forensics Capabilities**  
-# Darkelf Browser: Robust Anti-Forensics Measures for Privacy and Security
+### Darkelf Browser: Robust Anti-Forensics Measures for Privacy and Security
 
 Darkelf Browser incorporates robust anti-forensics measures to ensure maximum privacy and security:
 
