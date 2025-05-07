@@ -1173,6 +1173,7 @@ class WebsiteBlockDetector:
     def switch_node(self):
         # Implement logic to switch Tor node
         print("Switching Tor node...")
+        
 class Darkelf(QMainWindow):
     def __init__(self):
         super().__init__()
