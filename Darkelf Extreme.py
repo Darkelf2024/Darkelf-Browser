@@ -2356,7 +2356,7 @@ def main():
         "--disable-features=Canvas2DImageChromium,WebGLImageChromium "
         "--disable-reading-from-canvas "
         "--disable-offscreen-canvas "
-        "--use-angle=none"
+        "--use-angle=none "
         "--disable-extensions "
         "--disable-sync "
         "--disable-translate "
