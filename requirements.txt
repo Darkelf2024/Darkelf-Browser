@@ -7,11 +7,13 @@ Pillow==11.2.1
 PySide6==6.9.0
 PySide6_Addons==6.9.0
 PySide6_Essentials==6.9.0
-PyQt6-WebEngine==6.9.0 # Fail Safe/Fallback
-QtPy==2.4.3 #Fail Safe/Fallback
+PyQt6-WebEngine==6.9.0  # Fail Safe/Fallback
+QtPy==2.4.3  # Fail Safe/Fallback
 requests==2.32.3
 shiboken6==6.9.0
 stem==1.8.2
+httpx==0.27.0
+
 
 # Packages need to be maintained and upgraded to the latest
 # If you receive a "Name/NoModule Error = It means "pip install that particular missing package"
