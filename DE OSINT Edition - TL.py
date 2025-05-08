@@ -67,7 +67,6 @@ import dns.resolver
 import json
 import logging
 import time
-import crypto_rust
 from concurrent.futures import ThreadPoolExecutor
 from urllib.parse import urlparse
 from base64 import urlsafe_b64encode, urlsafe_b64decode
