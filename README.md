@@ -4,7 +4,8 @@
 ## 🌟 Key Features  
 ### 🔒 **Privacy and Security**
 - **Tor Integration**: Anonymize all browsing with native Tor network support, including `.onion` sites.
-- **Tor DNS Resolver**: Protect against trackers, ads, and phishing at the DNS level.  
+- **Tor DNS Resolver**: Protect against trackers, ads, and phishing at the DNS level.
+- **DoH/DoT Fallback**: Automatically route DNS over HTTPS (DoH) and DNS over TLS (DoT) through Cloudflare when Tor is unavailable — preserving privacy and security.
 - **Forensic-Resistant Sessions**: RAM-only storage ensures no data persists after shutdown.  
 - **Sandboxing**: Isolate processes to prevent unauthorized access.  
 - **Anti-Fingerprinting**: Blocks canvas/WebGL fingerprinting, spoofs user agents, and hides hardware details.  
