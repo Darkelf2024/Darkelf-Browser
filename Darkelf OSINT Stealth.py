@@ -57,6 +57,9 @@ import requests
 import shutil
 import shlex
 import platform
+import dns.query
+import dns.message
+import dns.rdatatype
 import socket
 import dns.resolver
 import json
@@ -72,7 +75,7 @@ from PySide6.QtGui import QPalette, QColor, QKeySequence, QShortcut, QAction, QG
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtNetwork import QNetworkProxy, QSslConfiguration, QSslSocket, QSsl, QSslCipher
 from PySide6.QtWebEngineCore import QWebEngineUrlRequestInterceptor, QWebEngineSettings, QWebEnginePage, QWebEngineScript, QWebEngineProfile, QWebEngineDownloadRequest, QWebEngineContextMenuRequest, QWebEngineCookieStore
-from PySide6.QtCore import QUrl, QSettings, Qt, QObject, Slot, QTimer, QCoreApplication
+from PySide6.QtCore import QUrl, QSettings, Qt, QObject, Slot, QTimer, QCoreApplication, Signal, QThread
 from cryptography.hazmat.primitives import serialization, hashes
 from cryptography.hazmat.primitives.asymmetric import x25519, rsa, padding
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
@@ -154,23 +157,35 @@ class ObfuscatedEncryptedCookieStore:
         print("[+] Wiped in-memory store.")
         
 class NetworkProtector:
-    def __init__(self, sock):
+    def __init__(self, sock: socket.socket):
         self.sock = sock
         self.secure_random = random.SystemRandom()
 
-    def add_jitter(self, min_delay=0.05, max_delay=0.3):
-        jitter = self.secure_random.uniform(min_delay, max_delay)
+    def add_jitter(self, base=0.1, variance=0.1):
+        """
+        Add random jitter to outgoing network traffic to obfuscate timing patterns.
+
+        Args:
+            base (float): Minimum jitter in seconds.
+            variance (float): Maximum random variation in seconds added to base.
+        """
+        jitter = base + self.secure_random.uniform(0, variance)
         time.sleep(jitter)
-        print(f"[Darkelf] Jitter applied: {jitter:.3f}s")
+        print(f"[Darkelf] Jitter applied: {jitter:.2f}s")
 
-    def send_with_padding(self, data: bytes, min_padding=128, max_padding=256):
-        target_size = max(len(data), self.secure_random.randint(min_padding, max_padding))
-        pad_len = target_size - len(data)
-        padding = os.urandom(pad_len)
-        padded_data = data + padding
+    def send_with_padding(self, data: bytes, padding_size=128):
+        """
+        Add padding to outgoing data to prevent timing analysis of packet size.
+
+        Args:
+            data (bytes): The data to send.
+            padding_size (int): The padding size in bytes.
+        """
+        pad_len = (padding_size - len(data) % padding_size) % padding_size
+        padded_data = data + b"\x00" * pad_len
         self.sock.sendall(padded_data)
-        print(f"[Darkelf] Sent padded data (original: {len(data)}, padded: {len(padded_data)}, pad: {pad_len})")
-
+        print(f"[Darkelf] Sent data with padding (original size: {len(data)}, padded size: {len(padded_data)}).")
+        
 # Debounce function to limit the rate at which a function can fire
 def debounce(func, wait):
     timeout = None
@@ -1102,7 +1117,6 @@ class TorManager:
 
     def close(self):
         self.stop_tor()
-        super().close()
 
     def switch_node(self):
         try:
@@ -1132,6 +1146,58 @@ class WebsiteBlockDetector:
     def switch_node(self):
         # Implement logic to switch Tor node
         print("Switching Tor node...")
+        
+class DoHResolverWorker(QThread):
+    result_ready = Signal(str)
+    error = Signal(str)
+
+    def __init__(self, domain: str, record_type: str = "A"):
+        super().__init__()
+        self.domain = domain
+        self.record_type = record_type.upper()
+
+    def run(self):
+        try:
+            result = asyncio.run(self._resolve_doh(self.domain, self.record_type))
+            self.result_ready.emit(result)
+        except Exception as e:
+            self.error.emit(f"DoH DNS Resolution Failed: {str(e)}")
+
+    async def _resolve_doh(self, domain: str, record_type: str) -> str:
+        url = "https://cloudflare-dns.com/dns-query"
+        headers = {"accept": "application/dns-json"}
+        params = {"name": domain, "type": record_type}
+
+        async with httpx.AsyncClient(timeout=10) as client:
+            response = await client.get(url, headers=headers, params=params)
+            response.raise_for_status()
+            data = response.json()
+            answers = data.get("Answer", [])
+            records = [a["data"] for a in answers if str(a.get("type")) == self._dns_type_to_code(record_type)]
+            return ", ".join(records) if records else "No matching DNS records found."
+
+    def _dns_type_to_code(self, record_type: str) -> str:
+        dns_type_map = {"A": "1", "AAAA": "28", "CNAME": "5", "MX": "15", "TXT": "16", "NS": "2"}
+        return dns_type_map.get(record_type.upper(), "1")
+
+class DoTResolverWorker(QThread):
+    result_ready = Signal(str)
+    error = Signal(str)
+
+    def __init__(self, domain: str, record_type: str = "A"):
+        super().__init__()
+        self.domain = domain
+        self.record_type = record_type.upper()
+
+    def run(self):
+        try:
+            query = dns.message.make_query(self.domain, self.record_type)
+            response = dns.query.tls(query, "1.1.1.1", timeout=5)
+            records = [r.to_text() for r in response.answer[0]] if response.answer else []
+            result = ", ".join(records) if records else "No matching DNS records found."
+            self.result_ready.emit(result)
+        except Exception as e:
+            self.error.emit(f"DoT DNS Resolution Failed: {str(e)}")
 
 class Darkelf(QMainWindow):
     def __init__(self):
@@ -1156,6 +1222,14 @@ class Darkelf(QMainWindow):
 
         QTimer.singleShot(8000, self.start_forensic_tool_monitor)
         
+        # Fallback DNS resolution only if Tor is not working
+        if self.tor_connection_failed():
+            self.log_stealth("Tor unavailable — using DoH/DoT fallback")
+            self.resolve_domain_doh("cloudflare.com", "A")
+            self.resolve_domain_dot("cloudflare.com", "A")
+        else:
+            self.log_stealth("Tor active — fallback not triggered")
+            
     def _init_stealth_log(self):
         try:
             with open(self.log_path, "a") as f:
@@ -1170,6 +1244,39 @@ class Darkelf(QMainWindow):
                 f.write(f"[{datetime.utcnow()}] {message}\n")
         except Exception:
             pass
+            
+    def tor_connection_failed(self) -> bool:
+        try:
+            if not getattr(self, "tor_network_enabled", False):
+                return True
+            with socket.create_connection(("127.0.0.1", 9052), timeout=3):
+                return False
+        except Exception:
+            return True
+
+    def resolve_domain_doh(self, domain: str, record_type: str = "A"):
+        self.doh_worker = DoHResolverWorker(domain, record_type)
+        self.doh_worker.result_ready.connect(self.handle_doh_result)
+        self.doh_worker.error.connect(self.handle_doh_error)
+        self.doh_worker.start()
+
+    def handle_doh_result(self, result: str):
+        self.log_stealth(f"DoH Success: {result}")
+
+    def handle_doh_error(self, error_msg: str):
+        self.log_stealth(f"DoH Error: {error_msg}")
+
+    def resolve_domain_dot(self, domain: str, record_type: str = "A"):
+        self.dot_worker = DoTResolverWorker(domain, record_type)
+        self.dot_worker.result_ready.connect(self.handle_dot_result)
+        self.dot_worker.error.connect(self.handle_dot_error)
+        self.dot_worker.start()
+
+    def handle_dot_result(self, result: str):
+        self.log_stealth(f"DoT Success: {result}")
+
+    def handle_dot_error(self, error_msg: str):
+        self.log_stealth(f"DoT Error: {error_msg}")
 
     def disable_system_swap(self):
         """Disable swap memory to enhance security and optimize for SSD."""
