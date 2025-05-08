@@ -57,11 +57,17 @@ import requests
 import shutil
 import shlex
 import platform
+import asyncio
+import httpx
+import dns.query
+import dns.message
+import dns.rdatatype
 import socket
 import dns.resolver
 import json
 import logging
 import time
+import crypto_rust
 from concurrent.futures import ThreadPoolExecutor
 from urllib.parse import urlparse
 from base64 import urlsafe_b64encode, urlsafe_b64decode
@@ -72,7 +78,7 @@ from PySide6.QtGui import QPalette, QColor, QKeySequence, QShortcut, QAction, QG
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtNetwork import QNetworkProxy, QSslConfiguration, QSslSocket, QSsl, QSslCipher
 from PySide6.QtWebEngineCore import QWebEngineUrlRequestInterceptor, QWebEngineSettings, QWebEnginePage, QWebEngineScript, QWebEngineProfile, QWebEngineDownloadRequest, QWebEngineContextMenuRequest, QWebEngineCookieStore
-from PySide6.QtCore import QUrl, QSettings, Qt, QObject, Slot, QTimer, QCoreApplication
+from PySide6.QtCore import QUrl, QSettings, Qt, QObject, Slot, QTimer, QCoreApplication, QThread, Signal
 from cryptography.hazmat.primitives import serialization, hashes
 from cryptography.hazmat.primitives.asymmetric import x25519, rsa, padding
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
@@ -98,8 +104,7 @@ import piexif
 
 def random_delay(min_delay=0.1, max_delay=1.0):
     """Introduce a random delay to confuse forensic analysis."""
-    secure_random = random.SystemRandom()
-    delay = secure_random.uniform(min_delay, max_delay)
+    delay = secrets.uniform(min_delay, max_delay)
     time.sleep(delay)
     print(f"Random delay: {delay:.2f}s")
 
@@ -170,6 +175,10 @@ class NetworkProtector:
         padded_data = data + padding
         self.sock.sendall(padded_data)
         print(f"[Darkelf] Sent padded data (original: {len(data)}, padded: {len(padded_data)}, pad: {pad_len})")
+
+    def send_protected(self, data: bytes):
+        self.add_jitter()
+        self.send_with_padding(data)
 
 # Debounce function to limit the rate at which a function can fire
 def debounce(func, wait):
@@ -771,13 +780,12 @@ class SecureWebEnginePage(QWebEnginePage):
         print(f"JS [{level}]: {message} (line {lineNumber}) in {sourceID}")
 
     def injectSecurityScripts(self):
-        """Inject JavaScript to block fingerprinting and WebRTC."""
+        """Inject JavaScript to block canvas fingerprinting"""
         script = """
         (function() {
-            // Canvas Fingerprinting Protection
-            const originalToDataURL = HTMLCanvasElement.prototype.toDataURL;
-            const originalToBlob = HTMLCanvasElement.prototype.toBlob;
-
+            let originalToDataURL = HTMLCanvasElement.prototype.toDataURL;
+            let originalToBlob = HTMLCanvasElement.prototype.toBlob;
+            
             HTMLCanvasElement.prototype.toDataURL = function() {
                 console.warn('Blocked Canvas Fingerprinting - toDataURL');
                 return "";
@@ -787,9 +795,15 @@ class SecureWebEnginePage(QWebEnginePage):
                 console.warn('Blocked Canvas Fingerprinting - toBlob');
                 return null;
             };
-
-            // WebRTC Blocking
-            const OriginalPeerConnection = window.RTCPeerConnection || window.webkitRTCPeerConnection;
+        })();
+        """
+        self.runJavaScript(script)
+        
+    def block_webrtc_js():
+        script = """
+        (function() {
+            let OriginalPeerConnection = window.RTCPeerConnection || window.webkitRTCPeerConnection;
+        
             if (OriginalPeerConnection) {
                 window.RTCPeerConnection = function() {
                     console.warn('Blocked WebRTC - RTCPeerConnection');
@@ -799,7 +813,35 @@ class SecureWebEnginePage(QWebEnginePage):
             }
         })();
         """
-        self.runJavaScript(script)
+        return script
+        
+    def injectSecurityScripts(self):
+        """Inject security scripts to block fingerprinting & WebRTC"""
+        self.runJavaScript("""
+            (function() {
+                let originalToDataURL = HTMLCanvasElement.prototype.toDataURL;
+                let originalToBlob = HTMLCanvasElement.prototype.toBlob;
+            
+                HTMLCanvasElement.prototype.toDataURL = function() {
+                    console.warn('Blocked Canvas Fingerprinting - toDataURL');
+                    return "";
+                };
+
+                HTMLCanvasElement.prototype.toBlob = function() {
+                    console.warn('Blocked Canvas Fingerprinting - toBlob');
+                    return null;
+                };
+
+                let OriginalPeerConnection = window.RTCPeerConnection || window.webkitRTCPeerConnection;
+                if (OriginalPeerConnection) {
+                    window.RTCPeerConnection = function() {
+                        console.warn('Blocked WebRTC - RTCPeerConnection');
+                        return null;
+                    };
+                    window.webkitRTCPeerConnection = window.RTCPeerConnection;
+                }
+            })();
+        """)
 
     def protect_fingerprinting(self):
         script = """
@@ -979,7 +1021,7 @@ class CustomWebEngineView(QWebEngineView):
     def __init__(self, browser, parent=None):
         super().__init__(parent)
         self.browser = browser
-        self.setPage(SecureWebEnginePage(self))
+        self.setPage(CustomWebEnginePage(self))
         self.configure_sandbox()
 
     def configure_sandbox(self):
@@ -1143,6 +1185,58 @@ class WebsiteBlockDetector:
         # Implement logic to switch Tor node
         print("Switching Tor node...")
         
+class DoHResolverWorker(QThread):
+    result_ready = Signal(str)
+    error = Signal(str)
+
+    def __init__(self, domain: str, record_type: str = "A"):
+        super().__init__()
+        self.domain = domain
+        self.record_type = record_type.upper()
+
+    def run(self):
+        try:
+            result = asyncio.run(self._resolve_doh(self.domain, self.record_type))
+            self.result_ready.emit(result)
+        except Exception as e:
+            self.error.emit(f"DoH DNS Resolution Failed: {str(e)}")
+
+    async def _resolve_doh(self, domain: str, record_type: str) -> str:
+        url = "https://cloudflare-dns.com/dns-query"
+        headers = {"accept": "application/dns-json"}
+        params = {"name": domain, "type": record_type}
+
+        async with httpx.AsyncClient(timeout=10) as client:
+            response = await client.get(url, headers=headers, params=params)
+            response.raise_for_status()
+            data = response.json()
+            answers = data.get("Answer", [])
+            records = [a["data"] for a in answers if str(a.get("type")) == self._dns_type_to_code(record_type)]
+            return ", ".join(records) if records else "No matching DNS records found."
+
+    def _dns_type_to_code(self, record_type: str) -> str:
+        dns_type_map = {"A": "1", "AAAA": "28", "CNAME": "5", "MX": "15", "TXT": "16", "NS": "2"}
+        return dns_type_map.get(record_type.upper(), "1")
+
+class DoTResolverWorker(QThread):
+    result_ready = Signal(str)
+    error = Signal(str)
+
+    def __init__(self, domain: str, record_type: str = "A"):
+        super().__init__()
+        self.domain = domain
+        self.record_type = record_type.upper()
+
+    def run(self):
+        try:
+            query = dns.message.make_query(self.domain, self.record_type)
+            response = dns.query.tls(query, "1.1.1.1", timeout=5)
+            records = [r.to_text() for r in response.answer[0]] if response.answer else []
+            result = ", ".join(records) if records else "No matching DNS records found."
+            self.result_ready.emit(result)
+        except Exception as e:
+            self.error.emit(f"DoT DNS Resolution Failed: {str(e)}")
+
 class Darkelf(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -1166,6 +1260,14 @@ class Darkelf(QMainWindow):
 
         QTimer.singleShot(8000, self.start_forensic_tool_monitor)
         
+        # Fallback DNS resolution only if Tor is not working
+        if self.tor_connection_failed():
+            self.log_stealth("Tor unavailable — using DoH/DoT fallback")
+            self.resolve_domain_doh("cloudflare.com", "A")
+            self.resolve_domain_dot("cloudflare.com", "A")
+        else:
+            self.log_stealth("Tor active — fallback not triggered")
+            
     def _init_stealth_log(self):
         try:
             with open(self.log_path, "a") as f:
@@ -1180,6 +1282,39 @@ class Darkelf(QMainWindow):
                 f.write(f"[{datetime.utcnow()}] {message}\n")
         except Exception:
             pass
+            
+    def tor_connection_failed(self) -> bool:
+        try:
+            if not getattr(self, "tor_network_enabled", False):
+                return True
+            with socket.create_connection(("127.0.0.1", 9052), timeout=3):
+                return False
+        except Exception:
+            return True
+
+    def resolve_domain_doh(self, domain: str, record_type: str = "A"):
+        self.doh_worker = DoHResolverWorker(domain, record_type)
+        self.doh_worker.result_ready.connect(self.handle_doh_result)
+        self.doh_worker.error.connect(self.handle_doh_error)
+        self.doh_worker.start()
+
+    def handle_doh_result(self, result: str):
+        self.log_stealth(f"DoH Success: {result}")
+
+    def handle_doh_error(self, error_msg: str):
+        self.log_stealth(f"DoH Error: {error_msg}")
+
+    def resolve_domain_dot(self, domain: str, record_type: str = "A"):
+        self.dot_worker = DoTResolverWorker(domain, record_type)
+        self.dot_worker.result_ready.connect(self.handle_dot_result)
+        self.dot_worker.error.connect(self.handle_dot_error)
+        self.dot_worker.start()
+
+    def handle_dot_result(self, result: str):
+        self.log_stealth(f"DoT Success: {result}")
+
+    def handle_dot_error(self, error_msg: str):
+        self.log_stealth(f"DoT Error: {error_msg}")
 
     def disable_system_swap(self):
         """Disable swap memory to enhance security and optimize for SSD."""
