@@ -157,34 +157,26 @@ class ObfuscatedEncryptedCookieStore:
         print("[+] Wiped in-memory store.")
         
 class NetworkProtector:
-    def __init__(self, sock: socket.socket):
+    def __init__(self, sock):
         self.sock = sock
         self.secure_random = random.SystemRandom()
 
-    def add_jitter(self, base=0.1, variance=0.1):
-        """
-        Add random jitter to outgoing network traffic to obfuscate timing patterns.
-
-        Args:
-            base (float): Minimum jitter in seconds.
-            variance (float): Maximum random variation in seconds added to base.
-        """
-        jitter = base + self.secure_random.uniform(0, variance)
+    def add_jitter(self, min_delay=0.05, max_delay=0.3):
+        jitter = self.secure_random.uniform(min_delay, max_delay)
         time.sleep(jitter)
-        print(f"[Darkelf] Jitter applied: {jitter:.2f}s")
+        print(f"[Darkelf] Jitter applied: {jitter:.3f}s")
 
-    def send_with_padding(self, data: bytes, padding_size=128):
-        """
-        Add padding to outgoing data to prevent timing analysis of packet size.
-
-        Args:
-            data (bytes): The data to send.
-            padding_size (int): The padding size in bytes.
-        """
-        pad_len = (padding_size - len(data) % padding_size) % padding_size
-        padded_data = data + b"\x00" * pad_len
+    def send_with_padding(self, data: bytes, min_padding=128, max_padding=256):
+        target_size = max(len(data), self.secure_random.randint(min_padding, max_padding))
+        pad_len = target_size - len(data)
+        padding = os.urandom(pad_len)
+        padded_data = data + padding
         self.sock.sendall(padded_data)
-        print(f"[Darkelf] Sent data with padding (original size: {len(data)}, padded size: {len(padded_data)}).")
+        print(f"[Darkelf] Sent padded data (original: {len(data)}, padded: {len(padded_data)}, pad: {pad_len})")
+
+    def send_protected(self, data: bytes):
+        self.add_jitter()
+        self.send_with_padding(data)
         
 # Debounce function to limit the rate at which a function can fire
 def debounce(func, wait):
@@ -1087,6 +1079,16 @@ class TorManager:
             self.controller.authenticate()
             print("Tor started successfully.")
 
+            # Optional test message through SOCKS with obfuscation
+            try:
+                test_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                test_sock.connect(("127.0.0.1", 9052))
+                protector = NetworkProtector(test_sock)
+                protector.send_protected(b"Darkelf test message through Tor SOCKS")
+                test_sock.close()
+            except Exception as e:
+                print(f"[Darkelf] Failed test connection through Tor SOCKS: {e}")
+
         except OSError as e:
             QMessageBox.critical(None, "Tor Error", f"Failed to start Tor: {e}")
 
@@ -1117,6 +1119,7 @@ class TorManager:
 
     def close(self):
         self.stop_tor()
+        super().close()
 
     def switch_node(self):
         try:
