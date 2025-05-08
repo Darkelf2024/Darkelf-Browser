@@ -2523,7 +2523,7 @@ def main():
         "--disable-javascript-harmony "
         "--no-referrers "
         "--incognito "
-        "--disable--disable-features=AudioServiceSandbox "
+        "--disable-features=AudioServiceSandbox "
         "--enable-features=StrictOriginIsolation,PartitionedCookies "
         "--disable-renderer-backgrounding "
         "--disable-background-timer-throttling "
@@ -2543,7 +2543,7 @@ def main():
         "--disable-features=IndexedDB "
         "--disable-webgl-image-chromium "
         "--disable-text-autosizing "
-        "--disable-peer-connection"
+        "--disable-peer-connection "
         "--disable-javascript"
     )
     
