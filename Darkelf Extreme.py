@@ -1030,10 +1030,11 @@ class DoHResolverWorker(QThread):
     result_ready = Signal(str)
     error = Signal(str)
 
-    def __init__(self, domain: str, record_type: str = "A"):
+    def __init__(self, domain: str, record_type: str = "A", proxies: str = None):
         super().__init__()
         self.domain = domain
         self.record_type = record_type.upper()
+        self.proxies = proxies
 
     def run(self):
         try:
@@ -1047,7 +1048,7 @@ class DoHResolverWorker(QThread):
         headers = {"accept": "application/dns-json"}
         params = {"name": domain, "type": record_type}
 
-        async with httpx.AsyncClient(timeout=10) as client:
+        async with httpx.AsyncClient(timeout=10, proxies=self.proxies) as client:
             response = await client.get(url, headers=headers, params=params)
             response.raise_for_status()
             data = response.json()
@@ -1134,7 +1135,8 @@ class Darkelf(QMainWindow):
             return True
 
     def resolve_domain_doh(self, domain: str, record_type: str = "A"):
-        self.doh_worker = DoHResolverWorker(domain, record_type)
+        proxies = "socks5h://127.0.0.1:9052" if getattr(self, "tor_enabled", False) else None
+        self.doh_worker = DoHResolverWorker(domain, record_type, proxies)
         self.doh_worker.result_ready.connect(self.handle_doh_result)
         self.doh_worker.error.connect(self.handle_doh_error)
         self.doh_worker.start()
@@ -1468,7 +1470,7 @@ class Darkelf(QMainWindow):
                 )
                 return private_key, private_key.public_key()
         except (FileNotFoundError, ValueError) as e:
-            print(f"Error loading ECDH private key: {e}")
+            print("[Darkelf] ECDH private key not found or invalid — generating a new key pair.")
             return self.generate_ecdh_key_pair()
 
     def generate_ecdh_key_pair(self):
