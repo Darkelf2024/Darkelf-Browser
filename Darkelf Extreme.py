@@ -1588,7 +1588,7 @@ class Darkelf(QMainWindow):
                 print("Tor is already running.")
                 return
 
-            tor_path = "/opt/homebrew/bin/tor"  # Update this with the correct path
+            tor_path = shutil.which("tor")
 
             if not os.path.exists(tor_path):
                 QMessageBox.critical(self, "Tor Error", "Tor executable not found! Install it using 'brew install tor'.")
