@@ -50,8 +50,8 @@ When the Tor network is unavailable, **Darkelf** seamlessly falls back to encryp
 Your `requirements.txt` should include:
 
 ```
-httpx>=0.24.0
-dnspython>=2.0.0
+httpx>=0.27.0
+dnspython>=2.7.0
 PySocks==1.7.1
 ```
 
