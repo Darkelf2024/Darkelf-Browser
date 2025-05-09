@@ -63,6 +63,7 @@ import dns.query
 import dns.message
 import dns.rdatatype
 import socket
+import socks
 import dns.resolver
 import json
 import logging
@@ -1064,18 +1065,32 @@ class DoTResolverWorker(QThread):
     result_ready = Signal(str)
     error = Signal(str)
 
-    def __init__(self, domain: str, record_type: str = "A"):
+    def __init__(self, domain: str, record_type: str = "A", use_proxy: bool = True):
         super().__init__()
         self.domain = domain
         self.record_type = record_type.upper()
+        self.use_proxy = use_proxy
 
     def run(self):
         try:
             query = dns.message.make_query(self.domain, self.record_type)
-            response = dns.query.tls(query, "1.1.1.1", timeout=5)
+
+            # Create a SOCKS5-wrapped socket if proxy is enabled
+            if self.use_proxy:
+                sock = socks.socksocket()
+                sock.set_proxy(socks.SOCKS5, "127.0.0.1", 9052)  # Tor's SOCKS port
+                sock.settimeout(5)
+                sock.connect(("1.1.1.1", 853))  # Cloudflare DoT endpoint
+            else:
+                sock = socket.create_connection(("1.1.1.1", 853), timeout=5)
+
+            # Send DNS query over TLS using the wrapped socket
+            response = dns.query.tls(query, sock, timeout=5, server_hostname="cloudflare-dns.com")
+
             records = [r.to_text() for r in response.answer[0]] if response.answer else []
             result = ", ".join(records) if records else "No matching DNS records found."
             self.result_ready.emit(result)
+
         except Exception as e:
             self.error.emit(f"DoT DNS Resolution Failed: {str(e)}")
 
@@ -1148,7 +1163,7 @@ class Darkelf(QMainWindow):
         self.log_stealth(f"DoH Error: {error_msg}")
 
     def resolve_domain_dot(self, domain: str, record_type: str = "A"):
-        self.dot_worker = DoTResolverWorker(domain, record_type)
+        self.dot_worker = DoTResolverWorker(domain, record_type, use_proxy=True)
         self.dot_worker.result_ready.connect(self.handle_dot_result)
         self.dot_worker.error.connect(self.handle_dot_error)
         self.dot_worker.start()
