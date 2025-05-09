@@ -1020,7 +1020,7 @@ class CustomWebEngineView(QWebEngineView):
     def __init__(self, browser, parent=None):
         super().__init__(parent)
         self.browser = browser
-        self.setPage(CustomWebEnginePage(self))
+        self.setPage(SecureWebEnginePage(self))
         self.configure_sandbox()
 
     def configure_sandbox(self):
