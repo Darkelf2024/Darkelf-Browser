@@ -1,5 +1,5 @@
 # Darkelf Browser v3.0 🚀  
-**Enhanced Security | Ultimate Privacy | Cutting-Edge Technology**
+**Enhanced Security | Ultimate Privacy | Cutting-Edge Technology | Anonymous Research | Zero Trace**
 
 Welcome to the Darkelf Browser! This provides comprehensive information about the Darkelf Browser, its features, installation guides, and much more can be found on our **Discord**.
 
@@ -11,6 +11,7 @@ Join our community on **Discord** for additional resources including:
 - Homebrew installation instructions
 - Screenshots
 - Videos
+- Confirmations = Swap Disabled, No TraceS on Disk
 - Real-time support and discussion
 
 Stay connected and get the most out of Darkelf Browser!
