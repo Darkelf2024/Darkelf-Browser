@@ -2542,7 +2542,6 @@ def main():
         "--disable-features=InterestCohortAPI,PrivacySandboxAdsAPIs "
         "--disable-javascript-harmony "
         "--no-referrers "
-        "--incognito "
         "--disable-features=AudioServiceSandbox "
         "--enable-features=StrictOriginIsolation,PartitionedCookies "
         "--disable-renderer-backgrounding "
@@ -2565,6 +2564,9 @@ def main():
         "--disable-text-autosizing "
         "--disable-peer-connection "
         "--disable-javascript"
+        "--incognito --disable-logging --no-first-run --disable-breakpad "
+        "--disable-features=NetworkService,TranslateUI "
+        "--disk-cache-dir=/dev/null"
     )
     
     # Create the application
