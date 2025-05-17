@@ -1,6 +1,20 @@
 # Darkelf Browser v3.0 🚀  
 **Enhanced Security | Ultimate Privacy | Cutting-Edge Technology**
 
+Welcome to the Darkelf Browser Wiki! This wiki provides comprehensive information about the Darkelf Browser, its features, installation guides, and much more.
+
+Visit our official website: [**darkelfbrowser.com**](https://darkelfbrowser.com)
+
+Join our community on **Discord** for additional resources including:
+- Walkthroughs
+- Pip installation guides
+- Homebrew installation instructions
+- Screenshots
+- Videos
+- Real-time support and discussion
+
+Stay connected and get the most out of Darkelf Browser!
+
 ## 🌟 Key Features  
 ### 🔒 **Privacy and Security**
 - **Tor Integration**: Anonymize all browsing with native Tor network support, including `.onion` sites.
