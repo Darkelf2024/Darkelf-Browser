@@ -1,7 +1,7 @@
 # Darkelf Browser v3.0 🚀  
 **Enhanced Security | Ultimate Privacy | Cutting-Edge Technology**
 
-Welcome to the Darkelf Browser Wiki! This provides comprehensive information about the Darkelf Browser, its features, installation guides, and much more can be found on our **Discord**.
+Welcome to the Darkelf Browser! This provides comprehensive information about the Darkelf Browser, its features, installation guides, and much more can be found on our **Discord**.
 
 Visit our official website: [**darkelfbrowser.com**](https://darkelfbrowser.com)
 
