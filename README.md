@@ -11,7 +11,7 @@ Join our community on **Discord** for additional resources including:
 - Homebrew installation instructions
 - Screenshots
 - Videos
-- Confirmations = Swap Disabled, No TraceS on Disk
+- Confirmations = Swap Disabled, No Trace
 - Real-time support and discussion
 
 Stay connected and get the most out of Darkelf Browser!
