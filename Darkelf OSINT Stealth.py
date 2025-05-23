@@ -100,62 +100,154 @@ import psutil
 from PIL import Image
 import piexif
 
-def random_delay(min_delay=0.1, max_delay=1.0):
-    """Introduce a random delay to confuse forensic analysis."""
+class StealthCovertOps:
+    def __init__(self, stealth_mode=True):
+        self._log_buffer = []
+        self._log_key = secrets.token_bytes(16)
+        self._stealth_mode = stealth_mode
+        self._authorized = False
+
+    def xor_encrypt(self, data: str) -> str:
+        data_bytes = data.encode()
+        return base64.b64encode(bytes(b ^ self._log_key[i % len(self._log_key)] for i, b in enumerate(data_bytes))).decode()
+
+    def xor_decrypt(self, enc_data: str) -> str:
+        data_bytes = base64.b64decode(enc_data)
+        return ''.join(chr(b ^ self._log_key[i % len(self._log_key)]) for i, b in enumerate(data_bytes))
+
+    def log_to_memory(self, message: str):
+        encrypted = self.xor_encrypt(message)
+        self._log_buffer.append(encrypted)
+
+    def authorize_flush(self, token: str):
+        if token == "darkelf-confirm":
+            self._authorized = True
+
+    def flush_log(self, path="covert_log.log", require_auth=True):
+        if self._stealth_mode:
+            raise PermissionError("Stealth mode active: disk log writing is disabled.")
+        if require_auth and not self._authorized:
+            raise PermissionError("Log flush not authorized.")
+        with open(path, "w") as f:
+            for encrypted in self._log_buffer:
+                f.write(self.xor_decrypt(encrypted) + "\n")
+        return path
+
+    def clear_logs(self):
+        for i in range(len(self._log_buffer)):
+            self._log_buffer[i] = secrets.token_hex(len(self._log_buffer[i]))
+        self._log_buffer.clear()
+
+    def cpu_saturate(self, seconds=5):
+        def stress():
+            end = time.time() + seconds
+            while time.time() < end:
+                _ = [x**2 for x in range(1000)]
+        for _ in range(os.cpu_count() or 2):
+            threading.Thread(target=stress, daemon=True).start()
+
+    def memory_saturate(self, mb=100):
+        try:
+            _ = bytearray(mb * 1024 * 1024)
+            time.sleep(2)
+            del _
+        except:
+            pass
+
+    def fake_activity_noise(self):
+        fake_files = [f"/tmp/tempfile_{i}.tmp" if platform.system() != "Windows" else f"C:\\Temp\\tempfile_{i}.tmp"
+                      for i in range(5)]
+        try:
+            for path in fake_files:
+                with open(path, "w") as f:
+                    f.write("Temporary diagnostic output\n")
+                with open(path, "r+b") as f:
+                    length = os.path.getsize(path)
+                    f.seek(0)
+                    f.write(secrets.token_bytes(length))
+                os.remove(path)
+        except:
+            pass
+
+    def process_mask_linux(self):
+        if platform.system() == "Linux":
+            try:
+                with open("/proc/self/comm", "w") as f:
+                    f.write("systemd")
+            except:
+                pass
+                
+def hardened_random_delay(min_delay=0.1, max_delay=1.0, jitter=0.05):
     secure_random = random.SystemRandom()
-    delay = secure_random.uniform(min_delay, max_delay)
-    time.sleep(delay)
-    print(f"Random delay: {delay:.2f}s")
+    base_delay = secure_random.uniform(min_delay, max_delay)
+    noise = secure_random.uniform(-jitter, jitter)
+    final_delay = max(0, base_delay + noise)
+    time.sleep(final_delay)
 
 class ObfuscatedEncryptedCookieStore:
     def __init__(self, qt_cookie_store: QWebEngineCookieStore):
-        self.key = Fernet.generate_key()
-        self.cipher = Fernet(self.key)
         self.store = {}
+        self.key_store = {}
         self.qt_cookie_store = qt_cookie_store
         self.qt_cookie_store.cookieAdded.connect(self.intercept_cookie)
 
     def obfuscate_name(self, name: str) -> str:
-        """Obfuscate cookie name using SHA-256 and truncate for storage."""
         return hashlib.sha256(name.encode()).hexdigest()[:16]
 
     def intercept_cookie(self, cookie):
-        """Intercept cookies, obfuscate and encrypt."""
-        random_delay(0.2, 1.5)
+        hardened_random_delay(0.2, 1.5)
         name = bytes(cookie.name()).decode()
         value = bytes(cookie.value()).decode()
         obfuscated_name = self.obfuscate_name(name)
         self.set_cookie(obfuscated_name, value)
 
     def set_cookie(self, name: str, value: str):
-        """Encrypts and stores a cookie using obfuscated name."""
-        random_delay(0.2, 1.5)
-        encrypted = self.cipher.encrypt(value.encode())
+        hardened_random_delay(0.2, 1.5)
+        key = Fernet.generate_key()
+        cipher = Fernet(key)
+        encrypted = cipher.encrypt(value.encode())
         self.store[name] = encrypted
-        print(f"[+] Stored cookie: {name}")
+        self.key_store[name] = key
+        del cipher
+        del key
 
     def get_cookie(self, name: str) -> str:
-        """Retrieves and decrypts a cookie."""
-        random_delay(0.1, 1.0)
+        hardened_random_delay(0.1, 1.0)
         encrypted = self.store.get(name)
-        return self.cipher.decrypt(encrypted).decode() if encrypted else None
+        key = self.key_store.get(name)
+        if encrypted and key:
+            cipher = Fernet(key)
+            value = cipher.decrypt(encrypted).decode()
+            del cipher
+            return value
+        return None
 
     def clear(self):
-        """Clears all cookies and memory."""
-        random_delay(0.3, 1.0)
-        for key in list(self.store.keys()):
-            self.store[key] = None
-            del self.store[key]
+        hardened_random_delay(0.3, 1.0)
+        self._secure_erase()
         self.qt_cookie_store.deleteAllCookies()
-        print("[+] Cleared cookies and memory.")
 
     def wipe_memory(self):
-        """Wipe memory securely."""
-        random_delay(0.2, 0.8)
+        hardened_random_delay(0.2, 0.8)
+        self._secure_erase()
+
+    def _secure_erase(self):
         for key in list(self.store.keys()):
-            self.store[key] = None
+            encrypted = self.store[key]
+            if encrypted:
+                overwrite = secrets.token_bytes(len(encrypted))
+                self.store[key] = overwrite
+                del overwrite
+            del self.store[key]
+        for key in list(self.key_store.keys()):
+            key_material = self.key_store[key]
+            if key_material:
+                overwrite = secrets.token_bytes(len(key_material))
+                self.key_store[key] = overwrite
+                del overwrite
+            del self.key_store[key]
         self.store.clear()
-        print("[+] Wiped in-memory store.")
+        self.key_store.clear()
         
 class NetworkProtector:
     def __init__(self, sock):
@@ -2338,9 +2430,13 @@ class Darkelf(QMainWindow):
             if callable(getattr(self, 'stop_tor', None)):
                 self.stop_tor()
 
-            # Wipe memory for encrypted store
+            # Wipe memory and clear encrypted store (includes Qt cookie clear)
             if hasattr(self, 'encrypted_store'):
-                self.encrypted_store.wipe_memory()
+                self.encrypted_store.clear()
+
+            # Flush covert logs if available
+            if hasattr(self, 'forensic_agent'):
+                self.forensic_agent.covert.flush_log("final_stealth.log")
 
             # Save user settings
             self.save_settings()
