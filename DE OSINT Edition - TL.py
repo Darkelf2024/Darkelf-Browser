@@ -198,8 +198,8 @@ class ObfuscatedEncryptedCookieStore:
 
     def intercept_cookie(self, cookie):
         hardened_random_delay(0.2, 1.5)
-        name = bytes(cookie.name()).decode()
-        value = bytes(cookie.value()).decode()
+        name = bytes(cookie.name()).decode(errors='ignore')
+        value = bytes(cookie.value()).decode(errors='ignore')
         obfuscated_name = self.obfuscate_name(name)
         self.set_cookie(obfuscated_name, value)
 
