@@ -2269,7 +2269,8 @@ class Darkelf(QMainWindow):
         """Enhanced clean shutdown with anti-forensics measures and secure deletion."""
         try:
             # Log shutdown activity
-            self.log_stealth("Initiating clean shutdown...")
+            if hasattr(self, 'log_path') and os.path.exists(self.log_path):
+                self.log_stealth("Initiating clean shutdown...")
 
             # Final forensic environment check
             self.check_forensic_environment()
@@ -2278,13 +2279,9 @@ class Darkelf(QMainWindow):
             if callable(getattr(self, 'stop_tor', None)):
                 self.stop_tor()
 
-            # Wipe memory and clear encrypted store (includes Qt cookie clear)
+            # Wipe memory for encrypted cookie store
             if hasattr(self, 'encrypted_store'):
-                self.encrypted_store.clear()
-
-            # Flush covert logs if available
-            if hasattr(self, 'forensic_agent'):
-                self.forensic_agent.covert.flush_log("final_stealth.log")
+                self.encrypted_store.wipe_memory()
 
             # Save user settings
             self.save_settings()
@@ -2292,7 +2289,7 @@ class Darkelf(QMainWindow):
             # Clear cache and history securely
             self.secure_clear_cache_and_history()
 
-            # Stop download manager timers
+            # Stop any timers in the download manager
             if hasattr(self, 'download_manager') and hasattr(self.download_manager, 'timers'):
                 for timer in self.download_manager.timers.values():
                     try:
@@ -2300,14 +2297,14 @@ class Darkelf(QMainWindow):
                     except Exception:
                         pass
 
-            # Clean up all tab pages
+            # Close all tabs and securely release their resources
             if hasattr(self, 'tab_widget'):
                 for i in reversed(range(self.tab_widget.count())):
                     widget = self.tab_widget.widget(i)
                     if isinstance(widget, QWebEngineView):
                         try:
                             page = widget.page()
-                            if isValid(page):
+                            if page:
                                 page.setParent(None)
                                 widget.setPage(None)
                                 page.deleteLater()
@@ -2318,12 +2315,12 @@ class Darkelf(QMainWindow):
                     widget.setParent(None)
                     widget.deleteLater()
 
-            # Clean up standalone views/popups
+            # Close any popout views
             if hasattr(self, 'web_views'):
                 for view in self.web_views:
                     try:
                         page = view.page()
-                        if isValid(page):
+                        if page:
                             page.setParent(None)
                             view.setPage(None)
                             page.deleteLater()
@@ -2333,11 +2330,11 @@ class Darkelf(QMainWindow):
                     view.setParent(None)
                     view.deleteLater()
 
-            # Clean up primary web_view
+            # Cleanup main view
             if hasattr(self, 'web_view'):
                 try:
                     page = self.web_view.page()
-                    if isValid(page):
+                    if page:
                         page.setParent(None)
                         self.web_view.setPage(None)
                         page.deleteLater()
@@ -2347,67 +2344,37 @@ class Darkelf(QMainWindow):
                 self.web_view.setParent(None)
                 self.web_view.deleteLater()
 
-            # Process remaining events
+            # Process any remaining events
             QApplication.processEvents()
             QApplication.processEvents()
 
-            # Delete web profile
+            # Schedule deletion of the web profile
             if hasattr(self, 'web_profile') and self.web_profile:
                 QTimer.singleShot(5000, lambda: self.web_profile.deleteLater())
 
-            # Securely delete temporary files
+            # Securely delete any temporary directories/files used
             temp_subdir = os.path.join(tempfile.gettempdir(), "darkelf_temp")
             if os.path.exists(temp_subdir):
                 self.secure_delete_directory(temp_subdir)
 
-            # Securely delete stealth log
+            # Securely delete cryptographic key files if present
+            for keyfile in ["private_key.pem", "ecdh_private_key.pem"]:
+                if os.path.exists(keyfile):
+                    self.secure_delete(keyfile)
+
+            # Securely delete stealth log — very last
             log_file_path = os.path.expanduser("~/.darkelf_log")
-            if os.path.exists(log_file_path):
-                self.secure_delete(log_file_path)
+            if hasattr(self, 'log_path') and os.path.exists(self.log_path):
+                self.secure_delete(self.log_path)
 
         except Exception as e:
-            self.log_stealth(f"Error during shutdown: {e}")
+            # Only log if log file still exists
+            if hasattr(self, 'log_path') and os.path.exists(self.log_path):
+                self.log_stealth(f"Error during shutdown: {e}")
+
         finally:
-            self.log_stealth("Shutdown complete.")
+            # Never log here — log file may already be deleted
             super().closeEvent(event)
-
-    def secure_clear_cache_and_history(self):
-        """Securely clear cache and history."""
-        try:
-            self.log_stealth("Clearing cache and history securely...")
-            # Clear cache directory securely
-            cache_dir = os.path.join(tempfile.gettempdir(), "darkelf_cache")
-            if os.path.exists(cache_dir):
-                self.secure_delete_directory(cache_dir)
-        except Exception as e:
-            self.log_stealth(f"Error clearing cache and history: {e}")
-
-    def secure_delete_directory(self, directory_path):
-        """Securely delete a directory and its contents."""
-        try:
-            for root, dirs, files in os.walk(directory_path, topdown=False):
-                for name in files:
-                    file_path = os.path.join(root, name)
-                    self.secure_delete(file_path)
-                for name in dirs:
-                    os.rmdir(os.path.join(root, name))
-            os.rmdir(directory_path)
-            self.log_stealth(f"Securely deleted directory: {directory_path}")
-        except Exception as e:
-            self.log_stealth(f"Error deleting directory {directory_path}: {e}")
-
-    def secure_delete(self, file_path, overwrite_count=7):
-        try:
-            if os.path.exists(file_path):
-                with open(file_path, "ba+", buffering=0) as f:
-                    length = f.tell()
-                    for _ in range(overwrite_count):
-                        f.seek(0)
-                        f.write(secrets.token_bytes(length))
-                os.remove(file_path)
-                self.log_stealth(f"Deleted: {file_path}")
-        except Exception as e:
-            self.log_stealth(f"Error deleting {file_path}: {e}")
 
     def handle_download(self, download_item):
         self.download_manager.handle_download(download_item)
