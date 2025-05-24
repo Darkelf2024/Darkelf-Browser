@@ -68,6 +68,7 @@ import dns.resolver
 import json
 import logging
 import time
+import ctypes
 from concurrent.futures import ThreadPoolExecutor
 from urllib.parse import urlparse
 from base64 import urlsafe_b64encode, urlsafe_b64decode
@@ -83,6 +84,7 @@ from cryptography.hazmat.primitives import serialization, hashes
 from cryptography.hazmat.primitives.asymmetric import x25519, rsa, padding
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+from cryptography.hazmat.primitives.kdf.scrypt import Scrypt
 from cryptography.hazmat.backends import default_backend
 from adblockparser import AdblockRules
 import subprocess # nosec - All run through sanitizing and validation
@@ -103,23 +105,38 @@ import psutil
 from PIL import Image
 import piexif
 
+
+class SecureCryptoUtils:
+    @staticmethod
+    def derive_key(password: bytes, salt: bytes) -> bytes:
+        kdf = Scrypt(
+            salt=salt,
+            length=32,
+            n=2**14,
+            r=8,
+            p=1,
+            backend=default_backend()
+        )
+        return base64.urlsafe_b64encode(kdf.derive(password))
+
+
 class StealthCovertOps:
     def __init__(self, stealth_mode=True):
         self._log_buffer = []
-        self._log_key = secrets.token_bytes(16)
+        self._salt = secrets.token_bytes(16)
+        self._log_key = SecureCryptoUtils.derive_key(b"darkelf_master_key", self._salt)
         self._stealth_mode = stealth_mode
         self._authorized = False
+        self._cipher = Fernet(self._log_key)
 
-    def xor_encrypt(self, data: str) -> str:
-        data_bytes = data.encode()
-        return base64.b64encode(bytes(b ^ self._log_key[i % len(self._log_key)] for i, b in enumerate(data_bytes))).decode()
+    def encrypt(self, data: str) -> str:
+        return self._cipher.encrypt(data.encode()).decode()
 
-    def xor_decrypt(self, enc_data: str) -> str:
-        data_bytes = base64.b64decode(enc_data)
-        return ''.join(chr(b ^ self._log_key[i % len(self._log_key)]) for i, b in enumerate(data_bytes))
+    def decrypt(self, enc_data: str) -> str:
+        return self._cipher.decrypt(enc_data.encode()).decode()
 
     def log_to_memory(self, message: str):
-        encrypted = self.xor_encrypt(message)
+        encrypted = self.encrypt(message)
         self._log_buffer.append(encrypted)
 
     def authorize_flush(self, token: str):
@@ -133,12 +150,14 @@ class StealthCovertOps:
             raise PermissionError("Log flush not authorized.")
         with open(path, "w") as f:
             for encrypted in self._log_buffer:
-                f.write(self.xor_decrypt(encrypted) + "\n")
+                f.write(self.decrypt(encrypted) + "\n")
         return path
 
     def clear_logs(self):
         for i in range(len(self._log_buffer)):
-            self._log_buffer[i] = secrets.token_hex(len(self._log_buffer[i]))
+            buffer_len = len(self._log_buffer[i])
+            secure_buffer = ctypes.create_string_buffer(buffer_len)
+            ctypes.memset(secure_buffer, 0, buffer_len)
         self._log_buffer.clear()
 
     def cpu_saturate(self, seconds=5):
@@ -189,10 +208,11 @@ def hardened_random_delay(min_delay=0.1, max_delay=1.0, jitter=0.05):
 
 class ObfuscatedEncryptedCookieStore:
     def __init__(self, qt_cookie_store: QWebEngineCookieStore):
-        self.store = {}
-        self.key_store = {}
+        self.store = {}  # {obfuscated_name: (encrypted_value, salt)}
         self.qt_cookie_store = qt_cookie_store
         self.qt_cookie_store.cookieAdded.connect(self.intercept_cookie)
+        self.master_salt = secrets.token_bytes(16)
+        self.master_key = SecureCryptoUtils.derive_key(b"cookie_master_key", self.master_salt)
 
     def obfuscate_name(self, name: str) -> str:
         return hashlib.sha256(name.encode()).hexdigest()[:16]
@@ -206,19 +226,20 @@ class ObfuscatedEncryptedCookieStore:
 
     def set_cookie(self, name: str, value: str):
         hardened_random_delay(0.2, 1.5)
-        key = Fernet.generate_key()
+        salt = secrets.token_bytes(16)
+        key = SecureCryptoUtils.derive_key(self.master_key, salt)
         cipher = Fernet(key)
         encrypted = cipher.encrypt(value.encode())
-        self.store[name] = encrypted
-        self.key_store[name] = key
+        self.store[name] = (encrypted, salt)
         del cipher
         del key
 
     def get_cookie(self, name: str) -> str:
         hardened_random_delay(0.1, 1.0)
-        encrypted = self.store.get(name)
-        key = self.key_store.get(name)
-        if encrypted and key:
+        entry = self.store.get(name)
+        if entry:
+            encrypted, salt = entry
+            key = SecureCryptoUtils.derive_key(self.master_key, salt)
             cipher = Fernet(key)
             value = cipher.decrypt(encrypted).decode()
             del cipher
@@ -235,22 +256,11 @@ class ObfuscatedEncryptedCookieStore:
         self._secure_erase()
 
     def _secure_erase(self):
-        for key in list(self.store.keys()):
-            encrypted = self.store[key]
-            if encrypted:
-                overwrite = secrets.token_bytes(len(encrypted))
-                self.store[key] = overwrite
-                del overwrite
-            del self.store[key]
-        for key in list(self.key_store.keys()):
-            key_material = self.key_store[key]
-            if key_material:
-                overwrite = secrets.token_bytes(len(key_material))
-                self.key_store[key] = overwrite
-                del overwrite
-            del self.key_store[key]
+        for name in list(self.store.keys()):
+            encrypted, salt = self.store[name]
+            self.store[name] = (secrets.token_bytes(len(encrypted)), secrets.token_bytes(len(salt)))
+            del self.store[name]
         self.store.clear()
-        self.key_store.clear()
         
 class NetworkProtector:
     def __init__(self, sock):
