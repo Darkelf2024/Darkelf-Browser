@@ -92,6 +92,7 @@ from collections import defaultdict
 from cryptography.fernet import Fernet
 from shiboken6 import isValid
 from datetime import datetime
+import string
 import getpass
 import uuid
 import hashlib
@@ -2266,30 +2267,25 @@ class Darkelf(QMainWindow):
         self.settings.setValue("block_media_devices", enabled)
         
     def closeEvent(self, event):
-        """Enhanced clean shutdown with anti-forensics measures and secure deletion."""
+        """Secure shutdown with memory wipe, file deletion, and anti-forensics measures."""
         try:
-            # Log shutdown activity
             if hasattr(self, 'log_path') and os.path.exists(self.log_path):
                 self.log_stealth("Initiating clean shutdown...")
 
-            # Final forensic environment check
             self.check_forensic_environment()
 
-            # Stop Tor if running
-            if callable(getattr(self, 'stop_tor', None)):
-                self.stop_tor()
+            # Stop Tor if active
+            if hasattr(self, 'tor_manager') and callable(getattr(self.tor_manager, 'stop_tor', None)):
+                self.tor_manager.stop_tor()
 
-            # Wipe memory for encrypted cookie store
+            # Wipe memory-based encrypted cookie store
             if hasattr(self, 'encrypted_store'):
                 self.encrypted_store.wipe_memory()
 
-            # Save user settings
             self.save_settings()
-
-            # Clear cache and history securely
             self.secure_clear_cache_and_history()
 
-            # Stop any timers in the download manager
+            # Stop download timers
             if hasattr(self, 'download_manager') and hasattr(self.download_manager, 'timers'):
                 for timer in self.download_manager.timers.values():
                     try:
@@ -2297,7 +2293,7 @@ class Darkelf(QMainWindow):
                     except Exception:
                         pass
 
-            # Close all tabs and securely release their resources
+            # Close all tabs
             if hasattr(self, 'tab_widget'):
                 for i in reversed(range(self.tab_widget.count())):
                     widget = self.tab_widget.widget(i)
@@ -2315,7 +2311,7 @@ class Darkelf(QMainWindow):
                     widget.setParent(None)
                     widget.deleteLater()
 
-            # Close any popout views
+            # Close popouts
             if hasattr(self, 'web_views'):
                 for view in self.web_views:
                     try:
@@ -2330,7 +2326,7 @@ class Darkelf(QMainWindow):
                     view.setParent(None)
                     view.deleteLater()
 
-            # Cleanup main view
+            # Close main view
             if hasattr(self, 'web_view'):
                 try:
                     page = self.web_view.page()
@@ -2344,37 +2340,99 @@ class Darkelf(QMainWindow):
                 self.web_view.setParent(None)
                 self.web_view.deleteLater()
 
-            # Process any remaining events
             QApplication.processEvents()
             QApplication.processEvents()
 
-            # Schedule deletion of the web profile
             if hasattr(self, 'web_profile') and self.web_profile:
                 QTimer.singleShot(5000, lambda: self.web_profile.deleteLater())
 
-            # Securely delete any temporary directories/files used
+            # Clean RAM-based directory
+            if hasattr(self, 'ram_path') and os.path.exists(self.ram_path):
+                self.secure_delete_ram_disk_directory(self.ram_path)
+
+            # Clean temp folder
             temp_subdir = os.path.join(tempfile.gettempdir(), "darkelf_temp")
             if os.path.exists(temp_subdir):
                 self.secure_delete_directory(temp_subdir)
 
-            # Securely delete cryptographic key files if present
+            # Cryptographic keys
             for keyfile in ["private_key.pem", "ecdh_private_key.pem"]:
                 if os.path.exists(keyfile):
                     self.secure_delete(keyfile)
 
-            # Securely delete stealth log — very last
-            log_file_path = os.path.expanduser("~/.darkelf_log")
+            # Final: log
             if hasattr(self, 'log_path') and os.path.exists(self.log_path):
                 self.secure_delete(self.log_path)
 
         except Exception as e:
-            # Only log if log file still exists
             if hasattr(self, 'log_path') and os.path.exists(self.log_path):
                 self.log_stealth(f"Error during shutdown: {e}")
-
         finally:
-            # Never log here — log file may already be deleted
             super().closeEvent(event)
+
+    def secure_delete_directory(self, directory_path):
+        try:
+            if not os.path.exists(directory_path):
+                self.log_stealth(f"[!] Directory not found: {directory_path}")
+                return
+
+            for root, dirs, files in os.walk(directory_path, topdown=False):
+                for name in files:
+                    self.secure_delete(os.path.join(root, name))
+                for name in dirs:
+                    try:
+                        os.rmdir(os.path.join(root, name))
+                    except Exception as e:
+                        self.log_stealth(f"[!] Error removing subdir {name}: {e}")
+
+            os.rmdir(directory_path)
+            self.log_stealth(f"[✓] Securely deleted directory: {directory_path}")
+        except Exception as e:
+            self.log_stealth(f"[!] Error deleting directory {directory_path}: {e}")
+
+    def secure_delete_temp_memory_file(self, file_path):
+        try:
+            if not isinstance(file_path, (str, bytes, os.PathLike)):
+                self.log_stealth(f"[!] Invalid temp file path: {type(file_path)}")
+                return
+
+            if not os.path.exists(file_path):
+                self.log_stealth(f"[!] Temp file not found: {file_path}")
+                return
+
+                file_size = os.path.getsize(file_path)
+
+                with open(file_path, "r+b", buffering=0) as f:
+                    for _ in range(3):
+                        f.seek(0)
+                        f.write(secrets.token_bytes(file_size))
+                        f.flush()
+                        os.fsync(f.fileno())
+
+            os.remove(file_path)
+            self.log_stealth(f"[✓] Securely deleted temp file: {file_path}")
+        except Exception as e:
+            self.log_stealth(f"[!] Error deleting temp file {file_path}: {e}")
+
+    def secure_delete_ram_disk_directory(self, ram_dir_path):
+        try:
+            if not os.path.exists(ram_dir_path):
+                self.log_stealth(f"[!] RAM disk not found: {ram_dir_path}")
+                return
+
+            for root, dirs, files in os.walk(ram_dir_path, topdown=False):
+                for name in files:
+                    self.secure_delete_temp_memory_file(os.path.join(root, name))
+                for name in dirs:
+                    try:
+                        os.rmdir(os.path.join(root, name))
+                    except Exception as e:
+                        self.log_stealth(f"[!] Error removing RAM subdir {name}: {e}")
+
+            os.rmdir(ram_dir_path)
+            self.log_stealth(f"[✓] Wiped RAM disk: {ram_dir_path}")
+        except Exception as e:
+            self.log_stealth(f"[!] Error wiping RAM disk: {e}")
 
     def handle_download(self, download_item):
         self.download_manager.handle_download(download_item)
