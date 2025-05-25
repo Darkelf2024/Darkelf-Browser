@@ -3,6 +3,10 @@
 
 Welcome to the Darkelf Browser! This provides comprehensive information about the Darkelf Browser, its features, installation guides, and much more can be found on our **Discord**.
 
+Darkelf Compiled Release: [**Darkelf Compiled Release](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Darkelf%20Compiled%20Release.md)
+
+The .so file and launch py are located in the repository
+
 Visit our official website: [**darkelfbrowser.com**](https://darkelfbrowser.com)
 
 Join our community on **Discord** for additional resources including:
