@@ -15,6 +15,8 @@ Launch them using the provided script:
 python3 launch_darkelf.py          # Runs 'extreme' version by default
 python3 launch_darkelf.py osint    # Launches the OSINT Stealth variant
 
+Refer to Darkelf Compiled Release Documentation listed in Repository
+
 
 Visit our official website: [**darkelfbrowser.com**](https://darkelfbrowser.com)
 
