@@ -57,6 +57,8 @@ import requests
 import shutil
 import shlex
 import platform
+import asyncio
+import httpx
 import dns.query
 import dns.message
 import dns.rdatatype
