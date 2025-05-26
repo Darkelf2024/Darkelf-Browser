@@ -3,11 +3,18 @@
 
 Welcome to the Darkelf Browser! This provides comprehensive information about the Darkelf Browser, its features, installation guides, and much more can be found on our **Discord**.
 
-Darkelf Compiled Release: [**Darkelf Compiled Release**](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Darkelf%20Compiled%20Release.md)
+## 🔐 Darkelf Compiled Release
 
-Compiled Releases darkelf extreme & darkelf osint stealth
+Compiled secure modules available for:
 
-The .so file and launch py are located in the repository
+- [**darkelf_extreme.cpython-311-darwin.so**](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/darkelf_extreme.cpython-311-darwin.so)
+- [**darkelf_osint_stealth.cpython-311-darwin.so**](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/darkelf_osint_stealth.cpython-311-darwin.so)
+
+Launch them using the provided script:
+
+python3 launch_darkelf.py          # Runs 'extreme' version by default
+python3 launch_darkelf.py osint    # Launches the OSINT Stealth variant
+
 
 Visit our official website: [**darkelfbrowser.com**](https://darkelfbrowser.com)
 
