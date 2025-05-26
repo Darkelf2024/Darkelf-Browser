@@ -2,7 +2,7 @@
 
 Darkelf is a stealth-optimized, privacy-hardened browser built with PySide6 and cryptographic safeguards.  
 This release ships with the core logic compiled into `.so` binaries using Cython to protect source code.
-Please make to place both .so files with launch.py file into the same folder on the desktop. - Name: darkelf_build or darkelf_core
+Please make sure to place both .so files with launch.py file into the same folder on the desktop. - Name: darkelf_build or darkelf_core
 
 ---
 
