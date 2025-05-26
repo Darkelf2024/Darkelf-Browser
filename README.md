@@ -5,6 +5,8 @@ Welcome to the Darkelf Browser! This provides comprehensive information about th
 
 Darkelf Compiled Release: [**Darkelf Compiled Release**](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Darkelf%20Compiled%20Release.md)
 
+Compiled Releases darkelf extreme & darkelf osint stealth
+
 The .so file and launch py are located in the repository
 
 Visit our official website: [**darkelfbrowser.com**](https://darkelfbrowser.com)
