@@ -1,4 +1,4 @@
-# darkelf_run.py
+# launch_darkelf.py
 
 import sys
 from PySide6.QtWidgets import QApplication
