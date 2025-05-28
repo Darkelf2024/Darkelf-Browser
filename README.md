@@ -150,3 +150,33 @@ Thank you for your continued support in making **Darkelf Browser** the best it c
 ## License & Terms of Use
 Darkelf Browser is licensed under **LGPL**, but additional **terms of use** apply.
 **Read the full [Terms of Use](Terms.md) and the [Export Compliance Notice](ExportComplianceNotice.md).**
+
+Disclaimer
+
+Darkelf Browser is a specialized, experimental web browser developed for cybersecurity research, educational use, and academic exploration. It is designed for environments where users operate under adversarial conditions, such as digital forensics, penetration testing, surveillance evasion, and post-quantum cryptography evaluation.
+
+This software is intended solely for lawful, ethical, and non-commercial purposes including:
+	•	Cybersecurity research and academic analysis
+	•	Educational demonstrations of cryptographic and forensic-resistance techniques
+	•	Threat modeling and controlled red-team simulations
+	•	Privacy-focused software experimentation
+
+Darkelf is not a general-purpose web browser. It is intended for advanced users with appropriate technical understanding and well-defined threat models. Improper use in unintended environments may lead to operational or legal risks.
+
+Use at your own risk. The author makes no warranties or guarantees regarding fitness for any specific purpose or resistance to advanced threat actors.
+
+⸻
+
+🔐 Legal and Export Notice
+
+Darkelf Browser includes cryptographic functionality and may be subject to U.S. Export Administration Regulations (EAR). It is released in full compliance with EAR §740.13(e) and is made publicly available via open-source distribution for unrestricted access.
+
+Users are responsible for ensuring compliance with all applicable local, national, and international laws regarding cryptographic software and cybersecurity tools. The developer disclaims liability for misuse or deployment in prohibited jurisdictions.
+
+⸻
+
+📄 License
+
+Darkelf Browser is released under the LGPL open-source license, promoting transparency, reproducibility, and responsible research. Redistribution, modification, and peer review are encouraged under the terms of the license.
+
+
