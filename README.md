@@ -70,7 +70,7 @@ Darkelf Browser incorporates robust anti-forensics measures to ensure maximum pr
 - **Advanced Anti-Fingerprinting**: Blocks tracking methods like Canvas API, WebGL, and WebRTC, and spoofs browser characteristics such as screen resolution, hardware concurrency, and timezone.
 - **Metadata Stripping**: Strips metadata from downloaded files, including images (JPEG, PNG) and PDFs, to ensure no identifiable traces are left behind.
 - **Custom Chromium Flags**: Configures Chromium with enhanced privacy settings, including disabling WebRTC, WebGL, speculative connections, and third-party cookies, while enforcing incognito mode by default.
-- **Quantum-Resistant Encryption**: Leverages advanced cryptographic protocols like ChaCha20, AES-GCM, RSA, and ECDH. Certain editions implement post-quantum algorithms (e.g., Kyber768/1024).
+- **Quantum-Resistant Encryption**: Leverages advanced cryptographic protocols like ChaCha20, AES-GCM, RSA, and ECDH. Certain editions implement post-quantum algorithms (e.g., ML-KEM-768/1024).
 - **Comprehensive Sandboxing**: Disables local storage, IndexedDB, and other persistent storage mechanisms. Enforces strict XSS auditing and blocks insecure content.
 
 For more details, refer to the full [Anti-Forensics Documentation](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Anti-Forensics.md).
