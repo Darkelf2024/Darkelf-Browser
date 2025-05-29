@@ -1,4 +1,4 @@
-# Darkelf Browser Post Quantum Edition Hybrid Kyber768 Features
+# Darkelf Browser Post Quantum Edition Hybrid ML-KEM-768/1024 Features
 
 ## Security Features
 1. **Adblock and Tracker Blocking**
