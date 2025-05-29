@@ -39,7 +39,7 @@ Stay connected and get the most out of Darkelf Browser!
 - **Forensic-Resistant Sessions**: RAM-only storage ensures no data persists after shutdown.  
 - **Sandboxing**: Isolate processes to prevent unauthorized access.  
 - **Anti-Fingerprinting**: Blocks canvas/WebGL fingerprinting, spoofs user agents, and hides hardware details.  
-- **Quantum Encryption**: Post-quantum hybrid encryption with Kyber768/1024 + X25519 and standalone editions for future-proof security. (Awaiting Release)  
+- **Quantum Encryption**: Post-quantum hybrid encryption with ML-KEM-768/1024 + X25519 and standalone editions for future-proof security. (Awaiting Release)  
 
 ### 🛡️ **Advanced Security Measures**  
 - **Custom Ad Blocker**: Blocks domains, trackers, and dynamic ads.  
