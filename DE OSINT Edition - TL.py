@@ -105,6 +105,72 @@ import psutil
 from PIL import Image
 import piexif
 
+class PhishingDetectorZeroTrace:
+    """
+    Zero-trace phishing detection for Darkelf:
+    - No logging
+    - No disk writes
+    - In-memory heuristics only
+    - No LLM, no network
+    """
+
+    def __init__(self):
+        self.static_blacklist = {
+            "paypal-login-security.com",
+            "update-now-secure.net",
+            "signin-account-verification.info"
+        }
+
+        self.suspicious_keywords = {
+            "login", "verify", "secure", "account", "bank", "update", "signin", "password"
+        }
+
+        self.ip_pattern = re.compile(r"^\d{1,3}(\.\d{1,3}){3}$")
+        self.session_flags = set()  # ephemeral, cleared on restart
+
+    def is_suspicious_url(self, url):
+        try:
+            parsed = urlparse(url)
+            host = parsed.hostname or ""
+            host = host.lower()
+            url_hash = self._hash_url(url)
+
+            if url_hash in self.session_flags:
+                return True, "Previously flagged during session."
+
+            if host in self.static_blacklist:
+                return True, f"Domain '{host}' is in static blacklist."
+
+            if self.ip_pattern.match(host):
+                return True, "URL uses IP address directly."
+
+            if host.count('.') > 3:
+                return True, "Too many subdomains."
+
+            for keyword in self.suspicious_keywords:
+                if keyword in host:
+                    return True, f"Contains suspicious keyword: '{keyword}'."
+
+            return False, "URL appears clean."
+
+        except Exception as e:
+            return True, f"URL parsing error: {str(e)}"
+
+    def analyze_page_content(self, html):
+        try:
+            lowered = html.lower()
+            score = 0
+            if "<form" in lowered and ("password" in lowered or "login" in lowered):
+                score += 2
+            if "re-authenticate" in lowered or "enter your credentials" in lowered:
+                score += 1
+            if "<iframe" in lowered or "hidden input" in lowered:
+                score += 1
+            if score >= 2:
+                return True, "Suspicious elements found in page."
+            return False, "Content appears clean."
+        except Exception:
+            return False, "Content scan error."
 
 class SecureCryptoUtils:
     @staticmethod
@@ -118,7 +184,6 @@ class SecureCryptoUtils:
             backend=default_backend()
         )
         return base64.urlsafe_b64encode(kdf.derive(password))
-
 
 class StealthCovertOps:
     def __init__(self, stealth_mode=True):
@@ -1368,6 +1433,8 @@ class Darkelf(QMainWindow):
         
         self.load_or_generate_ecdh_key_pair()
 
+        self.phishing_detector = PhishingDetectorZeroTrace()
+        
         self.disable_system_swap()  # Disable swap early
         self.init_settings()
         self.init_security()
@@ -2390,6 +2457,15 @@ class Darkelf(QMainWindow):
         if isinstance(current_tab, QWebEngineView):
             current_tab.setZoomFactor(current_tab.zoomFactor() - 0.1)
 
+    def analyze_page_content(self, web_view, url):
+        web_view.page().toHtml(lambda html: self.check_html_for_phishing(url, html))
+
+    def check_html_for_phishing(self, url, html):
+        is_phish, reason = self.phishing_detector.analyze_page_content(html)
+        if is_phish:
+            self.phishing_detector.flag_url_ephemeral(url)
+            self.phishing_detector.show_warning_dialog(self, reason)
+    
     def toggle_full_screen(self):
         if self.isFullScreen():
             self.showNormal()
