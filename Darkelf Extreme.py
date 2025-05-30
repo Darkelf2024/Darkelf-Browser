@@ -172,6 +172,21 @@ class PhishingDetectorZeroTrace:
         except Exception:
             return False, "Content scan error."
 
+    def flag_url_ephemeral(self, url):
+        self.session_flags.add(self._hash_url(url))
+
+    def _hash_url(self, url):
+        return hashlib.sha256(url.encode()).hexdigest()
+
+    def show_warning_dialog(self, parent_widget, reason):
+        msg = QMessageBox(parent_widget)
+        msg.setIcon(QMessageBox.Warning)
+        msg.setWindowTitle("Phishing Warning")
+        msg.setText("Blocked suspicious site")
+        msg.setInformativeText(reason)
+        msg.setStandardButtons(QMessageBox.Ok)
+        msg.exec()
+
 class SecureCryptoUtils:
     @staticmethod
     def derive_key(password: bytes, salt: bytes) -> bytes:
