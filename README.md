@@ -7,6 +7,8 @@ Welcome to the Darkelf Browser! This provides comprehensive information about th
 
 Refer to Darkelf Compiled Release Documentation listed in Repository - Updated
 
+Darkelf Post-Quantum Editions - Source Code Released = Darkelf will remain as a Pythoon Script .py file until further notice. Head to Darkelf Post Quantum Repository. 
+
 
 Visit our official website: [**darkelfbrowser.com**](https://darkelfbrowser.com)
 
