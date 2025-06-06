@@ -49,6 +49,16 @@ For detailed licensing information, please refer to each library’s official do
 This application uses **PySide6-WebEngine**, which provides Python bindings for **Qt WebEngine**, a web rendering engine developed by **The Qt Company** under the **LGPL-3.0 license**.  
 **PySide6-WebEngine** enables the integration of web functionality into this application using the **Qt framework**. For more information, refer to the official PySide6 documentation.  
 
+### Code Inspiration / Adapted Techniques
+
+This project uses anti-fingerprinting strategies inspired by or adapted from:
+
+- puppeteer-extra-plugin-stealth (MIT License) – https://github.com/berstend/puppeteer-extra
+- Brave Browser Fingerprinting Defenses – https://github.com/brave
+- Librewolf Privacy Scripts – https://gitlab.com/librewolf-community
+
+Modifications have been made to suit the PySide6 WebEngine environment and integrate with Darkelf’s privacy core.
+
 ### **Key Components and Dependencies:**  
 
 - **Python Standard Library** – Includes built-in modules such as `sys`, `os`, `gc`, `base64`, and `urllib.parse`, essential for system operations, memory management, and URL handling.  
