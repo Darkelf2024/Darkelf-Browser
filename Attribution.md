@@ -1,5 +1,11 @@
 # Darkelf Browser
 
+### Authorship
+
+Darkelf Browser is an original project developed by Dr. Kevin Moore. While inspired by best practices from privacy-respecting tools like Brave, Tor Browser, and Puppeteer stealth techniques, all fingerprinting countermeasures and cryptographic enhancements were independently implemented and customized for this application.
+
+This project also used generative assistance (e.g., ChatGPT) during development for research, coding, and documentation — but all architecture, decisions, and final code are authored and reviewed by Dr. Moore.
+
 ## Attribution
 
 This project utilizes third-party libraries and resources, which are acknowledged below:  
