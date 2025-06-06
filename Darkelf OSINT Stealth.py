@@ -10,43 +10,47 @@
 #
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU Lesser General Public License for more details.
 #
 # You should have received a copy of the GNU Lesser General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
 #
 # EXPORT COMPLIANCE NOTICE:
-# This software, Darkelf Browser v3.0, is classified under ECCN 5D002 c.1
-# and is authorized for export under License Exception ENC, as described in
-# Sections 740.17(a) and 740.17(b)(1) of the U.S. Export Administration
-# Regulations (EAR). The software includes encryption technologies (such
-# as AES, RSA, ChaCha20, and X25519) used for secure data storage and
-# transmission, which may subject it to U.S. export control laws.
+# This software contains encryption source code and is made publicly available
+# under the terms of License Exception TSU pursuant to 15 CFR §740.13(e) of the
+# U.S. Export Administration Regulations (EAR).
+#
+# A public release notification has been submitted to the U.S. Bureau of Industry
+# and Security (BIS) and the National Security Agency (NSA) as required by the EAR.
+#
+# The source code includes implementations of standard encryption technologies
+# (such as AES, RSA, ChaCha20, TLS 1.3, and X25519), and is intended for academic,
+# research, and general-purpose use.
+#
+# This code is provided as source only. No compiled binaries are included in this
+# distribution. Redistribution, modification, and use must comply with all applicable
+# U.S. export control laws and regulations.
 #
 # Prohibited Destinations:
-# This software may not be exported, re-exported, or transferred, either
-# directly or indirectly, to:
-# - Countries or territories subject to U.S. embargoes or comprehensive
-#   sanctions, as identified by the U.S. Department of Treasury’s Office of
-#   Foreign Assets Control (OFAC) or the BIS E1/E2 List.
-# - Entities or individuals listed on the U.S. Denied Persons List, Entity
-#   List, Specially Designated Nationals (SDN) List, or any other restricted
-#   parties list.
+# This software may not be exported, re-exported, or transferred, either directly
+# or indirectly, to:
+# - Countries or territories subject to U.S. embargoes or comprehensive sanctions,
+#   as identified by the U.S. Department of Treasury’s Office of Foreign Assets Control (OFAC)
+#   or the BIS Country Group E:1 or E:2 lists.
+# - Entities or individuals listed on the U.S. Denied Persons List, Entity List,
+#   Specially Designated Nationals (SDN) List, or any other restricted party list.
 #
 # End-Use Restrictions:
-# This software may not be used for the development, production, or
-# deployment of weapons of mass destruction, including nuclear, chemical,
-# or biological weapons, or missile technology, as defined under Part 744
-# of the EAR.
+# This software may not be used in the development, production, or deployment of
+# weapons of mass destruction, including nuclear, chemical, or biological weapons,
+# or missile technology, as defined in Part 744 of the EAR.
 #
-# User Obligations:
-# By downloading, using, or distributing this software, you agree to comply
-# with all applicable U.S. export laws and regulations. Users and redistributors
-# are solely responsible for ensuring their actions adhere to these regulations.
+# By downloading, using, or distributing this software, you agree to comply with
+# all applicable U.S. export control laws and regulations.
 #
-# This software is made available under the LGPL 3.0 license and was originally
-# authored and published by Dr. Kevin Moore in February 2025.
+# This software is published under the LGPL v3.0 license and was authored by
+# Dr. Kevin Moore in 2025.
 
 
 import sys
