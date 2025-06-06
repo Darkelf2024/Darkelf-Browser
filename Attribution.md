@@ -49,7 +49,7 @@ For detailed licensing information, please refer to each library’s official do
 This application uses **PySide6-WebEngine**, which provides Python bindings for **Qt WebEngine**, a web rendering engine developed by **The Qt Company** under the **LGPL-3.0 license**.  
 **PySide6-WebEngine** enables the integration of web functionality into this application using the **Qt framework**. For more information, refer to the official PySide6 documentation.  
 
-### Code Inspiration / Adapted Techniques
+## Code Inspiration / Adapted Techniques
 
 This project uses anti-fingerprinting strategies inspired by or adapted from:
 
