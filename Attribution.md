@@ -46,6 +46,9 @@ For detailed licensing information, please refer to each library’s official do
   
   - These lists **may only be used for non-commercial purposes**. If you would like to use them in a commercial project, please contact **support@disconnect.me** to request a commercial license.
   - If you believe a tracker has been missed or a domain has been incorrectly categorized, you can submit a report using [this form](https://github.com/disconnectme/disconnect-tracking-protection).
+ 
+  - ⚠️ This edition includes Disconnect.me lists, which are licensed under CC BY-NC-SA 4.0. Use in commercial environments may require additional licensing. See https://disconnect.me.
+
   - **Note:** Pull requests are not reviewed and will be closed.
 
   **Copyright (c) 2024 Disconnect, Inc.**  
