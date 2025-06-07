@@ -68,7 +68,7 @@ Darkelf Browser incorporates robust anti-forensics measures to ensure maximum pr
 For more details, refer to the full [Anti-Forensics Documentation](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Anti-Forensics.md).
 
 ### 🌐 **Browser Experience**  
-- **DelphiFMX UI Framework**: Fast, responsive, and cross-platform.  
+- **DelphiFMX UI Framework**: Fast, responsive, and cross-platform. - Work in Progress 
 - **PySide6 QtWebEngine**: Enhanced web browsing with modern rendering capabilities.  
 - **Multi-Platform Support**: macOS (Intel & Apple Silicon), Linux, Windows ready.  
 - **Customizable Security Settings**: Toggle JavaScript, cookies, geolocation, and more.
