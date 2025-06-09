@@ -6,7 +6,7 @@ psutil==7.0.0
 Pillow==11.2.1
 PySide6==6.9.0
 PySide6_Addons==6.9.0
-PySide6_Essentials==6.9.0
+PySide6_Essentials==6.9.1
 PySocks==1.7.1
 PyQt6-WebEngine==6.9.0  # Fail Safe/Fallback
 QtPy==2.4.3  # Fail Safe/Fallback
