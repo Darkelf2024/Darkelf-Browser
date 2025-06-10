@@ -111,8 +111,6 @@ For installation, consult the [Installation Guide](https://github.com/Darkelf202
 ---
 
 ## 🚀 **Future Improvements**  
-- **Mobile App**: iOS/Android apps in development.  
-- **Standalone Desktop Apps**: `.dmg` and `.exe` releases coming soon.  
 - **YouTube Fullscreen Fix**: Under active development.  
 - **Enhanced Adblock Accuracy**: Expanding rule sets and refining algorithms.  
 
