@@ -1,6 +1,6 @@
 ## Permanent Swap Disable Guide (macOS M1–M4, 2025)
 
-This guide shows how to **permanently disable macOS swap** on Apple Silicon (M1–M4) with **Permissive Security**, **SIP disabled**, and **dynamic pager off**. Ideal for secure, memory-only workloads like Darkelf, Tor, or forensics-safe use cases.
+This guide shows how to **permanently disable macOS swap** on Apple Silicon (M1–M4) with **Permissive Security**, **SIP disabled**, and **dynamic pager off**. Ideal for secure, memory-only workloads like Darkelf, or forensics-safe use cases.
 
 ---
 
