@@ -35,6 +35,8 @@ From the top menu: **Utilities → Terminal**
 
 ```bash
 csrutil disable
+csrutil authenticated-root disable
+nvram boot-args="vm_compressor=2"
 ```
 
 ---
