@@ -1,7 +1,7 @@
 
 # 🔐 macOS Hardening Guide (When SIP and Swap Are Disabled)
 
-If you’ve disabled **System Integrity Protection (SIP)** and **swap** for secure workloads (e.g., Darkelf, forensics, crypto), use this guide to harden macOS using alternative controls.
+If you’ve disabled **System Integrity Protection (SIP)** and **swap** for secure workloads (e.g., Darkelf, forensics, crypto), use this guide to harden macOS using alternative controls. This Guide is intended for Persistence - Full Time Defense
 
 ---
 
