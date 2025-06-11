@@ -7,7 +7,7 @@ Welcome to the Darkelf Browser! This provides comprehensive information about th
 
 Refer to Darkelf Compiled Release Documentation listed in Repository - Updated
 
-Please refer to the [Swap Disable Guide](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/disable_swap_macos_guide.md) to permanently disable macOS swap on Apple Silicon (M1–M4) with Permissive Security, SIP disabled, and dynamic pager off. Ideal for secure, memory-only workloads like Darkelf, or forensics-safe use cases. - Darkelf does exactly what it is suppose to do!
+Please refer to the [Swap Disable Guide](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/disable_swap_macos_guide.md) to permanently disable macOS swap on Apple Silicon (M1–M4) with Permissive Security, SIP disabled, and dynamic pager off. Ideal for secure, memory-only workloads like Darkelf, or forensics-safe use cases. - Darkelf does exactly what it is suppose to do! Apple continues to create difficulties with Swap Disabling etc. The current Guide is for 2025.
 
 Darkelf Post-Quantum Editions - Source Code Released = Darkelf will remain as a Python Script .py file until further notice. Head to [Darkelf Post Quantum](https://github.com/Darkelf2024/Darkelf-Post-Quantum-Edition/tree/main). 
 
