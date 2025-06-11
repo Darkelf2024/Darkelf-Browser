@@ -10,7 +10,7 @@ PySide6_Essentials==6.9.1
 PySocks==1.7.1
 PyQt6-WebEngine==6.9.0  # Fail Safe/Fallback
 QtPy==2.4.3  # Fail Safe/Fallback
-requests==2.32.3
+requests==2.32.4
 shiboken6==6.9.1
 stem==1.8.2
 httpx==0.28.1
