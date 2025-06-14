@@ -11,7 +11,7 @@ Darkelf Vault Browser uses PyQt5 Super Stealth - Head to other Repo
 - No Leaks
 - No Fingerprints
 - No http2 
-- No sec che ua headers 
+- No sec cha ua headers 
 - TLS Rotations 
 - Super Stealth
 - Post Quantum Encrypted Messaging Coming! 
