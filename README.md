@@ -7,6 +7,7 @@ Welcome to the Darkelf Browser! This provides comprehensive information about th
 
 Darkelf Vault Browser uses PyQt5 Super Stealth - Head to other Repo
 - Tor Letterboxing 
+- Firefox Headers Cipher Suites
 - No Leaks
 - No Fingerprints
 - No http2 
