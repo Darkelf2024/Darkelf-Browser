@@ -17,13 +17,12 @@ Darkelf Vault Browser uses PyQt5 Super Stealth - Head to other Repo
 - Post Quantum Encrypted Messaging Coming! 
 - TLS utilizes X25519/Post Quantum Logic, Ai, PQCryptApi
 
+Darkelf Vault PyQt5 This browser uses ML-KEM-768 for encrypted messaging key storage and secure buffer operations. TLS traffic remains X25519-based due to current web standard constraints!
+
 PySide6 Version Post Quantum 
 - TLS Post Quantum 
 - All Post Quantum Goods! 
-
-No leaks No fingerprints = Standard Editions in this Repo will get major updates fixes
-Darkelf Post Quantum is Active 100% Head to that Repo 
-
+ 
 Please refer to the [Swap Disable Guide](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/disable_swap_macos_guide.md) to permanently disable macOS swap on Apple Silicon (M1–M4) with Permissive Security, SIP disabled, and dynamic pager off. Ideal for secure, memory-only workloads like Darkelf, or forensics-safe use cases. - Darkelf does exactly what it is suppose to do! Apple continues to create difficulties with Swap Disabling etc. The current Guide is for 2025.
 
 Darkelf Post-Quantum Editions - Source Code Released = Darkelf will remain as a Python Script .py file until further notice. Head to [Darkelf Post Quantum](https://github.com/Darkelf2024/Darkelf-Post-Quantum-Edition/tree/main). 
