@@ -13,7 +13,7 @@ TLS Rotation JA3
 Font 
 
 No leaks No fingerprints = Standard Editions in this Repo will get major updates fixes
-Darkelf Post Quantum is Active 100% 
+Darkelf Post Quantum is Active 100% Head to that Repo PQC
 
 Refer to Darkelf Compiled Release Documentation listed in Repository - Updated
 
