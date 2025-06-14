@@ -3,7 +3,17 @@
 
 Welcome to the Darkelf Browser! This provides comprehensive information about the Darkelf Browser, its features, installation guides, and much more can be found on our **Discord**.
 
-## 🔐 Darkelf Compiled Release
+## 🔐 Darkelf PyQt5, PySide6 - What's blocked?
+
+Canvas
+WebGL
+WebRTC 
+http2
+TLS Rotation JA3
+Font 
+
+No leaks No fingerprints = Standard Editions in this Repo will get major updates fixes
+Darkelf Post Quantum is Active 100% 
 
 Refer to Darkelf Compiled Release Documentation listed in Repository - Updated
 
