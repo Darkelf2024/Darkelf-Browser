@@ -13,9 +13,7 @@ TLS Rotation JA3
 Font 
 
 No leaks No fingerprints = Standard Editions in this Repo will get major updates fixes
-Darkelf Post Quantum is Active 100% Head to that Repo PQC
-
-Refer to Darkelf Compiled Release Documentation listed in Repository - Updated
+Darkelf Post Quantum is Active 100% Head to that Repo 
 
 Please refer to the [Swap Disable Guide](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/disable_swap_macos_guide.md) to permanently disable macOS swap on Apple Silicon (M1–M4) with Permissive Security, SIP disabled, and dynamic pager off. Ideal for secure, memory-only workloads like Darkelf, or forensics-safe use cases. - Darkelf does exactly what it is suppose to do! Apple continues to create difficulties with Swap Disabling etc. The current Guide is for 2025.
 
