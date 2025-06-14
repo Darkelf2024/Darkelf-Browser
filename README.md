@@ -3,15 +3,22 @@
 
 Welcome to the Darkelf Browser! This provides comprehensive information about the Darkelf Browser, its features, installation guides, and much more can be found on our **Discord**.
 
-## 🔐 Darkelf PyQt5, PySide6 - What's blocked Everything 
+## 🔐 Darkelf PyQt5, PySide6 - What's blocked Everything!
 
-Darkelf Vault Browser uses PyQt5 Super Stealth 
+Darkelf Vault Browser uses PyQt5 Super Stealth - Head to other Repo
 - Tor Letterboxing 
 - No Leaks
-- No Fingerprints 
+- No Fingerprints
+- No http2 
+- No sec che ua headers 
+- TLS Rotations 
 - Super Stealth
 - Post Quantum Encrypted Messaging Coming! 
 - TLS utilizes X25519/Post Quantum Logic, Ai, PQCryptApi
+
+PySide6 Version Post Quantum 
+- TLS Post Quantum 
+- All Post Quantum Goods! 
 
 No leaks No fingerprints = Standard Editions in this Repo will get major updates fixes
 Darkelf Post Quantum is Active 100% Head to that Repo 
