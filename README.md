@@ -21,7 +21,7 @@ Darkelf Vault PyQt5 This browser uses ML-KEM-768 for encrypted messaging key sto
 
 Download Here [Darkelf Vault Browser](https://github.com/Darkelf2024/Darkelf-Browser-v3-PQC/blob/main/Darkelf%20Vault%20Browser.py) This doesn't have the Kernel Monitor Integration! 
 
-PySide6 Version Post Quantum 
+PySide6 Version Post Quantum - Download Here [Post Quantum PySide6](https://github.com/Darkelf2024/Darkelf-Browser-v3-PQC/tree/main)
 - TLS Post Quantum 
 - All Post Quantum Goods! 
  
