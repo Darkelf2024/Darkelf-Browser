@@ -1,7 +1,7 @@
 # Darkelf Browser v3.0 🚀  
 **Enhanced Security | Ultimate Privacy | Cutting-Edge Technology | Anonymous Research | Zero Trace**
 
-Welcome to the Darkelf Browser! This provides comprehensive information about the Darkelf Browser, its features, installation guides, and much more can be found on our **Discord**.
+Welcome to the Darkelf Browser! This provides comprehensive information about the Darkelf Browser, its features, installation guides, and much more can be found on our [Discord](https://discord.gg/vEPAzBjj)
 
 ## 🔐 Darkelf PyQt5, PySide6 - What's blocked Everything!
 
