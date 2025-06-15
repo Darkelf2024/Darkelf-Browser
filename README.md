@@ -19,6 +19,8 @@ Darkelf Vault Browser uses PyQt5 Super Stealth - Head to other Repo
 
 Darkelf Vault PyQt5 This browser uses ML-KEM-768 for encrypted messaging key storage and secure buffer operations. TLS traffic remains X25519-based due to current web standard constraints!
 
+Download Here [Darkelf Vault Browser](https://github.com/Darkelf2024/Darkelf-Browser-v3-PQC/blob/main/Darkelf%20Vault%20Browser.py) This doesn't have the Kernel Monitor Integration! 
+
 PySide6 Version Post Quantum 
 - TLS Post Quantum 
 - All Post Quantum Goods! 
