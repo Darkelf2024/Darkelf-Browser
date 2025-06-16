@@ -14,20 +14,20 @@ Darkelf Vault Browser uses PyQt5 Super Stealth - Head to other Repo
 - No sec cha ua headers 
 - TLS Rotations 
 - Super Stealth
-
+- Bridge Integration obfs4 
 - Post Quantum Encrypted Messaging Coming! 
-- Bridge Integration Coming soon! obfs4 
 
 - TLS utilizes X25519/Post Quantum Logic, Ai, PQCryptApi
 
-Darkelf Vault PyQt5 This browser uses ML-KEM-768 for encrypted messaging key storage and secure buffer operations. TLS traffic remains X25519-based due to current web standard constraints!
+Darkelf Vault PyQt5: This browser uses ML-KEM-768 for encrypted messaging key storage and secure buffer operations. TLS traffic remains X25519-based due to current web standard constraints!
 
 Download Here [Darkelf Vault Browser](https://github.com/Darkelf2024/Darkelf-Browser-v3-PQC/blob/main/Darkelf%20Vault%20Browser.py) This doesn't have the Kernel Monitor Integration! 
 
 PySide6 Version Post Quantum - Download Here [Post Quantum PySide6](https://github.com/Darkelf2024/Darkelf-Browser-v3-PQC/tree/main)
 
 - TLS Post Quantum 
-- All Post Quantum Goods! 
+- All Post Quantum Goods!
+- All PQC PySide6 Editions need a Patch - In Progress!
  
 Please refer to the [Swap Disable Guide](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/disable_swap_macos_guide.md) to permanently disable macOS swap on Apple Silicon (M1–M4) with Permissive Security, SIP disabled, and dynamic pager off. Ideal for secure, memory-only workloads like Darkelf, or forensics-safe use cases. - Darkelf does exactly what it is suppose to do! Apple continues to create difficulties with Swap Disabling etc. The current Guide is for 2025.
 
