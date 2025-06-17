@@ -6,7 +6,7 @@ Welcome to the Darkelf Browser! This provides comprehensive information about th
 ## 🔐 Darkelf PyQt5, PySide6 - What's blocked Everything!
 
 Darkelf Vault Browser uses PyQt5 Super Stealth - Head to other Repo
-- Tor Letterboxing 
+- Tor Letterboxing Mimicking 
 - Firefox Headers Cipher Suites
 - No Leaks
 - No Fingerprints
