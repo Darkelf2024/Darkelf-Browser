@@ -14,6 +14,12 @@ requests==2.32.4
 shiboken6==6.9.1
 stem==1.8.2
 httpx==0.28.1
+PySocks==1.7.1
+PyQt5-WebEngine==5.15
+requests==2.32.4
+shiboken6==6.9.1
+stem==1.8.2
+httpx==0.28.1
 
 
 # Packages need to be maintained and upgraded to the latest
