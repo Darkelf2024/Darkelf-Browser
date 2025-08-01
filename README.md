@@ -3,7 +3,7 @@
 
 Welcome to the Darkelf Browser! This provides comprehensive information about the Darkelf Browser, its features, installation guides, and much more can be found on our [Discord](https://discord.gg/vEPAzBjj)
 
-## 🔐 Darkelf PyQt5, PySide6 - What's blocked Everything!
+## 🔐 Darkelf PyQt5, - What's blocked Everything!
 
 Darkelf Vault Browser uses PyQt5 Super Stealth - Head to other Repo
 - Tor Letterboxing Mimicking 
