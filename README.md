@@ -1,9 +1,9 @@
 # Darkelf Browser v3.0 🚀  
 **Enhanced Security | Ultimate Privacy | Cutting-Edge Technology | Anonymous Research | Zero Trace**
 
-Welcome to the Darkelf Browser! This provides comprehensive information about the Darkelf Browser, its features, installation guides, and much more can be found on our [Discord](https://discord.gg/vEPAzBjj)
+Welcome to the Darkelf Browser! This provides comprehensive information about the Darkelf Browser, its features, installation guides, and much more can be found on our [Discord](Invite-Only)
 
-## 🔐 Darkelf PyQt5, - What's blocked Everything!
+## 🔐 Darkelf PyQt5 & PySide6 - What's blocked Everything!
 
 Darkelf Vault Browser uses PyQt5 Super Stealth - Head to other Repo
 - Tor Letterboxing Mimicking 
@@ -27,7 +27,7 @@ PySide6 Version Post Quantum - Download Here [Post Quantum PySide6](https://gith
 
 - TLS Post Quantum 
 - All Post Quantum Goods!
-- All PQC PySide6 Editions need a Patch - In Progress!
+- Post Quantum KEM768 = PySide6 = Hardened, Zero Trace!
  
 Please refer to the [Swap Disable Guide](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/disable_swap_macos_guide.md) to permanently disable macOS swap on Apple Silicon (M1–M4) with Permissive Security, SIP disabled, and dynamic pager off. Ideal for secure, memory-only workloads like Darkelf, or forensics-safe use cases. - Darkelf does exactly what it is suppose to do! Apple continues to create difficulties with Swap Disabling etc. The current Guide is for 2025.
 
