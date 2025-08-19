@@ -183,7 +183,7 @@ Users are responsible for ensuring compliance with all applicable local, nationa
 
 📄 License
 
-Darkelf Browser is released under ## 📄 License
+Darkelf Browser is released under 📄 License
 
 This repository contains documentation and overview materials only.
 
