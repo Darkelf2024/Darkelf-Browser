@@ -191,6 +191,7 @@ This repository contains documentation and overview materials only.
 - Darkelf code lives in separate repos and keeps its own licenses:
   - **PyQt5 editions** → **GPL-3.0-or-later**
   - **PySide6 editions** → **LGPL-3.0-or-later**
+  - **Darkelf CLI editions → **LGPL-3.0-or-later**
 
 Logos, trademarks, and screenshots may be subject to additional terms.
 
