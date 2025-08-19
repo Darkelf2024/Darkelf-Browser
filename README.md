@@ -183,6 +183,14 @@ Users are responsible for ensuring compliance with all applicable local, nationa
 
 📄 License
 
-Darkelf Browser is released under the LGPL open-source license, promoting transparency, reproducibility, and responsible research. Redistribution, modification, and peer review are encouraged under the terms of the license.
+Darkelf Browser is released under ## 📄 License
 
+This repository contains documentation and overview materials only.
+
+- Docs in this repo: **LGPL-3.0-or-later**
+- Darkelf code lives in separate repos and keeps its own licenses:
+  - **PyQt5 editions** → **GPL-3.0-or-later**
+  - **PySide6 editions** → **LGPL-3.0-or-later**
+
+Logos, trademarks, and screenshots may be subject to additional terms.
 
