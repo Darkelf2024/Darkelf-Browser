@@ -28,6 +28,7 @@ PySide6 Version Post Quantum - Download Here [Post Quantum PySide6](https://gith
 - TLS Post Quantum 
 - All Post Quantum Goods!
 - Post Quantum KEM768 = PySide6 = Hardened, Zero Trace!
+- Darkelf Video Tests - Browserleaks, AmIUnique & Cover Your Tracks - [Darkelf Video](https://github.com/Darkelf2024/Darkelf-PySide6-Browser-PQC/tree/main/Darkelf%20Video)
  
 Please refer to the [Swap Disable Guide](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/disable_swap_macos_guide.md) to permanently disable macOS swap on Apple Silicon (M1–M4) with Permissive Security, SIP disabled, and dynamic pager off. Ideal for secure, memory-only workloads like Darkelf, or forensics-safe use cases. - Darkelf does exactly what it is suppose to do! Apple continues to create difficulties with Swap Disabling etc. The current Guide is for 2025.
 
