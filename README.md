@@ -93,14 +93,15 @@ Darkelf Browser incorporates robust anti-forensics measures to ensure maximum pr
 For more details, refer to the full [Anti-Forensics Documentation](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Anti-Forensics.md).
 
 ### 🌐 **Browser Experience**  
-- **DelphiFMX UI Framework**: Fast, responsive, and cross-platform. - Work in Progress 
+- **PyQt5 QtWebEngine**: Hardened web browsing.
 - **PySide6 QtWebEngine**: Enhanced web browsing with modern rendering capabilities.  
 - **Multi-Platform Support**: macOS (Intel & Apple Silicon), Linux, Windows ready.  
 - **Customizable Security Settings**: Toggle JavaScript, cookies, geolocation, and more.
+- **Post-Quantum**: Utilizes Kyber768/1024.
 
 ### 🌈 **Modern Design**  
-- **Adaptive Themes**: Auto-detect system preferences for Dark, Light, or Grey modes.  
-- **Custom Home Page**: Integrated DuckDuckGo search for private browsing.  
+- **Adaptive Themes**: Auto-detect system preferences for Window themes.  
+- **Custom Home Page**: Integrated DuckDuckGo search for private browsing and elegant feel.  
 
 ---
 
@@ -136,7 +137,7 @@ For more details, refer to the full [Anti-Forensics Documentation](https://githu
 ## 💡 **Contributors**  
 - **Dr. Kevin Moore** ([Darkelf2024](https://github.com/Darkelf2024)) – Creator & Lead Developer.  
 - **Kevin Nguyen** ([KevinVinhN](https://github.com/KevinVinhN)) – Testing & Error Analysis.  
-- **Raz** ([Raz-js](https://github.com/Raz-js)) – UI Upgrades using DelphiFMX and PySide6 integration.
+- **Raz** ([Raz-js](https://github.com/Raz-js)) – Bug Bounty Hunter & Software Engineer.
 
 For a full list, see [Contributors](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Contributors.md).  
 
@@ -145,7 +146,7 @@ For a full list, see [Contributors](https://github.com/Darkelf2024/Darkelf-Brows
 ## 🛡️ **Community & Feedback**  
 We value your input!  
 - **[Open an Issue](https://github.com/Darkelf2024/Darkelf-Browser/issues)** for bug reports or feature requests.  
-- Join us on [Discord](https://discord.gg/czAb2c2T) to contribute ideas.
+- Join us on [Discord](https://discord.gg/Invite-Only) to contribute ideas.
 - Join Our Discord Channel for further Walk-through/Visuals for Guidance with Darkelf Browser.
 
 ---
@@ -155,12 +156,11 @@ We value your input!
 Thank you for your continued support in making **Darkelf Browser** the best it can be!  
 
 ## License & Terms of Use
-Darkelf Browser is licensed under **LGPL**, but additional **terms of use** apply.
 **Read the full [Terms of Use](Terms.md) and the [Export Compliance Notice](ExportComplianceNotice.md).**
 
 Disclaimer
 
-Darkelf Browser is a specialized, experimental web browser developed for cybersecurity research, educational use, and academic exploration. It is designed for environments where users operate under adversarial conditions, such as digital forensics, penetration testing, surveillance evasion, and post-quantum cryptography evaluation.
+Darkelf Browser is a specialized, web browser developed for cybersecurity research, educational use, and academic exploration. It is designed for environments where users operate under adversarial conditions, such as digital forensics, penetration testing, surveillance evasion, and post-quantum cryptography evaluation.
 
 This software is intended solely for lawful, ethical, and non-commercial purposes including:
 	•	Cybersecurity research and academic analysis
