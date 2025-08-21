@@ -8,5 +8,5 @@ updates:
   - package-ecosystem: "pip" # Python package manager
     directory: "/" # Location of the requirements.txt file
     schedule:
-      interval: "weekly" # Update dependencies weekly
+      interval: "daily" # Update dependencies weekly
     # Optionally, you can add more configuration here, such as assignees, reviewers, or labels.
