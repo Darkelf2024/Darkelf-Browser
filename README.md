@@ -34,9 +34,9 @@ Please refer to the [Swap Disable Guide](https://github.com/Darkelf2024/Darkelf-
 
 Darkelf Post-Quantum Editions - Source Code Released = Darkelf will remain as a Python Script .py file until further notice. Head to [Darkelf Post Quantum](https://github.com/Darkelf2024/Darkelf-Post-Quantum-Edition/tree/main). 
 
-Darkelf Browser - MacApp in Progress!
-Linux App for Arch in the Works!
-Darkelf Browser All Editions Work on MacM1-4 Series and Linux - Arch and Fedora, Debian in Progress, Windows 10/11 - Use WSL/WSL2
+- Darkelf Browser - MacApp in Progress!
+- Linux App for Arch in the Works!
+- Darkelf Browser All Editions Work on MacM1-4 Series and Linux - Arch and Fedora, Debian in Progress, Windows 10/11 - Use WSL/WSL2
 
 Visit our official website: [**darkelfbrowser.com**](https://darkelfbrowser.com)
 
