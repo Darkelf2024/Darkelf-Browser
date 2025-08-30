@@ -144,7 +144,7 @@ For more details, refer to the full [Anti-Forensics Documentation](https://githu
 - **Dr. Kevin Moore** ([Darkelf2024](https://github.com/Darkelf2024)) – Creator & Lead Developer.  
 - **Kevin Nguyen** ([KevinVinhN](https://github.com/KevinVinhN)) – Testing & Error Analysis.  
 - **Raz** ([Raz-js](https://github.com/Raz-js)) – Bug Bounty Hunter & Software Engineer.
-
+- **WinOps Team** ([Noah](https://github.com/Impact69)([Zenith](https://github.com/Zenith727) - WinOps Engineers.
 For a full list, see [Contributors](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Contributors.md).  
 
 ---
