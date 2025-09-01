@@ -21,6 +21,7 @@ Darkelf Vault Browser uses PyQt5 Super Stealth - Head to other Repo
 - TLS utilizes X25519/Post Quantum Logic, Ai, PQCryptApi
 
 Darkelf Mini Browser: PySide6 - No PQC - Providing Stealth, Privacy, and Hardened!
+Download Here [Darkelf Mini Browser](https://github.com/Darkelf2024/Darkelf-Mini-Browser/releases/tag/v3.0.1)
 
 Darkelf Vault PyQt5: This browser uses ML-KEM-768 for encrypted key storage and secure buffer operations. TLS traffic remains X25519-based due to current web standard constraints!
 
