@@ -25,7 +25,7 @@ Download Here [Darkelf Mini Browser](https://github.com/Darkelf2024/Darkelf-Mini
 
 Darkelf Vault PyQt5: This browser uses ML-KEM-768 for encrypted key storage and secure buffer operations. TLS traffic remains X25519-based due to current web standard constraints!
 
-Download Here [Darkelf Vault Browser](https://github.com/Darkelf2024/Darkelf-PyQt5-Browser-PQC/releases/tag/v3.0.1) This has the Kernel Monitor Integration! 
+Download Here [Darkelf Vault Browser](https://github.com/Darkelf2024/Darkelf-PyQt5-Browser-PQC/releases/tag/v3.0.6) This has the Kernel Monitor Integration! 
 
 PySide6 Version Post Quantum - Download Here [Post Quantum PySide6](https://github.com/Darkelf2024/Darkelf-PySide6-Browser-PQC/releases/tag/v3.0.6)
 
