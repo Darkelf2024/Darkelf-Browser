@@ -43,7 +43,8 @@ Darkelf Post-Quantum Editions - Source Code Released = Darkelf will remain as a 
 - Darkelf Browser - MacApp in Progress!
 - Linux App for Arch in the Works!
 - Darkelf Post Quantum Mini-Engine/Darkelf PQNet!
-- Darkelf Browser All Editions Work on MacM1-4 Series and Linux - Arch and Fedora, Debian in Progress, Windows 10/11 - Use WSL/WSL2
+- Darkelf Shell - Quick n Easy!
+- Darkelf Shadow Browser - Hardened General Use!
 
 Visit our official website: [**darkelfbrowser.com**](https://darkelfbrowser.com)
 
