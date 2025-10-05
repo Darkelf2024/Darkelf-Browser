@@ -1,212 +1,163 @@
-# Darkelf Browser v3.0 🚀  
-**Enhanced Security | Ultimate Privacy | Cutting-Edge Technology | Anonymous Research | Zero Trace**
+# 🧩 Darkelf Browser v3.0 — Ultimate Privacy, Zero Trace
 
-Welcome to the Darkelf Browser! This provides comprehensive information about the Darkelf Browser, its features, installation guides, and much more can be found on our [Discord](Invite-Only)
+**Enhanced Security | Post-Quantum Ready | Anonymous Research | Zero Trace**
 
-## 🔐 Darkelf PyQt5 & PySide6 - What's blocked Everything!
+Darkelf is a suite of **privacy-first browsers and tools** engineered for **cybersecurity research, digital forensics, red-team simulations, and post-quantum cryptography evaluation**.  
+Every variant is built to eliminate forensic footprints, block tracking, and secure all data — with RAM-only sessions, Tor integration, and cutting-edge PQC encryption.
 
-Darkelf Vault Browser uses PyQt5 Super Stealth - Head to other Repo
-- Tor Letterboxing Mimicking 
-- Firefox Headers Cipher Suites
-- No Leaks
-- No Fingerprints
-- No http2 
-- No sec cha ua headers 
-- TLS Rotations 
-- Super Stealth
-- Bridge Integration obfs4
-- Canvas Api - Now Blocked/Removed in Darkelf Mini Browser/ Updating PQC Editions this week!
-- Post Quantum Encrypted Messaging Coming! 
-
-- TLS utilizes X25519/Post Quantum Logic, Ai, PQCryptApi
-
-Darkelf Mini Browser: PySide6 - No PQC - Providing Stealth, Privacy, and Hardened!
-Download Here [Darkelf Mini Browser](https://github.com/Darkelf2024/Darkelf-Mini-Browser/releases/tag/v3.10.4.5)
-
-Darkelf Vault PyQt5: This browser uses ML-KEM-768 for encrypted key storage and secure buffer operations. TLS traffic remains X25519-based due to current web standard constraints!
-
-Download Here [Darkelf Vault Browser](https://github.com/Darkelf2024/Darkelf-PyQt5-Browser-PQC/releases/tag/v3.0.6) This has the Kernel Monitor Integration! 
-
-PySide6 Version Post Quantum - Download Here [Post Quantum PySide6](https://github.com/Darkelf2024/Darkelf-PySide6-Browser-PQC/releases/tag/v3.0.6)
-
-- TLS Post Quantum 
-- All Post Quantum Goods!
-- Post Quantum KEM768 = PySide6 = Hardened, Zero Trace!
-- Darkelf Video Tests - Browserleaks, AmIUnique & Cover Your Tracks - [Darkelf Video](https://github.com/Darkelf2024/Darkelf-PySide6-Browser-PQC/tree/main/Darkelf%20Video)
- 
-Please refer to the [Swap Disable Guide](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/disable_swap_macos_guide.md) to permanently disable macOS swap on Apple Silicon (M1–M4) with Permissive Security, SIP disabled, and dynamic pager off. Ideal for secure, memory-only workloads like Darkelf, or forensics-safe use cases. - Darkelf does exactly what it is suppose to do! Apple continues to create difficulties with Swap Disabling etc. The current Guide is for 2025.
-
-Darkelf Post-Quantum Editions - Source Code Released = Darkelf will remain as a Python Script .py file until further notice. Head to [Darkelf Post Quantum](https://github.com/Darkelf2024/Darkelf-Post-Quantum-Edition/tree/main). 
-
-## Coming Next:
-
-- Darkelf Browser - MacApp in Progress!
-- Linux App for Arch in the Works!
-- Darkelf Post Quantum Mini-Engine/Darkelf PQNet!
-- Darkelf Shell - Quick n Easy!
-- Darkelf Shadow Browser - Released Early - Beta!
-- Darkelf Cocoa Browser - Released - Ready!
-- Darkelf Post Quantum Proxy!
-
-Visit our official website: [**darkelfbrowser.com**](https://darkelfbrowser.com)
-
-Join our community on **Discord** for additional resources including:
-- Walkthroughs
-- Pip installation guides
-- Homebrew installation instructions
-- Screenshots
-- Videos
-- Confirmations = Swap Disabled, No Trace
-- Real-time support and discussion
-
-Stay connected and get the most out of Darkelf Browser!
-
-## 🌟 Key Features  
-### 🔒 **Privacy and Security**
-- **Tor Integration**: Anonymize all browsing with native Tor network support, including `.onion` sites.
-- **Tor DNS Resolver**: Protect against trackers, ads, and phishing at the DNS level.
-- **DoH/DoT Fallback**: Automatically route DNS over HTTPS (DoH) and DNS over TLS (DoT) through Cloudflare when Tor is unavailable — preserving privacy and security. [DoH-DoT Notes](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/DoH-DoT%20Fallback%20Options.md)
-- **Forensic-Resistant Sessions**: RAM-only storage ensures no data persists after shutdown.  
-- **Sandboxing**: Isolate processes to prevent unauthorized access.  
-- **Anti-Fingerprinting**: Blocks canvas/WebGL fingerprinting, spoofs user agents, and hides hardware details.  
-- **Quantum Encryption**: Post-quantum hybrid encryption with ML-KEM-768/1024 + X25519 and standalone editions for future-proof security. (Awaiting Release)  
-
-### 🛡️ **Advanced Security Measures**  
-- **Custom Ad Blocker**: Blocks domains, trackers, and dynamic ads.  
-- **NoScript Filtering**: Stops untrusted scripts and integrates seamlessly with the ad blocker.  
-- **HTTPS Enforcement**: Auto-upgrades HTTP requests to HTTPS for secure communication.  
-- **CSP Enhancements**: Mitigates XSS and injection attacks via strict content security policies.  
-- **Automatic Cookie & Cache Clearing**: Clears browsing data on exit.
-
-### 🔍 **Anti-Forensics Capabilities**  
-### Darkelf Browser: Robust Anti-Forensics Measures for Privacy and Security
-
-Darkelf Browser incorporates robust anti-forensics measures to ensure maximum privacy and security:
-
-- **Forensic Tool Detection**: Monitors for tools like Wireshark, Volatility, and Ollydbg, triggering a self-destruct sequence to prevent analysis.
-- **Self-Destruct Sequence**: Securely deletes sensitive files with 7-pass overwrites (DoD 5220.22-M standards).
-- **Disable Swap Memory**: Prevents sensitive data from being written to disk by disabling system swap (Linux, macOS, Windows).
-- **Secure File Deletion**: Implements multi-pass overwriting for permanent file removal.
-- **Encrypted & Obfuscated Cookie Management**: Uses SHA-256 hashing and Fernet cipher to secure cookies.
-- **Memory Wiping**: Clears sensitive in-memory data securely during app shutdown.
-- **Dynamic Path Resolution & Randomized Monitoring**: Improves stealth and introduces unpredictable intervals for forensic tool detection.
-- **Auto-Destruct on Exit**: Shuts down Tor services and wipes all session data during browser termination.
-
-### Additional Highlights
-
-- **Stealth Log Integration**: Tracks suspicious activities, such as forensic tool detections or anomalies in the environment, and stores logs securely with strict permissions. Stealth logs are securely deleted during shutdown or self-destruction.
-- **Network Protection**: Introduces randomized delays (jitter) and data padding to obscure network communication patterns, making traffic analysis more difficult. Data is transmitted securely and obfuscated.
-- **Tor Obfuscation**: Encrypts and pads messages sent through the Tor SOCKS proxy to prevent traffic analysis. Randomized intervals and dynamic path resolution further enhance stealth.
-- **Advanced Anti-Fingerprinting**: Blocks tracking methods like Canvas API, WebGL, and WebRTC, and spoofs browser characteristics such as screen resolution, hardware concurrency, and timezone.
-- **Metadata Stripping**: Strips metadata from downloaded files, including images (JPEG, PNG) and PDFs, to ensure no identifiable traces are left behind.
-- **Custom Chromium Flags**: Configures Chromium with enhanced privacy settings, including disabling WebRTC, WebGL, speculative connections, and third-party cookies, while enforcing incognito mode by default.
-- **Quantum-Resistant Encryption**: Leverages advanced cryptographic protocols like ChaCha20, AES-GCM, RSA, and ECDH. Certain editions implement post-quantum algorithms (e.g., ML-KEM-768/1024).
-- **Comprehensive Sandboxing**: Disables local storage, IndexedDB, and other persistent storage mechanisms. Enforces strict XSS auditing and blocks insecure content.
-
-For more details, refer to the full [Anti-Forensics Documentation](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Anti-Forensics.md).
-
-### 🌐 **Browser Experience**  
-- **PyQt5 QtWebEngine**: Hardened web browsing.
-- **PySide6 QtWebEngine**: Enhanced web browsing with modern rendering capabilities.  
-- **Multi-Platform Support**: macOS (Intel & Apple Silicon), Linux, Windows ready.  
-- **Customizable Security Settings**: Toggle JavaScript, cookies, geolocation, and more.
-- **Post-Quantum**: Utilizes Kyber768/1024.
-
-### 🌈 **Modern Design**  
-- **Adaptive Themes**: Auto-detect system preferences for Window themes.  
-- **Custom Home Page**: Integrated DuckDuckGo search for private browsing and elegant feel.  
+🌐 [Website](https://darkelfbrowser.com) • 💬 Discord *(Invite-only)* • 🧠 [Docs & Guides](https://github.com/Darkelf2024/Darkelf-Browser)
 
 ---
 
-## 🔧 **Developer-Friendly Features**  
-- **Adblock Pattern Management**: Regularly updated rules from trusted sources.  
-- **TLS Mimicking**: Configured for robust encryption, mirroring Firefox ESR.  
-- **JavaScript Hooks**: Blocks fingerprinting APIs dynamically.  
-- **Hotkey Support**: Navigate easily with keyboard shortcuts for tabs, history, and more.  
+## 🔑 Quick Overview
+
+| Edition | Framework | Focus | Status |
+|----------|------------|--------|---------|
+| **Mini Browser** | PySide6 | Lightweight Stealth / RAM-only | ✅ v3.10.4.5 |
+| **Vault Browser** | PyQt5 | ML-KEM Vault / Anti-Forensics | ✅ v3.0.6 |
+| **Post-Quantum Browser** | PySide6 | PQC Hybrid TLS / Research | ✅ v3.0.6 |
+| **Cocoa Browser** | Cocoa (macOS) | Native macOS Privacy Build | ✅ Released |
+| **Shadow Browser** | PyQt5 | High OpSec / Obfuscation | 🧪 Beta |
+| **Shell / CLI Tools** | Python | Command-line utilities | ✅ Released |
+| **Darkelf Web Browser Site** | HTML/CSS | Docs / Website / Branding | ✅ Public |
+| **PQC Engine / Mini Engine** | PySide6 | PQC Core Engine | ⚙️ In Development |
+| **Darkelf-CLI-Tools** | Python | Wipers, Tor, Secure Scripts | ✅ Stable |
+| **Darkelf-Browser Main Repo** | Docs / Guides | Core Docs + Legal + Swap Guides | ✅ Active |
 
 ---
 
-## 🎯 **Tech Stack**
+## 🔒 Core Features
+
+### 🕵️‍♂️ Privacy & Security
+- **Tor Integration** for `.onion` and DNS-level privacy  
+- **Forensic-Resistant Sessions** (RAM-only, auto-wipe)  
+- **DoH/DoT Fallback** (Cloudflare privacy DNS)  
+- **Anti-Fingerprinting** (Canvas/WebGL/WebRTC blocked)  
+- **TLS X25519 / PQC Hybrid Encryption** (ML-KEM-768/1024 + X25519)  
+- **Custom Ad Blocker + NoScript Filtering**  
+- **HTTPS Enforcement + CSP Strengthening**  
+
+### 🧩 Post-Quantum & AI Hardened
+- **Post-Quantum Encryption:** ML-KEM / Kyber768-ready  
+- **PQCryptAPI Integration** for key storage and secure buffers  
+- **Hybrid PQC + Classical TLS Logic** for real-world compatibility  
+- **AI-assisted TLS rotation and stealth cipher mimicry**  
+
+### 🧠 Anti-Forensics Technology
+- **Forensic Tool Detection:** Wireshark, OllyDbg, Volatility, etc.  
+- **Self-Destruct Sequence:** 7-pass file shredding (DoD 5220.22-M)  
+- **Memory Wiping & Secure Buffer Clearing**  
+- **Swap Disable Support:** macOS, Linux, Windows  
+- **Stealth Logging + Auto-Destruct on Exit**  
+- **Encrypted Cookies (SHA-256 + Fernet)**  
+- **Dynamic Path Randomization + Traffic Obfuscation**  
+
+### 🧱 Network & Sandboxing
+- Randomized delays, Tor bridge obfs4 integration  
+- Chromium flags: WebRTC off, local storage disabled, strict XSS audit  
+- Metadata stripping for files (PDF, images)  
+- Full sandbox process isolation  
+
+---
+
+## 🧰 Developer Features
+- Modular **PyQt5 / PySide6** architecture  
+- **Custom Adblock Pattern Management**  
+- **JavaScript Hooks** for dynamic blocking  
+- **TLS Cipher Mimicking (Firefox ESR)**  
+- **Hotkey and Command Support**  
+- **Cross-platform:** macOS (Intel & Apple Silicon), Linux, Windows  
+
+---
+
+## 🧮 Tech Stack
+![Python](https://img.shields.io/badge/Python-%233776AB.svg?style=for-the-badge&logo=python&logoColor=white)
+![PyQt5](https://img.shields.io/badge/PyQt5-%231C8C8C.svg?style=for-the-badge&logo=qt&logoColor=white)
+![PySide6](https://img.shields.io/badge/PySide6-%2300848C.svg?style=for-the-badge&logo=qt&logoColor=white)
 ![HTML5](https://img.shields.io/badge/HTML5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
-![Python](https://img.shields.io/badge/Python-%233776AB.svg?style=for-the-badge&logo=python&logoColor=white)
 ![Encryption](https://img.shields.io/badge/Encryption-%23008C45.svg?style=for-the-badge&logo=lock&logoColor=white)
 
 ---
 
-## 🔍 **Key Highlights**  
-- **Onion Routing**: Layers of encryption ensure anonymous browsing.  
-- **Custom Ad Blocker**: Enhanced rules for trackers and dynamic content.  
-- **TLS Compatibility**: Robust cipher suites for encrypted communication.  
+## 🧠 Installation Guides
+
+See full setup instructions on [Darkelf Discord (Invite Only)](https://discord.gg/Invite-Only).
+
+- **macOS Swap Disable:** [Guide for M1–M4](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/disable_swap_macos_guide.md)  
+- **Homebrew / Pip:** Refer to walkthroughs and videos in Discord.  
+- **Tor Integration:** Auto-configured or manual bridge (obfs4) mode.
 
 ---
 
-## 🚀 **Future Improvements**  
-- **YouTube Fullscreen Fix**: Under active development.  
-- **Enhanced Adblock Accuracy**: Expanding rule sets and refining algorithms.  
+## ⚗️ Future Development
+- ✅ **Mac App** — In progress  
+- ⚙️ **Arch Linux Package** — Coming soon  
+- 🔒 **Darkelf PQNet / PQC Mini Engine** — Development build  
+- 🧩 **Darkelf Post-Quantum Proxy** — In R&D  
+- 🎬 **YouTube Fullscreen Fix** — In testing  
 
 ---
 
-## 💡 **Contributors**  
-- **Dr. Kevin Moore** ([Darkelf2024](https://github.com/Darkelf2024)) – Creator & Lead Developer.  
-- **Kevin Nguyen** ([KevinVinhN](https://github.com/KevinVinhN)) – Testing & Error Analysis.  
-- **Raz** ([Raz-js](https://github.com/Raz-js)) – Bug Bounty Hunter & Software Engineer.
-- **WinOps Team** ([Noah](https://github.com/Impact69)) - WinOps Engineer.
-- **WinOps Team** ([Zenith](https://github.com/Zenith727)) - WinOps Engineer.
-For a full list, see [Contributors](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Contributors.md).  
+## 👥 Contributors
+| Name | Role | GitHub |
+|------|------|---------|
+| **Dr. Kevin Moore** | Creator & Lead Developer | [Darkelf2024](https://github.com/Darkelf2024) |
+| **Kevin Nguyen** | Testing & Error Analysis | [KevinVinhN](https://github.com/KevinVinhN) |
+| **Raz** | Bug Bounty Hunter / Engineer | [Raz-js](https://github.com/Raz-js) |
+| **Noah (WinOps)** | WinOps Engineer | [Impact69](https://github.com/Impact69) |
+| **Zenith (WinOps)** | WinOps Engineer | [Zenith727](https://github.com/Zenith727) |
+
+Full list: [Contributors.md](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Contributors.md)
 
 ---
 
-## 🛡️ **Community & Feedback**  
-We value your input!  
-- **[Open an Issue](https://github.com/Darkelf2024/Darkelf-Browser/issues)** for bug reports or feature requests.  
-- Join us on [Discord](https://discord.gg/Invite-Only) to contribute ideas.
-- Join Our Discord Channel for further Walk-through/Visuals for Guidance with Darkelf Browser.
+## 📂 Darkelf Repositories
+
+| # | Repository | Description |
+|---|-------------|--------------|
+| 1 | [Darkelf-Browser](https://github.com/Darkelf2024/Darkelf-Browser) | Core docs, anti-forensics, swap-disable guides |
+| 2 | [Darkelf-Mini-Browser](https://github.com/Darkelf2024/Darkelf-Mini-Browser) | Lightweight PySide6 browser (v3.10.4.5) |
+| 3 | [Darkelf-PyQt5-Browser-PQC](https://github.com/Darkelf2024/Darkelf-PyQt5-Browser-PQC) | PQC Vault edition (v3.0.6) |
+| 4 | [Darkelf-PySide6-Browser-PQC](https://github.com/Darkelf2024/Darkelf-PySide6-Browser-PQC) | Post-Quantum hardened build (v3.0.6) |
+| 5 | [Darkelf-Cocoa-Browser](https://github.com/Darkelf2024/Darkelf-Cocoa-Browser) | macOS-native variant |
+| 6 | [Darkelf-Shadow](https://github.com/Darkelf2024/Darkelf-Shadow) | High-opsec stealth edition |
+| 7 | [Darkelf-Shell](https://github.com/Darkelf2024/Darkelf-Shell) | CLI launcher & automation shell |
+| 8 | [Darkelf-CLI-Tools](https://github.com/Darkelf2024/Darkelf-CLI-Tools) | Wipers, Tor, secure CLI utilities |
+| 9 | [darkelf-web-browser](https://github.com/Darkelf2024/darkelf-web-browser) | Public documentation & website |
+| 10 | [Darkelf2024](https://github.com/Darkelf2024/Darkelf2024) | Profile repo / misc utilities |
 
 ---
 
-**Darkelf Browser** redefines privacy and performance. Explore the web confidently with cutting-edge security and unparalleled privacy. 🌐✨
+## ⚖️ Legal & License
 
-Thank you for your continued support in making **Darkelf Browser** the best it can be!  
+### Disclaimer
+Darkelf Browser is intended for **lawful cybersecurity research, educational use, and academic analysis** only.  
+It is **not a general-purpose browser** and may trigger antivirus or forensic tools due to its advanced stealth features.  
+Improper or unauthorized use could pose operational or legal risks. Use at your own discretion.
 
-## License & Terms of Use
-**Read the full [Terms of Use](Terms.md) and the [Export Compliance Notice](ExportComplianceNotice.md).**
+### Export & Compliance
+This software includes cryptography and complies with **U.S. EAR §740.13(e)** (publicly available encryption).  
+Users are responsible for ensuring compliance with local laws and export regulations.
 
-Disclaimer
+### Licensing
+| Component | License |
+|------------|----------|
+| Docs (this repo) | LGPL-3.0-or-later |
+| PyQt5 Editions | GPL-3.0-or-later |
+| PySide6 Editions | LGPL-3.0-or-later |
+| CLI / Shell | LGPL-3.0-or-later |
 
-Darkelf Browser is a specialized, web browser developed for cybersecurity research, educational use, and academic exploration. It is designed for environments where users operate under adversarial conditions, such as digital forensics, penetration testing, surveillance evasion, and post-quantum cryptography evaluation.
+Logos, trademarks, and screenshots are © respective owners.
 
-This software is intended solely for lawful, ethical, and non-commercial purposes including:
-	•	Cybersecurity research and academic analysis
-	•	Educational demonstrations of cryptographic and forensic-resistance techniques
-	•	Threat modeling and controlled red-team simulations
-	•	Privacy-focused software experimentation
+---
 
-Darkelf is not a general-purpose web browser. It is intended for advanced users with appropriate technical understanding and well-defined threat models. Improper use in unintended environments may lead to operational or legal risks.
+## 🌟 Summary
+Darkelf Browser redefines **anonymous browsing**, **post-quantum cryptography**, and **forensic resistance**.  
+Built by security researchers for advanced users — it combines stealth, privacy, and cryptographic rigor in one unified ecosystem.
 
-Use at your own risk. The author makes no warranties or guarantees regarding fitness for any specific purpose or resistance to advanced threat actors.
+**Explore. Research. Stay invisible.**
 
-⸻
+> “Darkelf does exactly what it is supposed to do.” — *Darkelf Dev Team*
 
-🔐 Legal and Export Notice
-
-Darkelf Browser includes cryptographic functionality and may be subject to U.S. Export Administration Regulations (EAR). It is released in full compliance with EAR §740.13(e) and is made publicly available via open-source distribution for unrestricted access.
-
-Users are responsible for ensuring compliance with all applicable local, national, and international laws regarding cryptographic software and cybersecurity tools. The developer disclaims liability for misuse or deployment in prohibited jurisdictions.
-
-⸻
-
-📄 License
-
-Darkelf Browser is released under 📄 License
-
-This repository contains documentation and overview materials only.
-
-- Docs in this repo: **LGPL-3.0-or-later**
-- Darkelf code lives in separate repos and keeps its own licenses:
-  - **PyQt5 editions** → **GPL-3.0-or-later**
-  - **PySide6 editions** → **LGPL-3.0-or-later**
-  - **Darkelf CLI editions** → **LGPL-3.0-or-later**
-
-Logos, trademarks, and screenshots may be subject to additional terms.
-
+---
