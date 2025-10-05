@@ -44,7 +44,8 @@ Darkelf Post-Quantum Editions - Source Code Released = Darkelf will remain as a 
 - Linux App for Arch in the Works!
 - Darkelf Post Quantum Mini-Engine/Darkelf PQNet!
 - Darkelf Shell - Quick n Easy!
-- Darkelf Shadow Browser - Hardened General Use!
+- Darkelf Shadow Browser - Released Early - Beta!
+- Darkelf Cocoa Browser - Released - Ready!
 - Darkelf Post Quantum Proxy!
 
 Visit our official website: [**darkelfbrowser.com**](https://darkelfbrowser.com)
