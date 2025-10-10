@@ -13,7 +13,7 @@ Every variant is built to eliminate forensic footprints, block tracking, and sec
 
 | Edition | Framework | Focus | Status |
 |----------|------------|--------|---------|
-| **Mini Browser** | PySide6 | Lightweight Stealth / RAM-only | ✅ v3.10.4.5 |
+| **Mini Browser** | PySide6 | Lightweight Stealth / RAM-only | ✅ v3.10.4.6 |
 | **Vault Browser** | PyQt5 | ML-KEM Vault / Anti-Forensics | ✅ v3.0.6 |
 | **Post-Quantum Browser** | PySide6 | PQC Hybrid TLS / Research | ✅ v3.0.6 |
 | **Cocoa Browser** | Cocoa (macOS) | Native macOS Privacy Build | ✅ v3.2.2 |
