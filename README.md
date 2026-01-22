@@ -24,7 +24,7 @@ Every variant is built to eliminate forensic footprints, block tracking, and sec
 | **Post-Quantum Browser** | PySide6 | PQC Hybrid TLS / Research | ✅ v3.0.6 |
 | **Cocoa Browser** | Cocoa (macOS) | Native macOS Privacy Build | ✅ v3.2.2 |
 | **Shadow Browser** | PyQt5 | High OpSec / Obfuscation | 🧪 Beta |
-| **Tools** | Python | Pywebview Shell | ✅ Pending |
+| **Tools** | Python | CLI Tools | ✅ Pending |
 | **Darkelf Web Browser Site** | HTML/CSS | Docs / Website / Branding | ✅ Public |
 | **PQC Engine / Mini Engine** | PySide6 | PQC Core Engine | ⚙️ In Development |
 | **Darkelf-CLI-Tools** | Python | Wipers, Tor, Secure Scripts | ✅ Stable |
