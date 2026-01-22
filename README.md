@@ -1,3 +1,9 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Darkelf2024/Darkelf-Browser/main/Darkelf%20Browser.png"
+       alt="Darkelf Browser"
+       width="900">
+</p>
+
 # 🧩 Darkelf Browser v3.0 — Ultimate Privacy, Zero Trace
 
 **Enhanced Security | Post-Quantum Ready | Anonymous Research | Zero Trace**
