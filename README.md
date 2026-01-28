@@ -128,7 +128,7 @@ Full list: [Contributors.md](https://github.com/Darkelf2024/Darkelf-Browser/blob
 | 4 | [Darkelf-PySide6-Browser-PQC](https://github.com/Darkelf2024/Darkelf-PySide6-Browser-PQC) | Post-Quantum hardened build (v3.0.6) |
 | 5 | [Darkelf-Cocoa-Browser](https://github.com/Darkelf2024/Darkelf-Cocoa-Browser) | macOS-native variant |
 | 6 | [Darkelf-Shadow](https://github.com/Darkelf2024/Darkelf-Shadow) | High-opsec stealth edition |
-| 7 | [Darkelf-Shell](https://github.com/Darkelf2024/Darkelf-Shell) | CLI launcher & automation shell |
+| 7 | [Darkelf-Retro-CLI-Hub](https://github.com/Darkelf2024/Darkelf-Retro-CLI-Hub) | Retro CLI launcher |
 | 8 | [Darkelf-CLI-Tools](https://github.com/Darkelf2024/Darkelf-CLI-Tools) | Wipers, Tor, secure CLI utilities |
 | 9 | [darkelf-web-browser](https://github.com/Darkelf2024/darkelf-web-browser) | Public documentation & website |
 | 10 | [Darkelf2024](https://github.com/Darkelf2024/Darkelf2024) | Profile repo / misc utilities |
