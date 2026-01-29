@@ -132,6 +132,7 @@ Full list: [Contributors.md](https://github.com/Darkelf2024/Darkelf-Browser/blob
 | 7 | [Darkelf-Retro-CLI-Hub](https://github.com/Darkelf2024/Darkelf-Retro-CLI-Hub) | Retro CLI launcher |
 | 8 | [Darkelf-CLI-Tools](https://github.com/Darkelf2024/Darkelf-CLI-Tools) | Wipers, Tor, secure CLI utilities |
 | 9 | [Darkelf-OSINT-Ai](https://github.com/Darkelf2024/Darkelf-OSINT-Ai) |
+Darkelf OSINT Ai, Search |
 | 10 | [darkelf-web-browser](https://github.com/Darkelf2024/darkelf-web-browser) | Public documentation & website |
 | 11 | [Darkelf2024](https://github.com/Darkelf2024/Darkelf2024) | Profile repo / misc utilities |
 
