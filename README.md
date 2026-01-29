@@ -28,6 +28,7 @@ Every variant is built to eliminate forensic footprints, block tracking, and sec
 | **Darkelf Web Browser Site** | HTML/CSS | Docs / Website / Branding | ✅ Public |
 | **PQC Engine / Mini Engine** | PySide6 | PQC Core Engine | ⚙️ In Development |
 | **Darkelf-CLI-Tools** | Python | Wipers, Tor, Secure Scripts | ✅ Stable |
+| **Darkelf-OSINT-Ai** | Python | Darkelf OSINT Ai, Secure Scripts | ✅ Stable |
 | **Darkelf-Browser Main Repo** | Docs / Guides | Core Docs + Legal + Swap Guides | ✅ Active |
 
 ---
@@ -130,8 +131,9 @@ Full list: [Contributors.md](https://github.com/Darkelf2024/Darkelf-Browser/blob
 | 6 | [Darkelf-Shadow](https://github.com/Darkelf2024/Darkelf-Shadow) | High-opsec stealth edition |
 | 7 | [Darkelf-Retro-CLI-Hub](https://github.com/Darkelf2024/Darkelf-Retro-CLI-Hub) | Retro CLI launcher |
 | 8 | [Darkelf-CLI-Tools](https://github.com/Darkelf2024/Darkelf-CLI-Tools) | Wipers, Tor, secure CLI utilities |
-| 9 | [darkelf-web-browser](https://github.com/Darkelf2024/darkelf-web-browser) | Public documentation & website |
-| 10 | [Darkelf2024](https://github.com/Darkelf2024/Darkelf2024) | Profile repo / misc utilities |
+| 9 | [Darkelf-OSINT-Ai](https://github.com/Darkelf2024/Darkelf-OSINT-Ai) |
+| 10 | [darkelf-web-browser](https://github.com/Darkelf2024/darkelf-web-browser) | Public documentation & website |
+| 11 | [Darkelf2024](https://github.com/Darkelf2024/Darkelf2024) | Profile repo / misc utilities |
 
 ---
 
