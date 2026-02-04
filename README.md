@@ -78,12 +78,16 @@ Every variant is built to eliminate forensic footprints, block tracking, and sec
 ---
 
 ## 🧮 Tech Stack
+
 ![Python](https://img.shields.io/badge/Python-%233776AB.svg?style=for-the-badge&logo=python&logoColor=white)
-![PyQt5](https://img.shields.io/badge/PyQt5-%231C8C8C.svg?style=for-the-badge&logo=qt&logoColor=white)
-![PySide6](https://img.shields.io/badge/PySide6-%2300848C.svg?style=for-the-badge&logo=qt&logoColor=white)
+![PyObjC](https://img.shields.io/badge/PyObjC-macOS%20Native-%23000000.svg?style=for-the-badge&logo=apple&logoColor=white)
+![WebKit](https://img.shields.io/badge/WebKit-WKWebView-%23191919.svg?style=for-the-badge&logo=safari&logoColor=white)
 ![HTML5](https://img.shields.io/badge/HTML5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
-![Encryption](https://img.shields.io/badge/Encryption-%23008C45.svg?style=for-the-badge&logo=lock&logoColor=white)
+![PWA](https://img.shields.io/badge/PWA-Offline%20Viewer-%2307C8EB.svg?style=for-the-badge&logo=progressive-web-apps&logoColor=white)
+![Ollama](https://img.shields.io/badge/Ollama-Local%20LLM-%23000000.svg?style=for-the-badge&logo=ollama&logoColor=white)
+![Tor](https://img.shields.io/badge/Tor-Network-%237E4798.svg?style=for-the-badge&logo=tor-project&logoColor=white)
+![Encryption](https://img.shields.io/badge/Encryption-Post--Quantum%20Ready-%23008C45.svg?style=for-the-badge&logo=lock&logoColor=white)
 
 ---
 
