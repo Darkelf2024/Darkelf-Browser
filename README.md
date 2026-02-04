@@ -123,7 +123,7 @@ Full list: [Contributors.md](https://github.com/Darkelf2024/Darkelf-Browser/blob
 
 | # | Repository | Description |
 |---|-------------|--------------|
-| 1 | [Darkelf-Browser](https://github.com/Darkelf2024/Darkelf-Browser) | Core docs, anti-forensics, swap-disable guides |
+| 1 | [Darkelf-Browser-Hub](https://github.com/Darkelf2024/Darkelf-Browser) | Core docs, anti-forensics, swap-disable guides |
 | 2 | [Darkelf-Mini-Browser](https://github.com/Darkelf2024/Darkelf-Mini-Browser) | Lightweight PySide6 browser (v3.10.4.8) |
 | 3 | [Darkelf-PyQt5-Browser-PQC](https://github.com/Darkelf2024/Darkelf-PyQt5-Browser-PQC) | PQC Vault edition (v3.0.6) |
 | 4 | [Darkelf-PySide6-Browser-PQC](https://github.com/Darkelf2024/Darkelf-PySide6-Browser-PQC) | Post-Quantum hardened build (v3.0.6) |
