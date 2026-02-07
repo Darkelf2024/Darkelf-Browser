@@ -115,8 +115,6 @@ See full setup instructions on [Darkelf Discord (Invite Only)](https://discord.g
 |------|------|---------|
 | **Dr. Kevin Moore** | Creator & Lead Developer | [Darkelf2024](https://github.com/Darkelf2024) |
 | **TeeM-Tim Burns** | Darkelf Developer | [TeeM](https://github.com/OpenSource-For-Freedom)
-
-## Darkelf Testers 
 | **Kevin Nguyen** | Testing & Error Analysis | [KevinVinhN](https://github.com/KevinVinhN) |
 | **Noah (WinOps)** | WinOps Tester | [Impact69](https://github.com/Impact69) |
 | **Zenith (WinOps)** | WinOps Tester | [Zenith727](https://github.com/Zenith727) |
