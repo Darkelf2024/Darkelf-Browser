@@ -114,10 +114,12 @@ See full setup instructions on [Darkelf Discord (Invite Only)](https://discord.g
 | Name | Role | GitHub |
 |------|------|---------|
 | **Dr. Kevin Moore** | Creator & Lead Developer | [Darkelf2024](https://github.com/Darkelf2024) |
+| **TeeM-Tim Burns** | Darkelf Developer | [TeeM](https://github.com/OpenSource-For-Freedom)
+
+## Darkelf Testers 
 | **Kevin Nguyen** | Testing & Error Analysis | [KevinVinhN](https://github.com/KevinVinhN) |
-| **Raz** | Bug Bounty Hunter / Engineer | [Raz-js](https://github.com/Raz-js) |
-| **Noah (WinOps)** | WinOps Engineer | [Impact69](https://github.com/Impact69) |
-| **Zenith (WinOps)** | WinOps Engineer | [Zenith727](https://github.com/Zenith727) |
+| **Noah (WinOps)** | WinOps Tester | [Impact69](https://github.com/Impact69) |
+| **Zenith (WinOps)** | WinOps Tester | [Zenith727](https://github.com/Zenith727) |
 
 Full list: [Contributors.md](https://github.com/Darkelf2024/Darkelf-Browser/blob/main/Contributors.md)
 
