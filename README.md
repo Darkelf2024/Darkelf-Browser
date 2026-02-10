@@ -22,7 +22,7 @@ Every variant is built to eliminate forensic footprints, block tracking, and sec
 | **Mini Browser** | PySide6 | Lightweight Stealth / RAM-only | ✅ v3.10.4.8 |
 | **Vault Browser** | PyQt5 | ML-KEM Vault / Anti-Forensics | ✅ v3.0.6 |
 | **Post-Quantum Browser** | PySide6 | PQC Hybrid TLS / Research | ✅ v3.0.6 |
-| **Cocoa Browser** | Cocoa (macOS) | Native macOS Privacy Build | ✅ v3.3 |
+| **Cocoa Browser** | Cocoa (macOS) | Native macOS Privacy Build | ✅ v3.5 |
 | **Shadow Browser** | PyQt5 | High OpSec / Obfuscation | 🧪 Beta |
 | **Darkelf Retro CLI Hub** | Python | CLI Retro Tools | ✅ Public |
 | **Darkelf Web Browser Site** | HTML/CSS | Docs / Website / Branding | ✅ Public |
